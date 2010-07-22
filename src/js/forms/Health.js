@@ -208,12 +208,26 @@ var q5=     {
                             html:'5. List all prescription and nonprescription medications you use <u>at least once a week</u>:'
                         },
                         {
+                            id:q('q5:a0'),
+                            name:q('q5:a0'),
+                            xtype:'checkbox',
+                            inputValue:1,
+                            boxLabel:'N/A',
+                            hideLabel:true,
+                            ctCls:'leftpaddinghack',
+                            listeners:  {
+                                            check:onQ5NA,
+                                            focus:onFieldFocus,
+                                            specialkey:onEnter
+                                        }
+                        },
+                        {
                             id:q('q5'),
                             name:q('q5'),
                             xtype:'panel',
                             layout:'table',
                             border:false,
-                            width:681,
+                            width:645,
                             next:q('q6'),
                             style:'margin-top:10px;margin-left:'+radioPaddingLeft+'px',
                             defaults:   {
@@ -224,7 +238,7 @@ var q5=     {
                                                         }
                                         },
                             layoutConfig:   {
-                                                columns:4
+                                                columns:3
                                             },
                             items:  [
                                         //--- TABLE HEADER ---
@@ -238,10 +252,6 @@ var q5=     {
                                         },
                                         {
                                             html:'Numbers of times used <u>per week</u>',
-                                            cls:'table-header'
-                                        },
-                                        {
-                                            html:'N/A',
                                             cls:'table-header'
                                         },
 
@@ -281,20 +291,8 @@ var q5=     {
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
-                                            next:q('q5:a1:4'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
-                                        },
-                                        {
-                                            id:q('q5:a1:4'),
-                                            name:q('q5:a1:4'),
-                                            xtype:'checkbox',
-                                            inputValue:1,
-                                            hideLabel:true,
                                             next:q('q5:a2:1'),
+                                            width:215,
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             specialkey:onEnter
@@ -334,20 +332,8 @@ var q5=     {
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
-                                            next:q('q5:a2:4'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
-                                        },
-                                        {
-                                            id:q('q5:a2:4'),
-                                            name:q('q5:a2:4'),
-                                            xtype:'checkbox',
-                                            hideLabel:true,
-                                            inputValue:2,
                                             next:q('q5:a3:1'),
+                                            width:215,
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             specialkey:onEnter
@@ -387,20 +373,8 @@ var q5=     {
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
-                                            next:q('q5:a3:4'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
-                                        },
-                                        {
-                                            id:q('q5:a3:4'),
-                                            name:q('q5:a3:4'),
-                                            xtype:'checkbox',
-                                            inputValue:3,
-                                            hideLabel:true,
                                             next:q('q5:a4:1'),
+                                            width:215,
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             specialkey:onEnter
@@ -440,20 +414,8 @@ var q5=     {
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
-                                            next:q('q5:a4:4'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
-                                        },
-                                        {
-                                            id:q('q5:a4:4'),
-                                            name:q('q5:a4:4'),
-                                            xtype:'checkbox',
-                                            inputValue:4,
-                                            hideLabel:true,
                                             next:q('q6'),
+                                            width:215,
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             specialkey:onEnter
@@ -1032,7 +994,7 @@ var q8=     {
                         {
                             xtype:'label',
                             cls:'question-text',
-                            html:'8. Have you ever taken one of the medications listed on the back of this sheet in the past?'
+                            html:'8. Have you ever taken medications in the past?'
                         },
                         {
                             id:q('q8'),
@@ -1827,4 +1789,31 @@ NRG.Forms.Health=form;
 function q(id)
 {
     return qID+':'+id;
+}
+
+function onQ5NA(checkbox,checked)
+{
+    var table=Ext.getCmp(q('q5'));
+    var qContainer=getQContainer(checkbox);
+
+    if (checked)
+    {
+        table.disable();
+        checkbox.next='qn6:q6';
+        //Mark the question as valid
+        //Normally, the onFieldValid callback would be called,
+        //but we disabled it for this checkbox
+        if (qContainer)
+            setQValidity(qContainer,true);
+    }
+    else
+    {
+        table.enable();
+        checkbox.next='qn6:q5:a1:1';
+
+        if (qContainer)
+            qContainer.removeClass('q-valid');
+    }
+
+    nextField(checkbox,checkbox.next);
 }

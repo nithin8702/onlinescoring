@@ -122,7 +122,7 @@ function onEnter(field,e)
  */
 function nextField(field, where)
 {
-    //console.log('+ nextField('+field.id+','+where+')');
+    console.log('+ nextField('+field.id+','+where+')');
     
     if (!(field instanceof Ext.Component))
         field=Ext.getCmp(field.id);
@@ -136,7 +136,7 @@ function nextField(field, where)
     if (defined(field.next))
         next=field.next;
 
-    //console.log('  nextField(): now next and field.next='+field.next)
+    console.log('  nextField(): now next and field.next='+field.next)
 
     if (field.getEl().dom.type=="radio")
     {
@@ -165,11 +165,11 @@ function nextField(field, where)
         var qContainer=getQContainer(field);
         if (qContainer)
         {
-            //console.log('  nextField: removing active state from '+qContainer.id+' for child field '+field.id);
+            console.log('  nextField: removing active state from '+qContainer.id+' for child field '+field.id);
             setQActive(qContainer,false);
         }
 
-        //console.log('  nextField('+field.id+'): Field is valid, looking for form.');
+        console.log('  nextField('+field.id+'): Field is valid, looking for form.');
         var form=field.findParentByType('form');
 
         //Remove the active class form what used to be the focused element
@@ -185,7 +185,7 @@ function nextField(field, where)
 
         if (next)
         {
-            //console.log('nextField():Moving to the next element: '+next);
+            console.log('nextField():Moving to the next element: '+next);
             nextQ(next,form);
         }
         else
@@ -193,7 +193,7 @@ function nextField(field, where)
     }
     else
     {
-        //console.log('nextField(): Field ',field.id,' is not valid.');
+        console.log('nextField(): Field ',field.id,' is not valid.');
     }
 }
 
@@ -679,7 +679,6 @@ function addShortcutLabel(input)
 {
     var label='<span class="q-radio-shortcut">'+input.dom.value+'</span>';
     input.insertSibling(label,'before');
-    console.log('Inserted label for ',input.id);
 }
 
 
