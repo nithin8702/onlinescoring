@@ -1,0 +1,187 @@
+.message-error
+{
+    color:red;
+}
+
+.x-icon-forms
+{
+    background-image:url('../images/icons/forms.png');
+}
+
+.x-icon-users
+{
+    background-image:url('../images/icons/users.png');
+}
+
+.x-icon-subject
+{
+    background-image: url('../images/icons/subject.png');
+}
+
+.question-text
+{
+    font-family: tahoma, arial, helvetica, sans-serif;
+    font-weight:bold;
+    font-size: 12px;
+    text-shadow: 2px 2px 2px #ccc;
+}
+
+.q-active
+{
+    background-color:#EEEEFF;
+}
+
+.q-fieldset
+{
+    margin-bottom:0px;
+    padding-bottom:0px;
+    padding-top:0px;
+    margin-top:0px;
+    width:500px;
+}
+
+/* Used to identify question containers */
+.q-container
+{
+    padding-top:5px;
+    padding-bottom: 5px;
+}
+
+.q-radio-shortcut
+{
+    color:orange;
+    margin-right:5px;
+    margin-left:2px;
+    font-family: 'Tahoma', sans;
+    font-size: 10px;
+}
+
+.q-use-enter
+{
+    background-image: url('../images/icons/enter.png');
+    background-repeat: no-repeat;
+    background-position: 10px 35px;
+}
+
+.q-use-mouse
+{
+    background-image: url('../images/icons/mouse.png');
+    background-repeat: no-repeat;
+    background-position: 10px 35px;
+}
+
+
+div.x-form-item
+{
+    margin-bottom:0px;
+}
+
+div.x-form-item .x-form-item-label
+{
+    padding-top:10px;
+    padding-bottom:0px;
+    font-weight:bold;
+    margin-left:10px
+}
+
+.q-valid
+{
+    background-color:#DDFFEE;
+    background-image:url('../images/icons/go.png');
+    background-repeat: no-repeat;
+    background-position:10px 35px;
+}
+
+.q-invalid
+{
+    background-color:#FFDDEE;
+    background-image:url('../images/icons/cancel.png');
+    background-repeat: no-repeat;
+    background-position:10px 35px;
+}
+
+.line-break
+{
+    border-top:2px solid black;
+    padding-left:10px;
+}
+
+.no-padding
+{
+    padding:0px
+}
+
+.leftpadding
+{
+    padding-left:30px;
+}
+
+.transparent
+{
+    background-color:transparent;
+}
+
+.q-etc
+{
+    font-size: 10px;
+    text-shadow: none;
+    color: gray;
+    padding-left:15px;
+}
+
+.q-table
+{
+    text-align:center
+}
+
+.q-table-label
+{
+    text-align:left;
+}
+
+.q-table-td-border
+{
+    border:1px solid #99BBE8;
+}
+
+.table-header
+{
+    font-family: tahoma, arial, helvetica, sans-serif;
+    font-weight:bold;
+    font-size: 12px;
+}
+
+ul.help
+{
+    margin-left:15px;
+    margin-top:10px;
+}
+
+.show-border
+{
+    border:2px solid red;
+}
+
+.radio-label-short
+{
+    width:50px;
+}
+
+.x-form-radio-group
+{
+    padding-left:30px;
+}
+
+.data-entry-help
+{
+    margin:25px;
+    font-family:"Tahoma",sans;
+    font-size:13px;
+    color:darkgray;
+}
+
+.data-entry-help ul
+{
+    margin-left:25px;
+    list-style: circle;
+}
