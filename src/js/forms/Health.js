@@ -96,7 +96,7 @@ var q2=     {
                                             inputValue:2
                                         },
                                         {
-                                            boxLabel:'Neither satisfied not dissatisfied',
+                                            boxLabel:'Neither satisfied nor dissatisfied',
                                             name:q('q2:a1'),
                                             inputValue:3
                                         },
@@ -930,7 +930,7 @@ var q7=     {
                         {
                             xtype:'label',
                             cls:'question-text',
-                            html:'7. Are you currently taking any medication for a psychiatric or neurology problem?<br/><span class="q-etc" style="padding-left:25px">(such as an antidepressant, an anti-anxiety medication, a mood stabilizer, an antipsychotic or an anticonvulsant)</span>'
+                            html:'7. Are you currently taking any medication for a psychiatric or neurological problem?<br/><span class="q-etc" style="padding-left:25px">(such as an antidepressant, an anti-anxiety medication, a mood stabilizer, an antipsychotic or an anticonvulsant)</span>'
                         },
                         {
                             id:q('q7'),

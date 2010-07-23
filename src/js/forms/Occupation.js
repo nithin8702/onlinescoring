@@ -45,7 +45,7 @@ var q1=     {
                                             inputValue:3
                                         },
                                         {
-                                            boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck diver, construction worker)</span>',
+                                            boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck driver, construction worker)</span>',
                                             name:q('q1:a1'),
                                             inputValue:4
                                         },
@@ -94,6 +94,7 @@ var q2=     {
                             id:q('q2'),
                             name:q('q2'),
                             xtype:'textfield',
+                            allowBlank:true,
                             hideLabel:true,
                             disabled:false,
                             next:q('q3'),
@@ -151,7 +152,7 @@ var q3=     {
                                             inputValue:3
                                         },
                                         {
-                                            boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck diver, construction worker)</span>',
+                                            boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck driver, construction worker)</span>',
                                             name:q('q3:a1'),
                                             inputValue:4
                                         },
@@ -202,6 +203,7 @@ var q4=     {
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
+                            allowBlank:true,
                             next:q('q5'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
@@ -257,7 +259,7 @@ var q5=     {
                                             inputValue:3
                                         },
                                         {
-                                            boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck diver, construction worker)</span>',
+                                            boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck driver, construction worker)</span>',
                                             name:q('q5:a1'),
                                             inputValue:4
                                         },
@@ -308,6 +310,7 @@ var q6=     {
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
+                            allowBlank:true,
                             next:q('q7'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
@@ -364,7 +367,7 @@ var q7=     {
                                             inputValue:3
                                         },
                                         {
-                                            boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck diver, construction worker)</span>',
+                                            boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck driver, construction worker)</span>',
                                             name:q('q7:a1'),
                                             inputValue:4
                                         },
@@ -415,6 +418,7 @@ var q8=     {
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
+                            allowBlank:true,
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
                             listeners:  {
