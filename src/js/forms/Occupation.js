@@ -24,8 +24,6 @@ var q1=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -94,7 +92,7 @@ var q2=     {
                             id:q('q2'),
                             name:q('q2'),
                             xtype:'textfield',
-                            allowBlank:true,
+                            allowBlank:false,
                             hideLabel:true,
                             disabled:false,
                             next:q('q3'),
@@ -103,8 +101,6 @@ var q2=     {
                             listeners:  {
                                             focus:onFieldFocus,
                                             specialkey:onEnter,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid
                                         }
                         }
                       ]
@@ -131,8 +127,6 @@ var q3=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -203,15 +197,13 @@ var q4=     {
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
-                            allowBlank:true,
+                            allowBlank:false,
                             next:q('q5'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
                             listeners:  {
                                             focus:onFieldFocus,
                                             specialkey:onEnter,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid
                                         }
                         }
                       ]
@@ -238,8 +230,6 @@ var q5=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -310,15 +300,13 @@ var q6=     {
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
-                            allowBlank:true,
+                            allowBlank:false,
                             next:q('q7'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
                             listeners:  {
                                             focus:onFieldFocus,
                                             specialkey:onEnter,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid
                                         }
                         }
                       ]
@@ -346,8 +334,6 @@ var q7=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -418,14 +404,12 @@ var q8=     {
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
-                            allowBlank:true,
+                            allowBlank:false,
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
                             listeners:  {
                                             focus:onFieldFocus,
                                             specialkey:onEnter,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid
                                         }
                         }
                       ]

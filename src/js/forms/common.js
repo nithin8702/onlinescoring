@@ -167,6 +167,7 @@ function nextField(field, where)
         {
             console.log('  nextField: removing active state from '+qContainer.id+' for child field '+field.id);
             setQActive(qContainer,false);
+            setQValidity(qContainer,true);
         }
 
         console.log('  nextField('+field.id+'): Field is valid, looking for form.');
@@ -240,11 +241,13 @@ function highlightInvalidFields(form)
                 //console.log('promptSaveForm(): Scrolling '+items[i].getEl().id+' into view...');
                 qContainer.scrollIntoView(Ext.getCmp('panelForms').body);
                 qContainer.highlight();
+                setQValidity(qContainer,false);
             }
             else
             {
                 items[i].getEl().scrollIntoView(Exte.getCmp('panelForms').body);
                 items[i].getEl().highlight();
+                setQValidity(items[i].getEl(),false);
             }
             focusCmp(items[i]);
             break;
@@ -264,7 +267,7 @@ function msgboxSaveHandler(button, text, config)
 //Transfers keyboard focus to the next question
 function nextQ(ids, form)
 {
-    //console.log('+ nextQ("'+ids+'",'+form.id+')');
+    console.log('+ nextQ("'+ids+'",'+form.id+')');
 
     var id=ids; //This will be changed later by the for-loop if necessary
     var nextQCmp=null;
@@ -281,6 +284,7 @@ function nextQ(ids, form)
                 {
                     id=ids[i];
                     nextQCmp=cmp;
+                    break;
                 }
         }
     }
@@ -309,7 +313,7 @@ function nextQ(ids, form)
     if ((typeof(form)!="undefined") && (form!=null))
     {
         form.focusedEl=focusObj;
-        //console.log('  nextQCmp: Saved focused element: '+focusObj.id);
+        console.log('  nextQCmp: Saved focused element: '+focusObj.id);
     }
 }
 
@@ -550,7 +554,7 @@ function setQValidity(qContainer, validity)
 {
     if (!defined(qContainer)) return;
 
-    //console.log('+ setQValidity('+qContainer.id+',',validity,')');
+    console.log('+ setQValidity('+qContainer.id+',',validity,')');
 
     //Remove all validity classes
     qContainer.removeClass('q-invalid');
@@ -604,7 +608,7 @@ function onFieldInvalid(field,message)
 
     var qContainer=getQContainer(field);
     if (!qContainer.hasClass('q-invalid'))
-        setQValidity(qContainer,false);
+            setQValidity(qContainer,false);
 }
 
 function onFieldFocus(field)

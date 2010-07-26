@@ -25,8 +25,6 @@ var q1=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -84,8 +82,8 @@ var q2=     {
                             invalidClass:'',
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
+
+
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -141,8 +139,8 @@ var q3=     {
                             invalidClass:'',
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
+
+
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -183,8 +181,6 @@ var q4=     {
                             invalidClass:'',
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -242,8 +238,6 @@ var q5=     {
                             disabled:true,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -297,8 +291,6 @@ var q6=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             enableQ:[q('q7')],
@@ -359,8 +351,6 @@ var q7=     {
                             disabled:true,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [

@@ -18,8 +18,6 @@ var sSex=        {
                     style:'padding-left:0px',
                     listeners:  {
                                     change:radiogroupChanged,
-                                    valid:onFieldValid,
-                                    invalid:onFieldInvalid,
                                     focus:onFieldFocus,
                                     specialkey:onEnter
                                 },
@@ -56,8 +54,6 @@ var sAge=    {
                     next:q('q3:1'),
                     listeners:  {
                                     specialkey:onEnter,
-                                    valid:onFieldValid,
-                                    invalid:onFieldInvalid,
                                     focus:onFieldFocus
                                 }
                 };
@@ -86,8 +82,6 @@ var q3= {
                             width:500,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus
                                         },
                             items:  [
@@ -331,15 +325,14 @@ var q4= {
                             name:q('q4'),
                             xtype:'radiogroup',
                             invalidClass:'',
+                            width:400,
                             allowBlank:false,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q5'),
-                            columns:1,
                             hideLabel:true,
+                            columns:1,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },
@@ -381,8 +374,6 @@ var q5= {
                             hideLabel:true,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },
@@ -439,8 +430,6 @@ var q6= {
                             hideLabel:true,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },
@@ -497,8 +486,6 @@ var q7= {
                             columns:1,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },
@@ -555,8 +542,6 @@ var q8= {
                             columns:1,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },

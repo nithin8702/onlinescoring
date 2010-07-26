@@ -17,11 +17,9 @@ var sSex=        {
                     width:135,
                     height:22,
                     allowBlank:false,
-                    next:q('q3'),
+                    next:q('q2'),
                     listeners:  {
                                     change:radiogroupChanged,
-                                    valid:onFieldValid,
-                                    invalid:onFieldInvalid,
                                     focus:onFieldFocus,
                                     specialkey:onEnter
                                 },
@@ -54,11 +52,9 @@ var sDOB=       {
                     maxValue:now,
                     minValue:new Date(1900,0,1),
                     selectOnFocus:true,
-                    next:q('q4'),
+                    next:q('q3'),
                     listeners:  {
                                     specialkey:onEnter,
-                                    valid:onFieldValid,
-                                    invalid:onFieldInvalid,
                                     focus:onFieldFocus
                                 }
                 }
@@ -79,11 +75,9 @@ var sHeight=    {
                     minValue:25,
                     selectOnFocus:true,
                     ctCls:'q-container',
-                    next:q('q2'),
+                    next:q('q4'),
                     listeners:  {
                                     specialkey:onEnter,
-                                    valid:onFieldValid,
-                                    invalid:onFieldInvalid,
                                     focus:onFieldFocus
                                 }
                 };
@@ -107,8 +101,6 @@ var sWeight=    {
                     next:q('q5:a1'),
                     listeners:  {
                                     specialkey:onEnter,
-                                    valid:onFieldValid,
-                                    invalid:onFieldInvalid,
                                     focus:onFieldFocus
                                 }
                 };
@@ -126,8 +118,6 @@ var birthCountry=   {
                         selectOnFocus:true,
                         next:q('q5:a2'),
                         listeners:  {
-                                        valid:onFieldValid,
-                                        invalid:onFieldInvalid,
                                         focus:onFieldFocus,
                                         specialkey:onEnter
                                     }
@@ -143,8 +133,6 @@ var birthState=     {
                         selectOnFocus:true,
                         next:q('q5:a3'),
                         listeners:  {
-                                        valid:onFieldValid,
-                                        invalid:onFieldInvalid,
                                         focus:onFieldFocus,
                                         specialkey:onEnter
                                     }
@@ -160,8 +148,6 @@ var birthCity=      {
                         selectOnFocus:true,
                         next:q('q6'),
                         listeners:  {
-                                        valid:onFieldValid,
-                                        invalid:onFieldInvalid,
                                         focus:onFieldFocus,
                                         specialkey:onEnter
                                     }
@@ -190,8 +176,6 @@ var q6=     {
                             next:q('q7'),
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },
@@ -273,8 +257,6 @@ var q7=     {
                             next:q('q8'),
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },
@@ -360,8 +342,6 @@ var q8=     {
                             next:q('q9'),
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },
@@ -431,8 +411,6 @@ var q9=     {
                             next:[q('q10'), q('q11')],
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },
@@ -493,8 +471,6 @@ var q10=     {
                             width:35,
                             next:q('q11'),
                             listeners:  {
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         }
@@ -526,9 +502,7 @@ var q11=     {
                             next:[q('q11:a2'),q('q12')],
                             listeners:  {
                                             change:checkboxgroupChanged,
-                                            specialkey:onEnter,
-                                            invalid:onFieldInvalid,
-                                            valid:onFieldValid,
+                                            specialkey:onEnter,      
                                             focus:onFieldFocus
                                         },
                             items:  [
@@ -619,8 +593,6 @@ var q12=     {
                             maxLength:4,
                             width:65,
                             listeners:  {
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         }

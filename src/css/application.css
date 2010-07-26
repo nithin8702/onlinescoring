@@ -28,7 +28,22 @@
 
 .q-active
 {
-    background-color:#EEEEFF;
+    background-color:#BBDDFF;
+}
+
+.q-valid
+{
+    background-image:url('../images/icons/go.png');
+    background-repeat: no-repeat;
+    background-position:10px 35px;
+}
+
+.q-invalid
+{
+    background-color:#FFDDEE;
+    background-image:url('../images/icons/cancel.png');
+    background-repeat: no-repeat;
+    background-position:10px 35px;
 }
 
 .q-fieldset
@@ -82,22 +97,6 @@ div.x-form-item .x-form-item-label
     padding-bottom:0px;
     font-weight:bold;
     margin-left:10px
-}
-
-.q-valid
-{
-    background-color:#DDFFEE;
-    background-image:url('../images/icons/go.png');
-    background-repeat: no-repeat;
-    background-position:10px 35px;
-}
-
-.q-invalid
-{
-    background-color:#FFDDEE;
-    background-image:url('../images/icons/cancel.png');
-    background-repeat: no-repeat;
-    background-position:10px 35px;
 }
 
 .line-break

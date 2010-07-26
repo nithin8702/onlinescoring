@@ -24,8 +24,6 @@ var q1=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -80,8 +78,6 @@ var q2=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -136,8 +132,6 @@ var q3=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -177,8 +171,6 @@ var q4=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -232,10 +224,6 @@ var q5=     {
                             style:'margin-top:10px;margin-left:'+radioPaddingLeft+'px',
                             defaults:   {
                                             bodyStyle:'padding:5px',
-                                            listeners:  {
-                                                            valid:onFieldValid,
-                                                            invalid:onFieldInvalid
-                                                        }
                                         },
                             layoutConfig:   {
                                                 columns:3
@@ -269,7 +257,7 @@ var q5=     {
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             specialkey:onEnter,
-                                                            valid:onFieldValid
+
                                                         }
                                         },
                                         {
@@ -454,8 +442,6 @@ var q6=     {
                                             bodyStyle:'padding:5px',
                                             ctCls:'q-table-td-border',
                                             listeners:  {
-                                                            valid:onFieldValid,
-                                                            invalid:onFieldInvalid,
                                                             specialkey:onEnter
                                                         }
                                         },
@@ -942,11 +928,10 @@ var q7=     {
                             next:q('q8'),
                             invalidClass:'',
                             allowBlank:false,
-                            next:q('q8'),
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
+
+
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -1008,8 +993,6 @@ var q8=     {
                             next:q('q9'),
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -1078,8 +1061,6 @@ answer these questions as they apply to your biological relatives <br/>\
                                             bodyStyle:'padding:5px',
                                             ctCls:'q-table-td-border',
                                             listeners:  {
-                                                            valid:onFieldValid,
-                                                            invalid:onFieldInvalid,
                                                             specialkey:onEnter
                                                         }
                                         },
@@ -1639,8 +1620,6 @@ var q10=     {
                             format:'Y',
                             next:q('q11'),
                             listeners:  {
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         }
@@ -1669,8 +1648,6 @@ var q11=     {
                             next:q('q12'),
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -1710,8 +1687,6 @@ var q12=     {
                             next:q('q13'),
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -1750,8 +1725,6 @@ var q13=     {
                             invalidClass:'',
                             listeners:  {
                                             blur:nextField,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         }
                         }

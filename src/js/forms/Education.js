@@ -24,8 +24,6 @@ var q1=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -90,8 +88,6 @@ var q2=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -161,8 +157,6 @@ var q3=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [
@@ -226,8 +220,6 @@ var q4=     {
                             allowBlank:false,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            valid:onFieldValid,
-                                            invalid:onFieldInvalid,
                                             specialkey:onEnter
                                         },
                             items:  [

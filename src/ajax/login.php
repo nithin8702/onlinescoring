@@ -41,7 +41,7 @@ if (!preg_match('/^[^\n\t\r]+$/',$md5password))
 try
 {
     //Make sure the username is registered with this application
-    $db=new \Database('127.0.0.1','root','%root1','onlinescoring');
+    $db=new Database('127.0.0.1','root','%root1','onlinescoring');
     $user=$db->getUser($username);
 
     if (empty($user))
