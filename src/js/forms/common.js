@@ -693,3 +693,60 @@ function defined(somevar)
 
     return true;
 }
+
+function btnSaveClicked(button)
+{
+    var txtSID=Ext.getCmp('txtSubjectID');
+
+    if (!txtSID.isValid())
+        return false;
+
+    var form=Ext.getCmp('tabForms').getActiveTab();
+
+    if (!form.getForm().isValid())
+    {
+        highlightInvalidFields(form);
+        return false;
+    }
+
+    var formdata=form.getForm().getValues();
+
+    //Disable the Save button
+    button.disable();
+
+    //Perform the save request
+    /*Ext.Ajax.request({
+        url:'Test/commit',
+        method:'POST',
+        params:{
+                data: Ext.encode({
+                                    info:{
+                                            session:txtSID.getValue().toString(),
+                                            test:"AtcTest"
+                                         },
+                                    questions:formdata
+                                 })
+               },
+
+        success:saveRequestSucceeded,
+        failure:saveRequestFailed
+    });
+*/
+    return true;
+}
+
+function saveRequestSucceeded(data,request)
+{
+    Ext.getCmp('btnSave').enable();
+//    var form=Ext.getCmp('tabForms').getActiveTab();
+//    form.setTitle('[saved] '+form.title);
+    nextForm();
+}
+
+function saveRequestFailed(form,data)
+{
+    Ext.Msg.alert('Error','Oh, snap! :( We were unable to store the data.<br/>Please contact your IT department.');
+    Ext.getCmp('btnSave').enable();
+//    var currentForm=Ext.getCmp('tabForms').getActiveTab();
+//    currentForm.setTitle('[!] '+currentForm.title);
+}

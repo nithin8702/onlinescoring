@@ -83,6 +83,7 @@ var toolbarForms=   {
                                         handler:btnGoClicked
                                     },
                                     {
+                                        id:'btnReset',
                                         xtype:'button',
                                         text:'Reset',
                                         handler:resetForms,
@@ -98,7 +99,7 @@ var toolbarForms=   {
                                         handler:function()
                                         {
                                             Ext.Ajax.request({
-                                                url:'logout.php',
+                                                url:'ajax/logout.php',
                                                 success:function(){window.location.reload()}
                                             })
                                         }
@@ -126,9 +127,9 @@ var panelForms=     {
 <p>&nbsp;To get started, please enter a Subject ID in the box above and press Enter.</p>\
 <h3 style="margin:5px 0px 5px 10px">Hints:</h3>\
 <ul><li>Use the <i>TAB</i> or <i>Enter</i> keys to cycle through form fields.</li>\
-<li>Try not to use the mouse, unless you see this icon <img src="../images/icons/mouse.png"></img>\
+<li>Try not to use the mouse, unless you see this icon <img src="images/icons/mouse.png"></img>\
 next to the question.</li>\
-<li>If you see <img src="../images/icons/enter_medium.png"></img> instead, use the <i>Enter</i>\
+<li>If you see <img src="images/icons/enter_medium.png"></img> instead, use the <i>Enter</i>\
  key for navigation.</li>\
 </span>',
                         listeners:  {
@@ -230,63 +231,6 @@ function btnGoClicked(button)
     Ext.getCmp('tabForms').show();
 
     return true;
-}
-
-function btnSaveClicked(button)
-{
-    var txtSID=Ext.getCmp('txtSubjectID');
-
-    if (!txtSID.isValid())
-        return false;
-
-    var form=Ext.getCmp('tabForms').getActiveTab();
-
-    if (!form.getForm().isValid())
-    {
-        highlightInvalidFields(form);
-        return false;
-    }
-
-    var formdata=form.getForm().getValues();
-
-    //Disable the Save button
-    button.disable();
-    
-    //Perform the save request
-    Ext.Ajax.request({
-        url:'Test/commit',
-        method:'POST',
-        params:{
-                data: Ext.encode({
-                                    info:{
-                                            session:txtSID.getValue().toString(),
-                                            test:"AtcTest"
-                                         },
-                                    questions:formdata
-                                 })
-               },
-
-        success:saveRequestSucceeded,
-        failure:saveRequestFailed
-    });
-
-    return true;
-}
-
-function saveRequestSucceeded(data,request)
-{
-    Ext.getCmp('btnSave').enable();
-//    var form=Ext.getCmp('tabForms').getActiveTab();
-//    form.setTitle('[saved] '+form.title);
-    nextForm();
-}
-
-function saveRequestFailed(form,data)
-{
-    Ext.Msg.alert('Error','Oh, snap! :( We were unable to store the data.<br/>Please contact your IT department.');
-    Ext.getCmp('btnSave').enable();
-//    var currentForm=Ext.getCmp('tabForms').getActiveTab();
-//    currentForm.setTitle('[!] '+currentForm.title);
 }
 
 function btnHelpClicked(button)
@@ -416,6 +360,8 @@ function resetForms()
         Ext.select('.q-invalid').removeClass('q-invalid');
         Ext.select('.q-active').removeClass('q-active');
     }
+
+    Ext.getCmp('btnFinish').enable();
 
     forms.setActiveTab(0);
     forms.hide();

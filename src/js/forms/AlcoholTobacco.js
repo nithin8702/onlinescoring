@@ -399,6 +399,8 @@ var form=   {
                 xtype:'form',
                 border:false,
                 autoScroll:true,
+                height:875,
+                buttonAlign:'left',
                 title:'Alcohol/Tobacco/Caffeine',
                 keys:   {
                             //Digits [1-5]
@@ -415,8 +417,17 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[q1,q2,q3,q4,q5,q6,q7]
-            };
+                items:[q1,q2,q3,q4,q5,q6,q7],
+                buttons:[
+                            {
+                                id:'btnFinish',
+                                xtype:'button',
+                                text:'Finish',
+                                icon:'images/icons/finish.png',
+                                handler:btnFinishClicked
+                            }
+                        ]
+             };
 
 NRG.Forms.AlcoholTobacco=form;
 
@@ -425,4 +436,10 @@ NRG.Forms.AlcoholTobacco=form;
 function q(id)
 {
     return qID+':'+id;
+}
+
+function btnFinishClicked(button)
+{
+    btnSaveClicked(button);
+    resetForms();
 }

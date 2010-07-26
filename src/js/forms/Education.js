@@ -298,6 +298,8 @@ var form=   {
                 xtype:'form',
                 border:false,
                 autoScroll:true,
+                height:400,
+                buttonAlign:'left',
                 title:'Education',
                 keys:   {
                             //Digits [1-9]
@@ -314,7 +316,15 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[formFields]
+                items:[formFields],
+                buttons:[
+                            {
+                                xtype:'button',
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnSaveClicked
+                            }
+                        ]
             };
 
 NRG.Forms.Education=form;

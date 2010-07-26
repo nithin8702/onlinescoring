@@ -1,6 +1,21 @@
 <?php
-    session_start();
-    $_SESSION['auth']=true; //TODO: CHANGE ME
+    require_once 'bootstrap.php';
+//    require_once 'database.php';
+//
+//    try
+//    {
+//        $db=new Database('127.0.0.1', 'root', '%root1', 'onlinescoring');
+//
+//        print_r($db->getUser('victor.petrov@gmail.com'));
+//    }
+//    catch (Exception $e)
+//    {
+//        print_r($e);
+//    }
+//
+//    die;
+    
+//    $_SESSION['auth']=true; //TODO: CHANGE ME
 ?>
 <!DOCTYPE HTML>
 <html>

@@ -1763,6 +1763,8 @@ var form=   {
                 xtype:'form',
                 border:false,
                 autoScroll:true,
+                height:2750,
+                buttonAlign:'left',
                 title:'Health',
                 keys:   {
                             //Digits [1-5]
@@ -1779,7 +1781,15 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13]
+                items:[q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13],
+                buttons:[
+                            {
+                                xtype:'button',
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnSaveClicked
+                            }
+                        ]
             };
 
 NRG.Forms.Health=form;

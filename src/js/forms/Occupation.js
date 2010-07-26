@@ -453,6 +453,8 @@ var form=   {
                 xtype:'form',
                 border:false,
                 autoScroll:true,
+                height:625,
+                buttonAlign:'left',
                 title:'Occupation',
                 keys:   {
                             //Digits [1-9]
@@ -469,7 +471,15 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[formFields]
+                items:[formFields],
+                buttons:[
+                            {
+                                xtype:'button',
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnSaveClicked
+                            }
+                        ]
             };
 
 NRG.Forms.Occupation=form;

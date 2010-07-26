@@ -550,7 +550,7 @@ var q8= {
                             xtype:'radiogroup',
                             invalidClass:'',
                             allowBlank:false,
-                            style:'padding-left:'+radioPaddingLeft+'px; padding-bottom:20px',
+                            style:'padding-left:'+radioPaddingLeft+'px; margin-bottom:20px',
                             hideLabel:true,
                             columns:1,
                             listeners:  {
@@ -591,11 +591,28 @@ var q8= {
                       ]
           };
 
+//var footer={
+//                xtype:'panel',
+//                height:100,
+//                tbar:{
+//                        xtype:'toolbar',
+//                        buttons:[
+//                                    {
+//                                        xtype:'button',
+//                                        text:'Next'
+//                                    }
+//                                ]
+//                     },
+//                items:  [{html:'&nbsp;'}],
+//            };
+
 var form=   {
                 id:qID,
                 xtype:'form',
                 border:false,
                 title:'Ethnicity/Handedness',
+                buttonAlign:'left',
+                height:900,
                 keys:   {
                             //Digits [1-9]
                             key:[49,50,51,52,53,54,55,56,57,58],
@@ -611,8 +628,16 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:  [sSex,sAge,q3,q4,q5,q6,q7,q8]
-            };
+                items:  [sSex,sAge,q3,q4,q5,q6,q7,q8],
+                buttons:[
+                            {
+                                xtype:'button',
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnSaveClicked
+                            }
+                        ]
+          };
 
 
 NRG.Forms.EthnicityHandedness=form;

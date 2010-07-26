@@ -15,7 +15,7 @@ var ui={
                         xtype: 'form',
                         id:'form-login',
                         title: 'Login',
-                        url: 'Login',
+                        url: 'ajax/login.php',
                         method: 'POST',
                         items: [
                                 {
@@ -88,7 +88,8 @@ function login()
         method:'POST',
         params: {
                     username:Ext.fly('txtUsername').getValue(),
-                    password:Ext.util.MD5(Ext.fly('txtPassword').getValue())
+//                    password:Ext.util.MD5(Ext.fly('txtPassword').getValue())
+                    password:Ext.fly('txtPassword').getValue()
                 },
         success:requestSucceeded,
         failure:requestFailed
@@ -129,7 +130,7 @@ function requestFailed(form,data)
     else
     {
         var response=Ext.decode(data.response.responseText);
-        message=response.result.error;
+        message=response.message;
     }
 
     msgError.update('<span class="message-error">'+message+'</span>');

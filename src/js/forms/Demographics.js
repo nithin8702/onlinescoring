@@ -735,6 +735,8 @@ var form=   {
                 id:qID,
                 xtype:'form',
                 border:false,
+                height:675,
+                buttonAlign:'left',
                 title:'Demographics',
                 keys:   {
                             //Digits [1-9]
@@ -751,7 +753,15 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:  [topFields,middleFields,bottomFields]
+                items:  [topFields,middleFields,bottomFields],
+                buttons:[
+                            {
+                                xtype:'button',
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnSaveClicked
+                            }
+                        ]
             };
 
 NRG.Forms.Demographics=form;
