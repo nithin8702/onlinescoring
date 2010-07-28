@@ -226,13 +226,17 @@ function btnGoClicked(button)
 function btnHelpClicked(button)
 {
     Ext.Msg.show({
-                    title:'Help',
-                    msg:'<b>Keyboard Shortcuts:</b><br>\
+                    title:'<b>Help, I\'m stuck!</b>',
+                    msg:'<b>General Advice:</b><br><br><p>Use soap or olive oil to get unstuck. Otherwise, \
+                    send an e-mail to <a href="mailto:vpetrov@nmr.mgh.harvard.edu">vpetrov@nmr.mgh.harvard.edu</a></p><br>\
+                <p><b>Keyboard Shortcuts:</b><br>\
                         <ul class="help">\
-                            <li>Digits 1-9:&nbsp;Select/Deselect option</li>\
-                            <li>Enter:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Move to the next field</li>\
-                        </ul>',
-                    width:300,
+                            <li><u>Digits 1-9:</u>&nbsp;&nbsp;&nbsp;&nbsp;Select/Deselect radio/checkbox</li>\
+                            <li><u>Enter/Tab:</u>&nbsp;&nbsp;&nbsp;Move to the next field</li>\
+                            <li><u>Ctrl+Shift+NumpadPlus:</u>&nbsp;&nbsp;&nbsp;Next Form</li>\
+                            <li><u>Ctrl+Shift+NumpadMinus:</u>&nbsp;Previous Form</li>\
+                        </ul></p>',
+                    width:400,
                     button:Ext.MessageBox.OK,
                     icon:Ext.MessageBox.INFO
                 });

@@ -14,7 +14,7 @@ var sSex=        {
                     labelStyle:'text-shadow: 2px 2px 2px #ccc',
                     ctCls:'q-container',
                     style:'padding-left:0px',
-                    width:135,
+                    width:150,
                     height:22,
                     allowBlank:false,
                     next:q('q2'),
@@ -27,12 +27,15 @@ var sSex=        {
                                 {
                                     boxLabel:'Male',
                                     name:q('q1:a1'),
-                                    inputValue:1
+                                    inputValue:1,
+                                    width:75
+
                                 },
                                 {
                                     boxLabel:'Female',
                                     name:q('q1:a1'),
-                                    inputValue:2
+                                    inputValue:2,
+                                    width:75
                                 }
                             ]
                 };
