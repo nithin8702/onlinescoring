@@ -144,7 +144,7 @@ var birthCity=      {
                         name:q('q5:a3'),
                         xtype:'textfield',
                         width:125,
-                        allowBlank:false,
+                        allowBlank:true,
                         selectOnFocus:true,
                         next:q('q6'),
                         listeners:  {
@@ -728,10 +728,11 @@ var form=   {
                 items:  [topFields,middleFields,bottomFields],
                 buttons:[
                             {
+                                id:q('btnNext'),
                                 xtype:'button',
                                 text:'Next Form',
                                 icon:'images/icons/next.png',
-                                handler:btnSaveClicked
+                                handler:btnNextFormClicked
                             }
                         ]
             };

@@ -24,6 +24,11 @@ var ui={
                                     labelWidth: 70,
                                     height: 95,
                                     border:false,
+                                    defaults:   {
+                                                    listeners:  {
+                                                                    specialkey:onEnter
+                                                                }
+                                                },
                                     items: [
                                             {
                                                 xtype: 'textfield',
@@ -34,10 +39,7 @@ var ui={
                                                 maxlength:30,
                                                 vtype:'email',
                                                 tabIndex:1,
-                                                value:'guest@neuroinfo.org',
-                                                listeners:  {
-                                                                specialkey:onEnter
-                                                            }
+                                                value:'guest@neuroinfo.org'
                                             },
                                             {
                                                 xtype: 'textfield',
@@ -47,10 +49,7 @@ var ui={
                                                 width:189,
                                                 inputType:'password',
                                                 maxlength:100,
-                                                tabIndex:2,
-                                                listeners:  {
-                                                                specialkey:onEnter
-                                                            }
+                                                tabIndex:2
                                             },
                                             {
                                                 xtype:'tbtext',

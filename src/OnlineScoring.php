@@ -28,7 +28,7 @@
         <script type="text/javascript">
             //Hack to get around some browser not having a default console object
             if ((typeof(window.console)=="undefined") || (window.console==null))
-                window.console={log:function(){},error:function(){}};
+                window.console={log:function(){},error:function(){},warn:function(){}};
         </script>
 
         <?php if ($_SESSION['auth']===true): ?>

@@ -1,21 +1,3 @@
-window.onkeypress=function(key)
-{
-    if (key.keyCode==9)
-    {
-        //Don't do anything funky if Shift+Tab was pressed.
-        if (key.shiftKey)
-            return;
-
-        key.preventDefault();
-        key.stopPropagation();
-        console.log('TAB ',key,key.cancelable);
-        var currentForm=Ext.getCmp('tabForms').getActiveTab();
-        //console.log('Focus is at: ', currentForm.focusedEl);
-        //currentForm.focusedEl.up('div').highlight();
-        nextField(currentForm.focusedEl);
-    }
-}
-
 Ext.onReady(function() {
 
 var tabForms=       {
@@ -146,9 +128,9 @@ next to the question.</li>\
 var portalForms=    {
                         id:'portalForms',
                         xtype:'portal',
-                        title:'Data entry',
+                        title:'Online Scoring',
                         layout:'fit',
-                        style:'padding:10px',
+                        style:'margin:10px;padding-right:20px',
                         iconCls:'x-icon-forms',
                         autoScroll:true,
                         items:[panelForms]
@@ -163,17 +145,17 @@ var portalUsers=     {
                         items:[{html:'Under construction'}]
                     };
 
-var portalScoring=    {
-                        xtype:'portal',
-                        title:'Online Scoring',
-                        layout:'fit',
-                        tabTip:'Online Scoring',
-                        items:  [
-                                    {
-                                        html:''
-                                    }
-                                ]
-                    };
+//var portalScoring=    {
+//                        xtype:'portal',
+//                        title:'Online Scoring',
+//                        layout:'fit',
+//                        tabTip:'Online Scoring',
+//                        items:  [
+//                                    {
+//                                        html:''
+//                                    }
+//                                ]
+//                    };
 
 var groupDashboard= {
                         xtype:'grouptabpanel',
@@ -181,8 +163,14 @@ var groupDashboard= {
                         activeGroup:0,
                         items:  [{
                                     mainItem:0,
-                                    items:[portalScoring,portalForms,portalUsers]
-                                }]
+                                    items:[
+//                                            portalScoring,
+                                            portalForms,
+                                            portalUsers]
+                                }],
+                        listeners:  {
+                                        afterrender:onDashboardActivate
+                                    }
                     };
 var viewportMain=     {
                         id:'viewportMain',
@@ -190,6 +178,8 @@ var viewportMain=     {
                         items:[groupDashboard]
                     };
 
+
+window.onbeforeunload=onLeave;
 
 //Initialize QuickTips
 Ext.QuickTips.init();
@@ -352,10 +342,15 @@ function resetForms()
 
     for (var i=0;i<forms.items.items.length;++i)
     {
-        var form=forms.items.items[i].getForm();
+        var formCmp=forms.items.items[i];
+        formCmp.saved=false;
+        formCmp.focusedEl=null;
+
+        var form=formCmp.getForm();
 
         NRG.Forms.GlobalReset=true;
         form.reset();
+
         Ext.select('.q-valid').removeClass('q-valid');
         Ext.select('.q-invalid').removeClass('q-invalid');
         Ext.select('.q-active').removeClass('q-active');
@@ -366,4 +361,15 @@ function resetForms()
     forms.setActiveTab(0);
     forms.hide();
     Ext.getCmp('txtSubjectID').focus();
+}
+
+function onLeave()
+{
+    return false;
+}
+
+function onDashboardActivate(dashboard)
+{
+    console.log('dashboard activated');
+    dashboard.getLayout().setActiveItem(1);
 }

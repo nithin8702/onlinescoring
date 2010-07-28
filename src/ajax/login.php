@@ -37,10 +37,15 @@ if (!preg_match('/^[^\n\t\r]+$/',$md5password))
 
 //$login=new NRG\Login($username,$md5password);
 
+
+//guest login
+guest_login($username,$md5password);
+flush();
+exit();
 //Check the username and password
 try
 {
-    //Make sure the username is registered with this application
+/*    //Make sure the username is registered with this application
     $db=new Database('127.0.0.1','root','%root1','onlinescoring');
     $user=$db->getUser($username);
 
@@ -50,6 +55,7 @@ try
     $auth=new NRG\Login\Google\ClientLogin($username,$md5password);
     
     $auth->login();
+ */
 }
 catch (\Exception $e)
 {
@@ -66,3 +72,18 @@ else
 //Success
 $result=Array("success"=>1);
 ajax_result($result);
+
+function guest_login($username,$password)
+{
+    if (($username=="guest@neuroinfo.org") && ($password=="guest"))
+    {
+        $_SESSION['auth']=true;
+        $result=Array("success"=>1);
+        ajax_result($result);
+    }
+    else
+    {
+        ajax_error("Invalid username or password.");
+    }
+
+}

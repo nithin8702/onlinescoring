@@ -1,5 +1,34 @@
 Ext.namespace('NRG.Forms');
 
+window.onkeypress=function(key)
+{
+    if (key.keyCode==9)
+    {
+        var currentForm=Ext.getCmp('tabForms').getActiveTab();
+
+       //Don't do anything funky if Shift+Tab was pressed.
+        if (key.shiftKey)
+        {
+            console.log('Focus is at: ', currentForm.focusedEl);
+            //currentForm.focusedEl.up('div').highlight();
+            return;
+        }
+
+        key.preventDefault();
+        key.stopPropagation();
+        console.log('+ TAB ',key,key.cancelable);
+        if (currentForm.focusedEl)
+        {
+            console.log('Focus is at: ', currentForm.focusedEl.id);
+            nextField(currentForm.focusedEl);
+        }
+        else
+            console.log('  TAB: No element has focus.');
+    }
+}
+
+
+
 /**
  * Common functions for all forms (callbacks and utility methods)
  */
@@ -136,7 +165,10 @@ function nextField(field, where)
     if (defined(field.next))
         next=field.next;
 
-    console.log('  nextField(): now next and field.next='+field.next)
+    if (next)
+        console.log('  nextField(): Going to '+next+', field.next was '+field.next);
+    else
+        console.warn('  nextField(): next is '+next);
 
     if (field.getEl().dom.type=="radio")
     {
@@ -146,6 +178,8 @@ function nextField(field, where)
         {
             //console.log('  nextField(): Found radiogroup: '+rg.id+', replacing field parameter');
             field=rg;
+            if ((!next) && (defined(field.next)))
+                next=field.next;
         }
         else
         {
@@ -157,6 +191,12 @@ function nextField(field, where)
     //check the entire radiogroup, not just this field.
     var valid=field.isValid();
 
+    console.log('Field to validate: ',field);
+
+    if (defined(field.validationHandler))
+        valid=field.validationHandler(field);
+
+
     //TODO: Check for Component/Element
     //Verify that the field is valid
     if (valid)
@@ -167,7 +207,8 @@ function nextField(field, where)
         {
             console.log('  nextField: removing active state from '+qContainer.id+' for child field '+field.id);
             setQActive(qContainer,false);
-            setQValidity(qContainer,true);
+            if (!field.ignoreValidState)
+                setQValidity(qContainer,true);
         }
 
         console.log('  nextField('+field.id+'): Field is valid, looking for form.');
@@ -190,7 +231,16 @@ function nextField(field, where)
             nextQ(next,form);
         }
         else
-            promptSaveForm(form);
+        {
+            if (form.saved)
+            {
+                var btnNext=Ext.getCmp(form.id+':btnNext');
+                if (btnNext)
+                    btnNext.focus();
+            }
+            else
+                promptSaveForm(form);
+        }
     }
     else
     {
@@ -200,7 +250,7 @@ function nextField(field, where)
 
 function promptSaveForm(form)
 {
-    //console.log('promptSaveForm('+form.id+')');
+    console.log('promptSaveForm('+form.id+')');
 
     if ((typeof(form)=="undefined") || (form==null))
     {
@@ -215,14 +265,17 @@ function promptSaveForm(form)
         return;
     }
 
-        Ext.Msg.show({
-            title:'Save Dialog',
-            msg:"It looks like you\'re ready to save this form.<br/>Would you like to save it now?",
-            buttons:Ext.MessageBox.YESNOCANCEL,
-            icon:Ext.MessageBox.QUESTION,
-            fn:msgboxSaveHandler,
-            form:form
-        });
+    if (form.saved)
+        return;
+
+    Ext.Msg.show({
+        title:'Save Dialog',
+        msg:"It looks like you\'re ready to save this form.<br/>Would you like to save it now?",
+        buttons:Ext.MessageBox.YESNOCANCEL,
+        icon:Ext.MessageBox.QUESTION,
+        fn:msgboxSaveHandler,
+        form:form
+    });
 }
 
 function highlightInvalidFields(form)
@@ -409,9 +462,11 @@ function formDone(form)
 {
     //console.log('+ formDone('+form.id+'): Form '+form.id+' is done: ', form.getForm().getValues());
 
-    //Quick hack
-    btnSaveClicked(Ext.getCmp('btnSave'));
-
+    if (!form.saved)
+        //Quick hack
+        btnSaveClicked(Ext.getCmp('btnSave'));
+    else
+        nextForm();
 }
 
 function onFormKeypress(keycode, event)
@@ -464,7 +519,22 @@ function radioKeypress(field,keycode,event)
     if ((typeof(group)=="undefined") || (group==null))
         return;
 
-    group.setValue(charcode);
+    //Get the component
+    var groupCmp=Ext.getCmp(group.id);
+    var ok=true;
+    if (groupCmp)
+    {
+        //Satisfies minValue condition?
+        if ((defined(groupCmp.minValue)) && (groupCmp.minValue>charcode))
+            ok=false;
+
+        //Satisfies maxValue condition?
+        if ((defined(groupCmp.maxValue)) && (groupCmp.maxValue<charcode))
+            ok=false;
+    }
+
+    if (ok)
+        group.setValue(charcode);
 }
 
 function checkboxKeypress(field,keycode,event)
@@ -620,11 +690,39 @@ function onFieldFocus(field)
     //console.log('+ onFieldFocus('+field.id+'): Updating form focused element. ');
     //Update current focused element for this form
     form.focusedEl=field.getEl();
+
+    var qContainer=getQContainer(field.getEl());
+    if (qContainer)
+        setQActive(qContainer,true);
+
+}
+
+//Lost focus
+function onFocusLost(field)
+{
+    if (!defined(field))
+        return;
+
+    var qContainer=getQContainer(field);
+    if (qContainer)
+        setQActive(qContainer,false);
+
+    var form=field.findParentByType('form');
+    if ((typeof(form)=="undefined") || (form==null))
+        return;
+
+    form.focusedEl.focus();
 }
 
 
 function onFormShow(form)
 {
+    var btnSave=Ext.getCmp('btnSave');
+    if (form.saved)
+        btnSave.disable();
+    else
+        btnSave.enable();
+
    //Does the form have a keymap associated with it?
     if (typeof(form.keyMap)=="undefined")
     {
@@ -656,7 +754,9 @@ function onFormActivated(form)
     {
         //console.log('  onFormActivated(): Highlighting focused element: '+form.focusedEl.id);
         form.focusedEl.focus();
-        form.focusedEl.up('div').highlight('#EEEEFF');
+        var qContainer=getQContainer(form.focusedEl);
+        if (qContainer)
+            setQActive(qContainer,true);
     }
     else
     {
@@ -718,6 +818,7 @@ function btnSaveClicked(button)
     //Disable the Save button
     button.disable();
 
+    form.saved=true;
     //Perform the save request
     /*Ext.Ajax.request({
         url:'Test/commit',
@@ -736,14 +837,16 @@ function btnSaveClicked(button)
         failure:saveRequestFailed
     });
 */
+
+    //FIXME: Change me when enabling the actual save request
+    saveRequestSucceeded(); //<------------- DELETE THIS.
+
+
     return true;
 }
 
 function saveRequestSucceeded(data,request)
 {
-    Ext.getCmp('btnSave').enable();
-//    var form=Ext.getCmp('tabForms').getActiveTab();
-//    form.setTitle('[saved] '+form.title);
     nextForm();
 }
 
@@ -753,4 +856,13 @@ function saveRequestFailed(form,data)
     Ext.getCmp('btnSave').enable();
 //    var currentForm=Ext.getCmp('tabForms').getActiveTab();
 //    currentForm.setTitle('[!] '+currentForm.title);
+}
+
+function btnNextFormClicked(button)
+{
+    var currentForm=Ext.getCmp('tabForms').getActiveTab();
+    if (currentForm.saved)
+        nextForm();
+    else
+        promptSaveForm(currentForm);
 }

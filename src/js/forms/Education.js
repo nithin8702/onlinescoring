@@ -22,6 +22,12 @@ var q1=     {
                             next:q('q2'),
                             invalidClass:'',
                             allowBlank:false,
+                            defaults:   {
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            blur:onFocusLost
+                                                        }
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             specialkey:onEnter
@@ -86,6 +92,12 @@ var q2=     {
                             next:q('q3'),
                             invalidClass:'',
                             allowBlank:false,
+                            defaults:   {
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            blur:onFocusLost
+                                                        }
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             specialkey:onEnter
@@ -155,7 +167,13 @@ var q3=     {
                             next:q('q4'),
                             invalidClass:'',
                             allowBlank:false,
-                            listeners:  {
+                             defaults:   {
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            blur:onFocusLost
+                                                        }
+                                        },
+                           listeners:  {
                                             change:radiogroupChanged,
                                             specialkey:onEnter
                                         },
@@ -218,6 +236,12 @@ var q4=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             invalidClass:'',
                             allowBlank:false,
+                            defaults:   {
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            blur:onFocusLost
+                                                        }
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             specialkey:onEnter
@@ -311,10 +335,11 @@ var form=   {
                 items:[formFields],
                 buttons:[
                             {
+                                id:q('btnNext'),
                                 xtype:'button',
                                 text:'Next Form',
                                 icon:'images/icons/next.png',
-                                handler:btnSaveClicked
+                                handler:btnNextFormClicked
                             }
                         ]
             };

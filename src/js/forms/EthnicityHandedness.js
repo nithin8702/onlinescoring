@@ -16,6 +16,12 @@ var sSex=        {
                     next:q('q2'),
                     ctCls:'q-container',
                     style:'padding-left:0px',
+                    defaults:   {
+                                    listeners:  {
+                                                    focus:onFieldFocus,
+                                                    blur:onFocusLost
+                                                }
+                                },
                     listeners:  {
                                     change:radiogroupChanged,
                                     focus:onFieldFocus,
@@ -54,7 +60,8 @@ var sAge=    {
                     next:q('q3:1'),
                     listeners:  {
                                     specialkey:onEnter,
-                                    focus:onFieldFocus
+                                    focus:onFieldFocus,
+                                    blur:onFocusLost
                                 }
                 };
 
@@ -80,9 +87,11 @@ var q3= {
                             next:q('q4'),
                             hideLabel:true,
                             width:500,
+                            validationHandler:q3Validator,
                             listeners:  {
                                             change:radiogroupChanged,
-                                            focus:onFieldFocus
+                                            focus:onFieldFocus,
+                                            blur:onFocusLost
                                         },
                             items:  [
                                         //First column
@@ -102,7 +111,16 @@ var q3= {
                                                         next:q('q3:2'),
                                                         hideLabel:true,
                                                         columns:1,
+                                                        ignoreValidState:true,
+                                                        minValue:1,
+                                                        maxValue:8,
                                                         itemCls:'q-container',
+                                                        defaults:   {
+                                                                        listeners:  {
+                                                                                        focus:onFieldFocus,
+                                                                                        blur:onFocusLost
+                                                                                    }
+                                                                    },
                                                         listeners:  {
                                                                         change:q3groupChanged,
                                                                         focus:onFieldFocus,
@@ -171,7 +189,16 @@ var q3= {
                                                         next:q('q3:3'),
                                                         hideLabel:true,
                                                         columns:1,
+                                                        minValue:1,
+                                                        maxValue:4,
+                                                        ignoreValidState:true,
                                                         itemCls:'q-container',
+                                                        defaults:   {
+                                                                        listeners:  {
+                                                                                        focus:onFieldFocus,
+                                                                                        blur:onFocusLost
+                                                                                    }
+                                                                    },
                                                         listeners:  {
                                                                         change:q3groupChanged,
                                                                         focus:onFieldFocus,
@@ -219,7 +246,16 @@ var q3= {
                                                         style:'padding-left:0px',
                                                         hideLabel:true,
                                                         columns:1,
+                                                        minValue:1,
+                                                        maxValue:4,
+                                                        ignoreValidState:true,
                                                         itemCls:'q-container',
+                                                        defaults:   {
+                                                                        listeners:  {
+                                                                                        focus:onFieldFocus,
+                                                                                        blur:onFocusLost
+                                                                                    }
+                                                                    },
                                                         listeners:  {
                                                                         change:q3groupChanged,
                                                                         focus:onFieldFocus,
@@ -266,8 +302,18 @@ var q3= {
                                                         next:q('q4'),
                                                         hideLabel:true,
                                                         columns:1,
+                                                        minValue:1,
+                                                        maxValue:4,
+                                                        ignoreValidState:true,
+                                                        validationHandler:q3Validator,
                                                         itemCls:'q-container',
                                                         style:'padding-left:0px',
+                                                        defaults:   {
+                                                                        listeners:  {
+                                                                                        focus:onFieldFocus,
+                                                                                        blur:onFocusLost
+                                                                                    }
+                                                                    },
                                                         listeners:  {
                                                                         change:q3groupChanged,
                                                                         focus:onFieldFocus,
@@ -299,7 +345,7 @@ var q3= {
                                                   ]
                                         },
                                         {
-                                            xtype:'radio',
+                                            xtype:'checkbox',
                                             id:'q3-hidden-value',
                                             name:'q3-hidden-value',
                                             hidden:true,
@@ -331,6 +377,12 @@ var q4= {
                             next:q('q5'),
                             hideLabel:true,
                             columns:1,
+                            defaults:   {
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            blur:onFocusLost
+                                                        }
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             focus:onFieldFocus,
@@ -372,6 +424,12 @@ var q5= {
                             next:q('q6'),
                             columns:1,
                             hideLabel:true,
+                            defaults:   {
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            blur:onFocusLost
+                                                        }
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             focus:onFieldFocus,
@@ -428,6 +486,12 @@ var q6= {
                             columns:1,
                             next:q('q7'),
                             hideLabel:true,
+                            defaults:   {
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            blur:onFocusLost
+                                                        }
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             focus:onFieldFocus,
@@ -484,6 +548,12 @@ var q7= {
                             next:q('q8'),
                             hideLabel:true,
                             columns:1,
+                            defaults:   {
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            blur:onFocusLost
+                                                        }
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             focus:onFieldFocus,
@@ -540,6 +610,12 @@ var q8= {
                             style:'padding-left:'+radioPaddingLeft+'px; margin-bottom:20px',
                             hideLabel:true,
                             columns:1,
+                            defaults:   {
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            blur:onFocusLost
+                                                        }
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             focus:onFieldFocus,
@@ -616,10 +692,11 @@ var form=   {
                 items:  [sSex,sAge,q3,q4,q5,q6,q7,q8],
                 buttons:[
                             {
+                                id:q('btnNext'),
                                 xtype:'button',
                                 text:'Next Form',
                                 icon:'images/icons/next.png',
-                                handler:btnSaveClicked
+                                handler:btnNextFormClicked
                             }
                         ]
           };
@@ -643,14 +720,9 @@ function q3groupChanged(radiogroup, checked)
 
     console.log('+ q3groupChanged('+radiogroup.id+'): Radio checked: '+checked.name+':'+checked.inputValue);
 
-    Ext.getCmp('q3-hidden-value').setValue(true);
-
     var fID=radiogroup.findParentByType('form').getId();
 
-    var q3=Ext.get(fID+':q3');
-
     //Clear all other radio groups in q3 except this one
-    //Yay, harcoded goodness!
     for (var i=1;i<=4;++i)
     {
         var rgID=fID+':q3:'+i;
@@ -670,7 +742,15 @@ function q3groupChanged(radiogroup, checked)
         console.log('  q3groupChanged(): Removing active class from parent container: '+qContainer.id);
         setQActive(qContainer,false);
     }
+    
+    var q3hidden=Ext.getCmp('q3-hidden-value');
+    
+    q3hidden.setRawValue(checked.inputValue);
+    q3hidden.setValue(false);
+    q3hidden.setValue(true);
 
+    var q3=Ext.getCmp(fID+':q3');
+    nextField(q3);
 }
 
 function onq3Enter(field,e)
@@ -688,4 +768,16 @@ function onq3Enter(field,e)
 
     //Execute the standard callback
     onEnter(q3,e);
+}
+
+function q3Validator(q3subgroup)
+{
+    var q3=Ext.getCmp('q3-hidden-value');
+    if (!q3)
+        return false;
+
+    if (!q3.getValue())
+        return false;
+
+    return true;
 }
