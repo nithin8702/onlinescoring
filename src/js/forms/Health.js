@@ -184,7 +184,7 @@ var q4=     {
                             columns:1,
                             hideLabel:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
-                            next:q('q5'),
+                            next:q('q5:a0'),
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
@@ -1787,7 +1787,12 @@ var form=   {
                 title:'Health',
                 keys:   {
                             //Digits [1-5]
-                            key:[49,50,51,52,53],
+                            key:[
+                                    //Horizontal line
+                                    49,50,51,52,53,
+                                    //Numpad
+                                    97,98,99,100,101
+                                ],
                             fn:onFormKeypress,
                             scope:this
                         },

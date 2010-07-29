@@ -471,7 +471,7 @@ function formDone(form)
 
 function onFormKeypress(keycode, event)
 {
-    //console.log('+ onFormKeypress('+keycode+'): FORM KEYPRESS :', keycode, event.target);
+    console.log('+ onFormKeypress('+keycode+'): FORM KEYPRESS :', keycode, event.target);
 
     var fieldCmp=Ext.getCmp(event.target.id);
 
@@ -506,15 +506,14 @@ function onFormKeypress(keycode, event)
         case "radio": radioKeypress(fieldCmp, keycode, event); break;
         case "checkbox": checkboxKeypress(fieldCmp, keycode, event); break;
     }
-
 }
 
 function radioKeypress(field,keycode,event)
 {
-    //console.log('+ radioKeypress('+field.id+','+keycode+')');
+    console.log('+ radioKeypress('+field.id+','+keycode+')');
     //Get the parent radio group
     var group=field.findParentByType('radiogroup');
-    var charcode=keycode-48;
+    var charcode=getNumCode(keycode);
 
     if ((typeof(group)=="undefined") || (group==null))
         return;
@@ -539,19 +538,29 @@ function radioKeypress(field,keycode,event)
 
 function checkboxKeypress(field,keycode,event)
 {
-    //console.log('+ checkboxKeypress('+field.id+','+keycode+')');
+    console.log('+ checkboxKeypress('+field.id+','+keycode+')');
     //Get the parent checkboxgroup
     var group=field.findParentByType('checkboxgroup');
-    var charcode=keycode-48;
+    var charcode=getNumCode(keycode);
     var checkbox=null;
 
-    //Search for the correct checkbox
-    for (var i=0;i<group.items.items.length;++i)
+    //If there is no group, then the checkbox is just a simple checkbox,
+    //so we should check it
+    if (!group)
     {
-        if (group.items.items[i].inputValue==charcode)
+        field.setValue(!field.getValue());
+        return;
+    }
+    else
+    {
+        //Search for the correct checkbox
+        for (var i=0;i<group.items.items.length;++i)
         {
-            checkbox=group.items.items[i];
-            break;
+            if (group.items.items[i].inputValue==charcode)
+            {
+                checkbox=group.items.items[i];
+                break;
+            }
         }
     }
 
@@ -711,7 +720,8 @@ function onFocusLost(field)
     if ((typeof(form)=="undefined") || (form==null))
         return;
 
-    form.focusedEl.focus();
+    if (defined(form.focusedEl))
+        form.focusedEl.focus();
 }
 
 
@@ -721,16 +731,17 @@ function onFormShow(form)
     if (form.saved)
         btnSave.disable();
     else
-        btnSave.enable();
+        if (NRG.Forms.SessionLabel)
+            btnSave.enable();
 
    //Does the form have a keymap associated with it?
     if (typeof(form.keyMap)=="undefined")
     {
-        //console.log('No keymap yet');
+        console.log('No keymap yet');
         return;
     }
 
-    //console.log('+ onFormShow('+form.id+'): Enabling keymap for: ',form.id);
+    console.log('+ onFormShow('+form.id+'): Enabling keymap for: ',form.id);
     //Deactivate the keymap
     form.keyMap.enable();
 }
@@ -743,24 +754,29 @@ function onFormActivated(form)
     if ((typeof(form.focusedEl)=="undefined") || (form.focusedEl==null))
     {
         form.focusedEl=Ext.select('input',false,form.getEl().dom).item(0);
-        //console.log('  onFormActivated(): Searched for a new input element to highlight and found this: ',form.focusedEl)
+        console.log('  onFormActivated(): Searched for a new input element to highlight and found this: ',form.focusedEl)
     }
 
     //If the form is hidden, then we should not focus any elements yet
-    if (Ext.getCmp('btnGo').isVisible())
+    if (!NRG.Forms.SessionLabel)
         return;
 
     if ((typeof(form.focusedEl)!="undefined") && (form.focusedEl!=null))
     {
-        //console.log('  onFormActivated(): Highlighting focused element: '+form.focusedEl.id);
+        console.log('  onFormActivated(): Highlighting focused element: '+form.focusedEl.id);
         form.focusedEl.focus();
         var qContainer=getQContainer(form.focusedEl);
         if (qContainer)
+        {
+            console.log('  onFormActivated(): Setting container '+qContainer.id+' active for element '+form.focusedEl);
             setQActive(qContainer,true);
+        }
+        else
+            console.log('  onFormActivated(): Couldn\'t find qContainer for '+form.focusedEl);
     }
     else
     {
-        //console.log('  onFormActivated(): No element to highlight for form '+form.id);
+        console.log('  onFormActivated(): No element to highlight for form '+form.id);
     }
 
     if (!defined(form.radioShortcutLabels))
@@ -776,7 +792,6 @@ function onFormActivated(form)
 
         form.radioShortcutLabels=true;
     }
-
 }
 
 function addShortcutLabel(input)
@@ -800,6 +815,20 @@ function defined(somevar)
 
 function btnSaveClicked(button)
 {
+    if (!NRG.Forms.SessionLabel)
+    {
+        Ext.Msg.show({
+            title:'Oops',
+            msg:'It seems the application lost your session id and will not function correctly if allowed to continue.<br><br>I will now click the Reset button for you and cross my fingers in hope this doesn\'t happen again, ok?',
+            icon:Ext.Msg.ERROR,
+            buttons:Ext.Msg.OK,
+            width:400,
+            fn:function(){resetForms();}
+        });
+
+        return false;
+    }
+
     var txtSID=Ext.getCmp('txtSubjectID');
 
     if (!txtSID.isValid())
@@ -820,38 +849,50 @@ function btnSaveClicked(button)
 
     form.saved=true;
     //Perform the save request
-    /*Ext.Ajax.request({
-        url:'Test/commit',
+    Ext.Ajax.request({
+        url:'ajax/saveform.php',
         method:'POST',
         params:{
-                data: Ext.encode({
-                                    info:{
-                                            session:txtSID.getValue().toString(),
-                                            test:"AtcTest"
-                                         },
-                                    questions:formdata
-                                 })
+                id:form.id,
+                session:NRG.Forms.SessionLabel,
+                data:Ext.encode(formdata)
                },
 
         success:saveRequestSucceeded,
         failure:saveRequestFailed
     });
-*/
-
-    //FIXME: Change me when enabling the actual save request
-    saveRequestSucceeded(); //<------------- DELETE THIS.
-
 
     return true;
 }
 
 function saveRequestSucceeded(data,request)
 {
-    nextForm();
+    Ext.Msg.hide();
+    var response=Ext.decode(data.responseText);
+
+    if (response.success==1)
+    {
+        nextForm();
+        return;
+    }
+
+    if (response.action)
+    {
+        ajaxAction(response.action,response);
+        return;
+    }
+    
+    Ext.Msg.show({
+                    title:'Oops',
+                    msg:response.message,
+                    icon:Ext.Msg.ERROR,
+                    buttons:Ext.Msg.OK
+    });
 }
 
 function saveRequestFailed(form,data)
 {
+    Ext.Msg.hide();
     Ext.Msg.alert('Error','Oh, snap! :( We were unable to store the data.<br/>Please contact your IT department.');
     Ext.getCmp('btnSave').enable();
 //    var currentForm=Ext.getCmp('tabForms').getActiveTab();
@@ -865,4 +906,16 @@ function btnNextFormClicked(button)
         nextForm();
     else
         promptSaveForm(currentForm);
+}
+
+function getNumCode(keycode)
+{
+    //Horizontal digit line
+    var result=keycode-48;
+
+    //Numpad
+    if (result>=48)
+        result-=48;
+
+    return result;
 }

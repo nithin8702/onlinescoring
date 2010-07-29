@@ -432,7 +432,12 @@ var form=   {
                 title:'Alcohol/Tobacco/Caffeine',
                 keys:   {
                             //Digits [1-5]
-                            key:[49,50,51,52,53],
+                            key:[
+                                    //Horizontal digits
+                                    49,50,51,52,53,
+                                    //Numpad
+                                    97,98,99,100,101
+                                ],
                             fn:onFormKeypress,
                             scope:this
                         },

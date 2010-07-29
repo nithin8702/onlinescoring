@@ -5,3 +5,5 @@ date_default_timezone_set("America/New_York");
 session_start();
 if (!isset($_SESSION['auth']))
     $_SESSION['auth']=false;
+
+define("CONFIG_FILE","config.ini.php");

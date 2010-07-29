@@ -62,6 +62,7 @@ var ui={
                                ],
                          buttons:[
                                     {
+                                        id:'btnLogin',
                                         text:'<b>Login</b>',
                                         type:'submit',
                                         handler:login
@@ -80,8 +81,11 @@ Ext.onReady(function(){
 
 function login()
 {
+    Ext.getCmp('btnLogin').disable();
+    var msgError=Ext.get('msgError');
+    msgError.update('');
     var form=Ext.getCmp('form-login').getForm();
-
+    
     Ext.Ajax.request({
         url:form.url,
         method:'POST',
@@ -97,7 +101,6 @@ function login()
 
 function requestSucceeded(data,request)
 {
-    console.log('success:',data,request);
     var msgError=Ext.get('msgError');
     var message='';
     if (data.failureType=='client')
@@ -115,13 +118,14 @@ function requestSucceeded(data,request)
         message=response.message;
     }
 
-    msgError.update('<span class="message-error">'+message+'</span>');
+    msgError.update('<span style="color:red">'+message+'</span>');
     msgError.show();
+    Ext.getCmp('btnLogin').enable();
 }
 
 function requestFailed(form,data)
 {
-    console.log('failure',data);
+    Ext.getCmp('btnLogin').enable();
     var msgError=Ext.get('msgError');
     var message='';
     if (data.failureType=='client')
@@ -132,7 +136,7 @@ function requestFailed(form,data)
         message=response.message;
     }
 
-    msgError.update('<span class="message-error">'+message+'</span>');
+    msgError.update('<span style="color:red">'+message+'</span>');
     msgError.show();
 
 }

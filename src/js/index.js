@@ -82,7 +82,12 @@ var toolbarForms=   {
                                         {
                                             Ext.Ajax.request({
                                                 url:'ajax/logout.php',
-                                                success:function(){window.location.reload()}
+                                                success:function()
+                                                {
+                                                    Ext.Msg.hide();
+                                                    window.onbeforeunload=null;
+                                                    window.location.reload()
+                                                }
                                             })
                                         }
                                     },
@@ -167,10 +172,7 @@ var groupDashboard= {
 //                                            portalScoring,
                                             portalForms,
                                             portalUsers]
-                                }],
-                        listeners:  {
-                                        afterrender:onDashboardActivate
-                                    }
+                                }]
                     };
 var viewportMain=     {
                         id:'viewportMain',
@@ -183,6 +185,18 @@ window.onbeforeunload=onLeave;
 
 //Initialize QuickTips
 Ext.QuickTips.init();
+
+// Display a wait.. dialog.
+Ext.Ajax.on('beforerequest',
+    function()
+    {
+        Ext.Msg.wait('Please stand by for milk and cookies ...','Loading');
+    },
+    this
+);
+
+//Ext.Ajax.on('requestcomplete',function(){ Ext.Msg.hide(); }, this);
+//Ext.Ajax.on('requestexception',function(){ Ext.Msg.hide(); }, this);
 
 //Instantiate the main window
 var MainWindow=new Ext.Viewport(viewportMain);
@@ -202,25 +216,19 @@ function btnGoClicked(button)
         return false;
     }
 
+    button.disable();
+    txtSID.setRawValue(txtSID.getValue().toUpperCase());
+    txtSID.disable();
+
     Ext.Ajax.request({
-        url:'Lock/check',
+        url:'ajax/session.php',
         method:'POST',
         params: {
-                    session:txtSID.getValue()
-                }
-
+                    subjectid:txtSID.getValue()
+                },
+        success:sessionRequestSucceeded,
+        failure:sessionRequestFailed
     });
-
-    txtSID.setRawValue(txtSID.getValue().toUpperCase());
-
-    txtSID.disable();
-    button.hide();
-    Ext.getCmp('btnSave').enable();
-
-    Ext.fly('panelFormsWelcome').hide();
-    Ext.getCmp('tabForms').show();
-
-    return true;
 }
 
 function btnHelpClicked(button)
@@ -237,7 +245,7 @@ function btnHelpClicked(button)
                             <li><u>Ctrl+Shift+NumpadMinus:</u>&nbsp;Previous Form</li>\
                         </ul></p>',
                     width:400,
-                    button:Ext.MessageBox.OK,
+                    buttons:{ok:'Outstanding!'},
                     icon:Ext.MessageBox.INFO
                 });
 }
@@ -332,6 +340,9 @@ function onBeforeTabChange(tabs, newform, oldform)
 
 function resetForms()
 {
+    //Lose the session label
+    NRG.Forms.SessionLabel=null;
+
     //Reset all text fields
     var txtSID=Ext.getCmp('txtSubjectID');
     txtSID.enable();
@@ -372,8 +383,54 @@ function onLeave()
     return false;
 }
 
-function onDashboardActivate(dashboard)
+function sessionRequestSucceeded(data,request)
 {
-    console.log('dashboard activated');
-    dashboard.getLayout().setActiveItem(1);
+    Ext.Msg.hide();
+    Ext.getCmp('btnGo').enable();
+
+    var response=Ext.decode(data.responseText);
+    if (response.success==1)
+    {
+        //Store the session label
+        NRG.Forms.SessionLabel=response.session;
+        Ext.getCmp('btnGo').hide();
+        Ext.getCmp('btnSave').enable();
+        Ext.fly('panelFormsWelcome').hide();
+        Ext.getCmp('tabForms').show();
+    }
+    else
+    {
+        Ext.getCmp('txtSubjectID').enable();
+        NRG.Forms.SessionLabel=null;
+
+        if (response.action)
+            ajaxAction(response.action, response)
+    }
+}
+
+function sessionRequestFailed(form,data)
+{
+    Ext.Msg.hide();
+    NRG.Forms.SessionLabel=null;
+    Ext.getCmp('btnGo').enable();
+    Ext.getCmp('txtSubjectID').enable();
+    Ext.Msg.alert('Error','Oops, we were unable to create a data entry session for this Subject ID.<br/>Please try again later.');
+}
+
+function ajaxAction(action,response)
+{
+    switch (action)
+    {
+        case "refresh":
+                        Ext.Msg.show({
+                            title:'Bummer',
+                            width:350,
+                            msg:response.message,
+                            icon:Ext.Msg.WARNING,
+                            buttons:Ext.Msg.OK,
+                            fn:function(){ window.onbeforeunload=null; window.location.reload();}
+                        });
+                        break;
+    }
+
 }
