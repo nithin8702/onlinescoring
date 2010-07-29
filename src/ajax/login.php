@@ -78,7 +78,7 @@ try
 }
 catch (\NRG\Login\Google\ClientLoginCaptchaException $e)
 {
-    error_log('[OnlineQuestionnaire] ERROR: Implement captcha exception at once!', LOG_ERR);
+    error_log('[OnlineQuestionnaire] ERROR: Implement captcha exception at once!',0);
     ajax_error('Sorry, Google wants Captcha image validation.');
 }
 catch (\NRG\Login\Google\ClientLoginException $e)
@@ -87,7 +87,7 @@ catch (\NRG\Login\Google\ClientLoginException $e)
 }
 catch (\Exception $e)
 {
-    error_log('[OnlineQuestionnaire] ERROR: '.$e->getMessage(), LOG_ERR);
+    error_log('[OnlineQuestionnaire] ERROR: '.$e->getMessage(), 0);
     ajax_error('Internal Server error. Please try again later.'.$e->getMessage());
 }
 

@@ -42,6 +42,6 @@ try
 }
 catch (\Exception $e)
 {
-    error_log('[OnlineQuestionnaire] ERROR: '.$e->getMessage(), LOG_ERR);
+    error_log('[OnlineQuestionnaire] ERROR: '.$e->getMessage(),0);
     ajax_error('Internal Server error. Please try again later.'.$e->getMessage());
 }

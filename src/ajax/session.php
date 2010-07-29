@@ -33,6 +33,6 @@ try
 }
 catch (Exception $e)
 {
-    error_log($e->getMessage(),LOG_ERR);
+    error_log($e->getMessage(),0);
     ajax_error('An internal server error has occured. Please try again later.'.$e->getMessage());
 }
