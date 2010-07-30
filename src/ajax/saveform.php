@@ -11,7 +11,7 @@ if (empty($_POST) || empty($_POST['session']) || empty($_POST['id']) || empty($_
 //Trim the data, remove html tags and escape any html special chars left.
 $session=trim(strip_tags($_POST['session']));
 $qid=trim(strip_tags($_POST['id']));
-$data=trim(strip_tags($_POST['data']));
+$jsonData=trim(strip_tags($_POST['data']));
 
 if (!preg_match('/^[A-Za-z0-9_\-]+$/',$session))
     ajax_error('Invalid session label.');
@@ -19,11 +19,18 @@ if (!preg_match('/^[A-Za-z0-9_\-]+$/',$session))
 if (!preg_match('/^[[A-Za-z0-9\:_]+$/',$qid))
     ajax_error('Invalid form id.');
 
-if (empty($data))
+if (empty($jsonData))
     ajax_error('Cannot accept empty form data.');
 
 try
 {
+    //Convert JSON to associative arrays
+    $data=json_decode($jsonData,true);
+    //Remove whitespaces from the data
+    purify($data);
+    //Convert the array back to JSON
+    $jsonData=json_encode($data);
+
     $config=new \NRG\Configuration(CONFIG_FILE);
 
     $dbconf=$config->Database;
@@ -34,7 +41,7 @@ try
     if (empty($session))
         ajax_error('Could not find your session id in the database.');
 
-    $db->storeForm($qid,$session['id'],$data);
+    $db->storeForm($qid,$session['id'],$jsonData);
 
     $result=Array("success"=>1);
 
@@ -44,4 +51,21 @@ catch (\Exception $e)
 {
     error_log('[OnlineQuestionnaire] ERROR: '.$e->getMessage(),0);
     ajax_error('Internal Server error. Please try again later.'.$e->getMessage());
+}
+
+/** Walks recursively through an array and trims whitespace.
+ *  Compresses multiple spaces into 1
+ * @param array $data
+ */
+function purify(Array &$data)
+{
+    foreach ($data as $key=>&$value)
+    {
+        trim($key);
+
+        if (is_array($value))
+            purify($value);
+        else
+            $value=trim(preg_replace('/\s+/',' ',$value));
+    }
 }

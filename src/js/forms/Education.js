@@ -309,12 +309,26 @@ var formFields={
                         ]
             };
 
+var btnNext={
+                xtype:'fieldset',
+                border:false,
+                style:'margin-bottom:20px',
+                items:[
+                            {
+                                id:q('btnNext'),
+                                xtype:'button',
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnNextFormClicked
+                            }
+                      ]
+              };
+
 var form=   {
                 id:qID,
                 xtype:'form',
                 border:false,
-                autoScroll:true,
-                height:400,
+                autoScroll:false,
                 buttonAlign:'left',
                 title:'Education',
                 keys:   {
@@ -337,16 +351,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[formFields],
-                buttons:[
-                            {
-                                id:q('btnNext'),
-                                xtype:'button',
-                                text:'Next Form',
-                                icon:'images/icons/next.png',
-                                handler:btnNextFormClicked
-                            }
-                        ]
+                items:[formFields, btnNext]
             };
 
 NRG.Forms.Education=form;

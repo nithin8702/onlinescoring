@@ -667,13 +667,27 @@ var q8= {
 //                items:  [{html:'&nbsp;'}],
 //            };
 
+var btnNext={
+                xtype:'fieldset',
+                border:false,
+                style:'margin-bottom:20px',
+                items:[
+                            {
+                                id:q('btnNext'),
+                                xtype:'button',
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnNextFormClicked
+                            }
+                      ]
+              };
 var form=   {
                 id:qID,
                 xtype:'form',
                 border:false,
                 title:'Ethnicity/Handedness',
                 buttonAlign:'left',
-                height:900,
+                autoScroll:false,
                 keys:   {
                             //Digits [1-9]
                             key:[
@@ -694,16 +708,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:  [sSex,sAge,q3,q4,q5,q6,q7,q8],
-                buttons:[
-                            {
-                                id:q('btnNext'),
-                                xtype:'button',
-                                text:'Next Form',
-                                icon:'images/icons/next.png',
-                                handler:btnNextFormClicked
-                            }
-                        ]
+                items:  [sSex,sAge,q3,q4,q5,q6,q7,q8,btnNext]
           };
 
 

@@ -1,6 +1,6 @@
 <?php
 
-define('QUERY_LIST_USERS','SELECT *, Acl.id as aclID, roles.id as roleID FROM Acl INNER JOIN Roles ON (Acl.fkRoleID=Roles.id)');
+define('QUERY_LIST_USERS','SELECT *, Acl.id as aclID, Roles.id as roleID FROM Acl INNER JOIN Roles ON (Acl.fkRoleID=Roles.id)');
 
 class Database
 {
@@ -168,7 +168,7 @@ class Database
             return $result;
 
         $label=$this->_server->real_escape_string($label);
-        $query="SELECT * FROM sessions WHERE label='$label' LIMIT 1;";
+        $query="SELECT * FROM Sessions WHERE label='$label' LIMIT 1;";
 
         try
         {

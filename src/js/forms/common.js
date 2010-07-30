@@ -503,8 +503,8 @@ function onFormKeypress(keycode, event)
 
     switch (fieldCmp.autoEl.type)
     {
-        case "radio": radioKeypress(fieldCmp, keycode, event); break;
-        case "checkbox": checkboxKeypress(fieldCmp, keycode, event); break;
+        case "radio":radioKeypress(fieldCmp, keycode, event);break;
+        case "checkbox":checkboxKeypress(fieldCmp, keycode, event);break;
     }
 }
 
@@ -796,7 +796,9 @@ function onFormActivated(form)
 
 function addShortcutLabel(input)
 {
-    var label='<span class="q-radio-shortcut">'+input.dom.value+'</span>';
+    var shortcut=input.dom.value;
+
+    var label='<span class="q-radio-shortcut">'+shortcut+'</span>';
     input.insertSibling(label,'before');
 }
 
@@ -848,6 +850,7 @@ function btnSaveClicked(button)
     button.disable();
 
     form.saved=true;
+    ajaxShowWait(true);
     //Perform the save request
     Ext.Ajax.request({
         url:'ajax/saveform.php',
@@ -872,7 +875,22 @@ function saveRequestSucceeded(data,request)
 
     if (response.success==1)
     {
-        nextForm();
+        var form=Ext.getCmp('tabForms').getActiveTab();
+        var time=Ext.fly('clock').dom.innerHTML;
+
+        if (form.lastForm)
+        {
+            Ext.Msg.show({
+                title:'Reset?',
+                width:350,
+                msg:'Congratulations! Your time was '+time+'.<br><br>Would you like to reset all forms now?',
+                buttons:Ext.Msg.YESNOCANCEL,
+                icon:Ext.Msg.QUESTION,
+                fn:function(button){if (button=='yes') resetForms();}
+            });
+        }
+        else
+            nextForm();
         return;
     }
 
@@ -919,3 +937,54 @@ function getNumCode(keycode)
 
     return result;
 }
+
+
+function ajaxAction(action,response)
+{
+    switch (action)
+    {
+        case "refresh":
+                        Ext.Msg.show({
+                            title:'Bummer',
+                            width:350,
+                            msg:response.message,
+                            icon:Ext.Msg.WARNING,
+                            buttons:Ext.Msg.OK,
+                            fn:function(){window.onbeforeunload=null;window.location.reload();}
+                        });
+                        break;
+    }
+
+}
+
+function ajaxShowWait(yes)
+{
+    if (yes)
+    {
+        Ext.Ajax.on('beforerequest',showWait);
+        Ext.Ajax.on('requestcompleted',Ext.Msg.hide);
+        Ext.Ajax.on('requestexception',Ext.Msg.hide);
+    }
+    else
+    {
+        Ext.Ajax.un('beforerequest',showWait);
+        Ext.Ajax.un('requestcompleted',Ext.Msg.hide);
+        Ext.Ajax.un('requestexception',Ext.Msg.hide);
+    }
+}
+
+function showWait()
+{
+    Ext.Msg.wait('Please stand by for milk and cookies ...','Loading');
+}
+
+NRG.Forms.timer={
+                    run:function()
+                    {
+                        var now=new Date();
+                        var elapsed=now.getTime()-NRG.Forms.startTime.getTime();
+                        now.setTime(elapsed);
+                        Ext.fly('clock').update(now.format('i:s'));
+                    },
+                    interval:1000
+                }

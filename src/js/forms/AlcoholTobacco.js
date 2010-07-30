@@ -422,13 +422,28 @@ var q7=     {
                       ]
             }
 
+var btnFinish={
+                xtype:'fieldset',
+                border:false,
+                style:'margin-bottom:20px',
+                items:[
+                            {
+                                id:'btnFinish',
+                                xtype:'button',
+                                text:'Finish',
+                                icon:'images/icons/finish.png',
+                                handler:btnFinishClicked
+                            }
+                      ]
+              };
+
 var form=   {
                 id:qID,
                 xtype:'form',
                 border:false,
-                autoScroll:true,
-                height:875,
+                autoScroll:false,
                 buttonAlign:'left',
+                lastForm:true,
                 title:'Alcohol/Tobacco/Caffeine',
                 keys:   {
                             //Digits [1-5]
@@ -450,16 +465,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[q1,q2,q3,q4,q5,q6,q7],
-                buttons:[
-                            {
-                                id:'btnFinish',
-                                xtype:'button',
-                                text:'Finish',
-                                icon:'images/icons/finish.png',
-                                handler:btnFinishClicked
-                            }
-                        ]
+                items:[q1,q2,q3,q4,q5,q6,q7,btnFinish]
              };
 
 NRG.Forms.AlcoholTobacco=form;

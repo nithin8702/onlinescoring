@@ -706,11 +706,25 @@ var topFields={
                         ]
             };
 
+var btnNext={
+                xtype:'fieldset',
+                border:false,
+                style:'margin-bottom:20px',
+                items:[
+                            {
+                                id:q('btnNext'),
+                                xtype:'button',
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnNextFormClicked
+                            }
+                      ]
+              };
 var form=   {
                 id:qID,
                 xtype:'form',
                 border:false,
-                height:675,
+                autoScroll:false,
                 buttonAlign:'left',
                 title:'Demographics',
                 keys:   {
@@ -733,16 +747,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:  [topFields,middleFields,bottomFields],
-                buttons:[
-                            {
-                                id:q('btnNext'),
-                                xtype:'button',
-                                text:'Next Form',
-                                icon:'images/icons/next.png',
-                                handler:btnNextFormClicked
-                            }
-                        ]
+                items:  [topFields,middleFields,bottomFields,btnNext]
             };
 
 NRG.Forms.Demographics=form;

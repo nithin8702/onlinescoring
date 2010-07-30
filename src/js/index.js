@@ -75,16 +75,24 @@ var toolbarForms=   {
                                         xtype:'tbfill'
                                     },
                                     {
+                                        id:'clock',
+                                        xtype:'tbtext',
+                                        html:'00:00'
+                                    },
+                                    {
+                                        xtype:'tbseparator'
+                                    },
+                                    {
                                         xtype:'button',
                                         text:'Logout',
                                         icon:'images/icons/logout.png',
                                         handler:function()
                                         {
+                                            ajaxShowWait(false);
                                             Ext.Ajax.request({
                                                 url:'ajax/logout.php',
                                                 success:function()
                                                 {
-                                                    Ext.Msg.hide();
                                                     window.onbeforeunload=null;
                                                     window.location.reload()
                                                 }
@@ -186,18 +194,6 @@ window.onbeforeunload=onLeave;
 //Initialize QuickTips
 Ext.QuickTips.init();
 
-// Display a wait.. dialog.
-Ext.Ajax.on('beforerequest',
-    function()
-    {
-        Ext.Msg.wait('Please stand by for milk and cookies ...','Loading');
-    },
-    this
-);
-
-//Ext.Ajax.on('requestcomplete',function(){ Ext.Msg.hide(); }, this);
-//Ext.Ajax.on('requestexception',function(){ Ext.Msg.hide(); }, this);
-
 //Instantiate the main window
 var MainWindow=new Ext.Viewport(viewportMain);
 
@@ -220,6 +216,7 @@ function btnGoClicked(button)
     txtSID.setRawValue(txtSID.getValue().toUpperCase());
     txtSID.disable();
 
+    ajaxShowWait(false);
     Ext.Ajax.request({
         url:'ajax/session.php',
         method:'POST',
@@ -342,6 +339,9 @@ function resetForms()
 {
     //Lose the session label
     NRG.Forms.SessionLabel=null;
+    Ext.TaskMgr.stop(NRG.Forms.timer);
+    //NRG.Forms.startTime=null;
+
 
     //Reset all text fields
     var txtSID=Ext.getCmp('txtSubjectID');
@@ -385,7 +385,6 @@ function onLeave()
 
 function sessionRequestSucceeded(data,request)
 {
-    Ext.Msg.hide();
     Ext.getCmp('btnGo').enable();
 
     var response=Ext.decode(data.responseText);
@@ -397,6 +396,9 @@ function sessionRequestSucceeded(data,request)
         Ext.getCmp('btnSave').enable();
         Ext.fly('panelFormsWelcome').hide();
         Ext.getCmp('tabForms').show();
+        Ext.fly('clock').update('00:00');
+        NRG.Forms.startTime=new Date();
+        Ext.TaskMgr.start(NRG.Forms.timer);
     }
     else
     {
@@ -415,22 +417,4 @@ function sessionRequestFailed(form,data)
     Ext.getCmp('btnGo').enable();
     Ext.getCmp('txtSubjectID').enable();
     Ext.Msg.alert('Error','Oops, we were unable to create a data entry session for this Subject ID.<br/>Please try again later.');
-}
-
-function ajaxAction(action,response)
-{
-    switch (action)
-    {
-        case "refresh":
-                        Ext.Msg.show({
-                            title:'Bummer',
-                            width:350,
-                            msg:response.message,
-                            icon:Ext.Msg.WARNING,
-                            buttons:Ext.Msg.OK,
-                            fn:function(){ window.onbeforeunload=null; window.location.reload();}
-                        });
-                        break;
-    }
-
 }

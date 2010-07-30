@@ -244,7 +244,7 @@ var q5=     {
                             layout:'table',
                             border:false,
                             width:645,
-                            next:q('q6'),
+                            next:q('q6:a0'),
                             style:'margin-top:10px;margin-left:'+radioPaddingLeft+'px',
                             defaults:   {
                                             bodyStyle:'padding:5px'
@@ -426,7 +426,7 @@ var q5=     {
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
-                                            next:q('q6'),
+                                            next:q('q6:a0'),
                                             width:215,
                                             listeners:  {
                                                             focus:onFieldFocus,
@@ -452,6 +452,7 @@ var q6=     {
                             cls:'question-text',
                             html:'6. Please check which of following conditions you have now or have had in the past.'
                         },
+
                         {
                             id:q('q6'),
                             name:q('q6'),
@@ -459,10 +460,11 @@ var q6=     {
                             layout:'table',
                             border:false,
                             cls:'q-table',
-                            width:561,
+                            width:650,
                             next:q('q7'),
                             style:'margin-top:10px;margin-left:'+radioPaddingLeft+'px',
                             defaults:   {
+                                            shortcut:'x',
                                             bodyStyle:'padding:5px',
                                             ctCls:'q-table-td-border',
                                             listeners:  {
@@ -490,9 +492,18 @@ var q6=     {
                                             border:false
                                         },
                                         {
-                                            html:'N/A',
-                                            cls:'table-header',
-                                            border:false
+                                            id:q('q6:a0'),
+                                            width:75,
+                                            name:q('q6:a0'),
+                                            xtype:'checkbox',
+                                            inputValue:1,
+                                            boxLabel:'<span class="table-header">N/A</span>',
+                                            hideLabel:true,
+                                            listeners:  {
+                                                            check:onQ6NA,
+                                                            focus:onFieldFocus,
+                                                            specialkey:onEnter
+                                                        }
                                         },
 
                                         //--- TABLE BODY
@@ -1777,12 +1788,27 @@ var q13=     {
                       ]
             };
 
+var btnNext={
+                xtype:'fieldset',
+                border:false,
+                style:'margin-bottom:20px',
+                items:[
+                            {
+                                id:q('btnNext'),
+                                xtype:'button',
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnNextFormClicked
+                            }
+                      ]
+              };
+
+
 var form=   {
                 id:qID,
                 xtype:'form',
                 border:false,
-                autoScroll:true,
-                height:2750,
+                autoScroll:false,
                 buttonAlign:'left',
                 title:'Health',
                 keys:   {
@@ -1805,16 +1831,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13],
-                buttons:[
-                            {
-                                id:q('btnNext'),
-                                xtype:'button',
-                                text:'Next Form',
-                                icon:'images/icons/next.png',
-                                handler:btnNextFormClicked
-                            }
-                        ]
+                items:[q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,btnNext]
             };
 
 NRG.Forms.Health=form;
@@ -1828,7 +1845,7 @@ function q(id)
 
 function onQ5NA(checkbox,checked)
 {
-    var table=Ext.getCmp(q('q5'));
+    var table=Ext.getCmp('qn6:q5');
     var qContainer=getQContainer(checkbox);
 
     if (checked)
@@ -1851,4 +1868,19 @@ function onQ5NA(checkbox,checked)
     }
 
     nextField(checkbox,checkbox.next);
+}
+
+function onQ6NA(checkbox,checked)
+{
+    var q6=Ext.getCmp('qn6:q6');
+
+    if (!q6)
+        return;
+
+    q6.getEl().select('input[name$=":3"]').each(function(checkbox)
+    {
+        checkbox.dom.checked=checked;
+    })
+
+    nextField(checkbox,q6.next);
 }
