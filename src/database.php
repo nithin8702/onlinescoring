@@ -227,4 +227,35 @@ class Database
 
         return $result;
     }
+
+    /** Returns all the data along with all the sessions for this subject */
+    public function getSubjectData($subjectid)
+    {
+        $result=Array();
+
+        $subjectid=$this->_server->real_escape_string($subjectid);
+        $query="SELECT * FROM (Forms INNER JOIN Sessions ON (Forms.fkSessionID=Sessions.id) INNER JOIN Acl ON (Sessions.fkAclID=Acl.id)) WHERE subjectLabel='".$subjectid."' ORDER BY fkSessionID DESC,datetimeAdded ASC";
+
+        try
+        {
+            $qr=$this->_server->query($query);
+            if ($qr===false)
+                throw new Exception("SQL [$query]\nERROR: ".$this->_server->error);
+
+            if ($qr->num_rows)
+            {
+                //Store the result
+                while (($row=$qr->fetch_assoc())!=NULL)
+                    $result[]=$row;
+            }
+
+            $qr->close();
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Cannot search data for subject '".$subjectid."': ".$e->getMessage());
+        }
+
+        return $result;
+    }
 }
