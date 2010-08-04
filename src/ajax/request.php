@@ -42,14 +42,19 @@ try
             ajax_error('Your access request is currently being reviewed.');
     }
 
+    //Looks like there is nothing else left to do, except add the user to the Acl table with
+    //NULL privileges
     $db->createUser($email);
+    //Prepare an e-mail message
     $headers = 'From: NRG Accounts <support@neuroinfo.org>' . "\r\n" .
         'X-Mailer: PHP/' . phpversion();
 
     $message="User $email requested access to ".$_SERVER['HTTP_HOST']." from ".$_SERVER['REMOTE_ADDR'].".";
 
+    //Send e-mail
     $result=mail('support@neuroinfo.org','Online Scoring Access Request',$message,$headers);
 
+    //Send the result back to the server
     ajax_result(Array(
         "success"=>1,
         "mail"=>$result
