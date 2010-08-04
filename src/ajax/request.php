@@ -10,7 +10,7 @@ else
 
 //3 strikes and you're out!
 if ($_SESSION['requestCount']>5)
-    ajax_error('You have reached the maximum number of requests you can make per hour. Please try again later.');
+    ajax_error('You have reached the maximum number of registration requests allowed. Please try again later.');
 
 //Check for errors
 if (empty($_POST))
@@ -36,7 +36,10 @@ try
         if ($user['requested']==1)
             ajax_error('Your access request is pending approval.');
 
-        ajax_error('Your username has been enabled, please log in.');
+        if ($user['roleID'])
+            ajax_error('Your username has been enabled, please log in.');
+        else
+            ajax_error('Your access request is currently being reviewed.');
     }
 
     $db->createUser($email);
