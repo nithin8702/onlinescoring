@@ -28,6 +28,14 @@ if (empty($_POST['password']))
 $username=strtolower(trim($_POST['username']));
 $md5password=trim($_POST['password']);
 
+$captchatext=null;
+$captchatoken=null;
+
+if (isset($_POST['captchatext']))
+    $captchatext=trim($_POST['captchatext']);
+if (isset($_POST['captchatoken']))
+    $captchatoken=trim($_POST['captchatoken']);
+
 //Make sure the username and password contain only valid characters
 if (!preg_match('/^[A-Za-z0-9@\.]+$/', $username))
     ajax_error('Your username contains invalid characters or is empty.');
@@ -50,7 +58,7 @@ try
     $user=$db->searchUser($username);
 
     if (empty($user))
-        ajax_error('You must <a href="javascript:register()">request access</a> first.');
+        ajax_error('You must <a href="javascript:showRegistrationForm()">request access</a> first.');
 
     if ($user['requested']==1)
         ajax_error('Your access request is pending approval.');
@@ -58,11 +66,21 @@ try
     if (!$user['enabled'])
         ajax_error('Your account has been disabled.');
 
+    if ((!isset($user['roleID'])) || ($user['roleID']==NULL))
+        ajax_error('Sorry, your account hasn\'t been assigned any privileges yet. Please try again later.');
+
     $auth=new NRG\Login\Google\ClientLogin($username,$md5password);
-    
+
+    if (!empty($captchatext) && !empty($captchatoken))
+    {
+        $auth->setCaptchaText($captchatext);
+        $auth->setCaptchaToken($captchatoken);
+    }
+
+    //Attempt to authenticate the user
     $auth->login();
 
-    //Log the user in
+    //If authentication was successful, log the user in
     if ($auth->isSuccessful())
     {
         $_SESSION['auth']=true;
@@ -78,8 +96,16 @@ try
 }
 catch (\NRG\Login\Google\ClientLoginCaptchaException $e)
 {
-    error_log('[OnlineQuestionnaire] ERROR: Implement captcha exception at once!',0);
-    ajax_error('Sorry, Google wants Captcha image validation.');
+    $result=Array(
+                    "success"=>0,
+                    "message"=>"Please enter the following validation code:",
+                    "captcha"=>Array(
+                                        "url"   => $e->getCaptchaURL(),
+                                        "token" => $e->getCaptchaToken()
+                                    )
+                 );
+
+    ajax_result($result);
 }
 catch (\NRG\Login\Google\ClientLoginException $e)
 {

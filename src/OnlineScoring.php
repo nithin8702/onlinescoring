@@ -1,4 +1,5 @@
 <?php
+//phpinfo();die;
     require_once 'bootstrap.php';
 //    require_once 'database.php';
 //
@@ -47,6 +48,8 @@
             <script type="text/javascript" src="js/lib/ext/ux/Portlet.js"></script>
             
             <!-- Forms -->
+            <script type="text/javascript" src="js/store/countries.js"></script>
+            <script type="text/javascript" src="js/store/states.js"></script>
             <script type="text/javascript" src="js/forms/common.js"></script>
             <script type="text/javascript" src="js/forms/AlcoholTobacco.js"></script>
             <script type="text/javascript" src="js/forms/Demographics.js"></script>
@@ -55,11 +58,13 @@
             <script type="text/javascript" src="js/forms/Occupation.js"></script>
             <script type="text/javascript" src="js/forms/Health.js"></script>
             <!-- INDEX -->
-            <script type="text/javascript" src="js/index.js"></script>
+            <script type="text/javascript" src="js/index.js.php"></script>
         <?php else: ?>
             <script type="text/javascript" src="js/lib/ext/ext.util.md5.js"></script>
             <script type="text/javascript" src="js/login.js"></script>
         <?php endif ?>
     </head>
-    <body/>
+    <body>
+        <div id="divRegister" style="display:none"></div>
+    </body>
 </html>

@@ -106,7 +106,7 @@ class Database
         if (empty($username))
             return $result;
         $param1=$this->_server->real_escape_string($username);
-        $query_string=QUERY_LIST_USERS." WHERE Acl.username='$username'";
+        $query_string="SELECT *, Acl.id as aclID, Roles.id as roleID FROM Acl LEFT JOIN Roles ON (Acl.fkRoleID=Roles.id) WHERE Acl.username='$username'";
         //Run the query
         $query=$this->_server->query($query_string);
         if ($query===false)
@@ -116,6 +116,43 @@ class Database
             $result=$query->fetch_assoc();
         $query->close();
         return $result;
+    }
+
+    public function createUser($email)
+    {
+        $result=Array();
+
+        if (empty($email))
+            throw new Exception("Email parameter cannot be empty.");
+
+        $email=$this->_server->real_escape_string($email);
+
+        $query="INSERT INTO Acl (username,enabled,requested)
+                VALUES('$email',0,1);";
+
+        try
+        {
+            $qr=$this->_server->query($query);
+            if ($qr===false)
+                throw new Exception("SQL [$query]\nERROR: ".$this->_server->error);
+
+            $insertID=$this->_server->insert_id;
+
+            if (empty($insertID) || !is_numeric($insertID))
+                throw new Exception("Invalid INSERT ID returned by MySQL for user-to-be ".$email.": '$insertID'");
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Unable to insert new user '".$email."' into the database: ".$e->getMessage());
+        }
+
+        $result=Array(
+                        "id"=>$insertID,
+                        "user"=>$email
+                     );
+
+        return $result;
+
     }
 
     /** Adds a new session to the Sessions table */

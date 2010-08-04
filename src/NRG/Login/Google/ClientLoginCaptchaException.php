@@ -30,7 +30,7 @@ class ClientLoginCaptchaException extends ClientLoginException
     /** Returns the Captcha URL to be prefixed by 'http://www.google.com/accounts'
      * @return string Captcha URL
      */
-    public function captchaURL()
+    public function getCaptchaURL()
     {
         return $this->_captchaURL;
     }
@@ -38,7 +38,7 @@ class ClientLoginCaptchaException extends ClientLoginException
     /** Returns the captcha token to repeat the login request
      * @return string
      */
-    public function captchaToken()
+    public function getCaptchaToken()
     {
         return $this->_captchaToken;
     }

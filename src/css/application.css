@@ -2,7 +2,10 @@
 {
     background-image:url('../images/icons/forms.png');
 }
-
+.x-icon-nrg
+{
+    background:url('../images/nrg.png') 0px 0px no-repeat !important;;
+}
 .x-icon-users
 {
     background-image:url('../images/icons/users.png');

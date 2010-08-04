@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    header('Content-type: text/javascript');
+?>
 Ext.onReady(function() {
 
 var tabForms=       {
@@ -83,6 +87,14 @@ var toolbarForms=   {
                                         xtype:'tbseparator'
                                     },
                                     {
+                                        id:'txtUsername',
+                                        xtype:'tbtext',
+                                        html:'<b><?php print $_SESSION['username'];?></b>'
+                                    },
+                                    {
+                                        xtype:'tbspacer'
+                                    },
+                                    {
                                         xtype:'button',
                                         text:'Logout',
                                         icon:'images/icons/logout.png',
@@ -125,7 +137,7 @@ var panelForms=     {
 <li>Try not to use the mouse, unless you see this icon <img src="images/icons/mouse.png"></img>\
 next to the question.</li>\
 <li>If you see <img src="images/icons/enter_medium.png"></img> instead, use the <i>Enter</i>\
- key for navigation.</li>\
+ key for navigation.</li></ul>\
 </span>',
                         listeners:  {
                                         afterrender:function(){Ext.getCmp('txtSubjectID').focus();}
