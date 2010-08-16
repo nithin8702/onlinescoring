@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    targetNamespace="http://www.neuroinfo.org/schemas/OnlineScoring/EH/1.0/"
+    xmlns="http://www.neuroinfo.org/schemas/OnlineScoring/EH/1.0/">
+
+    <xsd:element name="form">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="sex" type="T_YesNoCancel"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+
+    <xsd:simpleType name="T_YesNoCancel">
+        <xsd:restriction base="xsd:positiveInteger">
+            <xsd:enumeration value="1"/>
+            <xsd:enumeration value="2"/>
+            <xsd:enumeration value="9999"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

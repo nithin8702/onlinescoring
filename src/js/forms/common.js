@@ -1,5 +1,10 @@
 Ext.namespace('NRG.Forms');
 
+NRG.Forms.NoResponse=9999;
+//The regex below allow empty strings
+NRG.Forms.T_String=/^[\w\- ,\.();/]*$/;
+NRG.Forms.T_StringWithQuotes=/^[\w\- ,\.();/']*$/;
+
 window.onkeypress=function(key)
 {
     if (key.keyCode==9)
@@ -151,6 +156,7 @@ function onEnter(field,e)
  */
 function nextField(field, where)
 {
+    console.log(field);
     console.log('+ nextField('+field.id+','+where+')');
     
     if (!(field instanceof Ext.Component))
@@ -189,15 +195,23 @@ function nextField(field, where)
 
     //We want to check if the field is valid, but if it's a radio, we need to
     //check the entire radiogroup, not just this field.
-    var valid=field.isValid();
-
     console.log('Field to validate: ',field);
 
-    if (defined(field.validationHandler))
-        valid=field.validationHandler(field);
+    var valid=true;
 
+    //By default, fields are valid (Fieldsets for example, they don't have a isValid() method)
+    //but if the object is an instance of Ext.form.Field, then it does have an isValid()
+    //method and we should check if the field is valid.
+    if (field instanceof Ext.form.Field)
+    {
+        //Check validity
+        valid=field.isValid();
 
-    //TODO: Check for Component/Element
+        //If the object has a custom validation handler, then run it now.
+        if (defined(field.validationHandler))
+            valid=field.validationHandler(field);
+    }
+
     //Verify that the field is valid
     if (valid)
     {
@@ -533,7 +547,11 @@ function radioKeypress(field,keycode,event)
     }
 
     if (ok)
-        group.setValue(charcode);
+    {
+        var radio=group.getEl().select('input[type="radio"]',true).item(charcode-1);
+        if (radio)
+            group.setValue(radio.id,true);
+    }
 }
 
 function checkboxKeypress(field,keycode,event)
@@ -554,20 +572,10 @@ function checkboxKeypress(field,keycode,event)
     else
     {
         //Search for the correct checkbox
-        for (var i=0;i<group.items.items.length;++i)
-        {
-            if (group.items.items[i].inputValue==charcode)
-            {
-                checkbox=group.items.items[i];
-                break;
-            }
-        }
+        var cbEl=group.getEl().select('input[type="checkbox"]',true).item(charcode-1);
+        if (cbEl)
+            group.setValue(cbEl.id,!cbEl.dom.checked);
     }
-
-    if (!checkbox)
-        return;
-
-    group.setValue(checkbox.getName(),!checkbox.getValue());
 }
 
 function getQContainer(field)
@@ -781,25 +789,41 @@ function onFormActivated(form)
 
     if (!defined(form.radioShortcutLabels))
     {
-        //Find all radiobuttons and checkboxes on this form
-        var inputs=form.getEl().select('input[type=radio], input[type=checkbox]');
-
         //Add shortcut hints to each radio element
-        inputs.each(function(input){
-            if (!defined(input.shortcutLabel))
-                addShortcutLabel(input);
-        });
+        form.items.each(setCtShortcuts);
 
         form.radioShortcutLabels=true;
     }
 }
 
-function addShortcutLabel(input)
+/** Loops through all children of 'container' and assigns shortcut labels */
+function setCtShortcuts(container,index,count)
 {
-    var shortcut=input.dom.value;
+    switch (container.xtype)
+    {
+        case "radiogroup":
+        case "checkboxgroup":if (!defined(container.noShortcuts))
+                                 container.getEl().select('input[type=radio], input[type=checkbox]').each(addShortcutLabel);
+                             //Iterate through all child containers
+                             container.items.each(setCtShortcuts);break;
+        default: if (container.items)
+                     container.items.each(setCtShortcuts);break;
+    }
+
+    return true;
+}
+
+/** Adds a shortcut label to an input element */
+function addShortcutLabel(input,scope,index)
+{
+    //The default shortcut is the index of the element in the list of children
+    //plus 1 to correct 0-based iteration.
+    var shortcut=index+1;
 
     var label='<span class="q-radio-shortcut">'+shortcut+'</span>';
     input.insertSibling(label,'before');
+
+    return true;
 }
 
 
@@ -844,21 +868,26 @@ function btnSaveClicked(button)
         return false;
     }
 
-    var formdata=form.getForm().getValues();
+    //Retrieve an array of all the values (optionally in a specific order)
+    var values=getFormValues(form.getForm(), form.submitOrder);
+
+    //Transform the values to xml
+    var xmldata=formToXml(values);
 
     //Disable the Save button
     button.disable();
 
     form.saved=true;
+    
     ajaxShowWait(true);
     //Perform the save request
     Ext.Ajax.request({
         url:'ajax/saveform.php',
         method:'POST',
         params:{
-                id:form.id,
                 session:NRG.Forms.SessionLabel,
-                data:Ext.encode(formdata)
+                schema:form.schema,
+                data:xmldata
                },
 
         success:saveRequestSucceeded,
@@ -894,6 +923,7 @@ function saveRequestSucceeded(data,request)
         return;
     }
 
+    Ext.getCmp('btnSave').enable();
     if (response.action)
     {
         ajaxAction(response.action,response);
@@ -911,10 +941,8 @@ function saveRequestSucceeded(data,request)
 function saveRequestFailed(form,data)
 {
     Ext.Msg.hide();
-    Ext.Msg.alert('Error','Oh, snap! :( We were unable to store the data.<br/>Please contact your IT department.');
     Ext.getCmp('btnSave').enable();
-//    var currentForm=Ext.getCmp('tabForms').getActiveTab();
-//    currentForm.setTitle('[!] '+currentForm.title);
+    Ext.Msg.alert('Error','Oh, snap! :( We were unable to store the data.<br/>Please contact your IT department.');
 }
 
 function btnNextFormClicked(button)
@@ -988,3 +1016,171 @@ NRG.Forms.timer={
                     },
                     interval:1000
                 }
+
+function formToXml(values)
+{
+    var result="<form>\n";
+
+    console.log(values);
+
+    for (var i=0;i<values.length;++i)
+    {
+        var field=values[i];
+        var tag=field.name.toLowerCase().replace(/\s/g,'');
+
+        if (!tag.length)
+            continue;
+
+        result+="\t<"+tag+">"+field.value+"</"+tag+">\n";
+    }
+
+    result+="</form>";
+
+    return result;
+}
+
+////Takes a BasicForm param and an array of field names and returns a new Array
+//containing the values of the form in the order specified by the array of field names
+function getFormValues(form, order)
+{
+    var result=new Array();
+    var values=form.getValues();
+    var field=null;
+
+    //No specific order? Then transform all values to an array
+    if (!order)
+    {
+        for (field in values)
+        {
+            result.push({
+                            name:field,
+                            value:values[field]
+                        });
+        }
+    }
+    //Otherwise, only add specific values
+    else
+    {
+        for (var i=0;i<order.length;++i)
+        {
+            field=order[i];
+            var name="";
+            var defaultValue=NRG.Forms.NoResponse;
+            var handler=null;
+
+            //String?
+            if (typeof(field)=="string")
+                name=field;
+            //Object?
+            else
+            {
+                name=field.name;
+                if (defined(field.defaultValue))
+                    defaultValue=field.defaultValue;
+
+                if (defined(field.handler))
+                    handler=field.handler;
+            }
+
+            console.log('Searching for field: '+name+', default: '+defaultValue);
+            if (!defined(values[name]))
+                values[name]=defaultValue;
+            else
+            {
+                var value=values[name];
+
+                //Call custom value handler, if necessary
+                if (handler)
+                    value=handler(value);
+
+                values[name]=trim(value);
+            }
+
+            if (!values[name].length)
+                values[name]=defaultValue;
+
+            result.push({
+                            name:name,
+                            value:values[name]
+                        });
+        }
+    }
+
+    return result;
+}
+
+/** Makes sure that RACE_1,2,3 have values according to special rankings
+ * assigned to each radio input element.
+ */
+function setSeqHiddenFieldsValues(prefix,checkboxgroup,checkedItems)
+{
+    var checked=Array();
+
+    //Innitially, mark all hidden fields as NoResponse (to clear previous values
+    var i=0;
+    var f=null;
+    do
+    {
+        ++i;
+        f=Ext.getCmp(prefix+i);
+        if (!f)
+            break;
+
+        f.setValue(NRG.Forms.NoResponse);
+    }
+    while (f);
+
+    if ((checkboxgroup.saneCheckboxCount) && (checkedItems.length>checkboxgroup.saneCheckboxCount))
+        return;
+
+    //Retrieve inputValues by rankings or by order. Avoid mixing the two.
+    for (i=0;i<checkedItems.length;++i)
+    {
+        //Use rankings?
+        if (defined(checkedItems[i].ranking))
+        {
+            var ranking=checkedItems[i].ranking;
+            checked[ranking]=checkedItems[i].inputValue;
+        }
+        else
+            //No rankings, use array order
+            checked[i]=checkedItems[i].inputValue;
+    }
+
+    console.log('Checked array:',checked);
+
+    var hidden_idx=1;
+    //Loops through all these values and assigns them to prefix_{N} elements
+    while (checked.length)
+    {
+        var val=checked.shift();
+        if (!defined(val))
+            continue;
+
+        var field=Ext.getCmp(prefix+hidden_idx);
+
+        if (!field)
+        {
+            console.log('Done searching for fields. Last element: '+prefix+hidden_idx)
+            break;
+        }
+
+        field.setValue(val);
+        console.log(field.id,val);
+        ++hidden_idx;
+     }
+}
+
+function trim(stringToTrim)
+{
+	return stringToTrim.toString().replace(/^\s+|\s+$/g,"");
+}
+function ltrim(stringToTrim)
+{
+	return stringToTrim.toString().replace(/^\s+/,"");
+}
+function rtrim(stringToTrim)
+{
+	return stringToTrim.toString().replace(/\s+$/,"");
+}
+

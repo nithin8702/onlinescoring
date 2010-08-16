@@ -7,7 +7,6 @@ var now=new Date();
 //Subject Sex
 var sSex=        {
                     id:q('q1'),
-                    name:q('q1'),
                     xtype:'radiogroup',
                     fieldLabel:'Sex',
                     invalidClass:'',
@@ -18,36 +17,35 @@ var sSex=        {
                     height:22,
                     allowBlank:false,
                     next:q('q2'),
+                    defaults:   {
+                                    name:'SEX',
+                                    width:75
+                                },
                     listeners:  {
                                     change:radiogroupChanged,
                                     focus:onFieldFocus,
+                                    blur:onFocusLost,
                                     specialkey:onEnter
                                 },
                     items:  [
                                 {
                                     boxLabel:'Male',
-                                    name:q('q1:a1'),
-                                    inputValue:1,
-                                    width:75
-
+                                    inputValue:1
                                 },
                                 {
                                     boxLabel:'Female',
-                                    name:q('q1:a1'),
-                                    inputValue:2,
-                                    width:75
+                                    inputValue:2
                                 }
                             ]
                 };
 
-//Subject DOB
+//Subject DOB proxy
 var sDOB=       {
                     id:q('q2'),
-                    name:q('q2'),
                     xtype:'datefield',
                     fieldLabel:'Date of Birth <span style="text-shadow:none;font-weight:normal;color:gray">(m/d/Y)</span>',
                     labelStyle:'width:135px;text-shadow: 2px 2px 2px #ccc',
-                    boxLabel:'mm/dd/yyyy',
+                    format:'m/d/Y',
                     width:100,
                     ctCls:'q-container',
                     allowBlank:false,
@@ -57,15 +55,23 @@ var sDOB=       {
                     selectOnFocus:true,
                     next:q('q3'),
                     listeners:  {
+                                    change:onDOBChange,
                                     specialkey:onEnter,
                                     focus:onFieldFocus
                                 }
                 }
 
+var sDOBhidden= {
+                    id:q('q2:a1'),
+                    name:'DOB',
+                    xtype:'hidden',
+                    inputValue:NRG.Forms.NoResponse
+                };
+
 //Subject height
 var sHeight=    {
                     id:q('q3'),
-                    name:q('q3'),
+                    name:'HT',
                     xtype:'numberfield',
                     fieldLabel:'Height <span style="text-shadow:none;font-weight:normal;color:gray">(inches)</span>',
                     labelStyle:'text-shadow: 2px 2px 2px #ccc',
@@ -88,7 +94,7 @@ var sHeight=    {
 //Subject Weight
 var sWeight=    {
                     id:q('q4'),
-                    name:q('q4'),
+                    name:'WT',
                     xtype:'numberfield',
                     fieldLabel:'Weight <span style="text-shadow:none;font-weight:normal;color:gray">(pounds)</span>',
                     labelStyle:'width:135px;text-shadow: 2px 2px 2px #ccc',
@@ -113,11 +119,13 @@ var sWeight=    {
 //Country
 var birthCountry=   {
                         id:q('q5:a1'),
-                        name:q('q5:a1'),
                         xtype:'combo',
                         width:160,
-                        value:'United States of America',
+                        value:'US',
+                        inputValue:'US',
+                        submitValue:false,
                         allowBlank:false,
+                        forceSelection:true,
                         selectOnFocus:true,
                         store:NRG.Store.Countries,
                         typeAhead:true,
@@ -127,14 +135,21 @@ var birthCountry=   {
                         next:q('q5:a2'),
                         listeners:  {
                                         focus:onFieldFocus,
-                                        specialkey:onEnter
+                                        specialkey:onEnter,
+                                        change:onCountryChanged
                                     }
                     };
+
+var hiddenCountry=  {
+                        id:'COUNTRY',
+                        name:'COUNTRY',
+                        xtype:'hidden',
+                        value:'US'
+                    }
 
 //State
 var birthState=     {
                         id:q('q5:a2'),
-                        name:q('q5:a2'),
                         xtype:'combo',
                         width:125,
                         allowBlank:false,
@@ -148,19 +163,31 @@ var birthState=     {
                         displayField:'name',
                         listeners:  {
                                         focus:onFieldFocus,
-                                        specialkey:onEnter
+                                        specialkey:onEnter,
+                                        change:onStateChanged
                                     }
                     };
+
+var hiddenState=    {
+                        id:'STATE',
+                        name:'STATE',
+                        xtype:'hidden',
+                        value:NRG.Forms.NoResponse
+                    };
+
+
 
 //City
 var birthCity=      {
                         id:q('q5:a3'),
-                        name:q('q5:a3'),
+                        name:'CITY',
                         xtype:'textfield',
                         width:125,
                         allowBlank:true,
                         selectOnFocus:true,
+                        maxLength:100,
                         next:q('q6'),
+                        regex:NRG.Forms.T_StringWithQuotes,
                         listeners:  {
                                         focus:onFieldFocus,
                                         specialkey:onEnter
@@ -180,7 +207,6 @@ var q6=     {
                         },
                         {
                             id:q('q6'),
-                            name:q('q6'),
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
@@ -188,6 +214,9 @@ var q6=     {
                             invalidClass:'',
                             allowBlank:false,
                             next:q('q7'),
+                            defaults:   {
+                                            name:'MARITAL'
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             focus:onFieldFocus,
@@ -197,32 +226,26 @@ var q6=     {
                             items:  [
                                         {
                                             boxLabel:'Single',
-                                            name:q('q6:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Married',
-                                            name:q('q6:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'Separated',
-                                            name:q('q6:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'Divorced',
-                                            name:q('q6:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'Widowed',
-                                            name:q('q6:a1'),
                                             inputValue:5
                                         },
                                         {
                                             boxLabel:'Other',
-                                            name:q('q6:a1'),
                                             enableQ:[q('q6:a2')],
                                             next:q('q6:a2'),
                                             inputValue:6
@@ -231,7 +254,7 @@ var q6=     {
                         },
                         {
                             id:q('q6:a2'),
-                            name:q('q6:a2'),
+                            name:'MARITAL_LIST',
                             xtype:'textfield',
                             width:125,
                             disabled:true,
@@ -239,6 +262,7 @@ var q6=     {
                             style:'margin-top:5px',
                             labelStyle:'width:100px; padding-left:10px; font-weight:normal',
                             next:q('q7'),
+                            regex:NRG.Forms.T_String,
                             listeners:  {
                                             focus:onFieldFocus,
                                             specialkey:onEnter
@@ -260,7 +284,6 @@ var q7=     {
                         },
                         {
                             id:q('q7'),
-                            name:q('q7'),
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
@@ -269,6 +292,9 @@ var q7=     {
                             invalidClass:'',
                             disableQ:[q('q7:a2')],
                             next:q('q8'),
+                            defaults:   {
+                                            name:'HOUSE'
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             focus:onFieldFocus,
@@ -277,37 +303,30 @@ var q7=     {
                             items:  [
                                         {
                                             boxLabel:'Residence hall/College dormitory',
-                                            name:q('q7:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'House/Apartment/Condominium',
-                                            name:q('q7:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'Senior housing (independent)',
-                                            name:q('q7:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'Assisted living',
-                                            name:q('q7:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'Nursing home',
-                                            name:q('q7:a1'),
                                             inputValue:5
                                         },
                                         {
                                             boxLabel:'Relative\'s home',
-                                            name:q('q7:a1'),
                                             inputValue:6
                                         },
                                         {
                                             boxLabel:'Other',
-                                            name:q('q7:a1'),
                                             enableQ:[q('q7:a2')],
                                             next:q('q7:a2'),
                                             inputValue:7
@@ -316,7 +335,7 @@ var q7=     {
                         },
                         {
                             id:q('q7:a2'),
-                            name:q('q7:a2'),
+                            name:'HOUSE_LIST',
                             xtype:'textfield',
                             width:125,
                             disabled:true,
@@ -324,6 +343,7 @@ var q7=     {
                             style:'margin-top:5px',
                             labelStyle:'width:100px; padding-left:10px; font-weight:normal',
                             next:q('q8'),
+                            regex:NRG.Forms.T_String,
                             listeners:  {
                                             focus:onFieldFocus,
                                             specialkey:onEnter
@@ -345,7 +365,6 @@ var q8=     {
                         },
                         {
                             id:q('q8'),
-                            name:q('q8'),
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
@@ -362,12 +381,12 @@ var q8=     {
                             items:  [
                                         {
                                             boxLabel:'Alone',
-                                            name:q('q8:a1'),
+                                            name:'LIVE',
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'With family members - list',
-                                            name:q('q8:a1'),
+                                            name:'LIVE',
                                             inputValue:2,
                                             enableQ:[q('q8:a2')],
                                             next:q('q8:a2')
@@ -381,10 +400,11 @@ var q8=     {
                                                         disabled:true,
                                                         id:q('q8:a2'),
                                                         xtype:'textfield',
-                                                        name:q('q8:a2'),
+                                                        name:'LIVE_LIST',
                                                         style:'margin-left:35px;width:185px;margin-top:5px',
                                                         next:q('q9'),
                                                         selectOnFocus:true,
+                                                        regex:NRG.Forms.T_String,
                                                         listeners:  {
                                                                         focus:onFieldFocus,
                                                                         specialkey:onEnter
@@ -393,7 +413,7 @@ var q8=     {
                                         },
                                         {
                                             boxLabel:'With non-family members',
-                                            name:q('q8:a1'),
+                                            name:'LIVE',
                                             inputValue:3
                                         }
                                     ]
@@ -414,7 +434,6 @@ var q9=     {
                         },
                         {
                             id:q('q9'),
-                            name:q('q9'),
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
@@ -423,6 +442,9 @@ var q9=     {
                             invalidClass:'',
                             disableQ:[q('q9:a2'),q('q10')],
                             next:[q('q10'), q('q11')],
+                            defaults:   {
+                                            name:'ENG_NAT'
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             focus:onFieldFocus,
@@ -431,12 +453,10 @@ var q9=     {
                             items:  [
                                         {
                                             boxLabel:'Yes',
-                                            name:q('q9:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'No (please specify your primary language)',
-                                            name:q('q9:a1'),
                                             inputValue:2,
                                             enableQ:[q('q9:a2'),q('q10')],
                                             next:q('q9:a2')
@@ -452,7 +472,7 @@ var q9=     {
                                         disabled:true,
                                         id:q('q9:a2'),
                                         xtype:'textfield',
-                                        name:q('q9:a2'),
+                                        name:'NAT_LANG',
                                         style:'margin-left:90px;width:205px',
                                         next:q('q10'),
                                         listeners:  {
@@ -473,7 +493,7 @@ var q10=     {
                 items:[
                         {
                             id:q('q10'),
-                            name:q('q10'),
+                            name:'ENG_AGE',
                             xtype:'numberfield',
                             fieldLabel:'If NO: At what age did you learn English?',
                             labelStyle:'width:265px;text-shadow: 2px 2px 2px #ccc',
@@ -505,7 +525,6 @@ var q11=     {
                         },
                         {
                             id:q('q11'),
-                            name:q('q11'),
                             xtype:'checkboxgroup',
                             columns:1,
                             hideLabel:true,
@@ -514,56 +533,51 @@ var q11=     {
                             style:'padding-left:'+radioPaddingLeft+'px;background-color:transparent',
                             disableQ:[q('q11:a2'),q('q12')],
                             next:[q('q11:a2'),q('q12')],
+                            saneCheckboxCount:4,
+                            defaults:   {
+                                            submitValue:false
+                                        },
                             listeners:  {
-                                            change:checkboxgroupChanged,
+                                            change:occuCheckboxChanged,
                                             specialkey:onEnter,      
                                             focus:onFieldFocus
                                         },
                             items:  [
                                         {
                                             boxLabel:'Working full-time',
-                                            name:q('q11:a1:1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Working part-time',
-                                            name:q('q11:a1:2'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'Student',
-                                            name:q('q11:a1:3'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'Homemaker',
-                                            name:q('q11:a1:4'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'Retired',
-                                            name:q('q11:a1:5'),
                                             inputValue:5,
                                             enableQ:[q('q12')]
                                         },
                                         {
                                             boxLabel:'Volunteer worker',
-                                            name:q('q11:a1:6'),
                                             inputValue:6
                                         },
                                         {
                                             boxLabel:'Seeking employment, laid off, etc.',
-                                            name:q('q11:a1:7'),
                                             inputValue:7
                                         },
                                         {
                                             boxLabel:'Leave of absence',
-                                            name:q('q11:a1:8'),
                                             inputValue:8
                                         },
                                         {
                                             boxLabel:'Other',
-                                            name:q('q11:a1:9'),
                                             enableQ:[q('q11:a2')],
                                             inputValue:9
                                         }
@@ -571,7 +585,7 @@ var q11=     {
                         },
                         {
                             id:q('q11:a2'),
-                            name:q('q11:a2'),
+                            name:'OCCU_LIST',
                             xtype:'textfield',
                             width:125,
                             disabled:true,
@@ -579,10 +593,35 @@ var q11=     {
                             style:'margin-top:5px',
                             labelStyle:'width:100px; padding-left:10px; font-weight:normal',
                             next:q('q12'),
+                            regex:NRG.Forms.T_String,
                             listeners:  {
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         }
+                        },
+                        {
+                            xtype:'hidden',
+                            id:'OCCU_1',
+                            name:'OCCU_1',
+                            inputValue:NRG.Forms.NoResponse
+                        },
+                        {
+                            xtype:'hidden',
+                            id:'OCCU_2',
+                            name:'OCCU_2',
+                            inputValue:NRG.Forms.NoResponse
+                        },
+                        {
+                            xtype:'hidden',
+                            id:'OCCU_3',
+                            name:'OCCU_3',
+                            inputValue:NRG.Forms.NoResponse
+                        },
+                        {
+                            xtype:'hidden',
+                            id:'OCCU_4',
+                            name:'OCCU_4',
+                            inputValue:NRG.Forms.NoResponse
                         }
                       ]
             };
@@ -596,7 +635,7 @@ var q12=     {
                 items:[
                         {
                             id:q('q12'),
-                            name:q('q12'),
+                            name:'RETIRE_YEAR',
                             xtype:'numberfield',
                             fieldLabel:'6. If you are retired, in what year did you retire?',
                             labelStyle:'width:310px;padding-top:5px;text-shadow: 2px 2px 2px #ccc',
@@ -607,9 +646,17 @@ var q12=     {
                             maxLength:4,
                             width:65,
                             listeners:  {
+                                            change:onRetireYearChanged,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         }
+                        },
+                        {
+                            id:q('q12:a1'),
+                            name:'RETIRE_AGE',
+                            xtype:'hidden',
+                            inputValue:NRG.Forms.NoResponse,
+                            minValue:16
                         }
                       ]
             };
@@ -642,7 +689,9 @@ var birthFields=    {
                                     style:'font-weight:bold;padding:5px 5px 0px 20px;',
                                     html:'City'
                                 },
-                                birthCity
+                                birthCity,
+                                hiddenCountry,
+                                hiddenState
                               ]
                     };
 
@@ -657,7 +706,7 @@ var rightFields=    {
                         xtype:'fieldset',
                         style:'margin:0px;padding:0px',
                         border:false,
-                        items:[sDOB,sWeight]
+                        items:[sDOB,sDOBhidden,sWeight]
                     };
 
 var leftBottomFields=   {
@@ -733,11 +782,21 @@ var btnNext={
               };
 var form=   {
                 id:qID,
+                schema:'DEM/1.0',
                 xtype:'form',
                 border:false,
                 autoScroll:false,
                 buttonAlign:'left',
                 title:'Demographics',
+                resetHandler:resetState,
+                submitOrder:[
+                                'SEX', 'DOB','HT','WT',
+                                'COUNTRY','STATE','CITY','ZIP',
+                                'MARITAL','MARITAL_LIST','HOUSE','HOUSE_LIST',
+                                'LIVE','LIVE_LIST','ENG_NAT','NAT_LANG','ENG_AGE',
+                                'OCCU_1','OCCU_2','OCCU_3','OCCU_4','OCCU_LIST',
+                                'RETIRE_YEAR','RETIRE_AGE'
+                            ],
                 keys:   {
                             //Digits [1-9]
                             key:[
@@ -768,4 +827,105 @@ NRG.Forms.Demographics=form;
 function q(id)
 {
     return qID+':'+id;
+}
+
+function onCountryChanged(field, newval, oldval)
+{
+    Ext.getCmp('COUNTRY').setRawValue(newval);
+    Ext.getCmp('STATE').setRawValue(NRG.Forms.NoResponse);
+
+    console.log('Country:'+newval);
+
+    if (newval!="US")
+    {
+        var state=Ext.getCmp('qn2:q5:a2');
+
+        state.reset();
+        state.disable();
+        field.next='qn2:q5:a3';
+    }
+    else
+    {
+        Ext.getCmp('qn2:q5:a2').enable();
+        field.next='qn2:q5:a2';
+        nextField(field,field.next);
+    }
+}
+
+function onStateChanged(field, newval, oldval)
+{
+    Ext.getCmp('STATE').setRawValue(newval);
+}
+
+function onDOBChange(field, newval, oldval)
+{
+    var hiddenDOB=Ext.getCmp('qn2:q2:a1');
+
+    var newdate=new Date(newval);
+
+    hiddenDOB.setValue(newval.format('Y-m-d'));
+}
+
+function onRetireYearChanged(field, newval, oldval)
+{
+    if (!field.isValid())
+        return false;
+
+    //Check the Date of Birth field
+    var dobfield=Ext.getCmp('qn2:q2');
+    var dobstr=dobfield.getValue();
+    if (dobstr.length<=0)
+    {
+        dobfield.markInvalid('The Date of Birth field is required.');
+        field.setRawValue('');
+        field.markInvalid('Please complete the Date of Birth field first.');
+        return false;
+    }
+
+    var dob=new Date(dobstr);
+    var dobYear=dob.getFullYear();
+
+    if (newval<=dobYear)
+    {
+        field.setRawValue('');
+        field.markInvalid('Please enter a value that is greater than the year of birth.');
+        return false;
+    }
+
+    //Compute the retirement age
+    var age=newval-dobYear;
+
+    //Set the value of the hidden age field
+    var hiddenAge=Ext.getCmp('qn2:q12:a1');
+
+    if (!hiddenAge)
+        return;
+
+    if (defined(hiddenAge.minValue) && (age<hiddenAge.minValue))
+    {
+        field.setRawValue('');
+        field.markInvalid('The minimum year of retirement has to be '+(dobYear+hiddenAge.minValue));
+        return;
+    }
+    
+    hiddenAge.setValue(age);
+
+    return true;
+}
+
+function occuCheckboxChanged(checkboxgroup,checkedItems)
+{
+    setSeqHiddenFieldsValues('OCCU_',checkboxgroup,checkedItems);
+    checkboxgroupChanged(checkboxgroup,checkedItems);
+}
+
+function resetState(form)
+{
+    console.log('+ resetState(): ID='+form.getId());
+    var stateField=Ext.getCmp(form.getId()+':q5:a2');
+    if (!stateField)
+        return;
+
+    stateField.setValue('');
+    stateField.enable();
 }

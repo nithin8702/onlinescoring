@@ -23,6 +23,7 @@ var q1=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'HEALTH',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -35,27 +36,22 @@ var q1=     {
                             items:  [
                                         {
                                             boxLabel:'Much worse than average',
-                                            name:q('q1:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Worse than average',
-                                            name:q('q1:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'Average',
-                                            name:q('q1:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'Better than average',
-                                            name:q('q1:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'Much better than average',
-                                            name:q('q1:a1'),
                                             inputValue:5
                                         }
                                     ]
@@ -83,6 +79,7 @@ var q2=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'SATISFY',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -95,27 +92,22 @@ var q2=     {
                             items:  [
                                         {
                                             boxLabel:'Not at all satisfied',
-                                            name:q('q2:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Not very satisfied',
-                                            name:q('q2:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'Neither satisfied nor dissatisfied',
-                                            name:q('q2:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'Somewhat satisfied',
-                                            name:q('q2:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'Extremely satisfied',
-                                            name:q('q2:a1'),
                                             inputValue:5
                                         }
                                     ]
@@ -143,6 +135,7 @@ var q3=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'CONSCIOUS',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -155,12 +148,10 @@ var q3=     {
                             items:  [
                                         {
                                             boxLabel:'No',
-                                            name:q('q3:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Yes',
-                                            name:q('q3:a1'),
                                             inputValue:2
                                         }
                                     ]
@@ -188,6 +179,7 @@ var q4=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'POST_MENO',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -200,12 +192,10 @@ var q4=     {
                             items:  [
                                         {
                                             boxLabel:'No',
-                                            name:q('q4:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Yes',
-                                            name:q('q4:a1'),
                                             inputValue:2
                                         }
                                     ]
@@ -225,21 +215,21 @@ var q5=     {
                         },
                         {
                             id:q('q5:a0'),
-                            name:q('q5:a0'),
                             xtype:'checkbox',
                             inputValue:1,
                             boxLabel:'N/A',
                             hideLabel:true,
                             ctCls:'leftpaddinghack',
+                            submitValue:false,
                             listeners:  {
                                             check:onQ5NA,
                                             focus:onFieldFocus,
+                                            blur:onFocusLost,
                                             specialkey:onEnter
                                         }
                         },
                         {
                             id:q('q5'),
-                            name:q('q5'),
                             xtype:'panel',
                             layout:'table',
                             border:false,
@@ -280,8 +270,7 @@ var q5=     {
                                             width:215,
                                             listeners:  {
                                                             focus:onFieldFocus,
-                                                            specialkey:onEnter,
-
+                                                            specialkey:onEnter
                                                         }
                                         },
                                         {
@@ -426,7 +415,7 @@ var q5=     {
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
-                                            next:q('q6:a0'),
+                                            next:q('q5:a5'),
                                             width:215,
                                             listeners:  {
                                                             focus:onFieldFocus,
@@ -434,13 +423,43 @@ var q5=     {
                                                         }
                                         }
                                     ]
+                        },
+                        {
+                            id:q('q5:a5'),
+                            name:'RX',
+                            xtype:'numberfield',
+                            fieldLabel:'Number of prescription meds',
+                            labelStyle:'width:225px',
+                            style:'margin-top:5px; width:50px',
+                            ctCls:'toppaddinghack q-container',
+                            next:q('q5:a6'),
+                            inputValue:0,
+                            maxValue:100,
+                            listeners:  {
+                                            focus:onFieldFocus,
+                                            blur:onFocusLost,
+                                            specialkey:onEnter
+                                        }
+                        },
+                        {
+                            id:q('q5:a6'),
+                            name:'NON_RX',
+                            xtype:'numberfield',
+                            fieldLabel:'Number of non-prescription meds',
+                            labelStyle:'width:225px',
+                            style:'width:50px',
+                            ctCls:'q-container',
+                            next:q('q6:a0'),
+                            inputValue:0,
+                            maxValue:100,
+                            listeners:  {
+                                            focus:onFieldFocus,
+                                            blur:onFocusLost,
+                                            specialkey:onEnter
+                                        }
                         }
                       ]
             };
-
-
-
-
 
 var q6=     {
                 xtype:'fieldset',
@@ -450,12 +469,11 @@ var q6=     {
                         {
                             xtype:'label',
                             cls:'question-text',
-                            html:'6. Please check which of following conditions you have now or have had in the past.'
+                            html:'6. Please check which of following conditions you have now or have had in the past:'
                         },
 
                         {
                             id:q('q6'),
-                            name:q('q6'),
                             xtype:'panel',
                             layout:'table',
                             border:false,
@@ -464,6 +482,7 @@ var q6=     {
                             next:q('q7'),
                             style:'margin-top:10px;margin-left:'+radioPaddingLeft+'px',
                             defaults:   {
+                                            submitValue:false,
                                             shortcut:'x',
                                             bodyStyle:'padding:5px',
                                             ctCls:'q-table-td-border',
@@ -494,11 +513,12 @@ var q6=     {
                                         {
                                             id:q('q6:a0'),
                                             width:75,
-                                            name:q('q6:a0'),
+                                            submitValue:false,
                                             xtype:'checkbox',
                                             inputValue:1,
                                             boxLabel:'<span class="table-header">N/A</span>',
                                             hideLabel:true,
+                                            next:q('q7'),
                                             listeners:  {
                                                             check:onQ6NA,
                                                             focus:onFieldFocus,
@@ -514,21 +534,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a1:1'),
-                                            name:q('q6:a1:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'CANC',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a1:2'),
-                                            name:q('q6:a1:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'CANC',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a1:3'),
-                                            name:q('q6:a1:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'CANC',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
 
                                         {
@@ -538,21 +564,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a2:1'),
-                                            name:q('q6:a2:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'MIGRAINE',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a2:2'),
-                                            name:q('q6:a2:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'MIGRAINE',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a2:3'),
-                                            name:q('q6:a2:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'MIGRAINE',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Diabetes
                                         {
@@ -562,21 +594,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a3:1'),
-                                            name:q('q6:a3:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'DIABETES',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a3:2'),
-                                            name:q('q6:a3:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'DIABETES',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a3:3'),
-                                            name:q('q6:a3:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'DIABETES',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Encephalitis or meningitis
                                         {
@@ -586,21 +624,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a4:1'),
-                                            name:q('q6:a4:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'ENCEPH',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a4:2'),
-                                            name:q('q6:a4:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'ENCEPH',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a4:3'),
-                                            name:q('q6:a4:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'ENCEPH',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Epilepsy
                                         {
@@ -610,21 +654,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a5:1'),
-                                            name:q('q6:a5:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'EPILEPSY',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a5:2'),
-                                            name:q('q6:a5:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'EPILEPSY',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a5:3'),
-                                            name:q('q6:a5:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'EPILEPSY',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //High blood pressure
                                         {
@@ -634,21 +684,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a6:1'),
-                                            name:q('q6:a6:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'HBP',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a6:2'),
-                                            name:q('q6:a6:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'HBP',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a6:3'),
-                                            name:q('q6:a6:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'HBP',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Multiple sclerosis
                                         {
@@ -658,21 +714,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a7:1'),
-                                            name:q('q6:a7:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'MS',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a7:2'),
-                                            name:q('q6:a7:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'MS',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a7:3'),
-                                            name:q('q6:a7:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'MS',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Parkinson’s disease
                                         {
@@ -682,21 +744,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a8:1'),
-                                            name:q('q6:a8:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'PARK',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a8:2'),
-                                            name:q('q6:a8:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'PARK',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a8:3'),
-                                            name:q('q6:a8:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'PARK',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Stroke
                                         {
@@ -706,21 +774,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a9:1'),
-                                            name:q('q6:a9:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'STROKE',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a9:2'),
-                                            name:q('q6:a9:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'STROKE',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a9:3'),
-                                            name:q('q6:a9:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'STROKE',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Depression (diagnosed or treated)
                                         {
@@ -730,21 +804,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a10:1'),
-                                            name:q('q6:a10:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'DEP',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a10:2'),
-                                            name:q('q6:a10:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'DEP',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a10:3'),
-                                            name:q('q6:a10:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'DEP',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Attention Deficit Hyperactivity Disorder
                                         {
@@ -754,21 +834,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a11:1'),
-                                            name:q('q6:a11:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'ADHD',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a11:2'),
-                                            name:q('q6:a11:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'ADHD',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a11:3'),
-                                            name:q('q6:a11:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'ADHD',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Anxiety disorder
                                         {
@@ -778,21 +864,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a12:1'),
-                                            name:q('q6:a12:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'ANX',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a12:2'),
-                                            name:q('q6:a12:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'ANX',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a12:3'),
-                                            name:q('q6:a12:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'ANX',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Personality disorder
                                         {
@@ -802,21 +894,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a13:1'),
-                                            name:q('q6:a13:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'PD',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a13:2'),
-                                            name:q('q6:a13:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'PD',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a13:3'),
-                                            name:q('q6:a13:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'PD',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Schizophrenia or other psychotic disorder
                                         {
@@ -826,21 +924,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a14:1'),
-                                            name:q('q6:a14:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'SCH',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a14:2'),
-                                            name:q('q6:a14:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'SCH',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a14:3'),
-                                            name:q('q6:a14:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'SCH',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Bipolar disorder
                                         {
@@ -850,21 +954,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a15:1'),
-                                            name:q('q6:a15:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'BP',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a15:2'),
-                                            name:q('q6:a15:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'BP',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a15:3'),
-                                            name:q('q6:a15:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'BP',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Alcohol Abuse or Dependence
                                         {
@@ -874,21 +984,27 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a16:1'),
-                                            name:q('q6:a16:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'AA',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a16:2'),
-                                            name:q('q6:a16:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'AA',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a16:3'),
-                                            name:q('q6:a16:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'AA',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Other Substance Abuse or Dependence
                                         {
@@ -898,45 +1014,91 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a17:1'),
-                                            name:q('q6:a17:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            name:'SA',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a17:2'),
-                                            name:q('q6:a17:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            name:'SA',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         {
                                             id:q('q6:a17:3'),
-                                            name:q('q6:a17:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'SA',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
                                         },
                                         //Other Substance Abuse or Dependence
                                         {
-                                            html:'Other significant illnesses (please list)',
+                                            html:'Other significant illnesses',
                                             cls:'q-table-label',
                                             border:false
                                         },
                                         {
                                             id:q('q6:a18:1'),
-                                            name:q('q6:a18:1'),
-                                            xtype:'textfield',
-                                            inputValue:1
+                                            name:'OTHER',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q6:a19'),
+                                            listeners:  {
+                                                            check:onOtherPastIllnessesChecked
+                                                        }
                                         },
                                         {
                                             id:q('q6:a18:2'),
-                                            name:q('q6:a18:2'),
-                                            xtype:'textfield',
-                                            inputValue:2
+                                            name:'OTHER',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q6:a19'),
+                                            listeners:  {
+                                                            check:onOtherPastIllnessesChecked
+                                                        }
                                         },
                                         {
                                             id:q('q6:a18:3'),
-                                            name:q('q6:a18:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            name:'OTHER',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:  {
+                                                            check:onOtherPastIllnessesChecked
+                                                        }
+                                        },
+                                        {
+                                            ctCls:'q-container',
+                                            colspan:4,
+                                            xtype:'textfield',
+                                            id:q('q6:a19'),
+                                            next:q('q7'),
+                                            name:'OTHER_LIST',
+                                            width:640,
+                                            submitValue:true,
+                                            disabled:true,
+                                            border:false,
+                                            listeners:  {
+                                                            blur:onFocusLost,
+                                                            focus:onFieldFocus
+                                                        }
+                                        },
+                                        {
+                                            id:'HQ_LIFETIME',
+                                            name:'LIFETIME',
+                                            xtype:'hidden',
+                                            value:0
+                                        },
+                                        {
+                                            id:'HQ_NOW',
+                                            name:'NOW',
+                                            xtype:'hidden',
+                                            value:0
                                         }
                                     ]
                         }
@@ -964,6 +1126,7 @@ var q7=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'NOW_PSYMED',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -976,12 +1139,10 @@ var q7=     {
                             items:  [
                                         {
                                             boxLabel:'No',
-                                            name:q('q7:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Yes',
-                                            name:q('q7:a1'),
                                             inputValue:2,
                                             enableQ:q('q7:a2'),
                                             next:q('q7:a2')
@@ -995,7 +1156,7 @@ var q7=     {
                         },
                         {
                             id:q('q7:a2'),
-                            name:q('q7:a2'),
+                            name:'NOW_PSYMED_LIST',
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:true,
@@ -1026,11 +1187,12 @@ var q8=     {
                             columns:1,
                             hideLabel:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
-                            disableQ:q('q8:a2'),
+                            disableQ:[q('q8:a2'),q('q8:a3')],
                             invalidClass:'',
                             allowBlank:false,
                             next:q('q9'),
                             defaults:   {
+                                            name:'PAST_PSYMED',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -1043,32 +1205,42 @@ var q8=     {
                             items:  [
                                         {
                                             boxLabel:'No',
-                                            name:q('q8:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Yes',
-                                            name:q('q8:a1'),
                                             inputValue:2,
-                                            enableQ:q('q8:a2'),
+                                            enableQ:[q('q8:a2'),q('q8:a3')],
                                             next:q('q8:a2')
                                         }
                                     ]
                         },
                         {
-                            xtype:'label',
-                            cls:'question-text',
-                            html:'If yes, what medication(s) and for how long?'
-                        },
-                        {
                             id:q('q8:a2'),
-                            name:q('q8:a2'),
+                            name:'PAST_PSYMED_MED',
                             xtype:'textfield',
-                            hideLabel:true,
+                            fieldLabel:'<span class="question-label">If yes, what medication(s)</span>',
+                            labelStyle:'width:200px',
+                            hideLabel:false,
                             disabled:true,
                             width:250,
+                            next:q('q8:a3'),
+                            style:'margin-top:10px',
+                            listeners:  {
+                                            focus:onFieldFocus,
+                                            specialkey:onEnter
+                                        }
+                        },
+                        {
+                            id:q('q8:a3'),
+                            name:'PAST_PSYMED_TIME',
+                            xtype:'textfield',
+                            fieldLabel:'<span class="question-label">and for how long',
+                            labelStyle:'width:200px',
+                            disabled:true,
+                            width:150,
                             next:q('q9'),
-                            style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
+                            style:'margin-top:10px',
                             listeners:  {
                                             focus:onFieldFocus,
                                             specialkey:onEnter
@@ -1094,7 +1266,6 @@ answer these questions as they apply to your biological relatives <br/>\
                         },
                         {
                             id:q('q9'),
-                            name:q('q9'),
                             xtype:'panel',
                             layout:'table',
                             border:false,
@@ -1103,6 +1274,7 @@ answer these questions as they apply to your biological relatives <br/>\
                             style:'margin-top:10px;margin-left:'+radioPaddingLeft+'px',
                             next:q('q10'),
                             defaults:   {
+                                            next:q('q10'),
                                             bodyStyle:'padding:5px',
                                             ctCls:'q-table-td-border',
                                             listeners:  {
@@ -1142,22 +1314,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a1:1'),
-                                            name:q('q7:a1:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a1:1'),
+                                            name:'FAM_HEART_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a1:2'),
-                                            name:q('q7:a1:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a1:2'),
+                                            name:'FAM_HEART_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a1:3'),
-                                            name:q('q7:a1:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a1:3'),
+                                            name:'FAM_HEART_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Alzheimer's disease
                                         {
@@ -1166,22 +1338,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a2:1'),
-                                            name:q('q7:a2:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a2:1'),
+                                            name:'FAM_ALZ_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a2:2'),
-                                            name:q('q7:a2:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a2:2'),
+                                            name:'FAM_ALZ_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a2:3'),
-                                            name:q('q7:a2:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a2:3'),
+                                            name:'FAM_ALZ_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Aging dementia that is not Alzheimer\'s
                                         {
@@ -1190,22 +1362,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a3:1'),
-                                            name:q('q7:a3:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a3:1'),
+                                            name:'FAM_NOTALZ_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a3:2'),
-                                            name:q('q7:a3:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a3:2'),
+                                            name:'FAM_NOTALZ_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a3:3'),
-                                            name:q('q7:a3:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a3:3'),
+                                            name:'FAM_NOTALZ_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Multiple sclerosis
                                         {
@@ -1214,22 +1386,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a4:1'),
-                                            name:q('q7:a4:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a4:1'),
+                                            name:'FAM_MS_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a4:2'),
-                                            name:q('q7:a4:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a4:2'),
+                                            name:'FAM_MS_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a4:3'),
-                                            name:q('q7:a4:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a4:3'),
+                                            name:'FAM_MS_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Cancer (other than skin cancer)
                                         {
@@ -1238,22 +1410,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a5:1'),
-                                            name:q('q7:a5:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a5:1'),
+                                            name:'FAM_CANC_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a5:2'),
-                                            name:q('q7:a5:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a5:2'),
+                                            name:'FAM_CANC_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a5:3'),
-                                            name:q('q7:a5:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a5:3'),
+                                            name:'FAM_CANC_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Chronic migraine headaches
                                         {
@@ -1262,22 +1434,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a6:1'),
-                                            name:q('q7:a6:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a6:1'),
+                                            name:'FAM_MIGRAINE_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a6:2'),
-                                            name:q('q7:a6:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a6:2'),
+                                            name:'FAM_MIGRAINE_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a6:3'),
-                                            name:q('q7:a6:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a6:3'),
+                                            name:'FAM_MIGRAINE_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Diabetes
                                         {
@@ -1286,22 +1458,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a7:1'),
-                                            name:q('q7:a7:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a7:1'),
+                                            name:'FAM_DIABETES_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a7:2'),
-                                            name:q('q7:a7:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a7:2'),
+                                            name:'FAM_DIABETES_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a7:3'),
-                                            name:q('q7:a7:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a7:3'),
+                                            name:'FAM_DIABETES_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Encephalitis or meningitis
                                         {
@@ -1310,22 +1482,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a8:1'),
-                                            name:q('q7:a8:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a8:1'),
+                                            name:'FAM_ENCEPH_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a8:2'),
-                                            name:q('q7:a8:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a8:2'),
+                                            name:'FAM_ENCEPH_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a8:3'),
-                                            name:q('q7:a8:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a8:3'),
+                                            name:'FAM_ENCEPH_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Epilepsy
                                         {
@@ -1334,22 +1506,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a9:1'),
-                                            name:q('q7:a9:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a9:1'),
+                                            name:'FAM_EPILEPSY_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a9:2'),
-                                            name:q('q7:a9:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a9:2'),
+                                            name:'FAM_EPILEPSY_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a9:3'),
-                                            name:q('q7:a9:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a9:3'),
+                                            name:'FAM_EPILEPSY_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //High blood pressure
                                         {
@@ -1358,22 +1530,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a10:1'),
-                                            name:q('q7:a10:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a10:1'),
+                                            name:'FAM_HBP_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a10:2'),
-                                            name:q('q7:a10:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a10:2'),
+                                            name:'FAM_HBP_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a10:3'),
-                                            name:q('q7:a10:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a10:3'),
+                                            name:'FAM_HBP_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Parkinson’s disease
                                         {
@@ -1382,22 +1554,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a11:1'),
-                                            name:q('q7:a11:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a11:1'),
+                                            name:'FAM_PARK_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a11:2'),
-                                            name:q('q7:a11:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a11:2'),
+                                            name:'FAM_PARK_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a11:3'),
-                                            name:q('q7:a11:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a11:3'),
+                                            name:'FAM_PARK_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Stroke
                                         {
@@ -1406,22 +1578,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a12:1'),
-                                            name:q('q7:a12:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a12:1'),
+                                            name:'FAM_STROKE_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a12:2'),
-                                            name:q('q7:a12:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a12:2'),
+                                            name:'FAM_STROKE_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a12:3'),
-                                            name:q('q7:a12:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a12:3'),
+                                            name:'FAM_STROKE_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Depression (diagnosed or treated)
                                         {
@@ -1430,22 +1602,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a13:1'),
-                                            name:q('q7:a13:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a13:1'),
+                                            name:'FAM_DEP_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a13:2'),
-                                            name:q('q7:a13:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a13:2'),
+                                            name:'FAM_DEP_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a13:3'),
-                                            name:q('q7:a13:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a13:3'),
+                                            name:'FAM_DEP_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Attention Deficit Hyperactivity Disorder
                                         {
@@ -1454,22 +1626,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a14:1'),
-                                            name:q('q7:a14:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a14:1'),
+                                            name:'FAM_ADHD_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a14:2'),
-                                            name:q('q7:a14:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a14:2'),
+                                            name:'FAM_ADHD_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a14:3'),
-                                            name:q('q7:a14:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a14:3'),
+                                            name:'FAM_ADHD_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Anxiety disorder
                                         {
@@ -1478,22 +1650,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a15:1'),
-                                            name:q('q7:a15:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a15:1'),
+                                            name:'FAM_ANX_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a15:2'),
-                                            name:q('q7:a15:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a15:2'),
+                                            name:'FAM_ANX_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a15:3'),
-                                            name:q('q7:a15:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a15:3'),
+                                            name:'FAM_ANX_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Personality disorder
                                         {
@@ -1502,22 +1674,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a16:1'),
-                                            name:q('q7:a16:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a16:1'),
+                                            name:'FAM_PD_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a16:2'),
-                                            name:q('q7:a16:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a16:2'),
+                                            name:'FAM_PD_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a16:3'),
-                                            name:q('q7:a16:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a16:3'),
+                                            name:'FAM_PD_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Schizophrenia or other psychotic disorder
                                         {
@@ -1526,22 +1698,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a17:1'),
-                                            name:q('q7:a17:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a17:1'),
+                                            name:'FAM_SCH_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a17:2'),
-                                            name:q('q7:a17:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a17:2'),
+                                            name:'FAM_SCH_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a17:3'),
-                                            name:q('q7:a17:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a17:3'),
+                                            name:'FAM_SCH_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Bipolar disorder
                                         {
@@ -1550,22 +1722,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a18:1'),
-                                            name:q('q7:a18:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a18:1'),
+                                            name:'FAM_BP_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a18:2'),
-                                            name:q('q7:a18:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a18:2'),
+                                            name:'FAM_BP_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a18:3'),
-                                            name:q('q7:a18:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a18:3'),
+                                            name:'FAM_BP_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Alcohol Abuse or Dependence
                                         {
@@ -1574,22 +1746,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a19:1'),
-                                            name:q('q7:a19:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a19:1'),
+                                            name:'FAM_AA_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a19:2'),
-                                            name:q('q7:a19:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a19:2'),
+                                            name:'FAM_AA_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a19:3'),
-                                            name:q('q7:a19:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a19:3'),
+                                            name:'FAM_AA_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Other Substance Abuse or Dependence
                                         {
@@ -1598,22 +1770,22 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a20:1'),
-                                            name:q('q7:a20:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a20:1'),
+                                            name:'FAM_SA_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a20:2'),
-                                            name:q('q7:a20:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a20:2'),
+                                            name:'FAM_SA_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a20:3'),
-                                            name:q('q7:a20:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a20:3'),
+                                            name:'FAM_SA_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         //Mild mental illness but details are unknown
                                         {
@@ -1622,24 +1794,151 @@ answer these questions as they apply to your biological relatives <br/>\
                                             border:false
                                         },
                                         {
-                                            id:q('q7:a21:1'),
-                                            name:q('q7:a21:1'),
-                                            xtype:'checkbox',
-                                            inputValue:1
+                                            id:q('q9:a21:1'),
+                                            name:'FAM_OTHER_M',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a21:2'),
-                                            name:q('q7:a21:2'),
-                                            xtype:'checkbox',
-                                            inputValue:2
+                                            id:q('q9:a21:2'),
+                                            name:'FAM_OTHER_F',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         },
                                         {
-                                            id:q('q7:a21:3'),
-                                            name:q('q7:a21:3'),
-                                            xtype:'checkbox',
-                                            inputValue:3
+                                            id:q('q9:a21:3'),
+                                            name:'FAM_OTHER_S',
+                                            handler:updateFamHiddenField,
+                                            xtype:'checkbox'
                                         }
                                 ]
+                        },
+                        // HIDDEN FIELDS
+                        {
+                            id:q('q9:a1'),
+                            name:'FAM_HEART',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a2'),
+                            name:'FAM_ALZ',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a3'),
+                            name:'FAM_NOTALZ',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a4'),
+                            name:'FAM_MS',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a5'),
+                            name:'FAM_CANC',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a6'),
+                            name:'FAM_MIGRAINE',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a7'),
+                            name:'FAM_DIABETES',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a8'),
+                            name:'FAM_ENCEPH',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a9'),
+                            name:'FAM_EPILEPSY',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a10'),
+                            name:'FAM_HBP',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a11'),
+                            name:'FAM_PARK',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a12'),
+                            name:'FAM_STROKE',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a13'),
+                            name:'FAM_DEP',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a14'),
+                            name:'FAM_ADHD',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a15'),
+                            name:'FAM_ANX',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a16'),
+                            name:'FAM_PD',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a17'),
+                            name:'FAM_SCH',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a18'),
+                            name:'FAM_BP',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a19'),
+                            name:'FAM_AA',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a20'),
+                            name:'FAM_SA',
+                            xtype:'hidden',
+                            value:0
+                        },
+                        {
+                            id:q('q9:a21'),
+                            name:'FAM_OTHER',
+                            xtype:'hidden',
+                            value:0
                         }
                       ]
             };
@@ -1653,7 +1952,7 @@ var q10=     {
                 items:[
                         {
                             id:q('q10'),
-                            name:q('q10'),
+                            name:'NUM_SIB',
                             xtype:'numberfield',
                             fieldLabel:'10. How many biological siblings do you have?',
                             labelStyle:'padding-top:5px;width:300px',
@@ -1662,7 +1961,6 @@ var q10=     {
                             maxValue:99,
                             maxLength:2,
                             width:65,
-                            format:'Y',
                             next:q('q11'),
                             listeners:  {
                                             focus:onFieldFocus,
@@ -1693,6 +1991,7 @@ var q11=     {
                             allowBlank:false,
                             next:q('q12'),
                             defaults:   {
+                                            name:'MOM_HEALTH',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -1705,12 +2004,10 @@ var q11=     {
                             items:  [
                                         {
                                             boxLabel:'No',
-                                            name:q('q11:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Yes',
-                                            name:q('q11:a1'),
                                             inputValue:2
                                         }
                                     ]
@@ -1738,6 +2035,7 @@ var q12=     {
                             allowBlank:false,
                             next:q('q13'),
                             defaults:   {
+                                            name:'DAD_HEALTH',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -1750,12 +2048,10 @@ var q12=     {
                             items:  [
                                         {
                                             boxLabel:'No',
-                                            name:q('q12:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Yes',
-                                            name:q('q12:a1'),
                                             inputValue:2
                                         }
                                     ]
@@ -1776,6 +2072,7 @@ var q13=     {
                         {
                             id:q('q13'),
                             xtype:'textarea',
+                            name:'ADD_LIST',
                             hideLabel:true,
                             width:450,
                             height:125,
@@ -1811,6 +2108,7 @@ var form=   {
                 autoScroll:false,
                 buttonAlign:'left',
                 title:'Health',
+                schema:'HQ/1.0',
                 keys:   {
                             //Digits [1-5]
                             key:[
@@ -1831,7 +2129,445 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,btnNext]
+                items:[q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,q11,q12,q13,btnNext],
+                submitOrder:    [
+                                    "HEALTH",
+                                    "SATISFY",
+                                    "CONSCIOUS",
+                                    "POST_MENO",
+                                    "RX",
+                                    "NON_RX",
+                                    "CANC",
+                                    "MIGRAINE",
+                                    "DIABETES",
+                                    "ENCEPH",
+                                    "EPILEPSY",
+                                    "HBP",
+                                    "MS",
+                                    "PARK",
+                                    "STROKE",
+                                    "DEP",
+                                    "ADHD",
+                                    "ANX",
+                                    "PD",
+                                    "SCH",
+                                    "BP",
+                                    "AA",
+                                    "SA",
+                                    "OTHER",
+                                    "OTHER_LIST",
+                                    "LIFETIME",
+                                    "NOW",
+                                    "NOW_PSYMED",
+                                    "NOW_PSYMED_LIST",
+                                    "PAST_PSYMED",
+                                    "PAST_PSYMED_MED",
+                                    "PAST_PSYMED_TIME",
+                                    {
+                                        name:"FAM_HEART",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_HEART_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_HEART_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_HEART_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ALZ",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ALZ_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ALZ_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ALZ_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_NOTALZ",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_NOTALZ_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_NOTALZ_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_NOTALZ_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_MS",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_MS_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_MS_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_MS_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_CANC",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_CANC_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_CANC_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_CANC_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_MIGRAINE",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_MIGRAINE_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_MIGRAINE_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_MIGRAINE_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_DIABETES",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_DIABETES_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_DIABETES_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_DIABETES_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ENCEPH",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ENCEPH_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ENCEPH_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ENCEPH_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_EPILEPSY",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_EPILEPSY_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_EPILEPSY_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_EPILEPSY_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_HBP",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_HBP_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_HBP_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_HBP_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_PARK",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_PARK_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_PARK_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_PARK_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_STROKE",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_STROKE_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_STROKE_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_STROKE_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_DEP",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_DEP_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_DEP_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_DEP_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ADHD",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ADHD_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ADHD_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ADHD_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ANX",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ANX_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ANX_F",
+                                         handler:checkbox2integer,
+                                       defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_ANX_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_PD",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_PD_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_PD_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_PD_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_SCH",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_SCH_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_SCH_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_SCH_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_BP",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_BP_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_BP_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_BP_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_AA",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_AA_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_AA_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_AA_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_SA",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_SA_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_SA_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_SA_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_OTHER",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_OTHER_M",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_OTHER_F",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"FAM_OTHER_S",
+                                        handler:checkbox2integer,
+                                        defaultValue:0
+                                    },
+
+                                    "NUM_SIB",
+                                    "DAD_HEALTH",
+                                    "MOM_HEALTH",
+                                    "ADD_LIST",
+                                ]
             };
 
 NRG.Forms.Health=form;
@@ -1846,11 +2582,18 @@ function q(id)
 function onQ5NA(checkbox,checked)
 {
     var table=Ext.getCmp('qn6:q5');
+    var rx=Ext.getCmp('qn6:q5:a5');
+    var nonrx=Ext.getCmp('qn6:q5:a6');
+
     var qContainer=getQContainer(checkbox);
 
     if (checked)
     {
         table.disable();
+        rx.setRawValue(0);
+        nonrx.setRawValue(0);
+        rx.disable();
+        nonrx.disable();
         checkbox.next='qn6:q6';
         //Mark the question as valid
         //Normally, the onFieldValid callback would be called,
@@ -1861,6 +2604,8 @@ function onQ5NA(checkbox,checked)
     else
     {
         table.enable();
+        rx.enable();
+        nonrx.enable();
         checkbox.next='qn6:q5:a1:1';
 
         if (qContainer)
@@ -1877,10 +2622,108 @@ function onQ6NA(checkbox,checked)
     if (!q6)
         return;
 
-    q6.getEl().select('input[name$=":3"]').each(function(checkbox)
+    q6.getEl().select('input[id$=":3"]').each(function(checkbox)
     {
-        checkbox.dom.checked=checked;
+        var cb=Ext.getCmp(checkbox.id);
+        cb.setValue(checked);
     })
 
-    nextField(checkbox,q6.next);
+    if (checked)
+    {
+        Ext.getCmp('HQ_LIFETIME').setValue(0);
+        Ext.getCmp('HQ_NOW').setValue(0);
+    }
+    else
+        updateIllnessCount(checkbox, true);
+}
+
+function onOtherPastIllnessesChecked(field, checked)
+{
+    console.log('Past Illness: ', field, checked);
+    updateIllnessCount(field, true);
+
+    var other=Ext.getCmp('qn6:q6:a19');
+    if ( (field.id=='qn6:q6:a18:3') && (checked))
+    {
+        other.setValue('');
+        other.disable();
+    }
+    else
+        other.enable();
+
+    //Only trigger nextField() for the radio that was checked
+    if (checked)
+        nextField(field);
+}
+
+function updateIllnessCount(field, checked)
+{
+    if (!checked)
+        return;
+
+    var q6=Ext.getCmp('qn6:q6');
+
+    if (!q6)
+        return;
+
+    var countLifetime=0;
+    var countNow=0;
+
+    //Here we select all radio buttons under the "In your lifetime" and then "Currently (now)" columns,
+    //and then use a callback to count the number of radio buttons that are checked.
+    //Unfortunately, Ext.DomQuery can't be used to select on dom values, which is why this process
+    //requires this iteration
+    q6.getEl().select('input[type="radio"][id$=":1"]').each(function(cb){if (cb.dom.checked) countLifetime++});
+    q6.getEl().select('input[type="radio"][id$=":2"]').each(function(cb){if (cb.dom.checked) countNow++});
+
+    //Update current values
+    Ext.getCmp('HQ_LIFETIME').setValue(countLifetime);
+    Ext.getCmp('HQ_NOW').setValue(countNow);
+
+    console.log('Updating illness count: ',countLifetime,countNow);
+}
+
+function updateFamHiddenField(cb,checked)
+{
+    if (!cb)
+        return;
+
+    var splitID=cb.id.split(':');
+    var rootID=splitID[0]+":"+splitID[1]+":"+splitID[2];
+
+    var hidden=Ext.getCmp(rootID);
+
+    if (!hidden)
+        return;
+
+    if (checked)
+    {
+        hidden.setValue(1);
+        if (!defined(hidden.cbCount))
+            hidden.cbCount=1;
+        else
+            hidden.cbCount++;
+    }
+    else
+    {
+        if (!defined(hidden.cbCount))
+            hidden.cbCount=0;
+        else
+            hidden.cbCount--;
+
+        if (hidden.cbCount<=0)
+        {
+            hidden.cbCount=0;
+            hidden.setValue(0);
+        }
+    }
+}
+
+/* Must return a value. Basically this transforms checkbox "on" values to 1. */
+function checkbox2integer(cbValue)
+{
+    if (cbValue)
+        return 1;
+
+    return 0;
 }

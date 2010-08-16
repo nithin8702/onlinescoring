@@ -1,0 +1,51 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start>
+        <element name="form">
+            <!-- CURRENT OCCUPATION -->
+            <element name="now_1">
+                <ref name="T_7_ChoicesAnd998_997"/>
+            </element>
+            <element name="now_2">
+                <ref name="T_7_ChoicesAnd998_997"/>
+            </element>
+            <element name="now_3">
+                <ref name="T_7_ChoicesAnd998_997"/>
+            </element>
+            <element name="now_4">
+                <ref name="T_7_ChoicesAnd998_997"/>
+            </element>
+            <!-- CURRENT OCCUPATION LIST -->
+            <element name="now_list">
+                <ref name="T_String"/>
+            </element>
+
+            <!-- FUTURE OCCUPATION -->
+            <element name="fut">
+                <ref name="T_7_ChoicesAnd998_997"/>
+            </element>
+            <!-- FUTURE OCCUPATION LIST -->
+            <element name="fut_list">
+                <ref name="T_String"/>
+            </element>
+
+            <!-- DAD's OCCUPATION -->
+            <element name="dad">
+                <ref name="T_7_ChoicesAnd998_997"/>
+            </element>
+            <!-- DAD's OCCUPATION LIST -->
+            <element name="dad_list">
+                <ref name="T_String"/>
+            </element>
+
+            <!-- MOM's OCCUPATION -->
+            <element name="mom">
+                <ref name="T_7_ChoicesAnd998_997"/>
+            </element>
+            <!-- MOM's OCCUPATION LIST -->
+            <element name="mom_list">
+                <ref name="T_String"/>
+            </element>
+        </element>
+    </start>
+</grammar>

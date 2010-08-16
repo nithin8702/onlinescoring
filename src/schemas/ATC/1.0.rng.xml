@@ -1,0 +1,33 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start>
+        <element name="form">
+            <!-- ALCOHOL -->
+            <element name="alc_freq">
+                <ref name="T_5_Choices"/>
+            </element>
+            <element name="alc_amount">
+                <ref name="T_5_Choices"/>
+            </element>
+            <element name="alc_rec_binge">
+                <ref name="T_2_Choices"/>
+            </element>
+
+            <!-- TOBACCO -->
+            <element name="cig_freq">
+                <ref name="T_5_Choices"/>
+            </element>
+            <element name="cig_recent">
+                <ref name="T_5_Choices"/>
+            </element>
+
+            <!-- CAFFEINE -->
+            <element name="caff_freq">
+                <ref name="T_5_Choices"/>
+            </element>
+            <element name="caff_recent">
+                <ref name="T_5_Choices"/>
+            </element>
+        </element>
+    </start>
+</grammar>

@@ -1,0 +1,5 @@
+<form 	xmlns="http://www.neuroinfo.org/schemas/OnlineScoring/EH/1.0/"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.neuroinfo.org/schemas/OnlineScoring/EH/1.0/ EH.xsd">
+	<s1ex>1</s1ex>
+</form>

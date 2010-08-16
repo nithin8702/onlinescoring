@@ -1,0 +1,26 @@
+<form>
+       <sex>2</sex>
+       <dob>1950-01-01</dob>
+       <ht>56</ht>
+       <wt>555</wt>
+       <country>US</country>
+       <state>GA</state>
+       <city>9999</city>
+       <zip>9999</zip>
+       <marital>2</marital>
+       <marital_list>9999</marital_list>
+       <house>2</house>
+       <house_list>9999</house_list>
+       <live>2</live>
+       <live_list>someone</live_list>
+       <eng_nat>2</eng_nat>
+       <nat_lang>English</nat_lang>
+       <eng_age>99</eng_age>
+       <occu_1>1</occu_1>
+       <occu_2>5</occu_2>
+       <occu_3>9999</occu_3>
+       <occu_4>9999</occu_4>
+       <occu_list>9999</occu_list>
+       <retire_year>1966</retire_year>
+       <retire_age>16</retire_age>
+</form>

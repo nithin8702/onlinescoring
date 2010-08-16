@@ -15,70 +15,96 @@ var q1=     {
                         },
                         {
                             id:q('q1'),
-                            xtype:'radiogroup',
+                            xtype:'checkboxgroup',
                             columns:1,
                             hideLabel:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q2'),
                             invalidClass:'',
                             allowBlank:false,
+                            saneCheckboxCount:4,
                             defaults:   {
+                                            submitValue:false,
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
                                                         }
                                         },
                             listeners:  {
-                                            change:radiogroupChanged,
+                                            change:occuNowChanged,
                                             specialkey:onEnter
                                         },
                             items:  [
                                         {
                                             boxLabel:'Student',
-                                            name:q('q1:a1'),
-                                            inputValue:1
+                                            inputValue:997,
+                                            ranking:8
                                         },
                                         {
                                             boxLabel:'Homemaker',
-                                            name:q('q1:a1'),
-                                            inputValue:2
+                                            inputValue:998,
+                                            ranking:9
                                         },
                                         {
                                             boxLabel:'Day Laborer <span class="q-etc">(i.e. janitor, housecleaner, cafeteria employee)</span>',
-                                            name:q('q1:a1'),
-                                            inputValue:3
+                                            inputValue:1,
+                                            ranking:1
                                         },
                                         {
                                             boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck driver, construction worker)</span>',
-                                            name:q('q1:a1'),
-                                            inputValue:4
+                                            inputValue:2,
+                                            ranking:2
                                         },
                                         {
                                             boxLabel:'Skilled Manual Employee <span class="q-etc">(i.e. auto mechanic, carpenter, hairdresser)</span>',
-                                            name:q('q1:a1'),
-                                            inputValue:5
+                                            inputValue:3,
+                                            ranking:3
                                         },
                                         {
                                             boxLabel:'Clerical and Sales Worker or Technician <span class="q-etc">(i.e. retail sales, secretary, receptionist)</span>',
-                                            name:q('q1:a1'),
-                                            inputValue:6
+                                            inputValue:4,
+                                            ranking:4
                                         },
                                         {
                                             boxLabel:'Administrative Personnel <span class="q-etc">(i.e. administrator, supervisor, librarian)</span>',
-                                            name:q('q1:a1'),
-                                            inputValue:7
+                                            inputValue:5,
+                                            ranking:5
                                         },
                                         {
                                             boxLabel:'Business Manager or Professional<br/><span class="q-etc">(i.e. nurse, teacher, police/fire personnel, speech therapist, PT, OT, financial manager)</span>',
-                                            name:q('q1:a1'),
-                                            inputValue:8
+                                            inputValue:6,
+                                            ranking:6
                                         },
                                         {
                                             boxLabel:'Higher Executive or Major Professional <span class="q-etc">(i.e. physician, professor, engineer, CEO)</span>',
-                                            name:q('q1:a1'),
-                                            inputValue:9
+                                            inputValue:7,
+                                            ranking:7
                                         }
                                     ]
+                        },
+                        {
+                            id:'NOW_1',
+                            name:'NOW_1',
+                            xtype:'hidden',
+                            value:NRG.Forms.NoResponse
+                        },
+                        {
+                            id:'NOW_2',
+                            name:'NOW_2',
+                            xtype:'hidden',
+                            value:NRG.Forms.NoResponse
+                        },
+                        {
+                            id:'NOW_3',
+                            name:'NOW_3',
+                            xtype:'hidden',
+                            value:NRG.Forms.NoResponse
+                        },
+                        {
+                            id:'NOW_4',
+                            name:'NOW_4',
+                            xtype:'hidden',
+                            value:NRG.Forms.NoResponse
                         }
                       ]
             };
@@ -96,7 +122,7 @@ var q2=     {
                         },
                         {
                             id:q('q2'),
-                            name:q('q2'),
+                            name:'NOW_LIST',
                             xtype:'textfield',
                             allowBlank:false,
                             hideLabel:true,
@@ -104,6 +130,7 @@ var q2=     {
                             next:q('q3'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
+                            regex:NRG.Forms.T_String,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
@@ -133,6 +160,7 @@ var q3=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'DAD',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -145,48 +173,39 @@ var q3=     {
                             items:  [
                                         {
                                             boxLabel:'Not Applicable/Unknown',
-                                            name:q('q3:a1'),
-                                            inputValue:1
+                                            inputValue:999
                                         },
                                         {
                                             boxLabel:'Homemaker',
-                                            name:q('q3:a1'),
-                                            inputValue:2
+                                            inputValue:998
                                         },
                                         {
                                             boxLabel:'Day Laborer <span class="q-etc">(i.e. janitor, housecleaner, cafeteria employee)</span>',
-                                            name:q('q3:a1'),
-                                            inputValue:3
+                                            inputValue:1
                                         },
                                         {
                                             boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck driver, construction worker)</span>',
-                                            name:q('q3:a1'),
-                                            inputValue:4
+                                            inputValue:2
                                         },
                                         {
                                             boxLabel:'Skilled Manual Employee <span class="q-etc">(i.e. auto mechanic, carpenter, hairdresser)</span>',
-                                            name:q('q3:a1'),
-                                            inputValue:5
+                                            inputValue:3
                                         },
                                         {
                                             boxLabel:'Clerical and Sales Worker or Technician <span class="q-etc">(i.e. retail sales, secretary, receptionist)</span>',
-                                            name:q('q3:a1'),
-                                            inputValue:6
+                                            inputValue:4
                                         },
                                         {
                                             boxLabel:'Administrative Personnel <span class="q-etc">(i.e. administrator, supervisor, librarian)</span>',
-                                            name:q('q3:a1'),
-                                            inputValue:7
+                                            inputValue:5
                                         },
                                         {
                                             boxLabel:'Business Manager or Professional<br/><span class="q-etc">(i.e. nurse, teacher, police/fire personnel, speech therapist, PT, OT, financial manager)</span>',
-                                            name:q('q3:a1'),
-                                            inputValue:8
+                                            inputValue:6
                                         },
                                         {
                                             boxLabel:'Higher Executive or Major Professional <span class="q-etc">(i.e. physician, professor, engineer, CEO)</span>',
-                                            name:q('q3:a1'),
-                                            inputValue:9
+                                            inputValue:7
                                         }
                                     ]
                         }
@@ -206,7 +225,7 @@ var q4=     {
                         },
                         {
                             id:q('q4'),
-                            name:q('q4'),
+                            name:'DAD_LIST',
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
@@ -214,6 +233,7 @@ var q4=     {
                             next:q('q5'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
+                            regex:NRG.Forms.T_String,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
@@ -243,6 +263,7 @@ var q5=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'FUT',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -255,48 +276,39 @@ var q5=     {
                             items:  [
                                         {
                                             boxLabel:'I am retired',
-                                            name:q('q5:a1'),
-                                            inputValue:1
+                                            inputValue:999
                                         },
                                         {
                                             boxLabel:'Homemaker',
-                                            name:q('q5:a1'),
-                                            inputValue:2
+                                            inputValue:998
                                         },
                                         {
                                             boxLabel:'Day Laborer <span class="q-etc">(i.e. janitor, housecleaner, cafeteria employee)</span>',
-                                            name:q('q5:a1'),
-                                            inputValue:3
+                                            inputValue:1
                                         },
                                         {
                                             boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck driver, construction worker)</span>',
-                                            name:q('q5:a1'),
-                                            inputValue:4
+                                            inputValue:2
                                         },
                                         {
                                             boxLabel:'Skilled Manual Employee <span class="q-etc">(i.e. auto mechanic, carpenter, hairdresser)</span>',
-                                            name:q('q5:a1'),
-                                            inputValue:5
+                                            inputValue:3
                                         },
                                         {
                                             boxLabel:'Clerical and Sales Worker or Technician <span class="q-etc">(i.e. retail sales, secretary, receptionist)</span>',
-                                            name:q('q5:a1'),
-                                            inputValue:6
+                                            inputValue:4
                                         },
                                         {
                                             boxLabel:'Administrative Personnel <span class="q-etc">(i.e. administrator, supervisor, librarian)</span>',
-                                            name:q('q5:a1'),
-                                            inputValue:7
+                                            inputValue:5
                                         },
                                         {
                                             boxLabel:'Business Manager or Professional<br/><span class="q-etc">(i.e. nurse, teacher, police/fire personnel, speech therapist, PT, OT, financial manager)</span>',
-                                            name:q('q5:a1'),
-                                            inputValue:8
+                                            inputValue:6
                                         },
                                         {
                                             boxLabel:'Higher Executive or Major Professional <span class="q-etc">(i.e. physician, professor, engineer, CEO)</span>',
-                                            name:q('q5:a1'),
-                                            inputValue:9
+                                            inputValue:7
                                         }
                                     ]
                         }
@@ -316,7 +328,7 @@ var q6=     {
                         },
                         {
                             id:q('q6'),
-                            name:q('q6'),
+                            name:'FUT_LIST',
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
@@ -324,6 +336,7 @@ var q6=     {
                             next:q('q7'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
+                            regex:NRG.Forms.T_String,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
@@ -354,6 +367,7 @@ var q7=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'MOM',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -366,48 +380,39 @@ var q7=     {
                             items:  [
                                         {
                                             boxLabel:'Not Applicable/Unknown',
-                                            name:q('q7:a1'),
-                                            inputValue:1
+                                            inputValue:999
                                         },
                                         {
                                             boxLabel:'Homemaker',
-                                            name:q('q7:a1'),
-                                            inputValue:2
+                                            inputValue:998
                                         },
                                         {
                                             boxLabel:'Day Laborer <span class="q-etc">(i.e. janitor, housecleaner, cafeteria employee)</span>',
-                                            name:q('q7:a1'),
-                                            inputValue:3
+                                            inputValue:1
                                         },
                                         {
                                             boxLabel:'Machine Operator and Manual Worker <span class="q-etc">(i.e. truck driver, construction worker)</span>',
-                                            name:q('q7:a1'),
-                                            inputValue:4
+                                            inputValue:2
                                         },
                                         {
                                             boxLabel:'Skilled Manual Employee <span class="q-etc">(i.e. auto mechanic, carpenter, hairdresser)</span>',
-                                            name:q('q7:a1'),
-                                            inputValue:5
+                                            inputValue:3
                                         },
                                         {
                                             boxLabel:'Clerical and Sales Worker or Technician <span class="q-etc">(i.e. retail sales, secretary, receptionist)</span>',
-                                            name:q('q7:a1'),
-                                            inputValue:6
+                                            inputValue:4
                                         },
                                         {
                                             boxLabel:'Administrative Personnel <span class="q-etc">(i.e. administrator, supervisor, librarian)</span>',
-                                            name:q('q7:a1'),
-                                            inputValue:7
+                                            inputValue:5
                                         },
                                         {
                                             boxLabel:'Business Manager or Professional<br/><span class="q-etc">(i.e. nurse, teacher, police/fire personnel, speech therapist, PT, OT, financial manager)</span>',
-                                            name:q('q7:a1'),
-                                            inputValue:8
+                                            inputValue:6
                                         },
                                         {
                                             boxLabel:'Higher Executive or Major Professional <span class="q-etc">(i.e. physician, professor, engineer, CEO)</span>',
-                                            name:q('q7:a1'),
-                                            inputValue:9
+                                            inputValue:7
                                         }
                                     ]
                         }
@@ -427,13 +432,14 @@ var q8=     {
                         },
                         {
                             id:q('q8'),
-                            name:q('q8'),
+                            name:'MOM_LIST',
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
                             allowBlank:false,
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
+                            regex:NRG.Forms.T_String,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
@@ -482,6 +488,11 @@ var form=   {
                 autoScroll:false,
                 buttonAlign:'left',
                 title:'Occupation',
+                schema:'OCCU/1.0',
+                submitOrder:[
+                                'NOW_1','NOW_2','NOW_3','NOW_4','NOW_LIST',
+                                'FUT','FUT_LIST','DAD','DAD_LIST','MOM','MOM_LIST'
+                            ],
                 keys:   {
                             //Digits [1-9]
                             key:[
@@ -514,3 +525,8 @@ function q(id)
     return qID+':'+id;
 }
 
+function occuNowChanged(checkboxgroup,checkedFields)
+{
+    setSeqHiddenFieldsValues('NOW_',checkboxgroup,checkedFields);
+    checkboxgroupChanged(checkboxgroup,checkedFields);
+}

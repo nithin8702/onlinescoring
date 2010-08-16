@@ -6,7 +6,6 @@ var radioPaddingLeft=25;
 //Subject Sex
 var sSex=        {
                     id:q('q1'),
-                    name:q('q1'),
                     xtype:'radiogroup',
                     fieldLabel:'SEX',
                     labelStyle:'text-shadow: 2px 2px 2px #ccc',
@@ -17,6 +16,7 @@ var sSex=        {
                     ctCls:'q-container',
                     style:'padding-left:0px',
                     defaults:   {
+                                    name:'SEX',
                                     listeners:  {
                                                     focus:onFieldFocus,
                                                     blur:onFocusLost
@@ -30,12 +30,10 @@ var sSex=        {
                     items:  [
                                 {
                                     boxLabel:'Male',
-                                    name:q('q1:a1'),
                                     inputValue:1
                                 },
                                 {
                                     boxLabel:'Female',
-                                    name:q('q1:a1'),
                                     inputValue:2
                                 }
                             ]
@@ -44,7 +42,7 @@ var sSex=        {
 //Subject age
 var sAge=    {
                     id:q('q2'),
-                    name:q('q2'),
+                    name:'AGE',
                     xtype:'numberfield',
                     fieldLabel:'AGE',
                     labelStyle:'text-shadow: 2px 2px 2px #ccc',
@@ -68,7 +66,7 @@ var sAge=    {
 var q3= {
                 xtype:'fieldset',
                 border:false,
-                cls:'q-fieldset q-use-enter q-container',
+                cls:'q-fieldset q-container',
                 style:'padding-top:10px',
                 hideLabel:true,
                 items:[
@@ -78,16 +76,20 @@ var q3= {
                             html:'SELECT THE NUMBER OF THE HIGHEST GRADE YOU HAVE COMPLETED:'
                         },
                         {
-                            xtype:'radiogroup',
-                            id:q('q3'),
+                            xtype:'fieldset',
+                            id:'EDUC',
                             invalidClass:'',
                             allowBlank:false,
-                            style:'padding-top:10px',
+                            style:'padding-top:10px;padding-left:'+radioPaddingLeft+'px',
                             layout:'column',
                             next:q('q4'),
                             hideLabel:true,
                             width:500,
-                            validationHandler:q3Validator,
+                            border:false,
+                            noShortcuts:true,
+                            defaults:   {
+                                            border:false
+                                        },
                             listeners:  {
                                             change:radiogroupChanged,
                                             focus:onFieldFocus,
@@ -100,13 +102,14 @@ var q3= {
                                             items:[
                                                     {
                                                         xtype:'label',
-                                                        text:'Grade School'
+                                                        text:'Grade School',
+                                                        cls:'question-text'
                                                     },
                                                     {
                                                         id:q('q3:1'),
                                                         xtype:'radiogroup',
                                                         invalidClass:'',
-                                                        style:'padding-left:0px',
+                                                        style:'padding-left:0px;background-color:transparent',
                                                         allowBlank:true,
                                                         next:q('q3:2'),
                                                         hideLabel:true,
@@ -116,6 +119,7 @@ var q3= {
                                                         maxValue:8,
                                                         itemCls:'q-container',
                                                         defaults:   {
+                                                                        name:'EDUC',
                                                                         listeners:  {
                                                                                         focus:onFieldFocus,
                                                                                         blur:onFocusLost
@@ -129,42 +133,34 @@ var q3= {
                                                         items:[
                                                                 {
                                                                     boxLabel:'1',
-                                                                    name:q('q3:a1'),
                                                                     inputValue:1
                                                                 },
                                                                 {
                                                                     boxLabel:'2',
-                                                                    name:q('q3:a1'),
                                                                     inputValue:2
                                                                 },
                                                                 {
                                                                     boxLabel:'3',
-                                                                    name:q('q3:a1'),
                                                                     inputValue:3
                                                                 },
                                                                 {
                                                                     boxLabel:'4',
-                                                                    name:q('q3:a1'),
                                                                     inputValue:4
                                                                 },
                                                                 {
                                                                     boxLabel:'5',
-                                                                    name:q('q3:a1'),
                                                                     inputValue:5
                                                                 },
                                                                 {
                                                                     boxLabel:'6',
-                                                                    name:q('q3:a1'),
                                                                     inputValue:6
                                                                 },
                                                                 {
                                                                     boxLabel:'7',
-                                                                    name:q('q3:a1'),
                                                                     inputValue:7
                                                                 },
                                                                 {
                                                                     boxLabel:'8',
-                                                                    name:q('q3:a1'),
                                                                     inputValue:8
                                                                 }
                                                               ]
@@ -178,13 +174,14 @@ var q3= {
                                             items:[
                                                     {
                                                         xtype:'label',
-                                                        text:'High School'
+                                                        text:'High School',
+                                                        cls:'question-text'
                                                     },
                                                     {
                                                         id:q('q3:2'),
                                                         xtype:'radiogroup',
                                                         invalidClass:'',
-                                                        style:'padding-left:0px',
+                                                        style:'padding-left:0px;background-color:transparent',
                                                         allowBlank:true,
                                                         next:q('q3:3'),
                                                         hideLabel:true,
@@ -194,6 +191,7 @@ var q3= {
                                                         ignoreValidState:true,
                                                         itemCls:'q-container',
                                                         defaults:   {
+                                                                        name:'EDUC',
                                                                         listeners:  {
                                                                                         focus:onFieldFocus,
                                                                                         blur:onFocusLost
@@ -207,23 +205,19 @@ var q3= {
                                                         items:[
                                                                 {
                                                                     boxLabel:'9',
-                                                                    name:q('q3:a2'),
-                                                                    inputValue:1
+                                                                    inputValue:9
                                                                 },
                                                                 {
                                                                     boxLabel:'10',
-                                                                    name:q('q3:a2'),
-                                                                    inputValue:2
+                                                                    inputValue:10
                                                                 },
                                                                 {
                                                                     boxLabel:'11',
-                                                                    name:q('q3:a2'),
-                                                                    inputValue:3
+                                                                    inputValue:11
                                                                 },
                                                                 {
                                                                     boxLabel:'12 or GED',
-                                                                    name:q('q3:a2'),
-                                                                    inputValue:4
+                                                                    inputValue:12
                                                                 }
                                                               ]
                                                     }
@@ -235,7 +229,8 @@ var q3= {
                                             items:[
                                                     {
                                                         xtype:'label',
-                                                        text:'College'
+                                                        text:'College',
+                                                        cls:'question-text'
                                                     },
                                                     {
                                                         id:q('q3:3'),
@@ -243,7 +238,7 @@ var q3= {
                                                         invalidClass:'',
                                                         allowBlank:true,
                                                         next:q('q3:4'),
-                                                        style:'padding-left:0px',
+                                                        style:'padding-left:0px;background-color:transparent',
                                                         hideLabel:true,
                                                         columns:1,
                                                         minValue:1,
@@ -251,6 +246,7 @@ var q3= {
                                                         ignoreValidState:true,
                                                         itemCls:'q-container',
                                                         defaults:   {
+                                                                        name:'EDUC',
                                                                         listeners:  {
                                                                                         focus:onFieldFocus,
                                                                                         blur:onFocusLost
@@ -264,23 +260,19 @@ var q3= {
                                                         items:[
                                                                 {
                                                                     boxLabel:'13',
-                                                                    name:q('q3:a3'),
-                                                                    inputValue:1
+                                                                    inputValue:13
                                                                 },
                                                                 {
                                                                     boxLabel:'14',
-                                                                    name:q('q3:a3'),
-                                                                    inputValue:2
+                                                                    inputValue:14
                                                                 },
                                                                 {
                                                                     boxLabel:'15',
-                                                                    name:q('q3:a3'),
-                                                                    inputValue:3
+                                                                    inputValue:15
                                                                 },
                                                                 {
                                                                     boxLabel:'16',
-                                                                    name:q('q3:a3'),
-                                                                    inputValue:4
+                                                                    inputValue:16
                                                                 }
                                                               ]
                                                     }
@@ -292,7 +284,8 @@ var q3= {
                                             items:[
                                                     {
                                                         xtype:'label',
-                                                        text:'Graduate School'
+                                                        text:'Graduate School',
+                                                        cls:'question-text'
                                                     },
                                                     {
                                                         id:q('q3:4'),
@@ -307,8 +300,9 @@ var q3= {
                                                         ignoreValidState:true,
                                                         validationHandler:q3Validator,
                                                         itemCls:'q-container',
-                                                        style:'padding-left:0px',
+                                                        style:'padding-left:0px;background-color:transparent',
                                                         defaults:   {
+                                                                        name:'EDUC',
                                                                         listeners:  {
                                                                                         focus:onFieldFocus,
                                                                                         blur:onFocusLost
@@ -322,35 +316,24 @@ var q3= {
                                                         items:[
                                                                 {
                                                                     boxLabel:'17',
-                                                                    name:q('q3:a4'),
-                                                                    inputValue:1
+                                                                    inputValue:17
                                                                 },
                                                                 {
                                                                     boxLabel:'18',
-                                                                    name:q('q3:a4'),
-                                                                    inputValue:2
+                                                                    inputValue:18
                                                                 },
                                                                 {
                                                                     boxLabel:'19',
-                                                                    name:q('q3:a4'),
-                                                                    inputValue:3
+                                                                    inputValue:19
                                                                 },
                                                                 {
                                                                     boxLabel:'20',
-                                                                    name:q('q3:a4'),
-                                                                    inputValue:4
+                                                                    inputValue:20
                                                                 }
                                                               ]
                                                     }
                                                   ]
-                                        },
-                                        {
-                                            xtype:'checkbox',
-                                            id:'q3-hidden-value',
-                                            name:'q3-hidden-value',
-                                            hidden:true,
-                                            inputValue:1
-                                        },
+                                        }
                                     ]
                         }
                       ]
@@ -368,7 +351,6 @@ var q4= {
                         },
                         {
                             id:q('q4'),
-                            name:q('q4'),
                             xtype:'radiogroup',
                             invalidClass:'',
                             width:400,
@@ -378,6 +360,7 @@ var q4= {
                             hideLabel:true,
                             columns:1,
                             defaults:   {
+                                            name:'ETHNIC',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -391,12 +374,10 @@ var q4= {
                             items:  [
                                         {
                                             boxLabel:'Not Hispanic or Latino',
-                                            name:q('q4:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Hispanic or Latino',
-                                            name:q('q4:a1'),
                                             inputValue:2
                                         }
                                     ]
@@ -416,14 +397,14 @@ var q5= {
                         },
                         {
                             id:q('q5'),
-                            name:q('q5'),
-                            xtype:'radiogroup',
+                            xtype:'checkboxgroup',
                             invalidClass:'',
                             allowBlank:false,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q6'),
                             columns:1,
                             hideLabel:true,
+                            saneCheckboxCount:4,
                             defaults:   {
                                             listeners:  {
                                                             focus:onFieldFocus,
@@ -431,35 +412,64 @@ var q5= {
                                                         }
                                         },
                             listeners:  {
-                                            change:radiogroupChanged,
+                                            change:raceCheckboxChanged,
                                             focus:onFieldFocus,
                                             specialkey:onEnter
                                         },
                             items:  [
                                         {
                                             boxLabel:'American Indian/Alaskan Native',
-                                            name:q('q5:a1'),
-                                            inputValue:1
+                                            inputValue:1,
+                                            ranking:2,
+                                            submitValue:false
                                         },
                                         {
                                             boxLabel:'Asian',
-                                            name:q('q5:a1'),
-                                            inputValue:2
+                                            inputValue:2,
+                                            ranking:4,
+                                            submitValue:false
                                         },
                                         {
                                             boxLabel:'Native Hawaiian or Other Pacific Islander',
-                                            name:q('q5:a1'),
-                                            inputValue:3
+                                            inputValue:3,
+                                            ranking:1,
+                                            submitValue:false
                                         },
                                         {
                                             boxLabel:'Black or African American',
-                                            name:q('q5:a1'),
-                                            inputValue:4
+                                            inputValue:4,
+                                            ranking:3,
+                                            submitValue:false
                                         },
                                         {
                                             boxLabel:'White',
-                                            name:q('q5:a1'),
-                                            inputValue:5
+                                            inputValue:5,
+                                            ranking:5,
+                                            submitValue:false
+                                        },
+                                        {
+                                            id:'RACE_1',
+                                            name:'RACE_1',
+                                            xtype:'hidden',
+                                            value:NRG.Forms.NoResponse
+                                        },
+                                        {
+                                            id:'RACE_2',
+                                            name:'RACE_2',
+                                            xtype:'hidden',
+                                            value:NRG.Forms.NoResponse
+                                        },
+                                        {
+                                            id:'RACE_3',
+                                            name:'RACE_3',
+                                            xtype:'hidden',
+                                            value:NRG.Forms.NoResponse
+                                        },
+                                        {
+                                            id:'RACE_4',
+                                            name:'RACE_4',
+                                            xtype:'hidden',
+                                            value:NRG.Forms.NoResponse
                                         }
                                     ]
                         }
@@ -478,7 +488,6 @@ var q6= {
                         },
                         {
                             id:q('q6'),
-                            name:q('q6'),
                             xtype:'radiogroup',
                             invalidClass:'',
                             allowBlank:false,
@@ -487,6 +496,7 @@ var q6= {
                             next:q('q7'),
                             hideLabel:true,
                             defaults:   {
+                                            name:'HAND',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -500,28 +510,28 @@ var q6= {
                             items:  [
                                         {
                                             boxLabel:'Strongly Left',
-                                            name:q('q6:a1'),
-                                            inputValue:1
+                                            inputValue:-2,
+                                            shortcutKey:1
                                         },
                                         {
                                             boxLabel:'Left',
-                                            name:q('q6:a1'),
-                                            inputValue:2
+                                            inputValue:-1,
+                                            shortcutKey:2
                                         },
                                         {
                                             boxLabel:'No Preference (Ambidextrous)',
-                                            name:q('q6:a1'),
-                                            inputValue:3
+                                            inputValue:0,
+                                            shortcutKey:3
                                         },
                                         {
                                             boxLabel:'Right',
-                                            name:q('q6:a1'),
-                                            inputValue:4
+                                            inputValue:1,
+                                            shortcutKey:4
                                         },
                                         {
                                             boxLabel:'Strongly Right',
-                                            name:q('q6:a1'),
-                                            inputValue:5
+                                            inputValue:2,
+                                            shortcutKey:5
                                         }
                                     ]
                         }
@@ -540,7 +550,6 @@ var q7= {
                         },
                         {
                             id:q('q7'),
-                            name:q('q7'),
                             xtype:'radiogroup',
                             invalidClass:'',
                             allowBlank:false,
@@ -549,6 +558,7 @@ var q7= {
                             hideLabel:true,
                             columns:1,
                             defaults:   {
+                                            name:'WRITE',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -562,28 +572,23 @@ var q7= {
                             items:  [
                                         {
                                             boxLabel:'Always Left',
-                                            name:q('q7:a1'),
-                                            inputValue:1
+                                            inputValue:-2
                                         },
                                         {
                                             boxLabel:'Usually Left',
-                                            name:q('q7:a1'),
-                                            inputValue:2
+                                            inputValue:-1
                                         },
                                         {
                                             boxLabel:'No Preference (Ambidextrous)',
-                                            name:q('q7:a1'),
-                                            inputValue:3
+                                            inputValue:0
                                         },
                                         {
                                             boxLabel:'Usually Right',
-                                            name:q('q7:a1'),
-                                            inputValue:4
+                                            inputValue:1
                                         },
                                         {
                                             boxLabel:'Always Right',
-                                            name:q('q7:a1'),
-                                            inputValue:5
+                                            inputValue:2
                                         }
                                     ]
                         }
@@ -603,7 +608,6 @@ var q8= {
                         },
                         {
                             id:q('q8'),
-                            name:q('q8'),
                             xtype:'radiogroup',
                             invalidClass:'',
                             allowBlank:false,
@@ -611,6 +615,7 @@ var q8= {
                             hideLabel:true,
                             columns:1,
                             defaults:   {
+                                            name:'THROW',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -624,48 +629,28 @@ var q8= {
                             items:  [
                                         {
                                             boxLabel:'Always Left',
-                                            name:q('q8:a1'),
-                                            inputValue:1
+                                            inputValue:-2
                                         },
                                         {
                                             boxLabel:'Usually Left',
-                                            name:q('q8:a1'),
-                                            inputValue:2
+                                            inputValue:-1
                                         },
                                         {
                                             boxLabel:'No Preference (Ambidextrous)',
-                                            name:q('q8:a1'),
-                                            inputValue:3
+                                            inputValue:0
                                         },
                                         {
                                             boxLabel:'Usually Right',
-                                            name:q('q8:a1'),
-                                            inputValue:4
+                                            inputValue:1
                                         },
                                         {
                                             boxLabel:'Always Right',
-                                            name:q('q8:a1'),
-                                            inputValue:5
+                                            inputValue:2
                                         }
                                     ]
                         }
                       ]
           };
-
-//var footer={
-//                xtype:'panel',
-//                height:100,
-//                tbar:{
-//                        xtype:'toolbar',
-//                        buttons:[
-//                                    {
-//                                        xtype:'button',
-//                                        text:'Next'
-//                                    }
-//                                ]
-//                     },
-//                items:  [{html:'&nbsp;'}],
-//            };
 
 var btnNext={
                 xtype:'fieldset',
@@ -683,6 +668,7 @@ var btnNext={
               };
 var form=   {
                 id:qID,
+                schema:'EH/1.0',
                 xtype:'form',
                 border:false,
                 title:'Ethnicity/Handedness',
@@ -732,20 +718,6 @@ function q3groupChanged(radiogroup, checked)
 
     var fID=radiogroup.findParentByType('form').getId();
 
-    //Clear all other radio groups in q3 except this one
-    for (var i=1;i<=4;++i)
-    {
-        var rgID=fID+':q3:'+i;
-        //Skip this radiogroup
-        if (rgID==radiogroup.getId())
-            continue;
-
-        var rg=Ext.getCmp(rgID);
-
-        if (rg.getValue())
-            rg.setValue(0);
-    }
-
     var qContainer=getQContainer(checked);
     if (qContainer)
     {
@@ -753,13 +725,13 @@ function q3groupChanged(radiogroup, checked)
         setQActive(qContainer,false);
     }
     
-    var q3hidden=Ext.getCmp('q3-hidden-value');
-    
-    q3hidden.setRawValue(checked.inputValue);
-    q3hidden.setValue(false);
-    q3hidden.setValue(true);
-
-    var q3=Ext.getCmp(fID+':q3');
+//    var q3hidden=Ext.getCmp('EDUC');
+//
+//    q3hidden.setRawValue(checked.inputValue);
+//    q3hidden.setValue(false);
+//    q3hidden.setValue(true);
+//
+    var q3=Ext.getCmp('EDUC');
     nextField(q3);
 }
 
@@ -771,7 +743,7 @@ function onq3Enter(field,e)
     var fID=field.findParentByType('form').getId();
 
     //User must select a radio button before leaving q3
-    var q3=Ext.getCmp(fID+':q3');
+    var q3=Ext.getCmp('');
 
     if (!q3.isValid())
         return;
@@ -782,12 +754,22 @@ function onq3Enter(field,e)
 
 function q3Validator(q3subgroup)
 {
-    var q3=Ext.getCmp('q3-hidden-value');
-    if (!q3)
-        return false;
+    var i=1;
+    var group=Ext.getCmp('qn4:q3:'+i);
+    
+    while (group)
+    {
+        if (group.isValid())
+            return true;
+        ++i;
+        group=Ext.getCmp('qn4:q3:'+i);
+    }
 
-    if (!q3.getValue())
-        return false;
+    return false;
+}
 
-    return true;
+function raceCheckboxChanged(checkboxgroup,checkedItems)
+{
+    setSeqHiddenFieldsValues('RACE_',checkboxgroup,checkedItems);
+    checkboxgroupChanged(checkboxgroup, checkedItems);
 }

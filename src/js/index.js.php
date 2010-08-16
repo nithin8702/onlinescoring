@@ -170,17 +170,20 @@ var portalUsers=     {
                         items:[{html:'Under construction'}]
                     };
 
-//var portalScoring=    {
-//                        xtype:'portal',
-//                        title:'Online Scoring',
-//                        layout:'fit',
-//                        tabTip:'Online Scoring',
-//                        items:  [
-//                                    {
-//                                        html:''
-//                                    }
-//                                ]
-//                    };
+var gridDiff=       {
+                        xtype:'editorgrid',
+                    };
+
+var portalScoring=    {
+                        xtype:'portal',
+                        title:'Diff View',
+                        layout:'fit',
+                        tabTip:'Diff View',
+                        iconCls:'x-icon-grid',
+                        items:  [
+                                    gridDiff
+                                ]
+                    };
 
 var groupDashboard= {
                         xtype:'grouptabpanel',
@@ -189,8 +192,8 @@ var groupDashboard= {
                         items:  [{
                                     mainItem:0,
                                     items:[
-//                                            portalScoring,
                                             portalForms,
+                                            portalScoring,
                                             portalUsers]
                                 }]
                     };
@@ -370,6 +373,11 @@ function resetForms()
     for (var i=0;i<forms.items.items.length;++i)
     {
         var formCmp=forms.items.items[i];
+
+        //Call a custom reset handler if necessary
+        if (formCmp.resetHandler)
+            formCmp.resetHandler(formCmp);
+
         formCmp.saved=false;
         formCmp.focusedEl=null;
 

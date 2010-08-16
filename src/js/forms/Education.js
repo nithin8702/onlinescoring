@@ -23,6 +23,7 @@ var q1=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'NOW',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -35,37 +36,30 @@ var q1=     {
                             items:  [
                                         {
                                             boxLabel:'Less than seven years of school',
-                                            name:q('q1:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Seven to nine years of school <span class="q-etc">(Junior high/Middle School)</span>',
-                                            name:q('q1:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'Ten to 11 years of school <span class="q-etc">(part high school)</span>',
-                                            name:q('q1:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'High school graduate',
-                                            name:q('q1:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'One to three years college <span class="q-etc">(also business schools)</span>',
-                                            name:q('q1:a1'),
                                             inputValue:5
                                         },
                                         {
                                             boxLabel:'Four-year college graduate <span class="q-etc">(BA, BS, BM)</span>',
-                                            name:q('q1:a1'),
                                             inputValue:6
                                         },
                                         {
                                             boxLabel:'Professional Degree <span class="q-etc">(MA, MS, ME, MD, PhD, LLD)</span>',
-                                            name:q('q1:a1'),
                                             inputValue:7
                                         }
                                     ]
@@ -93,6 +87,7 @@ var q2=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'DAD',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -105,43 +100,35 @@ var q2=     {
                             items:  [
                                         {
                                             boxLabel:'Not Applicable/Unknown',
-                                            name:q('q2:a1'),
-                                            inputValue:1
+                                            inputValue:999
                                         },
                                         {
                                             boxLabel:'Less than seven years of school',
-                                            name:q('q2:a1'),
-                                            inputValue:2
+                                            inputValue:1
                                         },
                                         {
                                             boxLabel:'Seven to nine years of school <span class="q-etc">(Junior high/Middle School)</span>',
-                                            name:q('q2:a1'),
-                                            inputValue:3
+                                            inputValue:2
                                         },
                                         {
                                             boxLabel:'Ten to 11 years of school <span class="q-etc">(part high school)</span>',
-                                            name:q('q2:a1'),
-                                            inputValue:4
+                                            inputValue:3
                                         },
                                         {
                                             boxLabel:'High school graduate',
-                                            name:q('q2:a1'),
-                                            inputValue:5
+                                            inputValue:4
                                         },
                                         {
                                             boxLabel:'One to three years college <span class="q-etc">(also business schools)</span>',
-                                            name:q('q2:a1'),
-                                            inputValue:6
+                                            inputValue:5
                                         },
                                         {
                                             boxLabel:'Four-year college graduate <span class="q-etc">(BA, BS, BM)</span>',
-                                            name:q('q2:a1'),
-                                            inputValue:7
+                                            inputValue:6
                                         },
                                         {
                                             boxLabel:'Professional Degree <span class="q-etc">(MA, MS, ME, MD, PhD, LLD)</span>',
-                                            name:q('q2:a1'),
-                                            inputValue:8
+                                            inputValue:7
                                         }
                                     ]
                           }
@@ -168,6 +155,7 @@ var q3=     {
                             invalidClass:'',
                             allowBlank:false,
                              defaults:   {
+                                            name:'FUT',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -180,37 +168,30 @@ var q3=     {
                             items:  [
                                         {
                                             boxLabel:'Less than seven years of school',
-                                            name:q('q3:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Seven to nine years of school <span class="q-etc">(Junior high/Middle School)</span>',
-                                            name:q('q3:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'Ten to 11 years of school <span class="q-etc">(part high school)</span>',
-                                            name:q('q3:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'High school graduate',
-                                            name:q('q3:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'One to three years college <span class="q-etc">(also business schools)</span>',
-                                            name:q('q3:a1'),
                                             inputValue:5
                                         },
                                         {
                                             boxLabel:'Four-year college graduate <span class="q-etc">(BA, BS, BM)</span>',
-                                            name:q('q3:a1'),
                                             inputValue:6
                                         },
                                         {
                                             boxLabel:'Professional Degree <span class="q-etc">(MA, MS, ME, MD, PhD, LLD)</span>',
-                                            name:q('q3:a1'),
                                             inputValue:7
                                         }
                                     ]
@@ -237,6 +218,7 @@ var q4=     {
                             invalidClass:'',
                             allowBlank:false,
                             defaults:   {
+                                            name:'MOM',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -249,43 +231,35 @@ var q4=     {
                             items:  [
                                         {
                                             boxLabel:'Not Applicable/Unknown',
-                                            name:q('q4:a1'),
-                                            inputValue:1
+                                            inputValue:999
                                         },
                                         {
                                             boxLabel:'Less than seven years of school',
-                                            name:q('q4:a1'),
-                                            inputValue:2
+                                            inputValue:1
                                         },
                                         {
                                             boxLabel:'Seven to nine years of school <span class="q-etc">(Junior high/Middle School)</span>',
-                                            name:q('q4:a1'),
-                                            inputValue:3
+                                            inputValue:2
                                         },
                                         {
                                             boxLabel:'Ten to 11 years of school <span class="q-etc">(part high school)</span>',
-                                            name:q('q4:a1'),
-                                            inputValue:4
+                                            inputValue:3
                                         },
                                         {
                                             boxLabel:'High school graduate',
-                                            name:q('q4:a1'),
-                                            inputValue:5
+                                            inputValue:4
                                         },
                                         {
                                             boxLabel:'One to three years college <span class="q-etc">(also business schools)</span>',
-                                            name:q('q4:a1'),
-                                            inputValue:6
+                                            inputValue:5
                                         },
                                         {
                                             boxLabel:'Four-year college graduate <span class="q-etc">(BA, BS, BM)</span>',
-                                            name:q('q4:a1'),
-                                            inputValue:7
+                                            inputValue:6
                                         },
                                         {
                                             boxLabel:'Professional Degree <span class="q-etc">(MA, MS, ME, MD, PhD, LLD)</span>',
-                                            name:q('q4:a1'),
-                                            inputValue:8
+                                            inputValue:7
                                         }
                                     ]
                           }
@@ -331,6 +305,8 @@ var form=   {
                 autoScroll:false,
                 buttonAlign:'left',
                 title:'Education',
+                schema:'EDU/1.0',
+                submitOrder:['NOW','FUT','DAD','MOM'],
                 keys:   {
                             //Digits [1-9]
                             key:[

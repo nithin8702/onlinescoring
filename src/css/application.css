@@ -16,6 +16,11 @@
     background-image: url('../images/icons/subject.png');
 }
 
+.x-icon-grid
+{
+    background-image: url('../images/icons/grid.png');
+}
+
 .question-text
 {
     font-family: tahoma, arial, helvetica, sans-serif;
@@ -116,6 +121,11 @@ div.x-form-item .x-form-item-label
 .leftpaddinghack
 {
     margin-left:55px;
+}
+
+.toppaddinghack
+{
+    margin-top:10px
 }
 
 .transparent

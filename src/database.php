@@ -226,11 +226,11 @@ class Database
         return $result;
     }
 
-    public function storeForm($qid,$sessionid,$data)
+    public function storeForm($schemaName,$sessionid,$data)
     {
         $result=false;
 
-        if (empty($qid))
+        if (empty($schemaName))
             throw new Exception("Questionnaire ID cannot be empty.");
         if (empty($sessionid))
             throw new Exception("Session ID cannot be empty.");
@@ -239,11 +239,11 @@ class Database
         if (empty($data))
             throw new Exception("Form data cannot be empty.");
 
-        $qid=$this->_server->real_escape_string($qid);
+        $schemaName=$this->_server->real_escape_string($schemaName);
         $sessionid=$this->_server->real_escape_string($sessionid); //paranoia
         $data=$this->_server->real_escape_string($data);
 
-        $query="INSERT INTO Forms(qid,fkSessionID,data,dateTimeAdded) VALUES('$qid',$sessionid,'$data',NOW());";
+        $query="INSERT INTO Forms(schemaName,fkSessionID,data,dateTimeAdded) VALUES('$schemaName',$sessionid,'$data',NOW());";
 
         try
         {
@@ -259,7 +259,7 @@ class Database
         }
         catch (Exception $e)
         {
-            throw new Exception("Failed to store form '$qid' data for session id $sessionid : ".$e->getMessage());
+            throw new Exception("Failed to store form '$schemaName' data for session id $sessionid : ".$e->getMessage());
         }
 
         return $result;

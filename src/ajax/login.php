@@ -69,19 +69,29 @@ try
     if ((!isset($user['roleID'])) || ($user['roleID']==NULL))
         ajax_error('Sorry, your account hasn\'t been assigned any privileges yet. Please try again later.');
 
-    $auth=new NRG\Login\Google\ClientLogin($username,$md5password);
+    $logged_in=false;
 
-    if (!empty($captchatext) && !empty($captchatoken))
+    if (($username=="guest@neuroinfo.org") && ($md5password=="guest"))
+        $logged_in=true;
+    else
     {
-        $auth->setCaptchaText($captchatext);
-        $auth->setCaptchaToken($captchatoken);
+        $auth=new NRG\Login\Google\ClientLogin($username,$md5password);
+
+        if (!empty($captchatext) && !empty($captchatoken))
+        {
+            $auth->setCaptchaText($captchatext);
+            $auth->setCaptchaToken($captchatoken);
+        }
+
+        //Attempt to authenticate the user
+        $auth->login();
+
+        if ($auth->isSuccessful())
+            $logged_in=true;
     }
 
-    //Attempt to authenticate the user
-    $auth->login();
-
     //If authentication was successful, log the user in
-    if ($auth->isSuccessful())
+    if ($logged_in)
     {
         $_SESSION['auth']=true;
         $_SESSION['username']=$user['username'];

@@ -24,6 +24,7 @@ var q1=     {
                             enableQ:[q('q2'),q('q3')],
                             allowBlank:false,
                             defaults:   {
+                                            name:'ALC_FREQ',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -36,29 +37,24 @@ var q1=     {
                             items:  [
                                         {
                                             boxLabel:'Never',
-                                            name:q('q1:a1'),
                                             inputValue:1,
                                             next:q('q4'),
                                             disableQ:[q('q2'),q('q3')]
                                         },
                                         {
                                             boxLabel:'Monthly or less',
-                                            name:q('q1:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'2-4 times a month',
-                                            name:q('q1:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'2-3 times a week',
-                                            name:q('q1:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'4 or more times a week',
-                                            name:q('q1:a1'),
                                             inputValue:5
                                         }
                                     ]
@@ -87,6 +83,7 @@ var q2=     {
                             allowBlank:false,
                             invalidClass:'',
                             defaults:   {
+                                            name:'ALC_AMOUNT',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -99,27 +96,22 @@ var q2=     {
                             items:  [
                                         {
                                             boxLabel:'1 or 2',
-                                            name:q('q2:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'3 or 4',
-                                            name:q('q2:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'5 or 6',
-                                            name:q('q2:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'7,8 or 9',
-                                            name:q('q2:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'10 or more',
-                                            name:q('q2:a1'),
                                             inputValue:5
                                         }
                                     ]
@@ -148,6 +140,7 @@ var q3=     {
                             disabled:true,
                             invalidClass:'',
                             defaults:   {
+                                            name:'ALC_REC_BINGE',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -160,12 +153,10 @@ var q3=     {
                             items:  [
                                         {
                                             boxLabel:'No',
-                                            name:q('q3:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Yes',
-                                            name:q('q3:a1'),
                                             inputValue:2
                                         }
                                     ]
@@ -194,6 +185,7 @@ var q4=     {
                             enableQ:[q('q5')],
                             invalidClass:'',
                             defaults:   {
+                                            name:'CIG_FREQ',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -206,29 +198,24 @@ var q4=     {
                             items:  [
                                         {
                                             boxLabel:'None',
-                                            name:q('q4:a1'),
                                             inputValue:1,
                                             next:q('q6'),
                                             disableQ:[q('q5')]
                                         },
                                         {
                                             boxLabel:'Less than 2 cigarettes',
-                                            name:q('q4:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'About 1/2 pack',
-                                            name:q('q4:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'About 1 pack',
-                                            name:q('q4:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'More than 1 pack',
-                                            name:q('q4:a1'),
                                             inputValue:5
                                         }
                                     ]
@@ -257,6 +244,7 @@ var q5=     {
                             next:q('q6'),
                             disabled:true,
                             defaults:   {
+                                            name:'CIG_RECENT',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -269,27 +257,22 @@ var q5=     {
                             items:  [
                                         {
                                             boxLabel:'1-15 min ago',
-                                            name:q('q5:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Last 2 hours',
-                                            name:q('q5:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'3-7 hours ago',
-                                            name:q('q5:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'12-48 hours ago',
-                                            name:q('q5:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'48 hours or more',
-                                            name:q('q5:a1'),
                                             inputValue:5
                                         }
                                     ]
@@ -316,6 +299,7 @@ var q6=     {
                             invalidClass:'',
                             style:'padding-left:'+radioPaddingLeft+'px',
                             defaults:   {
+                                            name:'CAFF_FREQ',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -329,31 +313,26 @@ var q6=     {
                             items:  [
                                         {
                                             boxLabel:'None',
-                                            name:q('q6:a1'),
                                             inputValue:1,
                                             disableQ:[q('q7')]
                                         },
                                         {
                                             boxLabel:'1 cup (12 oz soda, 6oz coffee, 6oz tea)',
-                                            name:q('q6:a1'),
                                             next:q('q7'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'2-3 cups',
-                                            name:q('q6:a1'),
                                             next:q('q7'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'4-5 cups',
-                                            name:q('q6:a1'),
                                             next:q('q7'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'6 or more cups',
-                                            name:q('q6:a1'),
                                             next:q('q7'),
                                             inputValue:5
                                         }
@@ -382,6 +361,7 @@ var q7=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             disabled:true,
                             defaults:   {
+                                            name:'CAFF_RECENT',
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -394,27 +374,22 @@ var q7=     {
                             items:  [
                                         {
                                             boxLabel:'1-15 min ago',
-                                            name:q('q7:a1'),
                                             inputValue:1
                                         },
                                         {
                                             boxLabel:'Last 2 hours',
-                                            name:q('q7:a1'),
                                             inputValue:2
                                         },
                                         {
                                             boxLabel:'3-7 hours ago',
-                                            name:q('q7:a1'),
                                             inputValue:3
                                         },
                                         {
                                             boxLabel:'12-48 hours ago',
-                                            name:q('q7:a1'),
                                             inputValue:4
                                         },
                                         {
                                             boxLabel:'48 hours or more',
-                                            name:q('q7:a1'),
                                             inputValue:5
                                         }
                                     ]
@@ -445,6 +420,12 @@ var form=   {
                 buttonAlign:'left',
                 lastForm:true,
                 title:'Alcohol/Tobacco/Caffeine',
+                schema:'ATC/1.0',
+                submitOrder: [
+                                'ALC_FREQ', 'ALC_AMOUNT', 'ALC_REC_BINGE',
+                                'CIG_FREQ', 'CIG_RECENT',
+                                'CAFF_FREQ', 'CAFF_RECENT'
+                             ],
                 keys:   {
                             //Digits [1-5]
                             key:[
