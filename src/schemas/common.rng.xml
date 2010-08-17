@@ -96,15 +96,26 @@
     <!-- RadioGroup: 7 Choices / 998 / 997 / Cancel -->
     <define name="T_7_ChoicesAnd998_997">
         <choice>
+            <value type="positiveInteger">997</value>
+            <value type="positiveInteger">998</value>
             <data type="positiveInteger">
                 <param name="maxInclusive">7</param>
             </data>
-            <value type="positiveInteger">997</value>
-            <value type="positiveInteger">998</value>
             <ref name="NoAnswer"/>
         </choice>
     </define>
 
+    <!-- RadioGroup: 7 Choices / 999 / 998 / Cancel -->
+    <define name="T_7_ChoicesAnd999_998">
+        <choice>
+            <value type="positiveInteger">998</value>
+            <value type="positiveInteger">999</value>
+            <data type="positiveInteger">
+                <param name="maxInclusive">7</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
 
     <!-- RadioGroup: 8 Choices / Cancel -->
     <define name="T_8_Choices">
@@ -129,7 +140,7 @@
     <define name="T_String">
         <choice>
             <data type="string">
-                <param name="pattern">\w[\w\- ,\.();/]*</param>
+                <param name="pattern">[\w\-\+@\?% ,\.();/]+</param>
                 <param name="whiteSpace">collapse</param>
                 <param name="maxLength">100</param>
             </data>
@@ -140,7 +151,7 @@
     <define name="T_StringWithQuotes">
         <choice>
             <data type="string">
-                <param name="pattern">\w[\w\- ,\.();/']*</param>
+                <param name="pattern">[\w\-\+@\?% ,\.();/']+</param>
                 <param name="whiteSpace">collapse</param>
                 <param name="maxLength">100</param>
             </data>

@@ -154,7 +154,7 @@ var birthState=     {
                         id:q('q5:a2'),
                         xtype:'combo',
                         width:125,
-                        allowBlank:false,
+                        allowBlank:true,
                         selectOnFocus:true,
                         next:q('q5:a3'),
                         editable:true,
@@ -834,24 +834,6 @@ function q(id)
 function onCountryChanged(field, newval, oldval)
 {
     Ext.getCmp('COUNTRY').setRawValue(newval);
-    Ext.getCmp('STATE').setRawValue(NRG.Forms.NoResponse);
-
-    console.log('Country:'+newval);
-
-    if (newval!="US")
-    {
-        var state=Ext.getCmp('qn2:q5:a2');
-
-        state.reset();
-        state.disable();
-        field.next='qn2:q5:a3';
-    }
-    else
-    {
-        Ext.getCmp('qn2:q5:a2').enable();
-        field.next='qn2:q5:a2';
-        nextField(field,field.next);
-    }
 }
 
 function onStateChanged(field, newval, oldval)
@@ -931,11 +913,9 @@ function occuCheckboxChanged(checkboxgroup,checkedItems)
 
 function resetState(form)
 {
-    console.log('+ resetState(): ID='+form.getId());
     var stateField=Ext.getCmp(form.getId()+':q5:a2');
     if (!stateField)
         return;
 
     stateField.setValue('');
-    stateField.enable();
 }

@@ -80,7 +80,7 @@ var q3= {
                             id:'EDUC',
                             invalidClass:'',
                             allowBlank:false,
-                            style:'padding-top:10px;padding-left:'+radioPaddingLeft+'px',
+                            style:'padding-top:10px;padding-left:'+radioPaddingLeft+'px;background-color:transparent',
                             layout:'column',
                             next:q('q4'),
                             hideLabel:true,
@@ -99,6 +99,7 @@ var q3= {
                                         //First column
                                         {
                                             columnWidth:.25,
+                                            bodyStyle:'background-color:transparent',
                                             items:[
                                                     {
                                                         xtype:'label',
@@ -171,6 +172,7 @@ var q3= {
                                         //Second column
                                         {
                                             columnWidth:.25,
+                                            bodyStyle:'background-color:transparent',
                                             items:[
                                                     {
                                                         xtype:'label',
@@ -226,6 +228,7 @@ var q3= {
                                         //Third column
                                         {
                                             columnWidth:.25,
+                                            bodyStyle:'background-color:transparent',
                                             items:[
                                                     {
                                                         xtype:'label',
@@ -281,6 +284,7 @@ var q3= {
                                         //Forth column
                                         {
                                             columnWidth:.25,
+                                            bodyStyle:'background-color:transparent',
                                             items:[
                                                     {
                                                         xtype:'label',

@@ -2,8 +2,8 @@ Ext.namespace('NRG.Forms');
 
 NRG.Forms.NoResponse=9999;
 //The regex below allow empty strings
-NRG.Forms.T_String=/^[\w\- ,\.();/]*$/;
-NRG.Forms.T_StringWithQuotes=/^[\w\- ,\.();/']*$/;
+NRG.Forms.T_String=/^[\w\-\+@\?&% ,\.();/]*$/;
+NRG.Forms.T_StringWithQuotes=/^[\w\-\+@\?&% ,\.();/']*$/;
 
 window.onkeypress=function(key)
 {
@@ -14,21 +14,34 @@ window.onkeypress=function(key)
        //Don't do anything funky if Shift+Tab was pressed.
         if (key.shiftKey)
         {
-            console.log('Focus is at: ', currentForm.focusedEl);
-            //currentForm.focusedEl.up('div').highlight();
+//            console.log('Focus is at: ', currentForm.focusedEl);
             return;
         }
 
         key.preventDefault();
         key.stopPropagation();
-        console.log('+ TAB ',key,key.cancelable);
+        //console.log('+ TAB ',key,key.cancelable);
         if (currentForm.focusedEl)
         {
-            console.log('Focus is at: ', currentForm.focusedEl.id);
+//            console.log('Focus is at: ', currentForm.focusedEl.id);
             nextField(currentForm.focusedEl);
         }
-        else
-            console.log('  TAB: No element has focus.');
+//        else
+//            console.log('  TAB: No element has focus.');
+    }
+    else
+    {
+        //console.log('Direct KEY=',key.keyCode,key,key.shiftKey,key.altKey,key.ctrlKey);
+        switch (key.charCode)
+        {
+            //Ctrl+Shift+Plus
+            case 43: if (key.ctrlKey && key.shiftKey)
+                        nextForm();
+                     break;
+            case 45: if (key.ctrlKey && key.shiftKey)
+                        previousForm();
+                     break;
+        }
     }
 }
 
@@ -156,8 +169,8 @@ function onEnter(field,e)
  */
 function nextField(field, where)
 {
-    console.log(field);
-    console.log('+ nextField('+field.id+','+where+')');
+    //console.log(field);
+    //console.log('+ nextField('+field.id+','+where+')');
     
     if (!(field instanceof Ext.Component))
         field=Ext.getCmp(field.id);
@@ -171,10 +184,10 @@ function nextField(field, where)
     if (defined(field.next))
         next=field.next;
 
-    if (next)
-        console.log('  nextField(): Going to '+next+', field.next was '+field.next);
-    else
-        console.warn('  nextField(): next is '+next);
+//    if (next)
+//        console.log('  nextField(): Going to '+next+', field.next was '+field.next);
+//    else
+//        console.warn('  nextField(): next is '+next);
 
     if (field.getEl().dom.type=="radio")
     {
@@ -195,7 +208,7 @@ function nextField(field, where)
 
     //We want to check if the field is valid, but if it's a radio, we need to
     //check the entire radiogroup, not just this field.
-    console.log('Field to validate: ',field);
+//    console.log('Field to validate: ',field);
 
     var valid=true;
 
@@ -219,13 +232,13 @@ function nextField(field, where)
         var qContainer=getQContainer(field);
         if (qContainer)
         {
-            console.log('  nextField: removing active state from '+qContainer.id+' for child field '+field.id);
+//            console.log('  nextField: removing active state from '+qContainer.id+' for child field '+field.id);
             setQActive(qContainer,false);
             if (!field.ignoreValidState)
                 setQValidity(qContainer,true);
         }
 
-        console.log('  nextField('+field.id+'): Field is valid, looking for form.');
+//        console.log('  nextField('+field.id+'): Field is valid, looking for form.');
         var form=field.findParentByType('form');
 
         //Remove the active class form what used to be the focused element
@@ -241,7 +254,7 @@ function nextField(field, where)
 
         if (next)
         {
-            console.log('nextField():Moving to the next element: '+next);
+//            console.log('nextField(): Moving to the next element: '+next);
             nextQ(next,form);
         }
         else
@@ -258,13 +271,13 @@ function nextField(field, where)
     }
     else
     {
-        console.log('nextField(): Field ',field.id,' is not valid.');
+//        console.log('nextField(): Field ',field.id,' is not valid.');
     }
 }
 
 function promptSaveForm(form)
 {
-    console.log('promptSaveForm('+form.id+')');
+//    console.log('promptSaveForm('+form.id+')');
 
     if ((typeof(form)=="undefined") || (form==null))
     {
@@ -334,7 +347,7 @@ function msgboxSaveHandler(button, text, config)
 //Transfers keyboard focus to the next question
 function nextQ(ids, form)
 {
-    console.log('+ nextQ("'+ids+'",'+form.id+')');
+    //console.log('+ nextQ("'+ids+'",'+form.id+')');
 
     var id=ids; //This will be changed later by the for-loop if necessary
     var nextQCmp=null;
@@ -380,7 +393,7 @@ function nextQ(ids, form)
     if ((typeof(form)!="undefined") && (form!=null))
     {
         form.focusedEl=focusObj;
-        console.log('  nextQCmp: Saved focused element: '+focusObj.id);
+        //console.log('  nextQCmp: Saved focused element: '+focusObj.id);
     }
 }
 
@@ -485,7 +498,7 @@ function formDone(form)
 
 function onFormKeypress(keycode, event)
 {
-    console.log('+ onFormKeypress('+keycode+'): FORM KEYPRESS :', keycode, event.target);
+    //console.log('+ onFormKeypress('+keycode+'): FORM KEYPRESS :', keycode, event.target);
 
     var fieldCmp=Ext.getCmp(event.target.id);
 
@@ -524,7 +537,7 @@ function onFormKeypress(keycode, event)
 
 function radioKeypress(field,keycode,event)
 {
-    console.log('+ radioKeypress('+field.id+','+keycode+')');
+    //console.log('+ radioKeypress('+field.id+','+keycode+')');
     //Get the parent radio group
     var group=field.findParentByType('radiogroup');
     var charcode=getNumCode(keycode);
@@ -556,7 +569,7 @@ function radioKeypress(field,keycode,event)
 
 function checkboxKeypress(field,keycode,event)
 {
-    console.log('+ checkboxKeypress('+field.id+','+keycode+')');
+    //console.log('+ checkboxKeypress('+field.id+','+keycode+')');
     //Get the parent checkboxgroup
     var group=field.findParentByType('checkboxgroup');
     var charcode=getNumCode(keycode);
@@ -641,7 +654,7 @@ function setQValidity(qContainer, validity)
 {
     if (!defined(qContainer)) return;
 
-    console.log('+ setQValidity('+qContainer.id+',',validity,')');
+    //console.log('+ setQValidity('+qContainer.id+',',validity,')');
 
     //Remove all validity classes
     qContainer.removeClass('q-invalid');
@@ -745,24 +758,24 @@ function onFormShow(form)
    //Does the form have a keymap associated with it?
     if (typeof(form.keyMap)=="undefined")
     {
-        console.log('No keymap yet');
+        //console.log('No keymap yet');
         return;
     }
 
-    console.log('+ onFormShow('+form.id+'): Enabling keymap for: ',form.id);
+    //console.log('+ onFormShow('+form.id+'): Enabling keymap for: ',form.id);
     //Deactivate the keymap
     form.keyMap.enable();
 }
 
 function onFormActivated(form)
 {
-    console.log('+ onFormActivated('+form.id+')');
+    //console.log('+ onFormActivated('+form.id+')');
 
     //Focus and highlight the appropriate element for this form
     if ((typeof(form.focusedEl)=="undefined") || (form.focusedEl==null))
     {
         form.focusedEl=Ext.select('input',false,form.getEl().dom).item(0);
-        console.log('  onFormActivated(): Searched for a new input element to highlight and found this: ',form.focusedEl)
+        //console.log('  onFormActivated(): Searched for a new input element to highlight and found this: ',form.focusedEl)
     }
 
     //If the form is hidden, then we should not focus any elements yet
@@ -771,20 +784,20 @@ function onFormActivated(form)
 
     if ((typeof(form.focusedEl)!="undefined") && (form.focusedEl!=null))
     {
-        console.log('  onFormActivated(): Highlighting focused element: '+form.focusedEl.id);
+        //console.log('  onFormActivated(): Highlighting focused element: '+form.focusedEl.id);
         form.focusedEl.focus();
         var qContainer=getQContainer(form.focusedEl);
         if (qContainer)
         {
-            console.log('  onFormActivated(): Setting container '+qContainer.id+' active for element '+form.focusedEl);
+            //console.log('  onFormActivated(): Setting container '+qContainer.id+' active for element '+form.focusedEl);
             setQActive(qContainer,true);
         }
-        else
-            console.log('  onFormActivated(): Couldn\'t find qContainer for '+form.focusedEl);
+//        else
+//            console.log('  onFormActivated(): Couldn\'t find qContainer for '+form.focusedEl);
     }
     else
     {
-        console.log('  onFormActivated(): No element to highlight for form '+form.id);
+        //console.log('  onFormActivated(): No element to highlight for form '+form.id);
     }
 
     if (!defined(form.radioShortcutLabels))
@@ -1021,7 +1034,7 @@ function formToXml(values)
 {
     var result="<form>\n";
 
-    console.log(values);
+    //console.log(values);
 
     for (var i=0;i<values.length;++i)
     {
@@ -1031,7 +1044,7 @@ function formToXml(values)
         if (!tag.length)
             continue;
 
-        result+="\t<"+tag+">"+field.value+"</"+tag+">\n";
+        result+="\t<"+tag+">"+escape(field.value)+"</"+tag+">\n";
     }
 
     result+="</form>";
@@ -1082,7 +1095,7 @@ function getFormValues(form, order)
                     handler=field.handler;
             }
 
-            console.log('Searching for field: '+name+', default: '+defaultValue);
+            //console.log('Searching for field: '+name+', default: '+defaultValue);
             if (!defined(values[name]))
                 values[name]=defaultValue;
             else
@@ -1147,7 +1160,7 @@ function setSeqHiddenFieldsValues(prefix,checkboxgroup,checkedItems)
             checked[i]=checkedItems[i].inputValue;
     }
 
-    console.log('Checked array:',checked);
+    //console.log('Checked array:',checked);
 
     var hidden_idx=1;
     //Loops through all these values and assigns them to prefix_{N} elements
@@ -1161,12 +1174,12 @@ function setSeqHiddenFieldsValues(prefix,checkboxgroup,checkedItems)
 
         if (!field)
         {
-            console.log('Done searching for fields. Last element: '+prefix+hidden_idx)
+            //console.log('Done searching for fields. Last element: '+prefix+hidden_idx)
             break;
         }
 
         field.setValue(val);
-        console.log(field.id,val);
+        //console.log(field.id,val);
         ++hidden_idx;
      }
 }

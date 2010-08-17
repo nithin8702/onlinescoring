@@ -142,11 +142,6 @@ next to the question.</li>\
                         listeners:  {
                                         afterrender:function(){Ext.getCmp('txtSubjectID').focus();}
                                     },
-                        keys:   {
-                                    key:[107,109],
-                                    fn:onTabKeypress,
-                                    scope:this
-                                },
                         items:[tabForms]
                     };
 
@@ -276,17 +271,6 @@ function onTabShow(obj)
 {
     //hack
     onFormActivated(obj.getActiveTab());
-}
-
-function onTabKeypress(keycode,tabs,data)
-{
-    switch(keycode)
-    {
-        //Numpad +
-        case 107:   nextForm();break;
-        //Numpad -
-        case 109:   previousForm(); break;
-    }
 }
 
 function nextForm()

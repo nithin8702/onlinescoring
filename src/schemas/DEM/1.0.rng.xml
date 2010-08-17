@@ -46,7 +46,7 @@
 
                 <!-- STATE -->
                 <element name="state">
-                    <ref name="T_State"/>
+                    <ref name="T_String"/>
                 </element>
 
                 <!-- CITY -->

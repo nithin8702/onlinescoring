@@ -124,7 +124,7 @@ var q2=     {
                             id:q('q2'),
                             name:'NOW_LIST',
                             xtype:'textfield',
-                            allowBlank:false,
+                            allowBlank:true,
                             hideLabel:true,
                             disabled:false,
                             next:q('q3'),
@@ -229,7 +229,7 @@ var q4=     {
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
-                            allowBlank:false,
+                            allowBlank:true,
                             next:q('q5'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
@@ -276,7 +276,7 @@ var q5=     {
                             items:  [
                                         {
                                             boxLabel:'I am retired',
-                                            inputValue:999
+                                            inputValue:997
                                         },
                                         {
                                             boxLabel:'Homemaker',
@@ -332,7 +332,7 @@ var q6=     {
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
-                            allowBlank:false,
+                            allowBlank:true,
                             next:q('q7'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
@@ -436,7 +436,7 @@ var q8=     {
                             xtype:'textfield',
                             hideLabel:true,
                             disabled:false,
-                            allowBlank:false,
+                            allowBlank:true,
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
                             regex:NRG.Forms.T_String,

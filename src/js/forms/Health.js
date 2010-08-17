@@ -1956,7 +1956,7 @@ var q10=     {
                             xtype:'numberfield',
                             fieldLabel:'10. How many biological siblings do you have?',
                             labelStyle:'padding-top:5px;width:300px',
-                            allowBlank:false,
+                            allowBlank:true,
                             minValue:0,
                             maxValue:99,
                             maxLength:2,
