@@ -482,7 +482,6 @@ var q6=     {
                             next:q('q7'),
                             style:'margin-top:10px;margin-left:'+radioPaddingLeft+'px',
                             defaults:   {
-                                            submitValue:false,
                                             shortcut:'x',
                                             bodyStyle:'padding:5px',
                                             ctCls:'q-table-td-border',
