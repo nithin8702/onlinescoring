@@ -94,11 +94,22 @@
             <element name="other_list">
                 <ref name="T_StringWithQuotes"/>
             </element>
+
             <element name="lifetime">
-                <ref name="T_3_Choices"/>
+				<choice>
+					<data type="nonNegativeInteger">
+						<param name="maxInclusive">100</param>
+					</data>
+					<ref name="NoAnswer"/>
+				</choice>
             </element>
             <element name="now">
-                <ref name="T_3_Choices"/>
+				<choice>
+					<data type="nonNegativeInteger">
+						<param name="maxInclusive">100</param>
+					</data>
+					<ref name="NoAnswer"/>
+				</choice>
             </element>
 
             <!-- NOW PSYMED -->
