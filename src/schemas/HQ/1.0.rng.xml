@@ -95,6 +95,48 @@
                 <ref name="T_StringWithQuotes"/>
             </element>
 
+            <!-- MEDICATIONS -->
+            <element name="med_1">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_strength_1">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_freq_1">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="med_2">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_strength_2">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_freq_2">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="med_3">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_strength_3">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_freq_3">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="med_4">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_strength_4">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_freq_4">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <!-- Number of Medications -->
             <element name="lifetime">
 				<choice>
 					<data type="nonNegativeInteger">

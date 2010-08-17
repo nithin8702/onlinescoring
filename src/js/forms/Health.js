@@ -221,6 +221,7 @@ var q5=     {
                             hideLabel:true,
                             ctCls:'leftpaddinghack',
                             submitValue:false,
+                            next:q('q5:a1:1'),
                             listeners:  {
                                             check:onQ5NA,
                                             focus:onFieldFocus,
@@ -262,7 +263,7 @@ var q5=     {
                                         //First row
                                         {
                                             id:q('q5:a1:1'),
-                                            name:q('q5:a1:1'),
+                                            name:'MED_1',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -275,7 +276,7 @@ var q5=     {
                                         },
                                         {
                                             id:q('q5:a1:2'),
-                                            name:q('q5:a1:2'),
+                                            name:'MED_STRENGTH_1',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -288,7 +289,7 @@ var q5=     {
                                         },
                                         {
                                             id:q('q5:a1:3'),
-                                            name:q('q5:a1:3'),
+                                            name:'MED_FREQ_1',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -303,7 +304,7 @@ var q5=     {
                                         //Second row
                                         {
                                             id:q('q5:a2:1'),
-                                            name:q('q5:a2:1'),
+                                            name:'MED_2',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -316,7 +317,7 @@ var q5=     {
                                         },
                                         {
                                             id:q('q5:a2:2'),
-                                            name:q('q5:a2:2'),
+                                            name:'MED_STRENGTH_2',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -329,7 +330,7 @@ var q5=     {
                                         },
                                         {
                                             id:q('q5:a2:3'),
-                                            name:q('q5:a2:3'),
+                                            name:'MED_FREQ_2',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -344,7 +345,7 @@ var q5=     {
                                         //Third row
                                         {
                                             id:q('q5:a3:1'),
-                                            name:q('q5:a3:1'),
+                                            name:'MED_3',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -357,7 +358,7 @@ var q5=     {
                                         },
                                         {
                                             id:q('q5:a3:2'),
-                                            name:q('q5:a3:2'),
+                                            name:'MED_STRENGTH_3',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -370,7 +371,7 @@ var q5=     {
                                         },
                                         {
                                             id:q('q5:a3:3'),
-                                            name:q('q5:a3:3'),
+                                            name:'MED_FREQ_3',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -385,7 +386,7 @@ var q5=     {
                                         //Forth row
                                         {
                                             id:q('q5:a4:1'),
-                                            name:q('q5:a4:1'),
+                                            name:'MED_4',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -398,7 +399,7 @@ var q5=     {
                                         },
                                         {
                                             id:q('q5:a4:2'),
-                                            name:q('q5:a4:2'),
+                                            name:'MED_STRENGTH_4',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -411,7 +412,7 @@ var q5=     {
                                         },
                                         {
                                             id:q('q5:a4:3'),
-                                            name:q('q5:a4:3'),
+                                            name:'MED_FREQ_4',
                                             xtype:'textfield',
                                             hideLabel:true,
                                             disabled:false,
@@ -2155,6 +2156,10 @@ var form=   {
                                     "SA",
                                     "OTHER",
                                     "OTHER_LIST",
+                                    "MED_1", "MED_STRENGTH_1","MED_FREQ_1",
+                                    "MED_2", "MED_STRENGTH_2","MED_FREQ_2",
+                                    "MED_3", "MED_STRENGTH_3","MED_FREQ_3",
+                                    "MED_4", "MED_STRENGTH_4","MED_FREQ_4",
                                     "LIFETIME",
                                     "NOW",
                                     "NOW_PSYMED",
