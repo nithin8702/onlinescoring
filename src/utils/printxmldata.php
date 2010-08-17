@@ -17,7 +17,16 @@ require_once "../NRG/Configuration.php";
 require_once "../database.php";
 
 if (!isset($_GET['id']))
-    throw new Exception("Please specify a subject ID.");
+{
+    print "<h4>[OnlineScoring] Data Viewer</h4>
+          <form action='printxmldata.php'>
+                <label for='sid'>Subject ID:</label>
+                <input id='sid' name='id' type='text' width=100/>
+                <input type='submit'/>
+          </form>";
+    print "</div></body></html>";
+    exit();
+}
 
 $subjectid=trim(strtoupper($_GET['id']));
 
@@ -49,9 +58,12 @@ try
             $date=$row['datetimeAdded'];
             $sid=$row['fkSessionID'];
             $schemaName=explode('/',$row['schemaName']);
+
+            
             //Invalid schema name? Skip this result.
             if (count($schemaName)<2)
                 continue;
+
             $formName=strtoupper($schemaName[0]);
             $formVersion=$schemaName[1];
             
