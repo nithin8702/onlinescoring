@@ -55,6 +55,8 @@ var sDOB=       {
                     selectOnFocus:true,
                     next:q('q3'),
                     listeners:  {
+                                    valid:onDOBChange,
+                                    blur:onDOBChange,
                                     change:onDOBChange,
                                     specialkey:onEnter,
                                     focus:onFieldFocus
@@ -859,6 +861,14 @@ function onStateChanged(field, newval, oldval)
 
 function onDOBChange(field, newval, oldval)
 {
+    if (!field.isValid())
+    {
+        console.log('+ onDOBChange: Field isnt valid');
+        return;
+    }
+
+    newval=field.getValue();
+    
     var hiddenDOB=Ext.getCmp('qn2:q2:a1');
 
     var newdate=new Date(newval);
