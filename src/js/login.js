@@ -21,6 +21,7 @@ var ui={
                         url: 'ajax/login.php',
                         method: 'POST',
                         autoHeight:true,
+                        border:false,
                         items: [
                                 {
                                     xtype: 'fieldset',
@@ -125,6 +126,60 @@ var ui={
                     ]
         };
 
+//var winRegister={
+//                    xtype:'window',
+//                    title:'Request Access',
+//                    width:280,
+//                    modal:true,
+//                    items:  [
+//                                {
+//                                    xtype:'form',
+//                                    bodyStyle:'padding:3px',
+//                                    items:  [
+//                                                {
+//                                                    xtype:'textfield',
+//                                                    boxlabel:'E-Mail',
+//                                                    name:'regEmail',
+//                                                    regex:/^\S+@\w+(\.\w+)+$/,
+//                                                    selectOnFocus:true
+//                                                },
+//                                                {
+//                                                    id:'regPanel',
+//                                                    xtype:'panel',
+//                                                    title:'<a href="javascript:showRegPanel();" style="color:#6666FF">Sign up for a @neuroinfo.org account</a>',
+//                                                    collapsible:true,
+//                                                    collapsed:true,
+//                                                    border:true,
+//                                                    style:'background-color:white',
+//                                                    items:  [
+//                                                                {
+//                                                                    xtype:'fieldset',
+//                                                                    border:false,
+//                                                                    items:  [
+//                                                                                {
+//                                                                                    xtype:'textfield',
+//                                                                                    fieldLabel:'First name'
+//                                                                                },
+//                                                                                {
+//                                                                                    xtype:'textfield',
+//                                                                                    fieldLabel:'Last name'
+//                                                                                }
+//                                                                            ]
+//                                                                }
+//                                                            ]
+//                                                }
+//                                            ],
+//                                   buttons: [
+//                                                {
+//                                                    xtype:'button',
+//                                                    type:'submit',
+//                                                    text:'<b>Register</b>'
+//                                                }
+//                                            ]
+//                                }
+//                            ]
+//                };
+
 Ext.onReady(function(){
 
     Ext.QuickTips.init();
@@ -147,6 +202,8 @@ Ext.onReady(function(){
     Ext.Ajax.on('requestexception',function(){
         Ext.getCmp('progressLogin').reset(true);
     },this);
+
+    //winRegister=Ext.ComponentMgr.create(winRegister);
 
     var winLogin=Ext.ComponentMgr.create(ui);
     winLogin.show();
@@ -279,14 +336,7 @@ function onUsernameBlur(field)
 
 function showRegistrationForm(button)
 {
-    if (!button)
-        button=Ext.getCmp('btnRegister');
-
-    var username=Ext.getCmp('txtUsername').getValue();
-    if (username.length)
-        register(button,username);
-    else
-        Ext.Msg.prompt('Request Access','Please enter your e-mail:',register);
+    Ext.Msg.prompt('Request Access','Please enter your e-mail:',register);
 }
 
 function register(button,text)
