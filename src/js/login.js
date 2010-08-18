@@ -341,6 +341,9 @@ function showRegistrationForm(button)
 
 function register(button,text)
 {
+    if ((!text) || (!text.length))
+        return;
+
     Ext.getCmp('btnLogin').disable();
     Ext.getCmp('btnRegister').disable();
 
