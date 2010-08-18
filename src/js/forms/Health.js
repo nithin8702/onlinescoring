@@ -2060,8 +2060,14 @@ var form=   {
                                     "SATISFY",
                                     "CONSCIOUS",
                                     "POST_MENO",
-                                    "RX",
-                                    "NON_RX",
+                                    {
+                                        name:"RX",
+                                        defaultValue:0
+                                    },
+                                    {
+                                        name:"NON_RX",
+                                        defaultValue:0
+                                    },
                                     "MED_1", "MED_STRENGTH_1","MED_FREQ_1",
                                     "MED_2", "MED_STRENGTH_2","MED_FREQ_2",
                                     "MED_3", "MED_STRENGTH_3","MED_FREQ_3",
@@ -2604,6 +2610,7 @@ function updateIllnessCount(field, checked)
 
     var countLifetime=0;
     var countNow=0;
+    var countNA=0;
 
     //Here we select all radio buttons under the "In your lifetime" and then "Currently (now)" columns,
     //and then use a callback to count the number of radio buttons that are checked.
@@ -2611,6 +2618,13 @@ function updateIllnessCount(field, checked)
     //requires this iteration
     q6.getEl().select('input[type="radio"][id$=":1"]').each(function(cb){if (cb.dom.checked) countLifetime++});
     q6.getEl().select('input[type="radio"][id$=":2"]').each(function(cb){if (cb.dom.checked) countNow++});
+    q6.getEl().select('input[type="radio"][id$=":3"]').each(function(cb){if (cb.dom.checked) countNA++});
+
+    if (countNA<=0)
+    {
+        countLifetime=NRG.Forms.NoResponse;
+        countNow=NRG.Forms.NoResponse;
+    }
 
     //Update current values
     Ext.getCmp('HQ_LIFETIME').setValue(countLifetime);
