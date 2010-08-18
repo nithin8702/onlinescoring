@@ -238,7 +238,15 @@ var q5=     {
                             next:q('q6:a0'),
                             style:'margin-top:10px;margin-left:'+radioPaddingLeft+'px',
                             defaults:   {
-                                            bodyStyle:'padding:5px'
+                                            bodyStyle:'padding:5px',
+                                            hideLabel:true,
+                                            disabled:false,
+                                            width:215,
+                                            selectOnFocus:true,
+                                            listeners:  {
+                                                            focus:onFieldFocus,
+                                                            specialkey:onEnter
+                                                        }
                                         },
                             layoutConfig:   {
                                                 columns:3
@@ -265,40 +273,19 @@ var q5=     {
                                             id:q('q5:a1:1'),
                                             name:'MED_1',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a1:2'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a1:2')
                                         },
                                         {
                                             id:q('q5:a1:2'),
                                             name:'MED_STRENGTH_1',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a1:3'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a1:3')
                                         },
                                         {
                                             id:q('q5:a1:3'),
                                             name:'MED_FREQ_1',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a2:1'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a2:1')
                                         },
 
                                         //Second row
@@ -306,40 +293,19 @@ var q5=     {
                                             id:q('q5:a2:1'),
                                             name:'MED_2',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a2:2'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a2:2')
                                         },
                                         {
                                             id:q('q5:a2:2'),
                                             name:'MED_STRENGTH_2',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a2:3'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a2:3')
                                         },
                                         {
                                             id:q('q5:a2:3'),
                                             name:'MED_FREQ_2',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a3:1'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a3:1')
                                         },
 
                                         //Third row
@@ -347,40 +313,19 @@ var q5=     {
                                             id:q('q5:a3:1'),
                                             name:'MED_3',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a3:2'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a3:2')
                                         },
                                         {
                                             id:q('q5:a3:2'),
                                             name:'MED_STRENGTH_3',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a3:3'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a3:3')
                                         },
                                         {
                                             id:q('q5:a3:3'),
                                             name:'MED_FREQ_3',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a4:1'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a4:1')
                                         },
 
                                         //Forth row
@@ -388,40 +333,19 @@ var q5=     {
                                             id:q('q5:a4:1'),
                                             name:'MED_4',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a4:2'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a4:2')
                                         },
                                         {
                                             id:q('q5:a4:2'),
                                             name:'MED_STRENGTH_4',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a4:3'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a4:3')
                                         },
                                         {
                                             id:q('q5:a4:3'),
                                             name:'MED_FREQ_4',
                                             xtype:'textfield',
-                                            hideLabel:true,
-                                            disabled:false,
-                                            next:q('q5:a5'),
-                                            width:215,
-                                            listeners:  {
-                                                            focus:onFieldFocus,
-                                                            specialkey:onEnter
-                                                        }
+                                            next:q('q5:a5')
                                         }
                                     ]
                         },
@@ -431,11 +355,11 @@ var q5=     {
                             xtype:'numberfield',
                             fieldLabel:'Number of prescription meds',
                             labelStyle:'width:225px',
-                            style:'margin-top:5px; width:50px',
+                            style:'width:50px',
                             ctCls:'toppaddinghack q-container',
                             next:q('q5:a6'),
-                            inputValue:0,
-                            maxValue:100,
+                            selectOnFocus:true,
+                            value:NRG.Forms.NoResponse,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
@@ -451,8 +375,8 @@ var q5=     {
                             style:'width:50px',
                             ctCls:'q-container',
                             next:q('q6:a0'),
-                            inputValue:0,
-                            maxValue:100,
+                            selectOnFocus:true,
+                            value:NRG.Forms.NoResponse,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
@@ -521,6 +445,7 @@ var q6=     {
                                             next:q('q7'),
                                             listeners:  {
                                                             check:onQ6NA,
+                                                            blur:onFocusLost,
                                                             focus:onFieldFocus,
                                                             specialkey:onEnter
                                                         }
@@ -2137,6 +2062,10 @@ var form=   {
                                     "POST_MENO",
                                     "RX",
                                     "NON_RX",
+                                    "MED_1", "MED_STRENGTH_1","MED_FREQ_1",
+                                    "MED_2", "MED_STRENGTH_2","MED_FREQ_2",
+                                    "MED_3", "MED_STRENGTH_3","MED_FREQ_3",
+                                    "MED_4", "MED_STRENGTH_4","MED_FREQ_4",
                                     "CANC",
                                     "MIGRAINE",
                                     "DIABETES",
@@ -2156,10 +2085,6 @@ var form=   {
                                     "SA",
                                     "OTHER",
                                     "OTHER_LIST",
-                                    "MED_1", "MED_STRENGTH_1","MED_FREQ_1",
-                                    "MED_2", "MED_STRENGTH_2","MED_FREQ_2",
-                                    "MED_3", "MED_STRENGTH_3","MED_FREQ_3",
-                                    "MED_4", "MED_STRENGTH_4","MED_FREQ_4",
                                     "LIFETIME",
                                     "NOW",
                                     "NOW_PSYMED",
@@ -2593,9 +2518,12 @@ function onQ5NA(checkbox,checked)
 
     if (checked)
     {
+        //Disable all input elements in the table to prevent them from receiving TAB/ShiftTab focus.
+        table.getEl().select('input').each(function(obj){obj.dom.disabled=true});
         table.disable();
-        rx.setRawValue(0);
-        nonrx.setRawValue(0);
+        
+        rx.setValue(0);
+        nonrx.setValue(0);
         rx.disable();
         nonrx.disable();
         checkbox.next='qn6:q6';
@@ -2608,6 +2536,10 @@ function onQ5NA(checkbox,checked)
     else
     {
         table.enable();
+        //Enable all input elements in the table
+        table.getEl().select('input').each(function(obj){obj.dom.disabled=false;});
+        rx.setValue(NRG.Forms.NoResponse);
+        nonrx.setValue(NRG.Forms.NoResponse);
         rx.enable();
         nonrx.enable();
         checkbox.next='qn6:q5:a1:1';

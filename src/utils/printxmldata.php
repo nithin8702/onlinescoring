@@ -94,7 +94,7 @@ try
             }
 
            foreach ($data as $child)
-               print "<tr><td>".$formName."_".strtoupper($child->tagName)."</td><td>".urldecode($child->nodeValue)."</td></tr>";
+               print "<tr><td>".$formName."_".strtoupper($child->tagName)."</td><td>".rawurldecode($child->nodeValue)."</td></tr>";
 
             $lastsid=$sid;
          }

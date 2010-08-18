@@ -1044,7 +1044,7 @@ function formToXml(values)
         if (!tag.length)
             continue;
 
-        result+="\t<"+tag+">"+escape(field.value)+"</"+tag+">\n";
+        result+="\t<"+tag+">"+encodeURIComponent(field.value)+"</"+tag+">\n";
     }
 
     result+="</form>";
