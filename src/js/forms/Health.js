@@ -1017,13 +1017,13 @@ var q6=     {
                                             id:'HQ_LIFETIME',
                                             name:'LIFETIME',
                                             xtype:'hidden',
-                                            value:0
+                                            value:NRG.Forms.NoResponse
                                         },
                                         {
                                             id:'HQ_NOW',
                                             name:'NOW',
                                             xtype:'hidden',
-                                            value:0
+                                            value:NRG.Forms.NoResponse
                                         }
                                     ]
                         }
