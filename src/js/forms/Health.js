@@ -1017,13 +1017,13 @@ var q6=     {
                                             id:'HQ_LIFETIME',
                                             name:'LIFETIME',
                                             xtype:'hidden',
-                                            value:NRG.Forms.NoResponse
+                                            value:0
                                         },
                                         {
                                             id:'HQ_NOW',
                                             name:'NOW',
                                             xtype:'hidden',
-                                            value:NRG.Forms.NoResponse
+                                            value:0
                                         }
                                     ]
                         }
@@ -2610,7 +2610,6 @@ function updateIllnessCount(field, checked)
 
     var countLifetime=0;
     var countNow=0;
-    var countNA=0;
 
     //Here we select all radio buttons under the "In your lifetime" and then "Currently (now)" columns,
     //and then use a callback to count the number of radio buttons that are checked.
@@ -2618,19 +2617,11 @@ function updateIllnessCount(field, checked)
     //requires this iteration
     q6.getEl().select('input[type="radio"][id$=":1"]').each(function(cb){if (cb.dom.checked) countLifetime++});
     q6.getEl().select('input[type="radio"][id$=":2"]').each(function(cb){if (cb.dom.checked) countNow++});
-    q6.getEl().select('input[type="radio"][id$=":3"]').each(function(cb){if (cb.dom.checked) countNA++});
 
-    if (countNA<=0)
-    {
-        countLifetime=NRG.Forms.NoResponse;
-        countNow=NRG.Forms.NoResponse;
-    }
-
-    //Update current values
     Ext.getCmp('HQ_LIFETIME').setValue(countLifetime);
     Ext.getCmp('HQ_NOW').setValue(countNow);
 
-    console.log('Updating illness count: ',countLifetime,countNow);
+    //console.log('Updating illness count: ',countLifetime,countNow);
 }
 
 function updateFamHiddenField(cb,checked)
@@ -2642,31 +2633,21 @@ function updateFamHiddenField(cb,checked)
     var rootID=splitID[0]+":"+splitID[1]+":"+splitID[2];
 
     var hidden=Ext.getCmp(rootID);
-
     if (!hidden)
         return;
+    var value=hidden.getValue();
 
     if (checked)
-    {
-        hidden.setValue(1);
-        if (!defined(hidden.cbCount))
-            hidden.cbCount=1;
-        else
-            hidden.cbCount++;
-    }
+        value++;
     else
     {
-        if (!defined(hidden.cbCount))
-            hidden.cbCount=0;
-        else
-            hidden.cbCount--;
+        value--;
+        if (value<=0)
+            value=0;
 
-        if (hidden.cbCount<=0)
-        {
-            hidden.cbCount=0;
-            hidden.setValue(0);
-        }
     }
+
+    hidden.setValue(value);
 }
 
 /* Must return a value. Basically this transforms checkbox "on" values to 1. */
