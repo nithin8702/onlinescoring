@@ -176,7 +176,7 @@
 
             <!-- FAMILY ILLNESSES -->
             <element name="fam_heart">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_heart_m">
                 <ref name="T_01"/>
@@ -189,7 +189,7 @@
             </element>
 
             <element name="fam_alz">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_alz_m">
                 <ref name="T_01"/>
@@ -202,7 +202,7 @@
             </element>
 
             <element name="fam_notalz">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_notalz_m">
                 <ref name="T_01"/>
@@ -215,7 +215,7 @@
             </element>
 
             <element name="fam_ms">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_ms_m">
                 <ref name="T_01"/>
@@ -228,7 +228,7 @@
             </element>
 
             <element name="fam_canc">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_canc_m">
                 <ref name="T_01"/>
@@ -241,7 +241,7 @@
             </element>
 
             <element name="fam_migraine">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_migraine_m">
                 <ref name="T_01"/>
@@ -254,7 +254,7 @@
             </element>
 
             <element name="fam_diabetes">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_diabetes_m">
                 <ref name="T_01"/>
@@ -267,7 +267,7 @@
             </element>
 
             <element name="fam_enceph">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_enceph_m">
                 <ref name="T_01"/>
@@ -280,7 +280,7 @@
             </element>
 
             <element name="fam_epilepsy">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_epilepsy_m">
                 <ref name="T_01"/>
@@ -293,7 +293,7 @@
             </element>
 
             <element name="fam_hbp">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_hbp_m">
                 <ref name="T_01"/>
@@ -306,7 +306,7 @@
             </element>
 
             <element name="fam_park">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_park_m">
                 <ref name="T_01"/>
@@ -319,7 +319,7 @@
             </element>
 
             <element name="fam_stroke">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_stroke_m">
                 <ref name="T_01"/>
@@ -332,7 +332,7 @@
             </element>
 
             <element name="fam_dep">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_dep_m">
                 <ref name="T_01"/>
@@ -345,7 +345,7 @@
             </element>
 
             <element name="fam_adhd">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_adhd_m">
                 <ref name="T_01"/>
@@ -358,7 +358,7 @@
             </element>
 
             <element name="fam_anx">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_anx_m">
                 <ref name="T_01"/>
@@ -371,7 +371,7 @@
             </element>
 
             <element name="fam_pd">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_pd_m">
                 <ref name="T_01"/>
@@ -384,7 +384,7 @@
             </element>
 
             <element name="fam_sch">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_sch_m">
                 <ref name="T_01"/>
@@ -397,7 +397,7 @@
             </element>
 
             <element name="fam_bp">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_bp_m">
                 <ref name="T_01"/>
@@ -410,7 +410,7 @@
             </element>
 
             <element name="fam_aa">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_aa_m">
                 <ref name="T_01"/>
@@ -423,7 +423,7 @@
             </element>
 
             <element name="fam_sa">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_sa_m">
                 <ref name="T_01"/>
@@ -436,7 +436,7 @@
             </element>
 
             <element name="fam_other">
-                <ref name="T_01"/>
+                <ref name="T_0to3"/>
             </element>
             <element name="fam_other_m">
                 <ref name="T_01"/>
