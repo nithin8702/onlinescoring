@@ -8,10 +8,10 @@
                 </element>
 
                 <!-- DOB -->
-                <element name="dob">
+                <element name="yob">
                     <choice>
-                        <data type="date">
-                            <param name="maxInclusive">2010-01-01</param>
+                        <data type="gYear">
+                            <param name="maxInclusive">2010</param>
                         </data>
                         <ref name="NoAnswer"/>
                     </choice>

@@ -8,6 +8,7 @@ var tabForms=       {
                         id:'tabForms',
                         xtype:'tabpanel',
                         border:false,
+                        bodyBorder:false,
                         autoScroll:true,
                         hidden:true,
                         activeTab:0,
@@ -128,8 +129,10 @@ var toolbarForms=   {
 var panelForms=     {
                         id:'panelForms',
                         xtype:'panel',
+                        frame:true,
                         tbar:toolbarForms,
                         autoScroll:true,
+                        bodyStyle:'background-color:white',
                         html:'<span id="panelFormsWelcome" class="data-entry-help" style="margin-left:20px">\
 <p>&nbsp;To get started, please enter a Subject ID in the box above and press Enter.</p>\
 <h3 style="margin:5px 0px 5px 10px">Hints:</h3>\
@@ -150,9 +153,9 @@ var portalForms=    {
                         xtype:'portal',
                         title:'Online Scoring',
                         layout:'fit',
-                        style:'margin:10px;padding-right:20px',
                         iconCls:'x-icon-forms',
                         autoScroll:true,
+                        bodyStyle:'background-color:white',
                         items:[panelForms]
                     };
 
@@ -165,10 +168,6 @@ var portalUsers=     {
                         items:[{html:'Under construction'}]
                     };
 
-var gridDiff=       {
-                        xtype:'editorgrid',
-                    };
-
 var portalScoring=    {
                         xtype:'portal',
                         title:'Diff View',
@@ -176,7 +175,7 @@ var portalScoring=    {
                         tabTip:'Diff View',
                         iconCls:'x-icon-grid',
                         items:  [
-                                    gridDiff
+                                    NRG.OnlineScoring.DiffView
                                 ]
                     };
 
@@ -184,6 +183,7 @@ var groupDashboard= {
                         xtype:'grouptabpanel',
                         tabWidth:130,
                         activeGroup:0,
+                        padding:5,
                         items:  [{
                                     mainItem:0,
                                     items:[

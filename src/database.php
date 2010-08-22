@@ -99,6 +99,34 @@ class Database
         return $result;
     }
 
+    /** Lists all available subjects
+     * @return Array An associative array containg the query result
+     */
+    public function listSubjects($sort='DESC')
+    {
+        $result=Array();
+        //ASC or DESC sorting
+        if ($sort!="ASC")
+            $sort="DESC";
+
+        $query='SELECT  subjectLabel, 
+                        COUNT(DISTINCT fkSessionID) as countEntries, 
+                        MAX(datetimeAdded)          as dateUpdated 
+                        FROM Forms 
+                        INNER JOIN Sessions ON (Forms.fkSessionID=Sessions.id) 
+                        GROUP BY subjectLabel 
+                        ORDER BY dateUpdated '.$sort;
+
+        $query=$this->_server->query($query);
+        if ($query->num_rows)
+            $result=$query->fetch_all(MYSQLI_ASSOC);
+
+        $query->close();
+
+        return $result;
+    }
+
+
     /** Retrieves information about a particular username */
     public function searchUser($username=NULL)
     {

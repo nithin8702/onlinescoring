@@ -57,7 +57,7 @@ class ClientLogin extends \NRG\Login\AbstractLogin
 
     protected $_captchaText='';
     protected $_captchaToken='';
-    
+
 
     /** Default constructor
      * @param string $email     User's email

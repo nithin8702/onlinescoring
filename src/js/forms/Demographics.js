@@ -43,9 +43,9 @@ var sSex=        {
 var sDOB=       {
                     id:q('q2'),
                     xtype:'datefield',
-                    fieldLabel:'Date of Birth <span style="text-shadow:none;font-weight:normal;color:gray">(m/d/Y)</span>',
+                    fieldLabel:'Year of Birth',
                     labelStyle:'width:135px;text-shadow: 2px 2px 2px #ccc',
-                    format:'m/d/Y',
+                    format:'Y',
                     width:100,
                     ctCls:'q-container',
                     allowBlank:false,
@@ -65,7 +65,7 @@ var sDOB=       {
 
 var sDOBhidden= {
                     id:q('q2:a1'),
-                    name:'DOB',
+                    name:'YOB',
                     xtype:'hidden',
                     inputValue:NRG.Forms.NoResponse
                 };
@@ -792,7 +792,7 @@ var form=   {
                 title:'Demographics',
                 resetHandler:resetState,
                 submitOrder:[
-                                'SEX', 'DOB','HT','WT',
+                                'SEX', 'YOB','HT','WT',
                                 'COUNTRY','STATE','CITY','ZIP',
                                 'MARITAL','MARITAL_LIST','HOUSE','HOUSE_LIST',
                                 'LIVE','LIVE_LIST','ENG_NAT','NAT_LANG','ENG_AGE',
@@ -855,7 +855,7 @@ function onDOBChange(field, newval, oldval)
 
     var newdate=new Date(newval);
 
-    hiddenDOB.setValue(newval.format('Y-m-d'));
+    hiddenDOB.setValue(newval.format('Y'));
 }
 
 function onRetireYearChanged(field, newval, oldval)

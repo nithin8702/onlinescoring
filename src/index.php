@@ -57,6 +57,13 @@
             <script type="text/javascript" src="js/forms/EthnicityHandedness.js"></script>
             <script type="text/javascript" src="js/forms/Occupation.js"></script>
             <script type="text/javascript" src="js/forms/Health.js"></script>
+            
+            <!-- Diff View -->
+            <script type="text/javascript" src="js/lib/ext/ux/ProgressBarPager.js"></script>
+            <script type="text/javascript" src="js/lib/ext/ux/PagingStore.js"></script>
+            <script type="text/javascript" src="js/lib/ext/ux/GridSearch.js"></script>
+            <script type="text/javascript" src="js/diffview.js"></script>
+
             <!-- INDEX -->
             <script type="text/javascript" src="js/index.js.php"></script>
         <?php else: ?>
