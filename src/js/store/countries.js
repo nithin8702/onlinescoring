@@ -231,7 +231,7 @@ NRG.Store.Countries=new Ext.data.ArrayStore({
             ['UG','Uganda'],
             ['UK','United Kingdom'],
             ['UM','United States Minor Outlying Islands'],
-            ['US','United States of America'],
+            ['US','USA'],
             ['UY','Uruguay'],
             ['UZ','Uzbekistan'],
             ['VA','Vatican'],
