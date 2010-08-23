@@ -104,7 +104,7 @@ var ui= {
                                     ]
                         }
                     ]
-            
+
         }
 
 NRG.OnlineScoring.DiffView=ui;
@@ -123,5 +123,8 @@ function onSubjectsPageChanged(toolbar, data)
     if (!pb)
         return;
 
-    pb.updateProgress(end/data.total,'Displaying subjects '+start+' - '+end+' of '+data.total,true);
+    if (data.total==0)
+        pb.updateProgress(0,'No subjects to display');
+    else
+        pb.updateProgress(end/data.total,'Displaying subjects '+start+' - '+end+' of '+data.total,true);
 }
