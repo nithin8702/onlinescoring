@@ -807,6 +807,15 @@ function onFormActivated(form)
 
         form.radioShortcutLabels=true;
     }
+
+    //Update form version display field
+    if (defined(form.schema))
+    {
+        var verCmp=Ext.getCmp('form_version');
+
+        if (verCmp)
+            verCmp.getEl().update(form.schema);
+    }
 }
 
 /** Loops through all children of 'container' and assigns shortcut labels */

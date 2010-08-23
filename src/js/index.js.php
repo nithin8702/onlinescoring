@@ -80,6 +80,14 @@ var toolbarForms=   {
                                         xtype:'tbfill'
                                     },
                                     {
+                                        id:'form_version',
+                                        xtype:'tbtext',
+                                        html:''
+                                    },
+                                    {
+                                        xtype:'tbseparator'
+                                    },
+                                    {
                                         id:'clock',
                                         xtype:'tbtext',
                                         html:'00:00'
