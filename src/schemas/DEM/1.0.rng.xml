@@ -29,7 +29,7 @@
                 </element>
 
                 <!-- WEIGHT -->
-                <element name="wt">
+                <element name="wt">v
                     <choice>
                         <data type="positiveInteger">
                             <param name="minInclusive">30</param>
