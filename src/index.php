@@ -61,7 +61,7 @@
             <script type="text/javascript" src="js/lib/ext/ux/PagingStore.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/PagingRowNumberer.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/GridSearch.js"></script>
-            <script type="text/javascript" src="js/diffview.js"></script>
+            <script type="text/javascript" src="js/diff.js"></script>
 
             <!-- INDEX -->
             <script type="text/javascript" src="js/index.js.php"></script>

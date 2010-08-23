@@ -1,5 +1,12 @@
 Ext.ns('NRG.OnlineScoring');
 
+Ext.override(Ext.PagingToolbar, {
+    doRefresh: function(){
+        delete this.store.lastParams;
+        this.doLoad(this.cursor);    
+    }
+});
+
 var storeSubjects=new Ext.ux.data.PagingJsonStore({
     autoLoad:{
                 params: {
@@ -13,6 +20,10 @@ var storeSubjects=new Ext.ux.data.PagingJsonStore({
     root:'subjects',
     totalProperty:'total',
     idProperty:'subjectLabel',
+    sortInfo:   {
+                    field:'dateUpdated',
+                    direction:'DESC'
+                },
     fields: [
                 'subjectLabel',
                 {name:'countEntries', type:'int'},

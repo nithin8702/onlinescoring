@@ -14,6 +14,7 @@ try
         throw new Exception("Couldn't connect to the database.");
 
     $result=$db->listSubjects();
+
 //    $c=count($result);
 //    for ($i=0;$i<$c;$i++)
 //    {
