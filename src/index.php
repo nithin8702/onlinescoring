@@ -1,5 +1,4 @@
 <?php
-
     require_once 'bootstrap.php';
 //    require_once 'database.php';
 //
@@ -59,8 +58,8 @@
             <script type="text/javascript" src="js/forms/Health.js"></script>
             
             <!-- Diff View -->
-            <script type="text/javascript" src="js/lib/ext/ux/ProgressBarPager.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/PagingStore.js"></script>
+            <script type="text/javascript" src="js/lib/ext/ux/PagingRowNumberer.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/GridSearch.js"></script>
             <script type="text/javascript" src="js/diffview.js"></script>
 

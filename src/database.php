@@ -91,9 +91,13 @@ class Database
         $result=Array();
         
         $query=$this->_server->query(QUERY_LIST_USERS);
+        //Store the result
         if ($query->num_rows)
-            $result=$query->fetch_all(MYSQLI_ASSOC);
-
+        {
+            //Workaround for fetch_all() in case mysqlnd isn't available
+            while(($row=$query->fetch_array(MYSQLI_ASSOC)))
+                $result[]=$row;
+        }
         $query->close();
 
         return $result;
@@ -119,7 +123,11 @@ class Database
 
         $query=$this->_server->query($query);
         if ($query->num_rows)
-            $result=$query->fetch_all(MYSQLI_ASSOC);
+        {
+            //Workaround for fetch_all() in case mysqlnd isn't available
+            while(($row=$query->fetch_array(MYSQLI_ASSOC)))
+                $result[]=$row;
+        }
 
         $query->close();
 

@@ -14,22 +14,13 @@ try
         throw new Exception("Couldn't connect to the database.");
 
     $result=$db->listSubjects();
-    $c=count($result);
-    for ($i=0;$i<$c;$i++)
-    {
-        $row=$result[$i];
-        $row['subjectLabel'].=$i;
-        $result[]=$row;
-    }
-
-    $i=0;
-    foreach ($result as &$row)
-    {
-        //Add a new # column
-        $row['nr']=++$i;
-        //Convert the date to Unix Timestamp
-        //$row['dateUpdated']=strtotime($row['dateUpdated']);
-    }
+//    $c=count($result);
+//    for ($i=0;$i<$c;$i++)
+//    {
+//        $row=$result[$i];
+//        $row['subjectLabel'].=$i;
+//        $result[]=$row;
+//    }
 
     ajax_result(Array(
                         "total"     => count($result),
