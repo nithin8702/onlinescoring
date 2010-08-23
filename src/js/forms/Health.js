@@ -1913,7 +1913,7 @@ var q11=     {
                             hideLabel:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             next:q('q12'),
                             defaults:   {
                                             name:'MOM_HEALTH',
@@ -1957,7 +1957,7 @@ var q12=     {
                             hideLabel:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             next:q('q13'),
                             defaults:   {
                                             name:'DAD_HEALTH',
