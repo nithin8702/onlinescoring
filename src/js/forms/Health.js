@@ -2033,7 +2033,7 @@ var form=   {
                 autoScroll:false,
                 buttonAlign:'left',
                 title:'Health',
-                schema:'HQ/1.0',
+                schema:'HQ/1.1',
                 keys:   {
                             //Digits [1-5]
                             key:[
