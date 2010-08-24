@@ -261,7 +261,7 @@ var q5=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q6'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'FUT',
                                             listeners:  {
