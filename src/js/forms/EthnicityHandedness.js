@@ -403,7 +403,7 @@ var q5= {
                             id:q('q5'),
                             xtype:'checkboxgroup',
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q6'),
                             columns:1,
