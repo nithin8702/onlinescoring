@@ -785,7 +785,7 @@ var btnNext={
               };
 var form=   {
                 id:qID,
-                schema:'DEM/1.2',
+                schema:'DEM/1.3',
                 xtype:'form',
                 border:false,
                 autoScroll:false,
