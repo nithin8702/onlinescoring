@@ -21,7 +21,7 @@ var q1=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q2'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             saneCheckboxCount:4,
                             defaults:   {
                                             submitValue:false,
