@@ -134,7 +134,6 @@ class Database
         return $result;
     }
 
-
     /** Retrieves information about a particular username */
     public function searchUser($username=NULL)
     {
