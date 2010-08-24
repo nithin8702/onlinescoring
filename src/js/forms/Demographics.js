@@ -502,7 +502,7 @@ var q10=     {
                             labelStyle:'width:265px;text-shadow: 2px 2px 2px #ccc',
                             style:'margin-top:5px;',
                             disabled:true,
-                            minValue:1,
+                            minValue:0,
                             maxValue:100,
                             maxLength:3,
                             width:35,
