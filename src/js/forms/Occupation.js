@@ -158,7 +158,7 @@ var q3=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q4'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'DAD',
                                             listeners:  {
@@ -365,7 +365,7 @@ var q7=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q8'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'MOM',
                                             listeners:  {
