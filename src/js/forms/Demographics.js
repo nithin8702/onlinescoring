@@ -863,10 +863,7 @@ function onDOBChange(field, newval, oldval)
         return;
     }
 
-    var newdate=new Date(newval);
-
     hiddenDOB.setValue(newval.format('Y'));
-
 }
 
 function onRetireYearChanged(field, newval, oldval)
@@ -902,13 +899,13 @@ function onRetireYearChanged(field, newval, oldval)
     var hiddenAge=Ext.getCmp('qn2:q12:a1');
 
     if (!hiddenAge)
-        return;
+        return false;
 
     if (defined(hiddenAge.minValue) && (age<hiddenAge.minValue))
     {
         field.setRawValue('');
         field.markInvalid('The minimum year of retirement has to be '+(dobYear+hiddenAge.minValue));
-        return;
+        return false;
     }
     
     hiddenAge.setValue(age);
