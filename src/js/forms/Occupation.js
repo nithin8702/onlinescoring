@@ -130,7 +130,7 @@ var q2=     {
                             next:q('q3'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
-                            regex:NRG.Forms.T_String,
+                            regex:NRG.Forms.T_StringWithQuotes,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
@@ -233,7 +233,7 @@ var q4=     {
                             next:q('q5'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
-                            regex:NRG.Forms.T_String,
+                            regex:NRG.Forms.T_StringWithQuotes,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
@@ -336,7 +336,7 @@ var q6=     {
                             next:q('q7'),
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
-                            regex:NRG.Forms.T_String,
+                            regex:NRG.Forms.T_StringWithQuotes,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
@@ -439,7 +439,7 @@ var q8=     {
                             allowBlank:true,
                             width:250,
                             style:'margin-left:'+radioPaddingLeft+'px; margin-top:10px',
-                            regex:NRG.Forms.T_String,
+                            regex:NRG.Forms.T_StringWithQuotes,
                             listeners:  {
                                             focus:onFieldFocus,
                                             blur:onFocusLost,
