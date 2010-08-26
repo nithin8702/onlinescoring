@@ -358,7 +358,7 @@ var q4= {
                             xtype:'radiogroup',
                             invalidClass:'',
                             width:400,
-                            allowBlank:false,
+                            allowBlank:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q5'),
                             hideLabel:true,

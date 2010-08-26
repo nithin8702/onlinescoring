@@ -150,7 +150,7 @@
             <data type="string">
                 <param name="pattern">[\w\-\+@\?% ,\.();/]+</param>
                 <param name="whiteSpace">collapse</param>
-                <param name="maxLength">100</param>
+                <param name="maxLength">500</param>
             </data>
             <ref name="NoAnswer"/>
         </choice>
@@ -161,7 +161,7 @@
             <data type="string">
                 <param name="pattern">[\w\-\+@\?% ,\.();/']+</param>
                 <param name="whiteSpace">collapse</param>
-                <param name="maxLength">100</param>
+                <param name="maxLength">500</param>
             </data>
             <ref name="NoAnswer"/>
         </choice>
