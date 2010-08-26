@@ -25,6 +25,7 @@ var q1=     {
                             saneCheckboxCount:4,
                             defaults:   {
                                             submitValue:false,
+                                            next:q('q2'),
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
