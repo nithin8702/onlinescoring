@@ -488,7 +488,7 @@ var form=   {
                 autoScroll:false,
                 buttonAlign:'left',
                 title:'Occupation',
-                schema:'OCCU/1.0',
+                schema:'OCCU/1.1',
                 submitOrder:[
                                 'NOW_1','NOW_2','NOW_3','NOW_4','NOW_LIST',
                                 'FUT','FUT_LIST','DAD','DAD_LIST','MOM','MOM_LIST'
