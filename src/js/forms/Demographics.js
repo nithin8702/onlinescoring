@@ -851,17 +851,13 @@ function onStateChanged(field, newval, oldval)
 function onDOBChange(field, newval, oldval)
 {
     if (!field.isValid())
-    {
-        console.log('+ onDOBChange: Field isnt valid');
         return;
-    }
 
     newval=field.getValue();
 
-    
     var hiddenDOB=Ext.getCmp('qn2:q2:a1');
 
-    if ((!newval) || (!newval.length))
+    if (!newval)
     {
         hiddenDOB.setValue(NRG.Forms.NoResponse);
         return;
@@ -870,6 +866,7 @@ function onDOBChange(field, newval, oldval)
     var newdate=new Date(newval);
 
     hiddenDOB.setValue(newval.format('Y'));
+
 }
 
 function onRetireYearChanged(field, newval, oldval)
