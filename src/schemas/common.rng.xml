@@ -148,7 +148,7 @@
     <define name="T_String">
         <choice>
             <data type="string">
-                <param name="pattern">[\w\-\+@\?% ,\.();/]+</param>
+                <param name="pattern">[\w\-\+@\?% ,\.();/:]+</param>
                 <param name="whiteSpace">collapse</param>
                 <param name="maxLength">500</param>
             </data>
@@ -159,7 +159,7 @@
     <define name="T_StringWithQuotes">
         <choice>
             <data type="string">
-                <param name="pattern">[\w\-\+@\?% ,\.();/']+</param>
+                <param name="pattern">[\w\-\+@\?% ,\.();/':]+</param>
                 <param name="whiteSpace">collapse</param>
                 <param name="maxLength">500</param>
             </data>

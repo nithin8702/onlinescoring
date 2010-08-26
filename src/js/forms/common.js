@@ -2,8 +2,8 @@ Ext.namespace('NRG.Forms');
 
 NRG.Forms.NoResponse=9999;
 //The regex below allow empty strings
-NRG.Forms.T_String=/^[\w\-\+@\?&% ,\.();/]*$/;
-NRG.Forms.T_StringWithQuotes=/^[\w\-\+@\?&% ,\.();/']*$/;
+NRG.Forms.T_String=/^[\w\-\+@\?&% ,\.();/:]*$/;
+NRG.Forms.T_StringWithQuotes=/^[\w\-\+@\?&% ,\.();/':]*$/;
 
 window.onkeypress=function(key)
 {
