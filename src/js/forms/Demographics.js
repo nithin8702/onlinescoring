@@ -15,7 +15,7 @@ var sSex=        {
                     style:'padding-left:0px',
                     width:150,
                     height:22,
-                    allowBlank:false,
+                    allowBlank:true,
                     next:q('q2'),
                     defaults:   {
                                     name:'SEX',
@@ -48,7 +48,7 @@ var sDOB=       {
                     format:'Y',
                     width:100,
                     ctCls:'q-container',
-                    allowBlank:false,
+                    allowBlank:true,
                     //Restrict DOB entries to 150 year range
                     maxValue:now,
                     minValue:new Date(1900,0,1),
@@ -78,7 +78,7 @@ var sHeight=    {
                     fieldLabel:'Height <span style="text-shadow:none;font-weight:normal;color:gray">(inches)</span>',
                     labelStyle:'text-shadow: 2px 2px 2px #ccc',
                     width:135,
-                    allowBlank:false,
+                    allowBlank:true,
                     allowDecimals:true,
                     allowNegative:false,
                     maxLength:7,
@@ -101,7 +101,7 @@ var sWeight=    {
                     fieldLabel:'Weight <span style="text-shadow:none;font-weight:normal;color:gray">(pounds)</span>',
                     labelStyle:'width:135px;text-shadow: 2px 2px 2px #ccc',
                     width:100,
-                    allowBlank:false,
+                    allowBlank:true,
                     allowDecimals:true,
                     allowNegative:false,
                     maxLength:7,
@@ -126,7 +126,7 @@ var birthCountry=   {
                         value:'USA',
                         inputValue:'USA',
                         submitValue:false,
-                        allowBlank:false,
+                        allowBlank:true,
                         forceSelection:false,
                         selectOnFocus:true,
                         store:NRG.Store.Countries,
@@ -215,7 +215,7 @@ var q6=     {
                             hideLabel:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             next:q('q7'),
                             defaults:   {
                                             name:'MARITAL'
@@ -260,6 +260,7 @@ var q6=     {
                             name:'MARITAL_LIST',
                             xtype:'textfield',
                             width:125,
+                            allowBlank:true,
                             disabled:true,
                             fieldLabel:'please specify',
                             style:'margin-top:5px',
@@ -290,7 +291,7 @@ var q7=     {
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             invalidClass:'',
                             disableQ:[q('q7:a2')],
@@ -342,6 +343,7 @@ var q7=     {
                             xtype:'textfield',
                             width:125,
                             disabled:true,
+                            allowBlank:true,
                             fieldLabel:'please specify',
                             style:'margin-top:5px',
                             labelStyle:'width:100px; padding-left:10px; font-weight:normal',
@@ -371,7 +373,7 @@ var q8=     {
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             invalidClass:'',
                             disableQ:[q('q8:a2')],
@@ -404,6 +406,7 @@ var q8=     {
                                                         id:q('q8:a2'),
                                                         xtype:'textfield',
                                                         name:'LIVE_LIST',
+                                                        allowBlank:true,
                                                         style:'margin-left:35px;width:185px;margin-top:5px',
                                                         next:q('q9'),
                                                         selectOnFocus:true,
@@ -440,7 +443,7 @@ var q9=     {
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             invalidClass:'',
                             disableQ:[q('q9:a2'),q('q10')],
@@ -476,6 +479,7 @@ var q9=     {
                                         id:q('q9:a2'),
                                         xtype:'textfield',
                                         name:'NAT_LANG',
+                                        allowBlank:true,
                                         style:'margin-left:90px;width:205px',
                                         next:q('q10'),
                                         listeners:  {
@@ -498,6 +502,7 @@ var q10=     {
                             id:q('q10'),
                             name:'ENG_AGE',
                             xtype:'numberfield',
+                            allowBlank:true,
                             fieldLabel:'If NO: At what age did you learn English?',
                             labelStyle:'width:265px;text-shadow: 2px 2px 2px #ccc',
                             style:'margin-top:5px;',
@@ -531,7 +536,7 @@ var q11=     {
                             xtype:'checkboxgroup',
                             columns:1,
                             hideLabel:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             invalidClass:'',
                             style:'padding-left:'+radioPaddingLeft+'px;background-color:transparent',
                             disableQ:[q('q11:a2'),q('q12')],
@@ -592,6 +597,7 @@ var q11=     {
                             xtype:'textfield',
                             width:125,
                             disabled:true,
+                            allowBlank:true,
                             fieldLabel:'please specify',
                             style:'margin-top:5px',
                             labelStyle:'width:100px; padding-left:10px; font-weight:normal',
@@ -643,7 +649,7 @@ var q12=     {
                             fieldLabel:'6. If you are retired, in what year did you retire?',
                             labelStyle:'width:310px;padding-top:5px;text-shadow: 2px 2px 2px #ccc',
                             disabled:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             minValue:1900,
                             maxValue:2010,
                             maxLength:4,
@@ -851,8 +857,15 @@ function onDOBChange(field, newval, oldval)
     }
 
     newval=field.getValue();
+
     
     var hiddenDOB=Ext.getCmp('qn2:q2:a1');
+
+    if ((!newval) || (!newval.length))
+    {
+        hiddenDOB.setValue(NRG.Forms.NoResponse);
+        return;
+    }
 
     var newdate=new Date(newval);
 

@@ -22,7 +22,7 @@ var q1=     {
                             next:q('q2'),
                             invalidClass:'',
                             enableQ:[q('q2'),q('q3')],
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'ALC_FREQ',
                                             listeners:  {
@@ -80,7 +80,7 @@ var q2=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q3'),
                             disabled:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             invalidClass:'',
                             defaults:   {
                                             name:'ALC_AMOUNT',
@@ -136,7 +136,7 @@ var q3=     {
                             hideLabel:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q4'),
-                            allowBlank:false,
+                            allowBlank:true,
                             disabled:true,
                             invalidClass:'',
                             defaults:   {
@@ -179,7 +179,7 @@ var q4=     {
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q5'),
                             enableQ:[q('q5')],
@@ -238,7 +238,7 @@ var q5=     {
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             invalidClass:'',
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q6'),
@@ -295,7 +295,7 @@ var q6=     {
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             invalidClass:'',
                             style:'padding-left:'+radioPaddingLeft+'px',
                             defaults:   {
@@ -356,7 +356,7 @@ var q7=     {
                             xtype:'radiogroup',
                             columns:1,
                             hideLabel:true,
-                            allowBlank:false,
+                            allowBlank:true,
                             invalidClass:'',
                             style:'padding-left:'+radioPaddingLeft+'px',
                             disabled:true,

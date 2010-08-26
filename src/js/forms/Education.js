@@ -21,7 +21,7 @@ var q1=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q2'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'NOW',
                                             listeners:  {
@@ -85,7 +85,7 @@ var q2=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q3'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'DAD',
                                             listeners:  {
@@ -216,7 +216,7 @@ var q4=     {
                             hideLabel:true,
                             style:'padding-left:'+radioPaddingLeft+'px',
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'MOM',
                                             listeners:  {

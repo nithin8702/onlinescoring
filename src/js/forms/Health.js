@@ -21,7 +21,7 @@ var q1=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q2'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'HEALTH',
                                             listeners:  {
@@ -77,7 +77,7 @@ var q2=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q3'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'SATISFY',
                                             listeners:  {
@@ -133,7 +133,7 @@ var q3=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q4'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'CONSCIOUS',
                                             listeners:  {
@@ -177,7 +177,7 @@ var q4=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             next:q('q5:a0'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'POST_MENO',
                                             listeners:  {
@@ -1006,6 +1006,7 @@ var q6=     {
                                             name:'OTHER_LIST',
                                             width:640,
                                             submitValue:true,
+                                            allowBlank:true,
                                             disabled:true,
                                             border:false,
                                             listeners:  {
@@ -1049,7 +1050,7 @@ var q7=     {
                             disableQ:q('q7:a2'),
                             next:q('q8'),
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             defaults:   {
                                             name:'NOW_PSYMED',
                                             listeners:  {
@@ -1084,6 +1085,7 @@ var q7=     {
                             name:'NOW_PSYMED_LIST',
                             xtype:'textfield',
                             hideLabel:true,
+                            allowBlank:true,
                             disabled:true,
                             next:q('q8'),
                             width:250,
@@ -1114,7 +1116,7 @@ var q8=     {
                             style:'padding-left:'+radioPaddingLeft+'px',
                             disableQ:[q('q8:a2'),q('q8:a3')],
                             invalidClass:'',
-                            allowBlank:false,
+                            allowBlank:true,
                             next:q('q9'),
                             defaults:   {
                                             name:'PAST_PSYMED',
@@ -1148,6 +1150,7 @@ var q8=     {
                             labelStyle:'width:200px',
                             hideLabel:false,
                             disabled:true,
+                            allowBlank:true,
                             width:250,
                             next:q('q8:a3'),
                             style:'margin-top:10px',
@@ -1163,6 +1166,7 @@ var q8=     {
                             fieldLabel:'<span class="question-label">and for how long',
                             labelStyle:'width:200px',
                             disabled:true,
+                            allowBlank:true,
                             width:150,
                             next:q('q9'),
                             style:'margin-top:10px',
@@ -1998,6 +2002,7 @@ var q13=     {
                             id:q('q13'),
                             xtype:'textarea',
                             name:'ADD_LIST',
+                            allowBlank:true,
                             hideLabel:true,
                             width:450,
                             height:125,
