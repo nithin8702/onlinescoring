@@ -678,6 +678,11 @@ var form=   {
                 title:'Ethnicity/Handedness',
                 buttonAlign:'left',
                 autoScroll:false,
+                submitOrder:   [
+                                    "SEX","AGE","EDUC","ETHNIC",
+                                    "RACE_1","RACE_2","RACE_3","RACE_4",
+                                    "HAND","WRITE","THROW"
+                                ],
                 keys:   {
                             //Digits [1-9]
                             key:[
