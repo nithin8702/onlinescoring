@@ -102,7 +102,7 @@
                 <!-- Age Learnt English -->
                 <element name="eng_age">
                     <choice>
-                        <data type="nonNegativeInteger">
+                        <data type="float">
                             <param name="maxInclusive">100</param>
                         </data>
                         <ref name="NoAnswer"/>
@@ -148,7 +148,7 @@
                 <!-- RETIRE AGE -->
                 <element name="retire_age">
                     <choice>
-                        <data type="float">
+                        <data type="positiveInteger">
                             <param name="minInclusive">16</param>
                             <param name="maxInclusive">100</param>
                         </data>
