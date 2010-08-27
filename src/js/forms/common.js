@@ -45,8 +45,6 @@ window.onkeypress=function(key)
     }
 }
 
-
-
 /**
  * Common functions for all forms (callbacks and utility methods)
  */
