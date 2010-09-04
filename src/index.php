@@ -37,7 +37,6 @@
             <!-- overrides to base library -->
             <link rel="stylesheet" type="text/css" href="js/lib/ext/ux/css/Portal.css" />
             <link rel="stylesheet" type="text/css" href="js/lib/ext/ux/css/GroupTab.css" />
-            <link rel="stylesheet" type="text/css" href="js/lib/ext/ux/css/LockingGridView.css" />
 
             <!-- extensions -->
             <script type="text/javascript" src="js/lib/ext/ux/GroupTabPanel.js"></script>
@@ -62,7 +61,6 @@
             <script type="text/javascript" src="js/lib/ext/ux/PagingStore.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/PagingRowNumberer.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/GridSearch.js"></script>
-            <script type="text/javascript" src="js/lib/ext/ux/LockingGridView.js"></script>
             <script type="text/javascript" src="js/diff.js"></script>
 
             <!-- INDEX -->
