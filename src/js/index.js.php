@@ -4,6 +4,8 @@
 ?>
 Ext.onReady(function() {
 
+Ext.getBody().on("contextmenu",Ext.emptyFn,null,{preventDefault:true});
+
 var tabForms=       {
                         id:'tabForms',
                         xtype:'tabpanel',
@@ -222,6 +224,7 @@ MainWindow.show();
 function btnGoClicked(button)
 {
     NRG.Forms.GlobalReset=false;
+    NRG.Forms.DataEntry=true;
     var txtSID=Ext.getCmp('txtSubjectID');
     
     if (!txtSID.isValid())
@@ -350,6 +353,7 @@ function resetForms()
     //NRG.Forms.startTime=null;
 
 
+    NRG.Forms.DataEntry=false;
     //Reset all text fields
     var txtSID=Ext.getCmp('txtSubjectID');
     txtSID.enable();

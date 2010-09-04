@@ -300,13 +300,72 @@ class Database
         return $result;
     }
 
+    public function storeFinalForm($label, $aclID, $data)
+    {
+        if (!ctype_alnum($label))
+            throw new Exception("Subject label must be alphanumeric.");
+        if (!ctype_digit($aclID))
+            throw new Exception('Invalid Access Control ID specified.');
+        if (!strlen($data))
+            throw new Exception('Cannot store empty form data.');
+
+        $data=$this->_server->real_escape_string($data);
+        //Paranoia
+        $aclID=$this->_server->real_escape_string($aclID);
+        $label=$this->_server->real_escape_string($label);
+
+        $query="INSERT INTO final_forms(fkAclID,subjectLabel,data)
+                VALUES($aclID,'$label','$data')
+                ON DUPLICATE KEY UPDATE data=VALUES(data)";
+
+        try
+        {
+            $qr=$this->_server->query($query);
+            if ($qr===false)
+                throw new Exception("SQL [$query]\nERROR: ".$this->_server->error);
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Failed to store final form for subject '$label'.".$e->getMessage());
+        }
+    }
+
+    public function getSubjectFinalData($subjectLabel)
+    {
+        $result=Array();
+        if (!ctype_alnum($subjectLabel))
+            throw new Exception('Invalid subject label.');
+
+        $subjectLabel=$this->_server->real_escape_string($subjectLabel);
+
+        $query="SELECT id, fkAclID as aclID, data FROM final_forms WHERE subjectLabel='$subjectLabel'";
+
+        try
+        {
+            $qr=$this->_server->query($query);
+            if ($qr===false)
+                throw new Exception("SQL [$query]\nERROR: ".$this->_server->error);
+
+            if ($qr->num_rows)
+                $result=$qr->fetch_assoc();
+            
+            $qr->close();
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Cannot search final form data for subject '".$subjectid."': ".$e->getMessage());
+        }
+
+        return $result;
+    }
+
     /** Returns all the data along with all the sessions for this subject */
     public function getSubjectData($subjectid)
     {
         $result=Array();
 
         $subjectid=$this->_server->real_escape_string($subjectid);
-        $query="SELECT * FROM (Forms INNER JOIN Sessions ON (Forms.fkSessionID=Sessions.id) INNER JOIN Acl ON (Sessions.fkAclID=Acl.id)) WHERE subjectLabel='".$subjectid."' ORDER BY fkSessionID DESC,datetimeAdded ASC";
+        $query="SELECT *, Forms.id as formID FROM (Forms INNER JOIN Sessions ON (Forms.fkSessionID=Sessions.id) INNER JOIN Acl ON (Sessions.fkAclID=Acl.id)) WHERE subjectLabel='".$subjectid."' ORDER BY fkSessionID DESC,datetimeAdded ASC";
 
         try
         {

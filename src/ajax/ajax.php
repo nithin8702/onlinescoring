@@ -6,7 +6,6 @@ set_include_path(get_include_path().PATH_SEPARATOR.'../');
 
 set_error_handler("error_handler");
 /* Ajax Defaults */
-header('Content-type: application/json');
 
 //Commit mail settings
 $config=new \NRG\Configuration(CONFIG_FILE);
@@ -25,6 +24,8 @@ if (isset($mailconf) && !empty($mailconf))
 
 function ajax_error($message='An internal error has occurred')
 {
+    header('Content-type: application/json');
+
     $result=Array(
                     "success"=>0,
                     "message"=>$message
@@ -34,6 +35,8 @@ function ajax_error($message='An internal error has occurred')
 
 function ajax_result(Array $result)
 {
+    header('Content-type: application/json');
+
     print json_encode($result);
     flush();
     exit();

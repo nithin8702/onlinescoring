@@ -11,6 +11,12 @@
     background-image:url('../images/icons/users.png');
 }
 
+.x-icon-subjects
+{
+    background-image:url('../images/icons/subjects.png');
+    background-position: -4px -6px;
+}
+
 .x-icon-subject
 {
     background-image: url('../images/icons/subject.png');
@@ -196,4 +202,81 @@ ul.help
 {
     margin-left:25px;
     list-style: circle;
+}
+
+/* Diff Grid */
+
+.row-final
+{
+    /*border-right:1px solid #AACCF6;*/
+    border-right:1px solid #EEEEEE;
+}
+
+.row-diff
+{
+    border-right:1px solid #EEEEEE;
+}
+
+.row-diff div
+{
+    font-weight:bold;
+}
+
+.row-diff-odd
+{
+    background-color: #FFAAAA;
+    color:black;
+    border-right:1px solid red;
+}
+
+.row-diff-even
+{
+    background-color: #FFDDDD;
+    color:black;
+    border-right:1px solid red;
+}
+
+.row-diff-empty-odd
+{
+    background-color: #FFFF55;
+    color:black;
+    border-right:1px solid orange;
+}
+
+.row-diff-empty-even
+{
+    background-color: #FFFFAA;
+    color:black;
+    border-right:1px solid orange;
+}
+
+.diff-col-header-label
+{
+    color:gray;
+    font-weight:bold;
+}
+
+.diff-col-header-final
+{
+    color:gray;
+    font-weight:bold;
+}
+
+
+.diff-col-header-owner
+{
+    color:gray;
+    font-weight: bold;
+    margin-right:5px;
+}
+
+.diff-col-header-date
+{
+    color:gray;
+}
+
+#cellValueToCopy
+{
+    color:blue;
+    font-weight:bold;
 }
