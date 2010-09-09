@@ -15,6 +15,9 @@
             <xsl:attribute name="subject">
                 <xsl:value-of select="/result/@subject"/>
             </xsl:attribute>
+            <xsl:attribute name="locked">
+                <xsl:value-of select="/result/final/@locked"/>
+            </xsl:attribute>
             <xsl:call-template name="columns"/>
             <xsl:call-template name="rows"/>
         </result>

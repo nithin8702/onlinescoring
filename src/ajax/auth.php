@@ -9,3 +9,9 @@ if (!isset($_SESSION['auth']) || (!$_SESSION['auth']))
     );
     ajax_result($result);
 }
+
+function setClearanceLevel($level)
+{
+    if ((int)$_SESSION['clearance']<$level)
+        ajax_error('You do not have sufficient permissions to perform this operation.');
+}

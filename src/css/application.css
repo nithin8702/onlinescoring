@@ -27,6 +27,21 @@
     background-image: url('../images/icons/grid.png');
 }
 
+.x-icon-locked
+{
+    background-image: url('../images/icons/locked.png');
+}
+
+.x-icon-edited
+{
+    background-image: url('../images/icons/edited.png');
+}
+
+.x-icon-diff
+{
+    background-image:url('../images/icons/diff.png');
+}
+
 .question-text
 {
     font-family: tahoma, arial, helvetica, sans-serif;
@@ -236,6 +251,27 @@ ul.help
     border-right:1px solid red;
 }
 
+.row-subject-unchecked-odd div
+{
+    font-weight:bold;
+}
+
+.row-subject-unchecked-even div
+{
+    font-weight:bold;
+}
+
+.row-subject-ok-odd
+{
+    color:black;
+}
+
+.row-subject-ok-even
+{
+    color:black;
+}
+
+
 .row-diff-empty-odd
 {
     background-color: #FFFF55;
@@ -279,4 +315,37 @@ ul.help
 {
     color:blue;
     font-weight:bold;
+}
+
+.row-subject-locked
+{
+    background-image: url('../images/icons/locked.png');
+    background-repeat:no-repeat;
+    background-position: 2px 2px;
+}
+
+.row-subject-unlocked
+{
+
+}
+
+.row-user-enabled
+{
+    background-image:url('../images/icons/enabled.png');
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+}
+
+.row-user-disabled
+{
+    background-image:url('../images/icons/disabled.png');
+    background-repeat: no-repeat;
+    background-position: 5px 5px;
+}
+
+.row-user-new
+{
+    background-image:url('../images/icons/new.png');
+    background-repeat: no-repeat;
+    background-position: 1px 1px;
 }

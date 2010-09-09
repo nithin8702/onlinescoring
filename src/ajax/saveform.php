@@ -4,6 +4,9 @@ require_once "auth.php";
 require_once "NRG/Configuration.php";
 require_once '../database.php';
 
+//Require data entry privileges
+setClearanceLevel(30);
+
 define("SCHEMA_DIR","../schemas/");
 define("SCHEMA_EXT",".rng.xml");
 
@@ -66,6 +69,9 @@ try
         ajax_error('Could not find your session id in the database.');
 
     $db->storeForm($schemaName,$session['id'],$xmldata->saveXML());
+
+    //Mark this data as not diff'd
+    $db->storeFinalDiffState($session['subjectLabel'], 0);
 
     $result=Array("success"=>1);
 

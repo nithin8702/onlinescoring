@@ -29,9 +29,17 @@ var cxmenuDiffCellCol=new Ext.menu.Menu({
                     cellRecord:'',
                     cellField:''
                 },
+                '-',
                 {
-                    text:'Copy all to <b>Final</b>',
+                    id:'menuitemCopySelected',
+                    text:'Copy selection to <b>Final</b>',
                     icon:'images/icons/copyAll2Final.png',
+                    handler:onCopySelectedToFinal,
+                    disabled:true
+                },
+                {
+                    text:'Copy column to <b>Final</b>',
+                    icon:'images/icons/copySelected.png',
                     handler:onCopyCellsToFinal
                 }
             ]
@@ -61,7 +69,9 @@ var storeSubjects=new Ext.ux.data.PagingJsonStore({
     fields: [
                 'subjectLabel',
                 {name:'countEntries', type:'int'},
-                {name:'dateUpdated',  type:'string'}
+                {name:'dateUpdated',  type:'string'},
+                {name:'locked',       type:'int'},
+                {name:'diff',         type:'int'}
             ],
     listeners:  {
                     load:onSubjectsLoaded
@@ -69,7 +79,7 @@ var storeSubjects=new Ext.ux.data.PagingJsonStore({
  });
 
 //A simple paging grid that displays all subjects in a paged view
-var gridSubjects=   {
+NRG.OnlineScoring.GridSubjects=new Ext.grid.GridPanel({
                         id:'gridSubjects',
                         xtype:'grid',
                         store:storeSubjects,
@@ -80,10 +90,18 @@ var gridSubjects=   {
                                         width:32
                                     }),
                                     {
+                                        header:'',
+                                        dataIndex:'locked',
+                                        width:18,
+                                        sortable:true,
+                                        renderer:renderSubjectLock
+                                    },
+                                    {
                                         header:'Subject',
                                         dataIndex:'subjectLabel',
                                         width:75,
-                                        sortable:true
+                                        sortable:true,
+                                        renderer:renderSubjectLabel
                                     },
                                     {
                                         header:'#',
@@ -92,7 +110,7 @@ var gridSubjects=   {
                                         sortable:true
                                     },
                                     {
-                                        header:'Updated on',
+                                        header:'Last entry on',
                                         //xtype:'datecolumn',
                                         //format:'M d, Y g:ia',
                                         dataIndex:'dateUpdated',
@@ -116,7 +134,7 @@ var gridSubjects=   {
                                                     xtype:'progress',
                                                     value:0.5,
                                                     text:'Loading ...',
-                                                    width:245
+                                                    width:280
                                                 }
                                             ]
 
@@ -131,55 +149,76 @@ var gridSubjects=   {
                                         rowclick:onSubjectSelected,
                                         viewready:onSubjectsViewReady
                                     }
-                    };
+                    });
 
 var tbarDiffGrid=   {
                         xtype:'toolbar',
                         items:  [
                                     {
-                                        id:'btnSaveDiff',
-                                        xtype:'button',
-                                        text:'Save',
+                                        id:'btnSaveAndLock',
+                                        text:'Save & Lock',
                                         icon:'images/icons/save.png',
-                                        handler:onSaveDiff
+                                        handler:onSaveAndLock
                                     },
+                                    '-',
                                     {
-                                        xtype:'tbseparator'
-                                    },
-                                    {
-                                        id:'btnCancelDiff',
-                                        xtype:'button',
-                                        text:'Discard',
-                                        icon:'images/icons/reset.png',
-                                        handler:onCancelDiff,
-                                        disabled:true
+                                        id:'btnChanges',
+                                        text:'Changes',
+                                        icon:'images/icons/diff.png',
+                                        menu:   {
+                                                    xtype:'menu',
+                                                    plain:true,
+                                                    items:  [
+                                                                {
+                                                                    id:'btnSaveDiff',
+                                                                    text:'Remember',
+                                                                    icon:'images/icons/save_all.png',
+                                                                    handler:onSaveDiff
+                                                                },
+                                                                '-',
+                                                                {
+                                                                    id:'btnCancelDiff',
+                                                                    text:'Forget All',
+                                                                    icon:'images/icons/reset.png',
+                                                                    handler:onCancelDiff
+                                                                },
+                                                                {
+                                                                    id:'btnCancelSelectedDiff',
+                                                                    text:'Forget Selected',
+                                                                    icon:'images/icons/removeSelected.png',
+                                                                    handler:onCancelSelectedDiff
+                                                                }
+                                                            ]
+                                                }
                                     }
                                 ]
                     };
 
 //The grid on the right of the page that displays the information
-var gridDiff=   {
-                    id:'gridDiff',
-                    xtype:'editorgrid',
-                    title:'PG43VH',
-                    iconCls:'',
-                    headerAsText:true,
-                    stripeRows:true,
-                    border:true,
-                    hidden:true,
-                    loadMask:true,
-                    colModel:new Ext.grid.ColumnModel({
-                                columns:[]
-                            }),
-                    store:new Ext.data.ArrayStore(),
-                    tbar: tbarDiffGrid,
-                    listeners:  {
-                                    reconfigure: onGridDiffReconfigured,
-                                    celldblclick: onCellDoubleClicked,
-                                    cellcontextmenu: onCellContextMenu
-                                },
-                    sm:new Ext.grid.CellSelectionModel()
-                }
+NRG.OnlineScoring.GridDiff=new Ext.grid.EditorGridPanel({
+                                id:'gridDiff',
+                                xtype:'editorgrid',
+                                title:'PG43VH',
+                                iconCls:'',
+                                headerAsText:true,
+                                stripeRows:true,
+                                border:true,
+                                hidden:true,
+                                collapsible:true,
+                                loadMask:true,
+                                colModel:new Ext.grid.ColumnModel({
+                                            columns:[]
+                                        }),
+                                store:new Ext.data.ArrayStore(),
+                                tbar: tbarDiffGrid,
+                                listeners:  {
+                                                beforeedit:  onGridDiffBeforeEdit,
+                                                reconfigure: onGridDiffReconfigured,
+                                                celldblclick: onCellDoubleClicked,
+                                                cellcontextmenu: onCellContextMenu
+                                            },
+                                sm:new Ext.grid.RowSelectionModel()
+                            });
 
 var ui= {
             xtype:'panel',
@@ -192,7 +231,7 @@ var ui= {
                             layout:'fit',
                             border:true,
                             items:  [
-                                        gridDiff
+                                        NRG.OnlineScoring.GridDiff
                                     ]
                         },
                         {
@@ -205,10 +244,10 @@ var ui= {
                             cmargins: '2 2 2 2',
                             collapsible:true,
                             split:true,
-                            minSize:260,
-                            width:260,
+                            minSize:285,
+                            width:285,
                             items:  [
-                                        gridSubjects
+                                        NRG.OnlineScoring.GridSubjects
                                     ]
                         }
                     ]
@@ -251,15 +290,14 @@ function onSubjectSelected(grid, index, e)
 
 function getSubjectData(subjectLabel)
 {
-    var grid=Ext.getCmp('gridDiff');
+    var grid=NRG.OnlineScoring.GridDiff;
     if (!grid.isVisible())
         grid.show();
-    grid.setTitle(subjectLabel);
+    grid.setTitle(subjectLabel,'');
     grid.subject=subjectLabel;
 
     //Disable the Save button
-    Ext.getCmp('btnSaveDiff').disable();
-    Ext.getCmp('btnCancelDiff').disable();
+    Ext.getCmp('btnChanges').disable();
 
 
     //Show the loadmask
@@ -320,12 +358,13 @@ function loadSubjectData(xmldata)
 
     //Decode all strings inside the Store and then reconfigure the grid
     store.loadData(xmldata);
-    Ext.getCmp('gridDiff').reconfigure(store, columns);
+    NRG.OnlineScoring.GridDiff.locked=xmldata.documentElement.getAttribute('locked');
+    NRG.OnlineScoring.GridDiff.reconfigure(store, columns);
 }
 
 function onGetSubjectDataFailed(req)
 {
-    var grid=Ext.getCmp('gridDiff');
+    var grid=NRG.OnlineScoring.GridDiff;
     grid.hide();
     NRG.OnlineScoring.GridDiff.LoadMask.hide();
 
@@ -436,6 +475,49 @@ function generateSubjectDataStore(cells)
     return store;
 }
 
+function renderSubjectLabel(value,metadata,record,rowIndex,colIndex,store)
+{
+    var cssClass='';
+
+    switch (parseInt(record.get('diff')))
+    {
+        case -1:if (rowIndex%2==1)
+                    cssClass+='row-diff-odd';
+                else
+                    cssClass+='row-diff-even';
+                break;
+        case 2:if (rowIndex%2==1)
+                    cssClass+='row-diff-empty-odd';
+                else
+                    cssClass+='row-diff-empty-even'
+                break;
+        case 0:if (rowIndex%2==1)
+                    cssClass+='row-subject-unchecked-odd';
+                else
+                    cssClass+='row-subject-unchecked-even';
+                break;
+        case 1:if (rowIndex%2==1)
+                    cssClass+='row-subject-ok-odd';
+                else
+                    cssClass+='row-subject-ok-even';
+                break;
+
+    }
+
+    metadata.css=cssClass;
+
+    return value;
+}
+
+function renderSubjectLock(value,metadata,record,rowIndex,colIndex,store)
+{
+    if (value==1)
+        metadata.css='row-subject-locked';
+    else
+        metadata.css='row-subject-unlocked';
+    return "";
+}
+
 function renderFieldName(value, metadata, record, rowIndex, colIndex, store)
 {
     var cssClass='row-diff ';
@@ -474,6 +556,16 @@ function onSubjectsViewReady(grid)
                                                     limit:20
                                                 }
                                      });
+
+    ajaxShowWait(false);
+}
+
+function onGridDiffBeforeEdit(params)
+{
+    if (params.grid.locked==true)
+        return false;
+
+    return true;
 }
 
 function onGridDiffReconfigured(grid, store, colmodel)
@@ -481,6 +573,18 @@ function onGridDiffReconfigured(grid, store, colmodel)
     //Hide the loadmask
     if (typeof(grid.loadMask)=="object")
         grid.loadMask.hide();
+
+    if (grid.locked==true)
+    {
+        Ext.getCmp('btnChanges').disable();
+        Ext.getCmp('btnSaveAndLock').disable();
+    }
+    else
+    {
+        Ext.getCmp('btnSaveAndLock').enable();
+    }
+
+    gridDiffUpdateTitle(grid);
 }
 
 /* Creates an XML representation of the labels and final values in a diff grid */
@@ -504,13 +608,17 @@ function getFinalDiffXML(grid)
     return xml;
 }
 
-/* Saves the XML diff data to the server */
-function onSaveDiff(button)
+/* Saves the XML diff data on the server, optionally locking it */
+function onSaveDiff(button, event, lock)
 {
-    button.disable();
-    Ext.getCmp('btnCancelDiff').disable();
-    var grid=Ext.getCmp('gridDiff');
+    Ext.getCmp('btnChanges').disable();
+    var grid=NRG.OnlineScoring.GridDiff;
     var xml=getFinalDiffXML(grid);
+
+    if (!defined(lock))
+        lock=0;
+    else
+        lock=1;
 
     //Show loadmask
     if (typeof(grid.loadMask))
@@ -522,7 +630,8 @@ function onSaveDiff(button)
         method:'POST',
         params: {
                     label:grid.subject,
-                    data:xml
+                    data:xml,
+                    lock:lock
                 },
 
         success:onSaveDiffSuccess,
@@ -530,11 +639,52 @@ function onSaveDiff(button)
     })
 }
 
+/* Saves the final data *permanently* on the server and locks this subject.
+ * This function is essentially a wrapper for onSaveDiff
+ */
+function onSaveAndLock(button, event)
+{
+    var store=NRG.OnlineScoring.GridDiff.getStore();
+    var countRecords=store.getTotalCount();
+    var foundEmpty=false;
+    var subject=NRG.OnlineScoring.GridDiff.subject;
+
+    //Iterate over each record and check whether its Final value is empty
+    for (var i=0;i<countRecords;++i)
+    {
+        var record=store.getAt(i);
+        if (!record.get('final').toString().length)
+        {
+            foundEmpty=true;
+            break;
+        }
+    }
+
+    //Display a warning dialog in case empty Final cells are found
+    if (foundEmpty)
+        Ext.Msg.show({
+            title:'Sanity Check',
+            msg:'It seems there are empty cells in the <b>Final</b> column.<br>'+
+                'Are you sure you want to <u>lock</u> '+subject+"'s data?",
+            icon:Ext.Msg.WARNING,
+            buttons:Ext.Msg.YESNOCANCEL,
+            fn:onSaveAndLockWarning
+        });
+    else
+        onSaveDiff(null,null,true);
+}
+
+function onSaveAndLockWarning(answer, options)
+{
+    if (answer=="yes")
+        onSaveDiff(null,null,true);
+}
+
 /* @callback */
 function onSaveDiffSuccess(response, options)
 {
     var result=Ext.decode(response.responseText);
-    var grid=Ext.getCmp('gridDiff');
+    var grid=NRG.OnlineScoring.GridDiff;
 
     if (typeof(grid.loadMask)=="object")
         grid.loadMask.hide();
@@ -542,13 +692,21 @@ function onSaveDiffSuccess(response, options)
     if (result.success==1)
     {
         grid.edited=false;
-        grid.setTitle(grid.subject);
         grid.getStore().commitChanges();
         //Remove the cached entry. This will force the app to refresh this subejct's
         //data the next time the user clicks on it
         NRG.OnlineScoring.Cache.SubjectData[result.subject]=null;
 
-        var gridSubjects=Ext.getCmp('gridSubjects');
+        //Lock the subject
+        if (defined(options.params.lock) && (options.params.lock==1))
+        {
+            grid.locked=true;
+            gridDiffUpdateTitle(grid);
+
+            markSubjectAsLocked(result.subject);
+        }
+
+        var gridSubjects=NRG.OnlineScoring.GridSubjects;
         //Did the user save this while trying to view another subject?
         if (gridSubjects.nextSelection)
             focusNextSubject();
@@ -564,11 +722,10 @@ function onSaveDiffSuccess(response, options)
 
 function onSaveDiffFailed(response, options)
 {
-    var grid=Ext.getCmp('gridDiff');
+    var grid=NRG.OnlineScoring.GridDiff;
 
     //Enable the Save button
-    Ext.getCmp('btnSaveDiff').enable();
-    Ext.getCmp('btnCancelDiff').enable();
+    Ext.getCmp('btnChanges').disable();
 
     if (typeof(grid.loadMask)=="object")
         grid.loadMask.hide();
@@ -583,10 +740,10 @@ function onSaveDiffFailed(response, options)
 
 function onBeforeSubjectSelected(selmodel,rowIndex,keepExisting,record)
 {
-    var diffgrid=Ext.getCmp('gridDiff');
-    Ext.getCmp('gridSubjects').nextSelection=record;
+    var diffgrid=NRG.OnlineScoring.GridDiff;
+    NRG.OnlineScoring.GridSubjects.nextSelection=record;
 
-    if (diffgrid.edited)
+    if (diffgrid.edited==true)
     {
         Ext.Msg.show({
                         title:'Save?',
@@ -606,25 +763,32 @@ function onSaveDiffQAnswer(button, text, config)
     //If the user chose to save his changes, simulate a click on the Save button
     if (button=="yes")
     {
-        console.log('saving...');
         onSaveDiff(Ext.getCmp('btnSaveDiff'));
     }
     else
-        focusNextSubject();
+        if (button=="no")
+            focusNextSubject();
+        else
+        {
+            NRG.OnlineScoring.GridSubjects.nextSelection=null;
+        }
 }
 
 function focusNextSubject()
 {
         //Mark the grid as not edited
-        Ext.getCmp('gridDiff').edited=false;
+        var gridDiff=NRG.OnlineScoring.GridDiff;
+        gridDiff.edited=false;
         //Otherwise, force a new selection
-        var gridSubjects=Ext.getCmp('gridSubjects');
+        var gridSubjects=NRG.OnlineScoring.GridSubjects;
         var subject=gridSubjects.nextSelection.get('subjectLabel');
 
         //Highlight the next subject row
         gridSubjects.getSelectionModel().selectRecords(Array(gridSubjects.nextSelection));
+        gridSubjects.nextSelection=null;
         //Request data for the next subject
         getSubjectData(subject);
+
 }
 
 //URLDecode all final records
@@ -634,40 +798,105 @@ function onDiffStoreLoaded(store, records, options)
     {
         var record=records[i];
         var fieldCount=record.fields.getCount();
+        var initialValue=null;
+        var match=true;
+        //Determines whether to pre-populate the final column by comparing all other <cell> columns
+        //If a value already exists in the 'final' column, then do not pre-populate.
+        var compare=!record.data['final'].length;
 
-        //Decode all fields
+        //Set compare to false if the DiffGrid is locked
+        if (NRG.OnlineScoring.GridDiff.locked==true)
+            compare=false;
+
+        //Decode all fields and see whether all <cell> values are the same
         for (var j=0;j<fieldCount;++j)
         {
             var field=record.fields.item(j).name;
             var value=record.data[field];
+            //Decode
             record.data[field]=decodeURIComponent(value);
+
+            if (!compare)
+                continue;
+            
+            var cellColumn=field.indexOf('cell');
+            //Don't perform comparisons for non-<cell> columns
+            if (cellColumn<0)
+                continue;
+
+            //Store the value of the first encountered <cell> column into initialValue
+            if ((cellColumn==0) && (initialValue===null))
+                initialValue=record.data[field];
+            else
+            {
+                //Compare values (case insensitive)
+                if (record.data[field].toString().toLowerCase()!=initialValue.toString().toLowerCase())
+                    match=false;
+            }
         }
+
+        //If all <cell> columns have the same value, store it in the final column
+        if (compare && match)
+            record.set('final',initialValue);
     }
 }
 
 function onDiffValuesUpdated(store, record, operation)
 {
+    //Update diff column so that the cells in the Data_Label column are properly
+    //highlighted, but only in case the initial value was not 0
+    var diff=diffRecord(record);
+    record.set('diff',diff);
+
+    //If the grid was edited, enable save/cancel buttons and update the title
     if (operation==Ext.data.Record.EDIT)
     {
         //Enable save and cancel buttons
-        Ext.getCmp('btnSaveDiff').enable();
-        Ext.getCmp('btnCancelDiff').enable();
+        Ext.getCmp('btnChanges').enable();
         
-        var grid=Ext.getCmp('gridDiff');
+        var grid=NRG.OnlineScoring.GridDiff;
         grid.edited=true;
-        grid.setTitle('* '+grid.subject);
+        //grid.setTitle('* '+grid.subject+);
+        gridDiffUpdateTitle(grid);
+    }
+    else if (operation==Ext.data.Record.REJECT)
+    {
+        if (diff>0)
+            gridDiffUpdateTitle(NRG.OnlineScoring.GridDiff);
     }
 }
 
 function onCancelDiff(button)
 {
-    var grid=Ext.getCmp('gridDiff');
+    var grid=NRG.OnlineScoring.GridDiff;
 
     grid.edited=false;
     grid.getStore().rejectChanges();
-    grid.setTitle(grid.subject);
-    Ext.getCmp('btnSaveDiff').disable();
-    Ext.getCmp('btnCancelDiff').disable();
+    grid.setTitle(grid.subject,'');
+    Ext.getCmp('btnChanges').disable();
+    gridDiffUpdateTitle(grid);
+}
+
+function onCancelSelectedDiff(button)
+{
+    var grid=NRG.OnlineScoring.GridDiff;
+
+    //No selections? return.
+    if (!grid.getSelectionModel().hasSelection())
+        return;
+
+    var selected=grid.getSelectionModel().getSelections();
+    var countSelected=selected.length;
+
+    for (var i=0;i<countSelected;++i)
+        selected[i].reject();
+
+    //No more modified records left?
+    if (!grid.getStore().getModifiedRecords().length)
+    {
+        Ext.getCmp('btnChanges').disable();
+        grid.edited=false;
+    }
 }
 
 function getFieldNameAt(columnIndex,grid)
@@ -687,6 +916,8 @@ function getCellValueAt(rowIndex,field,grid)
 
 function onCellDoubleClicked(grid, rowIndex, columnIndex, event)
 {
+    if (grid.locked==1)
+        return;
     //Since columns can be moved around, the columnIndex variable is used
     //to find the name of the data field the cell's column maps to.
     var field=getFieldNameAt(columnIndex,grid);
@@ -707,12 +938,24 @@ function onCellDoubleClicked(grid, rowIndex, columnIndex, event)
 
 function onCellContextMenu(grid, rowIndex, columnIndex, event)
 {
+    //Do nothing if the grid is locked
+    if (grid.locked==true)
+        return;
+
     var field=getFieldNameAt(columnIndex,grid);
     var value=getCellValueAt(rowIndex,field,grid);
     var record=grid.getStore().getAt(rowIndex);
-    
+
+    //Context menu clears final value
     if (field=='final')
-        return;
+    {
+        if (record.isModified('final'))
+            record.reject();
+        else
+            record.set('final','');
+
+        gridDiffUpdateTitle(NRG.OnlineScoring.GridDiff);
+    }
     
     if (field=='field')
         return;
@@ -724,9 +967,18 @@ function onCellContextMenu(grid, rowIndex, columnIndex, event)
         menu.cellRecord=record;
         menu.cellField=field;
 
+        if (!value.length)
+            value='(empty)';
+        else
         //Make sure the display length of the value is reasonable
         if (value.length>15)
             value=value.substring(0,15)+'...';
+
+        //Enable 'Copy selection to Final' if there's something selected in the grid
+        if (grid.getSelectionModel().hasSelection())
+            Ext.getCmp('menuitemCopySelected').enable();
+        else
+            Ext.getCmp('menuitemCopySelected').disable();
 
         //Block the browser's popup menu
         event.preventDefault();
@@ -747,10 +999,23 @@ function onCopyOneCellToFinal(item, event)
     record.set('final',record.get(field));
 }
 
+function onCopySelectedToFinal(item,event)
+{
+    var selections=NRG.OnlineScoring.GridDiff.getSelectionModel().getSelections();
+    var countSelected=selections.length;
+    var field=item.parentMenu.cellField;
+    
+    for (var i=0;i<countSelected;++i)
+    {
+        var record=selections[i];
+        record.set('final',record.get(field));
+    }
+}
+
 function onCopyCellsToFinal(item, event)
 {
     var field=item.parentMenu.cellField;
-    var store=Ext.getCmp('gridDiff').getStore();
+    var store=NRG.OnlineScoring.GridDiff.getStore();
     var count=store.getTotalCount();
 
     store.suspendEvents(true);
@@ -770,5 +1035,88 @@ function onCopyCellsToFinal(item, event)
 function onSubjectsLoaded(store, records, options)
 {
     var grid=Ext.getCmp('panelSubjects');
-    grid.setTitle('Subjects ('+store.getTotalCount()+')');
+    grid.setTitle('Subjects ('+store.getTotalCount()+')','');
+}
+
+function gridDiffUpdateTitle(grid)
+{
+    var store=grid.getStore();
+    //Compute number of different rows
+    var countRecords=store.getTotalCount();
+    var prefix="";
+    var countDiff=0;
+    var iconCls='x-icon-diff';
+
+    if (grid.locked==true)
+        iconCls='x-icon-locked';
+    else
+    //Prepend a star in case there are modifications
+    if ((store.getModifiedRecords().length) && (grid.locked!=1))
+        iconCls="x-icon-edited";
+
+    //Count the number of rows that have diff>0
+    for (var i=0;i<countRecords;++i)
+        if (store.getAt(i).get('diff')>0)
+            ++countDiff;
+
+    if (countDiff)
+        grid.setTitle(prefix+grid.subject+' ('+countDiff+'/'+countRecords+')',iconCls);
+    else
+        grid.setTitle(prefix+grid.subject+' ('+countRecords+')',iconCls);
+
+}
+
+function diffRecord(record)
+{
+    var initialValue="";
+    var foundFirst=false;
+    var match=0;
+
+    //Skip records that have a final value
+    if (record.get('final').toString().length)
+        return match;
+
+    for (var i=0;i<record.fields.length;++i)
+    {
+        var field=record.fields.item(i).name;
+        var cellColumn=field.indexOf('cell');
+        //Don't perform comparisons for non-<cell> columns
+        if (cellColumn<0)
+            continue;
+
+        //Store the value of the first encountered <cell> column into initialValue
+        if ((cellColumn==0) && !foundFirst)
+        {
+            initialValue=record.get(field);
+            foundFirst=true;
+        }
+        else
+        {
+            //Compare values (case insensitive)
+            if (record.get(field).toString().toLowerCase()!=initialValue.toString().toLowerCase())
+                match=1;
+        }
+    }
+
+    if (!initialValue.length)
+        match=2;
+
+   return match;
+}
+
+function markSubjectAsLocked(label)
+{
+    console.log('Locking subject '+label);
+    var grid=NRG.OnlineScoring.GridSubjects;
+    var store=grid.getStore();
+
+    var result=store.findExact('subjectLabel',label);
+
+    if (result<0)
+        return;
+
+    var record=store.getAt(result);
+    record.set('locked',1);
+
+    console.log('Locked subject '+label);
 }

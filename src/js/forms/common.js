@@ -919,6 +919,7 @@ function btnSaveClicked(button)
 
 function saveRequestSucceeded(data,request)
 {
+    ajaxShowWait(false);
     Ext.Msg.hide();
     var response=Ext.decode(data.responseText);
 
@@ -960,6 +961,7 @@ function saveRequestSucceeded(data,request)
 
 function saveRequestFailed(form,data)
 {
+    ajaxShowWait(false);
     Ext.Msg.hide();
     Ext.getCmp('btnSave').enable();
     Ext.Msg.alert('Error','Oh, snap! :( We were unable to store the data.<br/>Please contact your IT department.');

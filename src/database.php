@@ -1,7 +1,10 @@
 <?php
 
-define('QUERY_LIST_USERS','SELECT *, Acl.id as aclID, Roles.id as roleID FROM Acl INNER JOIN Roles ON (Acl.fkRoleID=Roles.id)');
-
+define('QUERY_LIST_USERS','SELECT *, Acl.id as aclID, Roles.id as roleID FROM Acl 
+                            LEFT JOIN Roles ON (Acl.fkRoleID=Roles.id)
+                            WHERE Acl.Username!=\'SYSTEM\' AND Acl.deleted!=1
+                            ORDER BY Acl.datetimeModified DESC');
+define('QUERY_LIST_ROLES','SELECT * FROM Roles');
 class Database
 {
     protected $_hostname="";
@@ -103,6 +106,26 @@ class Database
         return $result;
     }
 
+    /** Lists all available roles
+     * @return Array An associative array containg the query result
+     */
+    public function listRoles()
+    {
+        $result=Array();
+
+        $query=$this->_server->query(QUERY_LIST_ROLES);
+        //Store the result
+        if ($query->num_rows)
+        {
+            //Workaround for fetch_all() in case mysqlnd isn't available
+            while(($row=$query->fetch_array(MYSQLI_ASSOC)))
+                $result[]=$row;
+        }
+        $query->close();
+
+        return $result;
+    }
+
     /** Lists all available subjects
      * @return Array An associative array containg the query result
      */
@@ -113,15 +136,22 @@ class Database
         if ($sort!="ASC")
             $sort="DESC";
 
-        $query='SELECT  subjectLabel, 
+        $query='SELECT  Sessions.subjectLabel,
                         COUNT(DISTINCT fkSessionID) as countEntries, 
-                        MAX(datetimeAdded)          as dateUpdated 
-                        FROM Forms 
-                        INNER JOIN Sessions ON (Forms.fkSessionID=Sessions.id) 
+                        MAX(datetimeAdded)          as dateUpdated,
+                        locked,
+                        diff
+                        FROM (Forms
+                        INNER JOIN Sessions ON (Forms.fkSessionID=Sessions.id)
+                        LEFT JOIN final_forms ON (final_forms.subjectLabel=Sessions.subjectLabel))
                         GROUP BY subjectLabel 
                         ORDER BY dateUpdated '.$sort;
 
         $query=$this->_server->query($query);
+
+        if ($query===false)
+            throw new Exception("SQL Error: ".$this->_server->error);
+       
         if ($query->num_rows)
         {
             //Workaround for fetch_all() in case mysqlnd isn't available
@@ -152,6 +182,8 @@ class Database
         $query->close();
         return $result;
     }
+
+
 
     public function createUser($email)
     {
@@ -300,23 +332,24 @@ class Database
         return $result;
     }
 
-    public function storeFinalForm($label, $aclID, $data)
+    public function storeFinalForm($label, $aclID, $data, $lock=0)
     {
         if (!ctype_alnum($label))
             throw new Exception("Subject label must be alphanumeric.");
-        if (!ctype_digit($aclID))
+        if (!is_numeric($aclID))
             throw new Exception('Invalid Access Control ID specified.');
         if (!strlen($data))
             throw new Exception('Cannot store empty form data.');
+        if (!is_numeric($lock))
+            throw new Exception("Property 'locked' must be numeric, '$lock' given.");
 
         $data=$this->_server->real_escape_string($data);
         //Paranoia
-        $aclID=$this->_server->real_escape_string($aclID);
         $label=$this->_server->real_escape_string($label);
 
-        $query="INSERT INTO final_forms(fkAclID,subjectLabel,data)
-                VALUES($aclID,'$label','$data')
-                ON DUPLICATE KEY UPDATE data=VALUES(data)";
+        $query="INSERT INTO final_forms(fkAclID,subjectLabel,data,locked)
+                VALUES($aclID,'$label','$data',$lock)
+                ON DUPLICATE KEY UPDATE data=VALUES(data),locked=VALUES(locked)";
 
         try
         {
@@ -330,6 +363,74 @@ class Database
         }
     }
 
+
+    public function storeFinalDiffState($label, $diff)
+    {
+        if (!ctype_alnum($label))
+            throw new Exception("Subject label must be alphanumeric.");
+        if (!is_numeric($diff))
+            throw new Exception('Invalid diff value specified.');
+
+        $data=$this->_server->real_escape_string($label);
+
+        $query="INSERT INTO final_forms(fkAclID,subjectLabel,data,diff)
+                VALUES(1,'$label','',$diff)
+                ON DUPLICATE KEY UPDATE diff=VALUES(diff)";
+
+        try
+        {
+            $qr=$this->_server->query($query);
+            if ($qr===false)
+                throw new Exception("SQL [$query]\nERROR: ".$this->_server->error);
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Failed to store final form for subject '$label'.".$e->getMessage());
+        }
+    }
+
+    public function storeUser($aclID,$username,$fkRoleID,$enabled,$requested)
+    {
+        if (($aclID!==null) && (!is_numeric($aclID)))
+            throw new Exception("User ID must be numeric.");
+        if (!is_numeric($fkRoleID))
+            throw new Exception("The access level ID must be numeric.");
+        if (!is_numeric($requested))
+            throw new Exception("Field 'requested' must be numeric.");
+        if (($requested!==0) && ($requested!==1))
+            throw new Exception("Field 'requested' must be either 0 or 1.");
+        if (($enabled!==0) && ($enabled!==1))
+            throw new Exception("Field 'enabled' must be either 0 or 1.");
+
+        $username=$this->_server->real_escape_string($username);
+
+        if (empty($aclID))
+            $query="INSERT INTO Acl(username,fkRoleID,enabled,requested,datetimeCreated)
+                    VALUES('$username',$fkRoleID,$enabled,$requested,NOW())";
+        else
+            $query="UPDATE Acl SET username='$username',fkRoleID=$fkRoleID,
+                    enabled=$enabled,requested=$requested WHERE id=$aclID LIMIT 1";
+
+        try
+        {
+            $qr=$this->_server->query($query);
+            if ($qr===false)
+                throw new Exception("SQL ERROR: ".$this->_server->error);
+
+            $result=$this->_server->insert_id;
+
+            //Return the original aclID
+            if (empty($result) || ($result<0))
+                $result=$aclID;
+        }
+        catch (Exception $e)
+        {
+            throw new Exception($e->getMessage());
+        }
+
+        return $result;
+    }
+
     public function getSubjectFinalData($subjectLabel)
     {
         $result=Array();
@@ -338,7 +439,7 @@ class Database
 
         $subjectLabel=$this->_server->real_escape_string($subjectLabel);
 
-        $query="SELECT id, fkAclID as aclID, data FROM final_forms WHERE subjectLabel='$subjectLabel'";
+        $query="SELECT id, fkAclID as aclID, data, locked FROM final_forms WHERE subjectLabel='$subjectLabel'";
 
         try
         {
@@ -388,5 +489,65 @@ class Database
         }
 
         return $result;
+    }
+
+    function isSubjectLocked($subjectLabel)
+    {
+        $result=false;
+        if (!ctype_alnum($subjectLabel))
+            throw new Exception('Invalid subject label.');
+
+        $subjectLabel=$this->_server->real_escape_string($subjectLabel);
+
+        $query="SELECT locked FROM final_forms WHERE subjectLabel='$subjectLabel'";
+
+        try
+        {
+            $qr=$this->_server->query($query);
+            if ($qr===false)
+                throw new Exception("SQL [$query]\nERROR: ".$this->_server->error);
+
+            if ($qr->num_rows==0)
+                $result=false;
+            else
+            {
+                $data=$qr->fetch_assoc();
+                if ((int)$data['locked']==1)
+                    $result=true;
+                else
+                    $result=false;
+            }
+
+            $qr->close();
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Cannot search final form data for subject '".$subjectid."': ".$e->getMessage());
+        }
+
+        return $result;
+    }
+
+    function deleteUser($username)
+    {
+        if (empty($username))
+            throw new Exception("Username cannot be empty.");
+
+        $username=$this->_server->real_escape_string($username);
+
+        $query="UPDATE Acl SET deleted=1,disabled=1,requested=0 WHERE username='$username' LIMIT 1";
+
+        try
+        {
+            $qr=$this->_server->query($query);
+            if ($qr===false)
+                throw new Exception("SQL [$query]\nERROR: ".$this->_server->error);
+        }
+        catch (Exception $e)
+        {
+            throw new Exception("Cannot delete user '".$username."': ".$e->getMessage());
+        }
+
+        return $this->_server->affected_rows;
     }
 }

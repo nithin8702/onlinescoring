@@ -5,7 +5,7 @@ require_once "NRG/Configuration.php";
 require_once '../database.php';
 
 //Require data manager privileges
-setClearanceLevel(50);
+setClearanceLevel(90);
 
 try
 {
@@ -16,11 +16,11 @@ try
     if (!$db)
         throw new Exception("Couldn't connect to the database.");
 
-    $result=$db->listSubjects();
+    $result=$db->listRoles();
 
     ajax_result(Array(
                         "total"     => count($result),
-                        "subjects"  => $result
+                        "roles"  => $result
                      ));
 }
 catch (\Exception $e)

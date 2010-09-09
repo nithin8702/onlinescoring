@@ -1,21 +1,5 @@
 <?php
     require_once 'bootstrap.php';
-//    require_once 'database.php';
-//
-//    try
-//    {
-//        $db=new Database('127.0.0.1', 'root', '%root1', 'onlinescoring');
-//
-//        print_r($db->getUser('victor.petrov@gmail.com'));
-//    }
-//    catch (Exception $e)
-//    {
-//        print_r($e);
-//    }
-//
-//    die;
-    
-//    $_SESSION['auth']=true; //TODO: CHANGE ME
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -31,7 +15,9 @@
                 window.console={log:function(){},error:function(){},warn:function(){}};
         </script>
 
-        <?php if ($_SESSION['auth']===true): ?>
+        <?php if ($_SESSION['auth']===true)
+              {
+        ?>
             <link rel="stylesheet" href="css/application.css" type="text/css"/>
 
             <!-- overrides to base library -->
@@ -45,8 +31,9 @@
             <script type="text/javascript" src="js/lib/ext/ux/Portal.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/PortalColumn.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/Portlet.js"></script>
-            
-            <!-- Forms -->
+
+        <?php if ($_SESSION['clearance']>=30):?>
+            <!-- Forms View -->
             <script type="text/javascript" src="js/store/countries.js"></script>
             <script type="text/javascript" src="js/store/states.js"></script>
             <script type="text/javascript" src="js/forms/common.js"></script>
@@ -56,19 +43,35 @@
             <script type="text/javascript" src="js/forms/EthnicityHandedness.js"></script>
             <script type="text/javascript" src="js/forms/Occupation.js"></script>
             <script type="text/javascript" src="js/forms/Health.js"></script>
-            
+        <?php endif; ?>
+
+        <?php if ($_SESSION['clearance']>=50):?>
             <!-- Diff View -->
             <script type="text/javascript" src="js/lib/ext/ux/PagingStore.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/PagingRowNumberer.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/GridSearch.js"></script>
             <script type="text/javascript" src="js/diff.js"></script>
+        <?php endif; ?>
+
+        <?php if ($_SESSION['clearance']>=90):?>
+            <!-- Users View -->
+            <link rel="stylesheet" type="text/css" href="js/lib/ext/ux/css/RowEditor.css"/>
+            <script type="text/javascript" src="js/lib/ext/ux/RowEditor.js"></script>
+            <script type="text/javascript" src="js/users.js"></script>
+        <?php endif; ?>
 
             <!-- INDEX -->
             <script type="text/javascript" src="js/index.js.php"></script>
-        <?php else: ?>
+        <?php  //if auth===false
+              }
+            else
+            {
+        ?>
             <script type="text/javascript" src="js/lib/ext/ext.util.md5.js"></script>
             <script type="text/javascript" src="js/login.js"></script>
-        <?php endif ?>
+        <?php
+            }
+        ?>
     </head>
     <body>
         <div id="divRegister" style="display:none"></div>

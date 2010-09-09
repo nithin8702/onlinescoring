@@ -6,6 +6,7 @@ Ext.onReady(function() {
 
 Ext.getBody().on("contextmenu",Ext.emptyFn,null,{preventDefault:true});
 
+<?php if ((int)$_SESSION['clearance']>=30): ?>
 var tabForms=       {
                         id:'tabForms',
                         xtype:'tabpanel',
@@ -78,53 +79,19 @@ var toolbarForms=   {
                                         handler:resetForms,
                                         icon:'images/icons/reset.png'
                                     },
-                                    {
-                                        xtype:'tbfill'
-                                    },
+                                    '->',
                                     {
                                         id:'form_version',
                                         xtype:'tbtext',
                                         html:''
                                     },
-                                    {
-                                        xtype:'tbseparator'
-                                    },
+                                    '-',
                                     {
                                         id:'clock',
                                         xtype:'tbtext',
                                         html:'00:00'
                                     },
-                                    {
-                                        xtype:'tbseparator'
-                                    },
-                                    {
-                                        id:'txtUsername',
-                                        xtype:'tbtext',
-                                        html:'<b><?php print $_SESSION['username'];?></b>'
-                                    },
-                                    {
-                                        xtype:'tbspacer'
-                                    },
-                                    {
-                                        xtype:'button',
-                                        text:'Logout',
-                                        icon:'images/icons/logout.png',
-                                        handler:function()
-                                        {
-                                            ajaxShowWait(false);
-                                            Ext.Ajax.request({
-                                                url:'ajax/logout.php',
-                                                success:function()
-                                                {
-                                                    window.onbeforeunload=null;
-                                                    window.location.reload()
-                                                }
-                                            })
-                                        }
-                                    },
-                                    {
-                                        xtype:'tbseparator'
-                                    },
+                                    '-',
                                     {
                                         id:'btnHelp',
                                         xtype:'button',
@@ -168,16 +135,20 @@ var portalForms=    {
                         bodyStyle:'background-color:white',
                         items:[panelForms]
                     };
-
+<?php endif; ?>
+<?php if ((int)$_SESSION['clearance']>=90): ?>
 var portalUsers=     {
                         xtype:'portal',
                         title:'Users',
                         layout:'fit',
-                        style:'padding:10px',
                         iconCls:'x-icon-users',
-                        items:[{html:'Under construction'}]
+                        items:  [
+                                    NRG.OnlineScoring.UsersView
+                                ]
                     };
+<?php endif; ?>
 
+<?php if ((int)$_SESSION['clearance']>=50): ?>
 var portalScoring=    {
                         xtype:'portal',
                         title:'Diff View',
@@ -188,24 +159,92 @@ var portalScoring=    {
                                     NRG.OnlineScoring.DiffView
                                 ]
                     };
+<?php endif; ?>
+
+var topMenu=    {
+                    region:'north',
+                    xtype:'toolbar',
+                    height:25,
+                    items:[
+                                    {
+                                        html:'<img alt="NRG" src="images/nrg.png" height="18" width="20" border="0" onclick="javascript:window.location=\'http://neuroinformatics.harvard.edu\'"/>',
+                                        style:'text-decoration:none'
+                                    },
+                                    {
+                                        xtype:'tbtext',
+                                        html:'<a href="http://neuroinformatics.harvard.edu" target="_blank" style="position:relative;margin-left:1px;top:-1px;font-weight:bold;color:firebrick; text-decoration:none"><b>NRG</b></a>',
+                                    },
+                                    ' ',
+                                    {
+                                        xtype:'tbtext',
+                                        html:'<a href="http://mail.neuroinfo.org" target="_blank">Mail</a>',
+                                        style:'margin-left:1px;margin-bottom:2px'
+                                    },
+                                    '->',
+                                    {
+                                        id:'txtUsername',
+                                        xtype:'tbtext',
+                                        html:'<span style="position:relative;top:-1px"><b><?php print $_SESSION['username'];?></b></span>',
+                                    },
+                                    {
+                                        xtype:'tbspacer'
+                                    },
+                                    '-',
+                                    {
+                                        xtype:'button',
+                                        text:'Logout',
+                                        icon:'images/icons/logout.png',
+                                        handler:function()
+                                        {
+                                            ajaxShowWait(false);
+                                            Ext.Ajax.request({
+                                                url:'ajax/logout.php',
+                                                success:function()
+                                                {
+                                                    window.onbeforeunload=null;
+                                                    window.location.reload()
+                                                }
+                                            })
+                                        }
+                                    },
+                                    ' '
+                          ]
+                };
 
 var groupDashboard= {
                         xtype:'grouptabpanel',
                         tabWidth:130,
                         activeGroup:0,
-                        padding:5,
-                        items:  [{
+                        items:  [
+                                  {
                                     mainItem:0,
                                     items:[
-                                            portalForms,
-                                            portalScoring,
-                                            portalUsers]
+                                            <?php
+                                                  //Data entry privileges
+                                                  if ($_SESSION['clearance']>=30)
+                                                      print 'portalForms,';
+                                                  //Data manager privileges
+                                                  if ($_SESSION['clearance']>=50)
+                                                    print 'portalScoring,';
+                                                  //Administrator privileges
+                                                  if ($_SESSION['clearance']>=90)
+                                                    print 'portalUsers';
+                                            ?>
+                                            ]
                                 }]
                     };
-var viewportMain=     {
+
+var viewportMain=   {
                         id:'viewportMain',
-                        layout:'fit',
-                        items:[groupDashboard]
+                        layout:'border',
+                        items:[
+                                topMenu,
+                                {
+                                    region:'center',
+                                    layout:'fit',
+                                    items:[groupDashboard]
+                                }
+                              ]
                     };
 
 
@@ -221,6 +260,7 @@ MainWindow.show();
 
 });
 
+<?php if ((int)$_SESSION['clearance']>=30): ?>
 function btnGoClicked(button)
 {
     NRG.Forms.GlobalReset=false;
@@ -394,11 +434,6 @@ function resetForms()
     Ext.getCmp('txtSubjectID').focus();
 }
 
-function onLeave()
-{
-    return false;
-}
-
 function sessionRequestSucceeded(data,request)
 {
     Ext.getCmp('btnGo').enable();
@@ -423,6 +458,13 @@ function sessionRequestSucceeded(data,request)
 
         if (response.action)
             ajaxAction(response.action, response)
+        else
+            Ext.Msg.show({
+                            title:'Aw, snap!',
+                            msg:response.message,
+                            icon:Ext.Msg.ERROR,
+                            buttons:Ext.Msg.OK
+                        });
     }
 }
 
@@ -433,4 +475,11 @@ function sessionRequestFailed(form,data)
     Ext.getCmp('btnGo').enable();
     Ext.getCmp('txtSubjectID').enable();
     Ext.Msg.alert('Error','Oops, we were unable to create a data entry session for this Subject ID.<br/>Please try again later.');
+}
+
+<?php endif; ?>
+
+function onLeave()
+{
+    return false;
 }

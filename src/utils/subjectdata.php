@@ -1,24 +1,9 @@
 <?php
-require_once "ajax.php";
-require_once "auth.php";
-require_once "NRG/Configuration.php";
-require_once '../database.php';
 
-if (!isset($_GET['label']) || empty($_GET['label']))
-    ajax_error('Please specify a subject label.');
-
-$subjectLabel=trim(strtoupper($_GET['label']));
-
-function getSubjectDataAsXml($subjectLabel)
+function getSubjectDataAsXml($subjectLabel, Database $db)
 {
     if (empty($subjectLabel))
         throw new Exception("Empty subject label.");
-    $config=new \NRG\Configuration("../config.ini.php");
-    $dbconfig=$config->Database;
-    $db=new Database($dbconfig['host'],$dbconfig['user'],$dbconfig['pass'],$dbconfig['name']);
-
-    if (!$db)
-        throw new Exception("Couldn't connect to the database.");
 
     //Retrieve the form data
     $result=$db->getSubjectData($subjectLabel);
@@ -47,6 +32,10 @@ function getSubjectDataAsXml($subjectLabel)
 
     $nodeFinal=$xmldoc->createElement('final');
     $nodeFinal->appendChild($xmlFinal);
+    $locked=0;
+    if ($finaldata['locked']>0)
+        $locked=$finaldata['locked'];
+    $nodeFinal->setAttribute('locked', $locked);
 
     //Insert the <final> element into the main XML document.
     $xmldoc->documentElement->appendChild($nodeFinal);
@@ -127,6 +116,9 @@ function getSubjectDataAsXml($subjectLabel)
 
 function applyXSLtoXML(DomDocument $xmldoc, $xsltemplate)
 {
+    //Make sure XSLT is available
+    if (!class_exists('XSLTProcessor'))
+        throw new Exception('Class XSLTProcessor is not available. Please install the XSLT extension for PHP.');
     $xsldata=null;
     //Now we should load the XSL stylesheet
     if (function_exists('apc_fetch'))
@@ -167,21 +159,27 @@ function applyXSLtoXML(DomDocument $xmldoc, $xsltemplate)
 /** Compares the columns of repeating <row> elements.
  * Appends @diff=1 if the columns have different values, otherwise @diff=0
  * @param DomNode $rowcollection
- * @return boolean
+ * @return int Number of rows that are different
  */
 function diffRows(DomNode &$rowcollection)
 {
-    $result=false;
+    $result=0;
     $row=$rowcollection->firstChild;
 
     //Loop through all the rows
     while ($row)
     {
+        $r=0;
+        //See the Final column has a value
+        $f=$row->getElementsByTagName('final')->item(0);
+
         //Compare all the columns
-        $r=diffColumns($row->getElementsByTagName('cell'));
+        if (empty($f->nodeValue))
+            $r=diffColumns($row->getElementsByTagName('cell'));
+
         $row->appendChild(new DOMAttr('diff', $r));
-        if ($r==true)
-            $result=true;
+        if ($r>0)
+            $result++;
 
         $row=$row->nextSibling;
     }

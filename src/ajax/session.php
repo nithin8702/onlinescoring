@@ -4,6 +4,9 @@ require_once "auth.php";
 require_once "NRG/Configuration.php";
 require_once '../database.php';
 
+//Require data entry privileges
+setClearanceLevel(30);
+
 //Check for errors
 if (empty($_POST) || empty($_POST['subjectid']))
     ajax_error('Invalid request.');
@@ -22,6 +25,11 @@ try
     $config=new \NRG\Configuration(CONFIG_FILE);
     $dbconf=$config->Database;
     $db=new Database($dbconf['host'],$dbconf['user'],$dbconf['pass'],$dbconf['name'],$dbconf['port']);
+
+    //Verify the subject isn't locked
+    if ($db->isSubjectLocked($subjectid))
+        ajax_error('Sorry, this subject has been locked. No data entry is allowed for locked subjects.');
+
     $session=$db->createSession($subjectid, $_SESSION['aclID']);
 
     $result=Array(
