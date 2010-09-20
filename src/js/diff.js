@@ -479,29 +479,31 @@ function renderSubjectLabel(value,metadata,record,rowIndex,colIndex,store)
 {
     var cssClass='';
 
-    switch (parseInt(record.get('diff')))
+    if (parseInt(record.get('locked'))==0)
     {
-        case -1:if (rowIndex%2==1)
-                    cssClass+='row-diff-odd';
-                else
-                    cssClass+='row-diff-even';
-                break;
-        case 2:if (rowIndex%2==1)
-                    cssClass+='row-diff-empty-odd';
-                else
-                    cssClass+='row-diff-empty-even'
-                break;
-        case 0:if (rowIndex%2==1)
-                    cssClass+='row-subject-unchecked-odd';
-                else
-                    cssClass+='row-subject-unchecked-even';
-                break;
-        case 1:if (rowIndex%2==1)
-                    cssClass+='row-subject-ok-odd';
-                else
-                    cssClass+='row-subject-ok-even';
-                break;
-
+        switch (parseInt(record.get('diff')))
+        {
+            case -1:if (rowIndex%2==1)
+                        cssClass+='row-diff-odd';
+                    else
+                        cssClass+='row-diff-even';
+                    break;
+            case 2:if (rowIndex%2==1)
+                        cssClass+='row-diff-empty-odd';
+                    else
+                        cssClass+='row-diff-empty-even'
+                    break;
+            case 0:if (rowIndex%2==1)
+                        cssClass+='row-subject-unchecked-odd';
+                    else
+                        cssClass+='row-subject-unchecked-even';
+                    break;
+            case 1:if (rowIndex%2==1)
+                        cssClass+='row-subject-ok-odd';
+                    else
+                        cssClass+='row-subject-ok-even';
+                    break;
+        }
     }
 
     metadata.css=cssClass;
