@@ -3,3 +3,8 @@
 \.chg\..*$
 \.rej$
 \.conflict\~$
+
+syntax: glob
+
+nbproject/configs/*
+nbproject/private/*
