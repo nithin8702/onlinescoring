@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This stylesheet converts the subject data from hierarchical XML format to
-     tabular XML format with a repeating <row> element.
- -->
+<!-- subjectdata.xsl tabsize=4
+
+ This is the xml stylesheet used to output the subject data in tabular form,
+ for use with XmlStore (but not limited to it).
+ Each <session> element is converted to a column. The rows in these columns
+ depend on the labels extracted automatically from the RelaxNG schemas.
+
+ @warning Unfortunately, one has to specify the version of each schema
+          (i.e. DEM/1.4) to load (as a parameter to the "form" template), but this
+          can be worked around by creating a symlink that always points to the
+          latest version. Then, one only needs to update the link and everything
+          else will magically load the new schema version. Because part of the
+          development time is spent on Windows, symlinks aren't used by default.
+
+ @author  Victor Petrov <victor_petrov@harvard.edu>
+ @date    July 20, 2010
+ @copyright (c) 2010 The Presidents and Fellows of Harvard College
+ @copyright (c) 2010 The Neuroinformatics Research Group at Harvard University
+ @license   GPLv3 <http://www.gnu.org/licenses/gpl-3.0.txt>
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" version="1.0">
     <xsl:output method="xml"/>
     <xsl:variable name="lc" select="'abcdefghijklmnopqrstuvwxyz'" />

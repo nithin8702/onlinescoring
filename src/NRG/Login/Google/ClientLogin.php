@@ -1,4 +1,33 @@
 <?php
+/* ClientLogin.php tabsize=4
+ *
+ * This class implements the Google ClientLogin interface. Its purpose is to
+ * authenticate the user identified by an e-mail. The username should be an
+ * e-mail account hosted by Google Apps or Google itself.
+ * To use it, simply instanciate this class supplying a username and cleartext
+ * password, and then call the login() method. Make sure to catch exceptions
+ * such as ClientLoginCaptchaException to handle Captcha images.
+ *
+ * @author  Victor Petrov <victor_petrov@harvard.edu>
+ * @date    July 20, 2010
+ * @copyright (c) 2010 The Presidents and Fellows of Harvard College
+ * @copyright (c) 2010 The Neuroinformatics Research Group at Harvard University
+ * @license   GPLv3 <http://www.gnu.org/licenses/gpl-3.0.txt>
+ * -----------------------------------------------------------------------------
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * -----------------------------------------------------------------------------
+ */
 namespace NRG\Login\Google;
 
 require_once "NRG/Login/AbstractLogin.php";
@@ -9,6 +38,7 @@ define('HTTP_RESPONSE_OK',200);
 define('HTTP_RESPONSE_FORBIDDEN',403);
 define('CLIENT_LOGIN_URL','https://www.google.com/accounts/ClientLogin');
 define('CAPTCHA_URL_PREFIX','http://www.google.com/accounts/');
+define('SOURCE_API','NRG-GoogleAPI-0.1');
 
 /** Implements the Google ClientLogin interface to login a client using an
  * email and password.
@@ -71,6 +101,7 @@ class ClientLogin extends \NRG\Login\AbstractLogin
         $this->setLoginURL(CLIENT_LOGIN_URL);
         $this->setUsername($email);
         $this->setPassword($password);
+        $this->_source=SOURCE_API;
     }
 
     /** Getsthe Google ClientLogin service id
@@ -170,8 +201,9 @@ class ClientLogin extends \NRG\Login\AbstractLogin
         return __CLASS__;
     }
 
-    /** Performs the first login attempt
-     *
+    /** Performs the actual login
+     * @warning Beware of exceptions.
+     * @return TRUE on Success, FALSE on Failure.
      */
     public function login()
     {

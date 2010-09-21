@@ -1,5 +1,37 @@
 <?php
-
+/* subjectdata.php tabsize=4
+ *
+ * Utility functions for fetching and manipulating subject data XML:
+ *      getSubjectDataAsXml() - returns a DomDocument containing the subject's data
+ *      applyXSLtoXML()       - transforms the XML using an XSL stylesheet.
+ *      diffRows()            - loops over a collection of <row> elements and appends
+ *                              an attribute called 'diff' if the columns have different
+ *                              values (@diff=1), otherwise, @diff=0.
+ *      diffColumns()         - loops over a collection of <column> elements and
+ *                              returns 0 if all values are the same,
+ *                                      1 if the values are different
+ *                                  and 2 if the values are the same but empty
+ * 
+ * @author  Victor Petrov <victor_petrov@harvard.edu>
+ * @date    July 20, 2010
+ * @copyright (c) 2010 The Presidents and Fellows of Harvard College
+ * @copyright (c) 2010 The Neuroinformatics Research Group at Harvard University
+ * @license   GPLv3 <http://www.gnu.org/licenses/gpl-3.0.txt>
+ * -----------------------------------------------------------------------------
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * -----------------------------------------------------------------------------
+ */
 function getSubjectDataAsXml($subjectLabel, Database $db)
 {
     if (empty($subjectLabel))

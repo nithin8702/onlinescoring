@@ -1,4 +1,31 @@
 <?php
+/* savefinalform.php tabsize=4
+ *
+ * Stores the final subject data as XML into the database. Collapses whitespace
+ * and trim()'s values. Returns JSON.
+ *
+ * @author  Victor Petrov <victor_petrov@harvard.edu>
+ * @date    July 20, 2010
+ * @copyright (c) 2010 The Presidents and Fellows of Harvard College
+ * @copyright (c) 2010 The Neuroinformatics Research Group at Harvard University
+ * @license   GPLv3 <http://www.gnu.org/licenses/gpl-3.0.txt>
+ * -----------------------------------------------------------------------------
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * -----------------------------------------------------------------------------
+ *
+ * @todo Refuse to store the final data if the subject has been locked.
+ */
 require_once "ajax.php";
 require_once "auth.php";
 require_once "NRG/Configuration.php";
@@ -112,7 +139,7 @@ function libxml_error_handler($errno,$errstr,$errfile,$errline)
            "--------------------------------------\n";
 
     //Send e-mail
-    $result=mail($ir['to'],$ir['subject'],$email);
+    $result=mail($ir['to'],$ir['subject'],$email,get_mail_headers($config));
 
     if ($result)
         $message.="<br><br>This issue has been reported to ".$ir['to'].".<br>You will receive an e-mail when the issue is fixed.";

@@ -1,4 +1,33 @@
 <?php
+/* request.php tabsize=4
+ *
+ * Accepts a new user registration request. If the user already exists, it
+ * returns different errors depending on the current status of this user (disabled,
+ * still pending and no privileges yet). Otherwise, a new entry is added to the
+ * database and an e-mail notification is sent to the address specified under the
+ * UserRegistration section of config.ini.php.
+ *
+ * @author  Victor Petrov <victor_petrov@harvard.edu>
+ * @date    July 20, 2010
+ * @copyright (c) 2010 The Presidents and Fellows of Harvard College
+ * @copyright (c) 2010 The Neuroinformatics Research Group at Harvard University
+ * @license   GPLv3 <http://www.gnu.org/licenses/gpl-3.0.txt>
+ * -----------------------------------------------------------------------------
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * -----------------------------------------------------------------------------
+ */
+
 require_once 'ajax.php';
 require_once 'NRG/Configuration.php';
 require_once '../database.php';
@@ -45,14 +74,13 @@ try
     //Looks like there is nothing else left to do, except add the user to the Acl table with
     //NULL privileges
     $db->createUser($email);
-    //Prepare an e-mail message
-    $headers = 'From: NRG Accounts <support@neuroinfo.org>' . "\r\n" .
-        'X-Mailer: PHP/' . phpversion();
 
+    $ur=$config->UserRegistration;
+    //Prepare an e-mail message
     $message="User $email requested access to ".$_SERVER['HTTP_HOST']." from ".$_SERVER['REMOTE_ADDR'].".";
 
     //Send e-mail
-    $result=mail('support@neuroinfo.org','Online Scoring Access Request',$message,$headers);
+    $result=mail($ur['to'],$ur['subject'],$message,get_mail_headers($config));
 
     //Send the result back to the server
     ajax_result(Array(
