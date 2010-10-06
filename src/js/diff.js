@@ -1098,9 +1098,10 @@ function diffRecord(record)
     var initialValue="";
     var foundFirst=false;
     var match=0;
+    var val=record.get('final');
 
     //Skip records that have a final value
-    if (record.get('final').toString().length)
+    if ((val!=null) && (val.toString().length))
         return match;
 
     for (var i=0;i<record.fields.length;++i)
