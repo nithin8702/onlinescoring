@@ -32,4 +32,13 @@ session_start();
 if (!isset($_SESSION['auth']))
     $_SESSION['auth']=false;
 
-define("CONFIG_FILE","config.ini.php");
+/****************************************************
+* !!! EDIT THIS TO POINT TO YOUR OWN config.ini !!! *
+****************************************************/
+define("CONFIG_FILE","../config.ini");
+
+//Display an error if the user has not setup a config file
+if (!file_exists(CONFIG_FILE))
+	die "Please edit config.ini and bootstrap.php before launching this application. <br>An example config.ini is provided as part of the installation package. Bootstrap ";
+
+
