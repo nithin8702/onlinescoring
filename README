@@ -1,0 +1,46 @@
+OnlineScoring Quick Readme
+
+==============
+ INSTALLATION
+==============
+
+1. Import the SQL file into your mysql database:
+
+	mysql -u user -p -h host dbname < db/onlinescoring.sql
+
+2. Edit config.ini.sample and specify your own values.
+3. Rename config.ini.sample to config.ini
+4. Edit src/bootstrap.php and change the value of CONFIG_FILE to the system path of the config.ini file created in Step 3.
+5. Make sure your web server is running PHP 5.3 with MySQLi, pecl_http, APC and XSLT extensions.
+
+6. a) Make an alias in your webserver config for src/. For example, for Apache 2.x, one would add this to httpd.conf:
+	-----------------------------------------------
+	<Directory /path/to/onlinescoring/src>
+		Options FollowSymLinks
+		Order allow,deny
+		Allow from all
+	</Directory>
+
+	Alias /onlinescoring /path/to/onlinescoring/src
+	-----------------------------------------------
+
+      This allows future updates via Mercurial.
+
+	-OR-
+	
+   b) Copy the contents of the src/ folder into your web directory on a LAMP server.
+      Future updates will have to be copied manually into your web directory.
+
+7. Create a cron job that runs <web_root>/utils/checkdiff.php every hour or so.
+
+NOTE:
+
+Right now, you can only login with your @gmail.com, @neuroinfo.org account or another domain hosted on Google Apps.
+We don't just give out @neuroinfo.org accounts so if your domain is not hosted with Google you should probably use your @gmail.com account.
+Note: We do not store your password. We even don't like the fact that it goes through our application, but if you really want to ensure your password isn't stored 
+anywhere in this app, take a look at ajax/login.php and then NRG/Login/Google/ClientLogin.php. They're just passing the password to each other, and then to Google using an https connection. 
+
+By default, @neuroinfo.org is appended to your username on the login screen (if the e-mail does not contain an @ sign). For your convenience, make sure to edit the DEFAULT_DOMAIN variable in src/js/login.js.
+
+This is a temporary hack. In the future, we'll add LDAP and NIS support.
+

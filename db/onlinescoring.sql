@@ -7,8 +7,6 @@
 -- Server version: 5.1.41
 -- PHP Version: 5.3.2-1ubuntu4.5
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -133,3 +131,12 @@ ALTER TABLE `Forms`
 --
 ALTER TABLE `Sessions`
   ADD CONSTRAINT `fk_acl_id` FOREIGN KEY (`fkAclID`) REFERENCES `Acl` (`id`);
+
+INSERT INTO `Roles` (`id`, `name`, `clearance`) VALUES
+(1, 'Administrator', 99),
+(2, 'Data Manager', 50),
+(3, 'Data Entry', 30),
+(4, 'No access', 0);
+
+INSERT INTO `Acl` (`id`, `username`, `fkRoleID`, `enabled`, `requested`, `datetimeCreated`, `datetimeModified`, `deleted`) VALUES
+(1, 'SYSTEM', 1, b'0', b'0', NOW(), NOW(), 0);
