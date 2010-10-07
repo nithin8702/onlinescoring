@@ -1,0 +1,161 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start combine="choice">
+        <element name="form">
+                <!-- SEX -->
+                <element name="sex">
+                    <ref name="T_2_Choices"/>
+                </element>
+
+                <!-- DOB -->
+                <element name="yob">
+                    <choice>
+                        <data type="gYear">
+                            <param name="maxInclusive">2010</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                    </choice>
+                </element>
+
+                <!-- HEIGHT -->
+                <element name="ht">
+                    <choice>
+                        <data type="float">
+                            <param name="minInclusive">0</param>
+                            <param name="maxInclusive">100</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                    </choice>
+                </element>
+
+                <!-- WEIGHT -->
+                <element name="wt">
+                    <choice>
+                        <data type="float">
+                            <param name="minInclusive">0</param>
+                            <param name="maxInclusive">1400</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                    </choice>
+                </element>
+
+                <!-- COUNTRY -->
+                <element name="country">
+                    <ref name="T_StringWithQuotes"/>
+                </element>
+
+                <!-- STATE -->
+                <element name="state">
+                    <ref name="T_String"/>
+                </element>
+
+                <!-- CITY -->
+                <element name="city">
+                    <ref name="T_StringWithQuotes"/>
+                </element>
+
+                <!-- ZIP -->
+                <element name="zip">
+                    <ref name="T_ZipCode"/>
+                </element>
+
+                <!-- MARITAL -->
+                <element name="marital">
+                    <ref name="T_6_Choices"/>
+                </element>
+
+                <!-- MARITAL LIST -->
+                <element name="marital_list">
+                    <ref name="T_String"/>
+                </element>
+
+                <!-- HOUSE -->
+                <element name="house">
+                    <ref name="T_7_Choices"/>
+                </element>
+
+                <!-- HOUSE LIST -->
+                <element name="house_list">
+                    <ref name="T_String"/>
+                </element>
+
+                <!-- ROOMMATES -->
+                <element name="live">
+                    <ref name="T_3_Choices"/>
+                </element>
+
+                <!-- ROOMMATES LIST -->
+                <element name="live_list">
+                    <ref name="T_String"/>
+                </element>
+
+                <!-- Native English -->
+                <element name="eng_nat">
+                    <ref name="T_2_Choices"/>
+                </element>
+
+                <!-- Native Language -->
+                <element name="nat_lang">
+                    <ref name="T_String"/>
+                </element>
+
+                <!-- Age Learnt English -->
+                <element name="eng_age">
+                    <choice>
+                        <data type="float">
+                            <param name="maxInclusive">100</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                    </choice>
+                </element>
+
+                <!-- OCCUPATION 1 -->
+                <element name="occu_1">
+                    <ref name="T_9_Choices"/>
+                </element>
+
+                <!-- OCCUPATION 2 -->
+                <element name="occu_2">
+                    <ref name="T_9_Choices"/>
+                </element>
+
+                <!-- OCCUPATION 3 -->
+                <element name="occu_3">
+                    <ref name="T_9_Choices"/>
+                </element>
+
+                <!-- OCCUPATION 4 -->
+                <element name="occu_4">
+                    <ref name="T_9_Choices"/>
+                </element>
+
+                <!-- OCCUPATION LIST -->
+                <element name="occu_list">
+                    <ref name="T_String"/>
+                </element>
+
+                <!-- RETIRE YEAR -->
+                <element name="retire_year">
+                    <choice>
+                        <data type="gYear">
+                            <param name="minInclusive">1916</param>
+                            <param name="maxInclusive">2010</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                    </choice>
+                </element>
+
+                <!-- RETIRE AGE -->
+                <element name="retire_age">
+                    <choice>
+                        <data type="positiveInteger">
+                            <param name="minInclusive">16</param>
+                            <param name="maxInclusive">100</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                    </choice>
+                </element>
+        </element>
+
+    </start>
+</grammar>
