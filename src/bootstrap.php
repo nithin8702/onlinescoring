@@ -32,13 +32,10 @@ session_start();
 if (!isset($_SESSION['auth']))
     $_SESSION['auth']=false;
 
-/****************************************************
-* !!! EDIT THIS TO POINT TO YOUR OWN config.ini !!! *
-****************************************************/
-define("CONFIG_FILE","../config.ini");
+define("CONFIG_FILE","config.ini.php");
 
 //Display an error if the user has not setup a config file
 if (!file_exists(CONFIG_FILE))
-	die "Please edit config.ini and bootstrap.php before launching this application. <br>An example config.ini is provided as part of the installation package. Bootstrap ";
+	die("Please create a config.ini.php file, as specified in the README document you should have received along with the OnlineScoring package.");
 
 

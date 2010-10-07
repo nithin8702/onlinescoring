@@ -8,4 +8,4 @@ syntax: glob
 
 nbproject/configs/*
 nbproject/private/*
-config.ini
+src/config.ini.php
