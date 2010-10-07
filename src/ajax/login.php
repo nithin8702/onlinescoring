@@ -33,6 +33,8 @@ require_once 'NRG/Configuration.php';
 require_once '../database.php';
 require_once 'NRG/Login/Google/ClientLogin.php';
 
+define("SYSTEM_USERNAME",'SYSTEM');
+
 //Verify the session
 if (isset($_SESSION) && isset($_SESSION['auth']) && ($_SESSION['auth']===true))
 {
@@ -55,7 +57,7 @@ if (empty($_POST['password']))
     ajax_error('Please enter your password.');
 
 $username=strtolower(trim($_POST['username']));
-$md5password=trim($_POST['password']);
+$txtPassword=trim($_POST['password']);
 
 $captchatext=null;
 $captchatoken=null;
@@ -69,58 +71,78 @@ if (isset($_POST['captchatoken']))
 if (!preg_match('/^[A-Za-z0-9@\.]+$/', $username))
     ajax_error('Your username contains invalid characters or is empty.');
 
-if (!preg_match('/^[^\n\t\r]+$/',$md5password))
+if (!preg_match('/^[^\n\t\r]+$/',$txtPassword))
     ajax_error('Your password contains invalid characters or is empty.');
 
 
-//$login=new NRG\Login($username,$md5password);
+//$login=new NRG\Login($username,$txtPassword);
 
 //Check the username and password
 try
 {
     $config=new \NRG\Configuration(CONFIG_FILE);
 
+    $logged_in=false;
+    $user=Array();
+
+    $setupconf=$config->Setup;
     $dbconf=$config->Database;
 
     //Make sure the username is registered with this application
     $db=new Database($dbconf['host'],$dbconf['user'],$dbconf['pass'],$dbconf['name'],$dbconf['port']);
-    $user=$db->searchUser($username);
 
-    if (empty($user))
-        ajax_error('You must <a href="javascript:showRegistrationForm()">request access</a> first.');
-
-    if ($user['requested']==1)
-        ajax_error('Your access request is pending approval.');
-
-    if (!$user['enabled'])
-        ajax_error('Your account has been disabled.');
-
-    if ((!isset($user['roleID'])) || ($user['roleID']==NULL))
-        ajax_error('Sorry, your account hasn\'t been assigned any privileges yet. Please try again later.');
-
-    $logged_in=false;
-
-    if (($username=="guest@neuroinfo.org") && ($md5password=="guest"))
-        $logged_in=true;
-    else
+    if (!empty($setupconf) && isset($setupconf['setupkey']))
     {
-        $auth=new NRG\Login\Google\ClientLogin($username,$md5password);
-
-        if (!empty($captchatext) && !empty($captchatoken))
+        $setupkey=trim($setupconf['setupkey']);
+        if ((strlen($setupkey)>0) && ($txtPassword===$setupkey))
         {
-            $auth->setCaptchaText($captchatext);
-            $auth->setCaptchaToken($captchatoken);
-        }
-
-        //Attempt to authenticate the user
-        $auth->login();
-
-        if ($auth->isSuccessful())
+    	    $user=$db->searchUser(SYSTEM_USERNAME);
+    	    if (empty($user))
+	        ajax_error('OnlineScoring was not setup properly. Please backup your current database, drop all the tables and recreate the table structure using db/onlinescoring.sql from the installation package.');
             $logged_in=true;
+        }
+    }
+         
+
+    if ($logged_in===false)
+    {
+	    $user=$db->searchUser($username);
+
+	    if (empty($user))
+		ajax_error('You must <a href="javascript:showRegistrationForm()">request access</a> first.');
+
+	    if ($user['requested']==1)
+		ajax_error('Your access request is pending approval.');
+
+	    if (!$user['enabled'])
+		ajax_error('Your account has been disabled.');
+
+	    if ((!isset($user['roleID'])) || ($user['roleID']==NULL))
+		ajax_error('Sorry, your account hasn\'t been assigned any privileges yet. Please try again later.');
+
+
+	    if (($username=="guest@neuroinfo.org") && ($txtPassword=="guest"))
+		$logged_in=true;
+	    else
+	    {
+		$auth=new NRG\Login\Google\ClientLogin($username,$txtPassword);
+
+		if (!empty($captchatext) && !empty($captchatoken))
+		{
+		    $auth->setCaptchaText($captchatext);
+		    $auth->setCaptchaToken($captchatoken);
+		}
+
+		//Attempt to authenticate the user
+		$auth->login();
+
+		if ($auth->isSuccessful())
+		    $logged_in=true;
+	    }
     }
 
     //If authentication was successful, log the user in
-    if ($logged_in)
+    if ($logged_in===true)
     {
         $_SESSION['auth']=true;
         $_SESSION['username']=$user['username'];

@@ -54,7 +54,7 @@ class Configuration
 
     public function __set($property,$value)
     {
-        $this->_config[$property]=$value;
+        $this->_config["$property"]=$value;
     }
 
     /** Reads the configuration .ini file and returns an associative array

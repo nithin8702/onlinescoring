@@ -19,17 +19,25 @@
 ; GNU General Public License for more details.
 ; You should have received a copy of the GNU General Public License
 ; along with this program. If not, see <http://www.gnu.org/licenses/>.
+;---------------------------------------------------------------------
+; @warning Make sure to remove the 'setupkey' line after you're done setting
+;          up OnlineScoring.
+; @warning To setup up OnlineScoring, make sure to uncomment the Setup category
+;          by removing the semicolon ';'
+
+[Setup]
+;setupkey="<YOUR SECRET KEY GOES HERE>"
 
 [Mail]
 host="smtp.example.com"
-from='Support <support@example.com>'
+from="Support <support@example.com>"
 
 [Database]
-host='127.0.0.1'
+host=127.0.0.1
 port=3306
-user='user'
-pass='password'
-name='database_name'
+user=user
+pass=password
+name=database_name
 
 [IssueReport]
 to="support@example.com"

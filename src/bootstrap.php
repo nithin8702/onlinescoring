@@ -1,5 +1,5 @@
 <?php
-/* database.php tabsize=4
+/* bootstrap.php tabsize=4
  *
  * Bootstraps the application. Edit when going to production.
  *
@@ -32,7 +32,8 @@ session_start();
 if (!isset($_SESSION['auth']))
     $_SESSION['auth']=false;
 
-define("CONFIG_FILE","config.ini.php");
+//Default config.ini.php should be in the same directory as this file.
+define("CONFIG_FILE",dirname(__FILE__)."/config.ini.php");
 
 //Display an error if the user has not setup a config file
 if (!file_exists(CONFIG_FILE))
