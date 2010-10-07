@@ -8,10 +8,19 @@ OnlineScoring Quick Readme
 
 	mysql -u user -p -h host dbname < db/onlinescoring.sql
 
-2. Copy src/config.ini.sample to src/config.ini.php .
+
+2. Copy config.ini.sample to src/config.ini.php 
+
+	cp config.ini.sampe src/config.ini.php
+
+
 3. Edit the newly created config.ini.php and specify your own values.
    -IMPORTANT- Make sure to uncomment the 'setupkey' line and specify your own temporary secret key.
                Remove the setupkey line after you're done setting up OnlineScoring.
+
+	vim src/config.ini.php
+
+
 4. Make sure your web server is running PHP 5.3 with MySQLi, pecl_http, APC and XSLT extensions.
 
 5. a) Add an alias in your webserver config for src/. For example, for Apache 2.x, one would add this to httpd.conf:
@@ -30,11 +39,13 @@ OnlineScoring Quick Readme
    b) Copy the contents of the src/ folder into your web directory on a LAMP server.
       Future updates will have to be copied manually into your web directory too.
 
-6. Log in as user 'SYSTEM' and the setupkey (from config.ini.php) as the password.
+6. In a browser, navigate to the URL by which you intend to access OnlineScoring and log in as user 'SYSTEM' and the setupkey 
+   (from config.ini.php) as the password.
+
 7. Go directly to the Users page (do not pass Go, do not collect $200) and add a new entry for yourself (see the NOTE below).
-   There is no password. You should make sure your account is enabled (it should have a green circle next to the username). If it's not enabled,
-   then, by all means, select your new account and goto Account->Enable. Obviously, you would want to set yourself as part of
-   the Administrators group.
+   There is no password. You should make sure your account is enabled (it should have a green circle next to the username). 
+   If it's not enabled, then, by all means, select your new account and click the Account->Enable menu. Obviously, you would want 
+   to set yourself as a member of the Administrators group.
    
 
 8. Create a cron job that runs <web_root>/utils/checkdiff.php every hour or so.
