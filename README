@@ -24,12 +24,10 @@ OnlineScoring Quick Readme
 	Alias /onlinescoring /path/to/onlinescoring/src
 	-----------------------------------------------
 
-      This allows future updates via Mercurial.
-
 	-OR-
 	
    b) Copy the contents of the src/ folder into your web directory on a LAMP server.
-      Future updates will have to be copied manually into your web directory.
+      Future updates will have to be copied manually into your web directory too.
 
 7. Create a cron job that runs <web_root>/utils/checkdiff.php every hour or so.
 
