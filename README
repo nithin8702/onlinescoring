@@ -8,8 +8,8 @@ OnlineScoring Quick Readme
 
 	mysql -u user -p -h host dbname < db/onlinescoring.sql
 
-2. Edit config.ini.sample and specify your own values.
-3. Rename config.ini.sample to config.ini
+2. Copy config.ini.sample to config.ini. Feel free to place config.ini in a directory of your choice.
+3. Edit the newly created config.ini and specify your own values.
 4. Edit src/bootstrap.php and change the value of CONFIG_FILE to the system path of the config.ini file created in Step 3.
 5. Make sure your web server is running PHP 5.3 with MySQLi, pecl_http, APC and XSLT extensions.
 
