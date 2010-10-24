@@ -67,6 +67,11 @@
     background-image:url('../images/icons/diff.png');
 }
 
+.x-icon-history
+{
+     background-image:url('../images/icons/history.png');
+}
+
 .question-text
 {
     font-family: tahoma, arial, helvetica, sans-serif;
@@ -373,4 +378,24 @@ ul.help
     background-image:url('../images/icons/new.png');
     background-repeat: no-repeat;
     background-position: 1px 1px;
+}
+
+.spaced
+{
+    margin-left:10px;
+}
+
+.background
+{
+    background-color:#0000FF;
+}
+
+.noborder
+{
+    border: none;
+}
+
+.hidden
+{
+    display:none;
 }

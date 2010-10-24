@@ -115,12 +115,21 @@ var toolbarForms=   {
                                         html:''
                                     },
                                     '-',
+                                    '<img src="images/icons/clock.png"/>',
                                     {
                                         id:'clock',
                                         xtype:'tbtext',
                                         html:'00:00'
                                     },
                                     '-',
+                                    {
+                                        id:'btnHistory',
+                                        xtype:'button',
+                                        text:'History',
+                                        enableToggle:true,
+                                        icon:'images/icons/history.png',
+                                        toggleHandler:btnHistoryToggled
+                                    },
                                     {
                                         id:'btnHelp',
                                         xtype:'button',
@@ -131,6 +140,104 @@ var toolbarForms=   {
 
                                 ]
                     }
+
+var storeHistory=new Ext.ux.data.PagingJsonStore({
+                    id:'storeHistory',
+                    storeId:'storeHistory',
+                    url:'ajax/mysubjects.php',
+                    autoLoad:false,
+                    autoDestroy:true,
+                    root:'subjects',
+                    totalProperty:'total',
+                    idProperty:'label',
+                    fields: [
+                                'label',
+                                'dateUpdated'
+                            ],
+                    sortInfo:   {
+                                    field:'dateUpdated',
+                                    direction:'DESC'
+                                },
+                    listeners:  {
+                                   load:onHistoryLoaded
+                                }
+});
+
+var gridHistory=    {
+                        xtype:'grid',
+                        id:'gridHistory',
+                        stripeRows:true,
+                        border:true,
+                        loadMask:true,
+                        width:250,
+                        columns:[
+                                    {
+                                        id:'label',
+                                        header:'Subject',
+                                        sortable:true,
+                                        dataIndex:'label'
+                                    },
+                                    {
+                                        id:'dateUpdated',
+                                        header:'Last updated',
+                                        sortable:true,
+                                        dataIndex:'dateUpdated',
+                                        width:125
+                                    }
+                                ],
+                        store:storeHistory,
+                        tbar: new Ext.PagingToolbar({
+                                    pageSize: 20,
+                                    store: storeHistory,
+                                    displayInfo: false,
+                                    listeners:  {
+                                                    change:onHistoryPageChanged
+                                                }
+                                }),
+                        bbar: {
+                                    xtype:'toolbar',
+                                    items:  [
+                                                {
+                                                    id:'historyPageProgressBar',
+                                                    xtype:'progress',
+                                                    value:0.5,
+                                                    text:'Loading ...',
+                                                    width:280
+                                                }
+                                            ]
+
+                              },
+                        sm:new Ext.grid.RowSelectionModel()
+                    };
+
+function onHistoryPageChanged(toolbar, data)
+{
+    if (typeof(toolbar.ownerCt.loadMask)=="object")
+        toolbar.ownerCt.loadMask.disable();
+
+     //subjects per page
+    var spp=toolbar.pageSize;
+    var start=spp*(data.activePage-1) + 1;
+    var end=spp*data.activePage;
+
+    if (end>data.total)
+        end=data.total;
+
+    var pb=Ext.getCmp('historyPageProgressBar');
+    if (!pb)
+        return;
+
+    if (data.total==0)
+        pb.updateProgress(0,'No subjects to display');
+    else
+        pb.updateProgress(end/data.total,'Displaying subjects '+start+' - '+end+' of '+data.total,true);
+}
+
+function onHistoryLoaded(store, records, options)
+{
+    var grid=Ext.getCmp('entryRegionEast');
+    grid.setTitle('History ('+store.getTotalCount()+')','');
+}
 
 var panelForms=     {
                         id:'panelForms',
@@ -151,18 +258,41 @@ next to the question.</li>\
                         listeners:  {
                                         afterrender:function(){Ext.getCmp('txtSubjectID').focus();}
                                     },
-                        items:[tabForms]
+                        items:[
+                                tabForms
+                              ]
                     };
 
 var portalForms=    {
                         id:'portalForms',
-                        xtype:'portal',
                         title:'Online Scoring',
-                        layout:'fit',
+                        layout:'border',
                         iconCls:'x-icon-forms',
-                        autoScroll:true,
-                        bodyStyle:'background-color:white',
-                        items:[panelForms]
+                        autoScroll:false,
+                        bodyStyle:'background-color:transparent',
+                        items:[{
+                                    region:'center',
+                                    layout:'fit',
+                                    cls:'background',
+                                    items:[panelForms]
+                               },
+                               {
+                                    region:'east',
+                                    layout:'fit',
+                                    id:'entryRegionEast',
+                                    hideMode:'display',
+                                    header:true,
+                                    title:'History',
+                                    collapsible:true,
+                                    collapsed:true,
+                                    hideCollapseTool:true,
+                                    frame:true,
+                                    border:true,
+                                    margins:'0 0 0 5',
+                                    collapseMode:'mini',
+                                    items:  [gridHistory]
+                                }
+                        ]
                     };
 <?php endif; ?>
 <?php if ((int)$_SESSION['clearance']>=90): ?>
@@ -244,6 +374,7 @@ var groupDashboard= {
                         xtype:'grouptabpanel',
                         tabWidth:130,
                         activeGroup:0,
+                        bodyStyle:'background-color:transparent;border:none',
                         items:  [
                                   {
                                     mainItem:0,
@@ -266,6 +397,7 @@ var groupDashboard= {
 var viewportMain=   {
                         id:'viewportMain',
                         layout:'border',
+                        border:false,
                         items:[
                                 topMenu,
                                 {
@@ -316,6 +448,23 @@ function btnGoClicked(button)
         success:sessionRequestSucceeded,
         failure:sessionRequestFailed
     });
+}
+
+function btnHistoryToggled(button,state)
+{
+    var grid=Ext.getCmp('gridHistory');
+    var store=grid.getStore();
+    var count=store.getTotalCount();
+
+    if (count==0)
+        store.load({
+                    params: {
+                                start:0,
+                                limit:20
+                            }
+                   });
+
+    Ext.getCmp('entryRegionEast').toggleCollapse();
 }
 
 function btnHelpClicked(button)

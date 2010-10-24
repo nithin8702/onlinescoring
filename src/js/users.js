@@ -146,6 +146,13 @@ var toolbarUsers=   {
                                                                     icon:'images/icons/remove.png',
                                                                     text:'Remove',
                                                                     handler:onRemoveUser
+                                                                },
+                                                                '-',
+                                                                {
+                                                                    id:'btnSwitchUser',
+                                                                    icon:'images/icons/switchto.png',
+                                                                    text:'Switch User',
+                                                                    handler:onSwitchUser
                                                                 }
                                                             ]
                                                 }
@@ -651,4 +658,59 @@ function validateUserEntry(editor,changes,record,rowIndex)
     }
  
     return !cancel;
+}
+
+function onSwitchUser(button)
+{
+    var rec = getSelectedUser();
+
+    if (!rec)
+        return;
+
+    Ext.Ajax.request({
+        url:'ajax/switchto.php',
+        method:'POST',
+        params: {
+                    username:rec.get('username')
+                },
+        success:requestSwitchUserSucceeded,
+        failure:requestSwitchUserFailed
+    });
+}
+
+function requestSwitchUserSucceeded(request,options)
+{
+    var response=Ext.decode(request.responseText);
+
+    if (response.success==1)
+    {
+         window.onbeforeunload=null;
+         window.location.reload();
+        return;
+    }
+
+    if ((response.message) && (response.message.length))
+        Ext.Msg.show({
+            title:'Error',
+            msg:response.message,
+            icon:Ext.Msg.ERROR,
+            buttons:Ext.Msg.OK
+        });
+    else
+        Ext.Msg.show({
+            title:'Error',
+            msg:'We were unable to process your request to switch users. Please try again later.',
+            icon:Ext.Msg.ERROR,
+            buttons:Ext.Msg.OK
+        });
+}
+
+function requestSwitchUserFailed(request,options)
+{
+     Ext.Msg.show({
+        title:'Oops',
+        msg:'We were unable to contact the server at this time. Please try again later.',
+        icon:Ext.Msg.ERROR,
+        buttons:Ext.Msg.OK
+    });
 }
