@@ -32,7 +32,7 @@ require_once "auth.php";
 require_once "NRG/Configuration.php";
 require_once '../database.php';
 
-//Require data manager privileges
+//Require Administrator privileges
 setClearanceLevel(90);
 
 try

@@ -190,6 +190,44 @@ class Database
         return $result;
     }
 
+    /** Lists all available subjects for a user
+     * @param  $userid A numeric User ID
+     * @param  $sort   Sort method: "ASC" or "DESC"
+     * @return Array   An associative array containg the query result
+     */
+    public function listSubjectsCreatedBy($userid, $sort='DESC')
+    {
+        $result=Array();
+        //ASC or DESC sorting
+        if ($sort!="ASC")
+            $sort="DESC";
+
+        if (!is_numeric($userid))
+            throw new Exception("User ID must be a numeric value.");
+
+        $query='SELECT subjectLabel as label, timestampModified as dateUpdated
+                FROM `Sessions`  WHERE fkAclID='.$userid.'
+                GROUP BY subjectLabel
+                ORDER BY timestampModified '.$sort;
+
+        $query=$this->_server->query($query);
+
+        if ($query===false)
+            throw new Exception("SQL Error: ".$this->_server->error);
+
+        if ($query->num_rows)
+        {
+            //Workaround for fetch_all() in case mysqlnd isn't available
+            while(($row=$query->fetch_array(MYSQLI_ASSOC)))
+                $result[]=$row;
+        }
+
+        $query->close();
+
+        return $result;
+    }
+
+
     /** Retrieves information about a particular username */
     public function searchUser($username=NULL)
     {

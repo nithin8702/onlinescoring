@@ -578,11 +578,11 @@ function onSubjectsViewReady(grid)
 {
     // grid.loadMask.show();
     grid.getStore().load({
-                                        params: {
-                                                    start:0,
-                                                    limit:20
-                                                }
-                                     });
+                            params: {
+                                        start:0,
+                                        limit:20
+                                    }
+                         });
 
     ajaxShowWait(false);
 }
