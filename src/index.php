@@ -33,9 +33,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Online Scoring</title>
-        <link rel="stylesheet" href="js/lib/ext-3.2.1/resources/css/ext-all.css" type="text/css"/>
-        <script type="text/javascript" src="js/lib/ext-3.2.1/adapter/ext/ext-base-debug-w-comments.js"></script>
-        <script type="text/javascript" src="js/lib/ext-3.2.1/ext-all-debug-w-comments.js"></script>
+        <link rel="stylesheet" href="js/lib/ext-3.3.0/resources/css/ext-all.css" type="text/css"/>
+        <script type="text/javascript" src="js/lib/ext-3.3.0/adapter/ext/ext-base-debug.js"></script>
+        <script type="text/javascript" src="js/lib/ext-3.3.0/ext-all-debug-w-comments.js"></script>
         <script type="text/javascript">
             //Hack to get around some browser not having a default console object
             if ((typeof(window.console)=="undefined") || (window.console==null))
@@ -59,6 +59,9 @@
             <script type="text/javascript" src="js/lib/ext/ux/PortalColumn.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/Portlet.js"></script>
 
+            <script type="text/javascript" src="js/lib/ext/ux/PagingStore.js"></script>
+            <script type="text/javascript" src="js/lib/ext/ux/PagingRowNumberer.js"></script>
+
         <?php if ($_SESSION['clearance']>=30):?>
             <!-- Forms View -->
             <script type="text/javascript" src="js/store/countries.js"></script>
@@ -74,8 +77,6 @@
 
         <?php if ($_SESSION['clearance']>=50):?>
             <!-- Diff View -->
-            <script type="text/javascript" src="js/lib/ext/ux/PagingStore.js"></script>
-            <script type="text/javascript" src="js/lib/ext/ux/PagingRowNumberer.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/GridSearch.js"></script>
             <script type="text/javascript" src="js/diff.js"></script>
         <?php endif; ?>
