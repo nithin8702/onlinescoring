@@ -269,7 +269,7 @@ var portalForms=    {
                         layout:'border',
                         iconCls:'x-icon-forms',
                         autoScroll:false,
-                        bodyStyle:'background-color:transparent',
+                        bodyStyle:'background-color:transparent; border:2px solid red;',
                         items:[{
                                     region:'center',
                                     layout:'fit',
@@ -280,7 +280,7 @@ var portalForms=    {
                                     region:'east',
                                     layout:'fit',
                                     id:'entryRegionEast',
-                                    hideMode:'display',
+                                    hidden:false,
                                     header:true,
                                     title:'History',
                                     collapsible:true,
@@ -292,7 +292,10 @@ var portalForms=    {
                                     collapseMode:'mini',
                                     items:  [gridHistory]
                                 }
-                        ]
+                               ],
+                       listeners:   {
+                                        afterrender: function() { this.doLayout(false,true); this.syncSize();}
+                                    }
                     };
 <?php endif; ?>
 <?php if ((int)$_SESSION['clearance']>=90): ?>
@@ -391,7 +394,10 @@ var groupDashboard= {
                                                     print 'portalUsers';
                                             ?>
                                             ]
-                                }]
+                                }],
+                          listeners:{
+                                        afterrender:function(){this.doLayout(false,true);this.syncSize();}
+                                    }
                     };
 
 var viewportMain=   {
@@ -405,7 +411,10 @@ var viewportMain=   {
                                     layout:'fit',
                                     items:[groupDashboard]
                                 }
-                              ]
+                              ],
+                          listeners:{
+                                        afterrender:function(){console.log(this);this.doLayout(false,true);this.syncSize();}
+                                    }
                     };
 
 
