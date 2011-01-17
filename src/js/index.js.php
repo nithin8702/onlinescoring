@@ -267,17 +267,20 @@ var portalForms=    {
                         id:'portalForms',
                         title:'Online Scoring',
                         layout:'border',
+                        width:900,
+                        height:500,
                         iconCls:'x-icon-forms',
                         autoScroll:false,
-                        bodyStyle:'background-color:transparent; border:2px solid red;',
+                        bodyStyle:'background-color:transparent;',
                         items:[{
                                     region:'center',
                                     layout:'fit',
                                     cls:'background',
                                     items:[panelForms]
                                },
-                               {
+                              {
                                     region:'east',
+                                    width:250,
                                     layout:'fit',
                                     id:'entryRegionEast',
                                     hidden:false,
@@ -292,9 +295,10 @@ var portalForms=    {
                                     collapseMode:'mini',
                                     items:  [gridHistory]
                                 }
+                                
                                ],
                        listeners:   {
-                                        afterrender: function() { this.doLayout(false,true); this.syncSize();}
+                                       afterrender: function() { this.doLayout(false,true); this.syncSize();}
                                     }
                     };
 <?php endif; ?>
@@ -375,7 +379,7 @@ var topMenu=    {
 
 var groupDashboard= {
                         xtype:'grouptabpanel',
-                        tabWidth:130,
+                        //tabWidth:130,
                         activeGroup:0,
                         bodyStyle:'background-color:transparent;border:none',
                         items:  [
@@ -413,7 +417,7 @@ var viewportMain=   {
                                 }
                               ],
                           listeners:{
-                                        afterrender:function(){console.log(this);this.doLayout(false,true);this.syncSize();}
+                                        //afterrender:function(){console.log(this);this.doLayout(false,true);this.syncSize();}
                                     }
                     };
 
