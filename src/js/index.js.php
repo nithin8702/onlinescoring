@@ -55,7 +55,8 @@ var tabForms=       {
                                     NRG.Forms.Education,
                                     NRG.Forms.Occupation,
                                     NRG.Forms.Health,
-                                    NRG.Forms.AlcoholTobacco
+                                    NRG.Forms.AlcoholTobacco,
+                                    NRG.Forms.Lifestyle
                                 ]
 
                     };
@@ -672,5 +673,6 @@ function sessionRequestFailed(form,data)
 
 function onLeave()
 {
-    return false;
+    //TODO: Uncommented the line below for production
+    //return false;
 }
