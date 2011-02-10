@@ -73,6 +73,7 @@
             <script type="text/javascript" src="js/forms/EthnicityHandedness.js"></script>
             <script type="text/javascript" src="js/forms/Occupation.js"></script>
             <script type="text/javascript" src="js/forms/Health.js"></script>
+            <script type="text/javascript" src="js/forms/Lifestyle.js"></script>
         <?php endif; ?>
 
         <?php if ($_SESSION['clearance']>=50):?>

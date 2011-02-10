@@ -80,6 +80,38 @@
     text-shadow: 2px 2px 2px #ccc;
 }
 
+.instructions
+{
+    font-family: tahoma, arial, helvetica, sans-serif;
+    font-weight:normal;
+    font-size: 12px;
+    max-width:900px;
+    color:darkgray;
+    margin:5px 0px 5px 10px;
+    text-align: justify;
+}
+
+.life_headers
+{
+    width:905px;
+    text-align:right;
+}
+
+.life_headers span
+{
+    margin-left:5px;
+}
+
+.life_headers span
+{
+    margin-left:5px;
+}
+
+.life_headers span:nth-child(2n+1)
+{
+    color:darkgray;
+}
+
 .q-active
 {
     background-color:#BBDDFF;

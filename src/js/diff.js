@@ -32,6 +32,10 @@ NRG.OnlineScoring.Cache.SubjectData=Array();
 Ext.override(Ext.PagingToolbar, {
     doRefresh: function(){
         delete this.store.lastParams;
+        //empty the cache (if new entries come in, onClick will load data from
+        //the cache. This is a quick way of making sure new data gets always
+        //fetched from the server)
+        NRG.OnlineScoring.Cache.SubjectData=Array();
         if (this.ownerCt.loadMask)
             this.ownerCt.loadMask.enable();
         this.doLoad(this.cursor);
