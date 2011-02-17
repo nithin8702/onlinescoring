@@ -40,6 +40,13 @@
         </data>
     </define>
 
+    <!-- 0 through 7 -->
+    <define name="T_0to7">
+        <data type="nonNegativeInteger">
+            <param name="maxInclusive">7</param>
+        </data>
+    </define>
+
     <!-- 9999 -->
     <define name="NoAnswer">
         <value type="positiveInteger">9999</value>

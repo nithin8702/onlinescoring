@@ -26,6 +26,9 @@
  * -----------------------------------------------------------------------------
  *
  * @todo Change the code to return only XML and use HTTP status codes.
+ * @warning The XSL file used will be cached, if possible. If you update your
+ *          XSL, make sure to disable APC caching.
+ * @see ../utils/subjectdata.php
  */
 
 require_once "ajax.php";
@@ -56,10 +59,15 @@ try
     $xml=getSubjectDataAsXml($subjectLabel, $db);
 //    header('Content-type: application/xml');
 //    print $xml->saveXML();die;
+    
+    /** WARNING: This function caches the XSL file. */
     $result=applyXSLtoXML($xml, XSL_SUBJECT_DATA);
 
     $xml=new DomDocument();
     $xml->loadXML($result);
+
+//    header('Content-type: application/xml');
+//    print $xml->saveXML();die;
 
     $rows=$xml->getElementsByTagName('rows')->item(0);
     $hasDiff=diffRows($rows);

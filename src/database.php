@@ -530,7 +530,7 @@ class Database
         $result=Array();
 
         $subjectid=$this->_server->real_escape_string($subjectid);
-        $query="SELECT *, Forms.id as formID FROM (Forms INNER JOIN Sessions ON (Forms.fkSessionID=Sessions.id) INNER JOIN Acl ON (Sessions.fkAclID=Acl.id)) WHERE subjectLabel='".$subjectid."' ORDER BY fkSessionID DESC,datetimeAdded ASC";
+        $query="SELECT *, Sessions.datetimeCreated as dateSessionCreated, Forms.id as formID FROM (Forms INNER JOIN Sessions ON (Forms.fkSessionID=Sessions.id) INNER JOIN Acl ON (Sessions.fkAclID=Acl.id)) WHERE subjectLabel='".$subjectid."' ORDER BY fkSessionID DESC,datetimeAdded ASC";
 
         try
         {

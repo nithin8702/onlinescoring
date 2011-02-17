@@ -491,7 +491,7 @@ function toggleQ(ids,state)
             //remove value for checkbox- and radio- groups
             if ((component.xtype=="checkboxgroup") ||
                 (component.xtype=="radiogroup"))
-                component.setValue("");
+                component.setValue(false);
         }
         else
         {

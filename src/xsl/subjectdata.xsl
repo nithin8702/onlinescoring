@@ -39,7 +39,7 @@
 
     <xsl:template match="/">
         <result>
-            <xsl:attribute name="subject">
+            <xsl:attribute name="subject1">
                 <xsl:value-of select="/result/@subject"/>
             </xsl:attribute>
             <xsl:attribute name="locked">
@@ -96,6 +96,10 @@
             <!-- Lifestyle -->
            <xsl:call-template name="form">
                <xsl:with-param name="name">LIFE/1.0</xsl:with-param>
+           </xsl:call-template>
+            <!-- Interactions -->
+           <xsl:call-template name="form">
+               <xsl:with-param name="name">INT/1.0</xsl:with-param>
            </xsl:call-template>
 
         </rows>

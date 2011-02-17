@@ -33,7 +33,7 @@
 
 Ext.onReady(function() {
 
-Ext.getBody().on("contextmenu",Ext.emptyFn,null,{preventDefault:true});
+//Ext.getBody().on("contextmenu",Ext.emptyFn,null,{preventDefault:true});
 
 <?php if ((int)$_SESSION['clearance']>=30): ?>
 var tabForms=       {
@@ -56,7 +56,8 @@ var tabForms=       {
                                     NRG.Forms.Occupation,
                                     NRG.Forms.Health,
                                     NRG.Forms.AlcoholTobacco,
-                                    NRG.Forms.Lifestyle
+                                    NRG.Forms.Lifestyle,
+                                    NRG.Forms.Interactions
                                 ]
 
                     };

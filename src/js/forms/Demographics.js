@@ -100,7 +100,7 @@ var sHeight=    {
                     id:q('q3'),
                     name:'HT',
                     xtype:'numberfield',
-                    fieldLabel:'Height <span style="text-shadow:none;font-weight:normal;color:gray">(inches)</span>',
+                    fieldLabel:'Height <span class="qexplanation">(inches)</span>',
                     labelStyle:'text-shadow: 2px 2px 2px #ccc',
                     width:135,
                     allowBlank:true,
@@ -123,7 +123,7 @@ var sWeight=    {
                     id:q('q4'),
                     name:'WT',
                     xtype:'numberfield',
-                    fieldLabel:'Weight <span style="text-shadow:none;font-weight:normal;color:gray">(pounds)</span>',
+                    fieldLabel:'Weight <span class="qexplanation">(pounds)</span>',
                     labelStyle:'width:135px;text-shadow: 2px 2px 2px #ccc',
                     width:100,
                     allowBlank:true,
@@ -554,7 +554,7 @@ var q11=     {
                         {
                             xtype:'label',
                             cls:'question-text',
-                            html:'5. Occupational status (check all that apply)'
+                            html:'5. Occupational status <span class="qexplanation">(check all that apply)</span>'
                         },
                         {
                             id:q('q11'),
