@@ -78,6 +78,7 @@
     font-weight:bold;
     font-size: 12px;
     text-shadow: 2px 2px 2px #ccc;
+    max-width:800px
 }
 
 .instructions
@@ -430,4 +431,33 @@ ul.help
 .hidden
 {
     display:none;
+}
+
+.qexplanation
+{
+    text-shadow:none;
+    font-weight:normal;
+    color:gray;
+    margin-top:5px;
+}
+
+.qverylong
+{
+    max-width: 600px;
+    width:600px;
+}
+
+.qindented
+{
+    margin-left:20px;
+}
+
+.qhalf-indented
+{
+    margin-left:10px;
+}
+
+.small-margin-top
+{
+    margin-top:5px;
 }

@@ -90,7 +90,7 @@ function getSubjectDataAsXml($subjectLabel, Database $db)
         $sessionId=$row['fkSessionID'];
         $schema=$row['schemaName'];
         $sessionLabel=$row['label'];
-        $dateSessionCreated=$row['datetimeCreated'];
+        $dateSessionCreated=$row['dateSessionCreated'];
         $subjectLabel=$row['subjectLabel'];
         $owner=$row['username'];
         $formId=$row['formID'];
@@ -146,12 +146,19 @@ function getSubjectDataAsXml($subjectLabel, Database $db)
     return $xmldoc;
 }
 
+/** WARNING: Uses APC to cache the XSL file!
+ *
+ * @param DomDocument $xmldoc
+ * @param <type> $xsltemplate
+ * @return <type> 
+ */
 function applyXSLtoXML(DomDocument $xmldoc, $xsltemplate)
 {
     //Make sure XSLT is available
     if (!class_exists('XSLTProcessor'))
         throw new Exception('Class XSLTProcessor is not available. Please install the XSLT extension for PHP.');
     $xsldata=null;
+    
     //Now we should load the XSL stylesheet
     if (function_exists('apc_fetch'))
         $xsldata=apc_fetch($xsltemplate);
