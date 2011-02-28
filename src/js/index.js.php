@@ -57,7 +57,8 @@ var tabForms=       {
                                     NRG.Forms.Health,
                                     NRG.Forms.AlcoholTobacco,
                                     NRG.Forms.Lifestyle,
-                                    NRG.Forms.Interactions
+                                    NRG.Forms.Interactions,
+                                    NRG.Forms.HormoneMenstrualCycle
                                 ]
 
                     };
@@ -614,6 +615,9 @@ function resetForms()
 
         NRG.Forms.GlobalReset=true;
         form.reset();
+
+        if (typeof(form.customReset)=="function")
+            form.customReset();
 
         Ext.select('.q-valid').removeClass('q-valid');
         Ext.select('.q-invalid').removeClass('q-invalid');

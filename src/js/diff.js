@@ -359,6 +359,7 @@ function onGetSubjectData(response, request)
     var xmldata=response.responseXML;
     var subject=xmldata.documentElement.getAttribute('subject');
 
+    console.log("Caching "+subject+"'s data.");
     NRG.OnlineScoring.Cache.SubjectData[subject]=xmldata;
 
     //Load the data into the grid's store

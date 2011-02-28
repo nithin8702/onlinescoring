@@ -39,7 +39,7 @@
 
     <xsl:template match="/">
         <result>
-            <xsl:attribute name="subject1">
+            <xsl:attribute name="subject">
                 <xsl:value-of select="/result/@subject"/>
             </xsl:attribute>
             <xsl:attribute name="locked">
@@ -101,7 +101,11 @@
            <xsl:call-template name="form">
                <xsl:with-param name="name">INT/1.0</xsl:with-param>
            </xsl:call-template>
-
+            <!-- Hormone/Menstrual Cycle -->
+           <xsl:call-template name="form">
+               <xsl:with-param name="name">HMC/1.0</xsl:with-param>
+           </xsl:call-template>
+           
         </rows>
     </xsl:template>
 

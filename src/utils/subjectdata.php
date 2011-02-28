@@ -146,7 +146,11 @@ function getSubjectDataAsXml($subjectLabel, Database $db)
     return $xmldoc;
 }
 
-/** WARNING: Uses APC to cache the XSL file!
+/** Transforms the XML using the XSL stylesheet. This function uses APC to cache
+ * the XSL data. It also checks to see whether the XSL file has been modified
+ * since it was last cached. If it did, the function loads the new data and
+ * caches it, along with the file modification time.
+ * WARNING: Uses APC to cache the XSL file!
  *
  * @param DomDocument $xmldoc
  * @param <type> $xsltemplate
@@ -161,7 +165,22 @@ function applyXSLtoXML(DomDocument $xmldoc, $xsltemplate)
     
     //Now we should load the XSL stylesheet
     if (function_exists('apc_fetch'))
-        $xsldata=apc_fetch($xsltemplate);
+    {
+        $success=false;
+        //Get cached mtime
+        $xsl_cacheddate=apc_fetch("mtime:".$xsltemplate,$success);
+        
+        if ($success)
+        {
+            //Clear the stat cache to make sure we're reading the latest mtime
+            clearstatcache();
+            //Get real mtime
+            $file_lastdate=@filemtime($xsltemplate);
+
+            if (($file_lastdate!==FALSE) && ($file_lastdate<=$xsl_cacheddate))
+                $xsldata=apc_fetch($xsltemplate);
+        }
+    }
 
     //Cache miss?
     if (empty($xsldata))
@@ -170,9 +189,23 @@ function applyXSLtoXML(DomDocument $xmldoc, $xsltemplate)
         if (empty($xsldata))
             throw new Exception("Could not find subject data stylesheet.");
 
-        //Can we cache the xsl data?
+        //Can we cache the xsl data? Max cache time: 24 hours
         if (function_exists('apc_store'))
+        {
+            //Cache the data
             apc_store($xsltemplate,$xsldata);
+
+            //Clear the stat cache to get the latest mtime
+            clearstatcache();
+            //Get xsl mtime
+            $file_lastdate=@filemtime($xsltemplate);
+
+            if ($file_lastdate!==FALSE)
+            {
+                //Store the mtime in the cache
+                apc_store("mtime:".$xsltemplate,$file_lastdate);
+            }
+        }
     }
 
     //Restore the original error handler

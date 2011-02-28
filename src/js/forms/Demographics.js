@@ -92,7 +92,7 @@ var sDOBhidden= {
                     id:q('q2:a1'),
                     name:'YOB',
                     xtype:'hidden',
-                    inputValue:NRG.Forms.NoResponse
+                    value:NRG.Forms.NoResponse
                 };
 
 //Subject height
@@ -637,25 +637,25 @@ var q11=     {
                             xtype:'hidden',
                             id:'OCCU_1',
                             name:'OCCU_1',
-                            inputValue:NRG.Forms.NoResponse
+                            value:NRG.Forms.NoResponse
                         },
                         {
                             xtype:'hidden',
                             id:'OCCU_2',
                             name:'OCCU_2',
-                            inputValue:NRG.Forms.NoResponse
+                            value:NRG.Forms.NoResponse
                         },
                         {
                             xtype:'hidden',
                             id:'OCCU_3',
                             name:'OCCU_3',
-                            inputValue:NRG.Forms.NoResponse
+                            value:NRG.Forms.NoResponse
                         },
                         {
                             xtype:'hidden',
                             id:'OCCU_4',
                             name:'OCCU_4',
-                            inputValue:NRG.Forms.NoResponse
+                            value:NRG.Forms.NoResponse
                         }
                       ]
             };
@@ -689,7 +689,7 @@ var q12=     {
                             id:q('q12:a1'),
                             name:'RETIRE_AGE',
                             xtype:'hidden',
-                            inputValue:NRG.Forms.NoResponse,
+                            value:NRG.Forms.NoResponse,
                             minValue:16
                         }
                       ]

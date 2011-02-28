@@ -491,14 +491,30 @@ function toggleQ(ids,state)
             //remove value for checkbox- and radio- groups
             if ((component.xtype=="checkboxgroup") ||
                 (component.xtype=="radiogroup"))
-                component.setValue(false);
+                {
+                    console.log("Setting value of radiogroup ",component.getId()," to ''");
+                    component.setValue("");
+                    //Make sure textboxe values are not set to "false"
+                    component.getEl().select('input[type="text"]').each(function(el,c,index)
+                    {
+                        el.dom.value="";
+                        console.log("Cleared value from "+el.dom.id);
+                    });
+                }
         }
         else
         {
-
+            console.log("Setting value of radiogroup ",component.getId()," to ''");
             component.setValue("");
             component.getEl().up('.q-container').removeClass('q-invalid');
             component.getEl().up('.q-container').addClass('q-valid');
+            //Make sure textboxe values are not set to "false"
+            component.getEl().select('input[type="text"]').each(function(el,c,index)
+            {
+                el.dom.value="";
+                console.log("Cleared value from "+el.dom.id);
+            });
+
             component.disable();
         }
     }
@@ -583,7 +599,15 @@ function radioKeypress(field,keycode,event)
     {
         var radio=group.getEl().select('input[type="radio"]',true).item(charcode-1);
         if (radio)
+        {
+            console.log("Setting value of ",radio.id," to true.");
             group.setValue(radio.id,true);
+            group.getEl().select('input[type="text"]').each(function(el,c,index)
+            {
+                el.dom.value="";
+                console.log("Cleared value from textbox "+el.dom.id);
+            });
+        }
     }
 }
 
@@ -1108,6 +1132,8 @@ function getFormValues(form, order)
         for (var i=0;i<order.length;++i)
         {
             field=order[i];
+            if (typeof(field)=="undefined")
+                continue;
             var name="";
             var defaultValue=NRG.Forms.NoResponse;
             var handler=null;

@@ -1,6 +1,6 @@
-/* AlcoholTobacco.js tabsize=4
+/* Interactions.js tabsize=4
  *
- * The Alcohol/Tobacco/Caffeine Form.
+ * The Interactions Questionnaire
  *
  * @author  Victor Petrov <victor_petrov@harvard.edu>
  * @date    July 20, 2010
@@ -1605,6 +1605,10 @@ var q12a=     {
                                             id:q('q12:a1:2'),
                                             name:'GROUP_NUM_1',
                                             xtype:'numberfield',
+                                            allowDecimals:false,
+                                            allowNegative:false,
+                                            maxValue:NRG.Forms.NoResponse,
+                                            minValue:1,
                                             next:q('q12:a2:1'),
                                             width:50,
                                             cls:'qhalf-indented'
@@ -1620,6 +1624,10 @@ var q12a=     {
                                             id:q('q12:a2:2'),
                                             name:'GROUP_NUM_2',
                                             xtype:'numberfield',
+                                            allowDecimals:false,
+                                            allowNegative:false,
+                                            maxValue:NRG.Forms.NoResponse,
+                                            minValue:1,
                                             next:q('q12:a3:1'),
                                             width:50,
                                             cls:'qhalf-indented'
@@ -1636,6 +1644,10 @@ var q12a=     {
                                             id:q('q12:a3:2'),
                                             name:'GROUP_NUM_3',
                                             xtype:'numberfield',
+                                            allowDecimals:false,
+                                            allowNegative:false,
+                                            maxValue:NRG.Forms.NoResponse,
+                                            minValue:1,
                                             next:q('q12:a4:1'),
                                             width:50,
                                             cls:'qhalf-indented'
@@ -1652,6 +1664,10 @@ var q12a=     {
                                             id:q('q12:a4:2'),
                                             name:'GROUP_NUM_4',
                                             xtype:'numberfield',
+                                            allowDecimals:false,
+                                            allowNegative:false,
+                                            maxValue:NRG.Forms.NoResponse,
+                                            minValue:1,
                                             next:q('q12:a5:1'),
                                             width:50,
                                             cls:'qhalf-indented'
@@ -1667,6 +1683,10 @@ var q12a=     {
                                             id:q('q12:a5:2'),
                                             name:'GROUP_NUM_5',
                                             xtype:'numberfield',
+                                            allowDecimals:false,
+                                            allowNegative:false,
+                                            maxValue:NRG.Forms.NoResponse,
+                                            minValue:1,
                                             width:50,
                                             cls:'qhalf-indented'
                                         }
@@ -1675,18 +1695,17 @@ var q12a=     {
                       ]
             };
 
-
-var btnFinish={
+var btnNext={
                 xtype:'fieldset',
                 border:false,
                 style:'margin-bottom:20px',
                 items:[
                             {
-                                id:'btnFinish',
+                                id:q('btnNext'),
                                 xtype:'button',
-                                text:'Finish',
-                                icon:'images/icons/finish.png',
-                                handler:btnFinishClicked
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnNextFormClicked
                             }
                       ]
               };
@@ -1734,7 +1753,7 @@ var form=   {
                                 activate:onFormActivated
                             },
                 items:[ q1,q2,q2a,q3,q3a,q4,q4a,q5,q5a,q6,q6a,q7,q7a,q8,q8a,q9,
-                        q9a,q9b,q10,q11,q11a,q12,q12a,btnFinish]
+                        q9a,q9b,q10,q11,q11a,q12,q12a,btnNext]
              };
 
 NRG.Forms.Interactions=form;
