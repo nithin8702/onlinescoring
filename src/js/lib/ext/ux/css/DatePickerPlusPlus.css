@@ -1,0 +1,79 @@
+.x-date-pp-click1
+{
+    background-color:yellowgreen !important;
+    color:white !important;
+ }
+
+.x-date-pp-click2
+{
+    background-color:orange !important;
+    color:white !important;
+}
+
+.x-date-selected
+{
+}
+
+th.x-date-weeknumber
+{
+    background-color: gray;
+    background-image: url(../images/glass-bg.gif);
+    border-bottom-color: #A3BAD9;
+    font: normal 10px arial, helvetica,tahoma,sans-serif;
+    color: darkgray;
+}
+
+.x-date-weeknumber-header a em span
+{
+    color:darkblue !important;
+}
+
+td.x-date-weeknumber-cell
+{
+    border-color:#DFECFB;
+    background-color:#DFECFB;
+}
+
+.x-date-weeknumber-cell a em span
+{
+    color:darkblue;
+}
+
+.x-date-prevday
+{
+    background-color:white !important;
+    cursor:default;
+}
+
+.x-date-prevday a em span
+{
+    color:#FFF !important;
+    cursor:default;
+}
+
+.x-date-prevday a:hover
+{
+    background-color:#FFF !important;
+    color:#FFF !important;
+    cursor:default;
+}
+
+
+.x-date-nextday
+{
+    background-color:white !important;
+    cursor:default;
+}
+
+.x-date-nextday a em span
+{
+    color:#FFF !important;
+    cursor:default;
+}
+
+.x-date-nextday a:hover
+{
+    background-color:white !important;
+    color:#FFF !important;
+    cursor:default;
+}

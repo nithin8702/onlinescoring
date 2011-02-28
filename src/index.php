@@ -63,6 +63,12 @@
             <script type="text/javascript" src="js/lib/ext/ux/PagingRowNumberer.js"></script>
 
         <?php if ($_SESSION['clearance']>=30):?>
+            <!-- DatePickerPlus CSS-->
+            <link rel="stylesheet" type="text/css" href="js/lib/ext/ux/css/DatePickerPlus.css"/>
+            <link rel="stylesheet" type="text/css" href="js/lib/ext/ux/css/DatePickerPlusPlus.css"/>
+            <script type="text/javascript" src="js/lib/ext/ux/DatePickerPlus.js"></script>
+            <script type="text/javascript" src="js/lib/ext/ux/DatePickerPlusPlus.js"></script>
+
             <!-- Forms View -->
             <script type="text/javascript" src="js/store/countries.js"></script>
             <script type="text/javascript" src="js/store/states.js"></script>
@@ -75,6 +81,7 @@
             <script type="text/javascript" src="js/forms/Health.js"></script>
             <script type="text/javascript" src="js/forms/Lifestyle.js"></script>
             <script type="text/javascript" src="js/forms/Interactions.js"></script>
+            <script type="text/javascript" src="js/forms/HormoneMenstrualCycle.js"></script>
         <?php endif; ?>
 
         <?php if ($_SESSION['clearance']>=50):?>

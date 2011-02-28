@@ -461,3 +461,29 @@ ul.help
 {
     margin-top:5px;
 }
+
+.small-margin-bottom
+{
+    margin-bottom:5px
+}
+
+.medium-margin-top
+{
+    margin-top:10px;
+}
+
+.medium-margin-bottom
+{
+    margin-bottom:10px;
+}
+
+
+.qpadded
+{
+    padding-left:20px;
+}
+
+ul.with-bullets
+{
+    list-style-type: disc;
+}

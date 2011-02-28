@@ -72,31 +72,46 @@
                 <ref name="T_StringWithQuotes"/>
             </element>
             <element name="group_num_1">
-                <data type="nonNegativeInteger"/>
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
             </element>
             <element name="group_name_2">
                 <ref name="T_StringWithQuotes"/>
             </element>
             <element name="group_num_2">
-                <data type="nonNegativeInteger"/>
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
             </element>
             <element name="group_name_3">
                 <ref name="T_StringWithQuotes"/>
             </element>
             <element name="group_num_3">
-                <data type="nonNegativeInteger"/>
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
             </element>
             <element name="group_name_4">
                 <ref name="T_StringWithQuotes"/>
             </element>
             <element name="group_num_4">
-                <data type="nonNegativeInteger"/>
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
             </element>
             <element name="group_name_5">
                 <ref name="T_StringWithQuotes"/>
             </element>
             <element name="group_num_5">
-                <data type="nonNegativeInteger"/>
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
             </element>
         </element>
     </start>

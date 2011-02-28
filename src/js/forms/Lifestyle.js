@@ -1,6 +1,6 @@
-/* Health.js tabsize=4
+/* Lifestyle.js tabsize=4
  *
- * The Health Form.
+ * The L:ifestyle Form.
  *
  * @author  Victor Petrov <victor_petrov@harvard.edu>
  * @date    July 20, 2010
