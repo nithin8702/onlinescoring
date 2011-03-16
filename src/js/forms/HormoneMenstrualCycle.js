@@ -573,7 +573,7 @@ var q7=     {
                                             inputValue:1
                                         },
                                         {
-                                            boxLabel:'Thetiming of my period varies from month to month. It\'s hard to predict when itwill come.',
+                                            boxLabel:'The timing of my period varies from month to month. It\'s hard to predict when it will come.',
                                             inputValue:2
                                         },
                                         {
