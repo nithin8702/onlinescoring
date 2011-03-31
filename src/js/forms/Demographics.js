@@ -534,7 +534,7 @@ var q10=     {
                             disabled:true,
                             minValue:0,
                             maxValue:100,
-                            maxLength:3,
+                            maxLength:6,
                             width:35,
                             next:q('q11'),
                             listeners:  {
@@ -951,4 +951,9 @@ function resetState(form)
         return;
 
     stateField.setValue('');
+}
+
+function setMaleSubject()
+{
+    console.log("Male subject!");
 }

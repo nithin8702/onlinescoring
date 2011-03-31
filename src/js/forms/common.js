@@ -597,7 +597,24 @@ function radioKeypress(field,keycode,event)
 
     if (ok)
     {
-        var radio=group.getEl().select('input[type="radio"]',true).item(charcode-1);
+        var index=0;
+        var radios=group.getEl().select('input[type="radio"]',true);
+        var radio=radios.item(index);
+        if (!radio)
+            return;
+
+        if ((typeof(radio.dom.alt)!="undefined") && (radio.dom.alt.length))
+            index=charcode;
+        else
+            index=charcode-1;
+
+        var radio=radios.item(index);
+
+        if (!radio)
+            return;
+
+        console.log(radio);
+
         if (radio)
         {
             console.log("Setting value of ",radio.id," to true.");
@@ -605,7 +622,7 @@ function radioKeypress(field,keycode,event)
             group.getEl().select('input[type="text"]').each(function(el,c,index)
             {
                 el.dom.value="";
-                console.log("Cleared value from textbox "+el.dom.id);
+                //console.log("Cleared value from textbox "+el.dom.id);
             });
         }
     }
@@ -885,6 +902,9 @@ function addShortcutLabel(input,scope,index)
     //The default shortcut is the index of the element in the list of children
     //plus 1 to correct 0-based iteration.
     var shortcut=index+1;
+
+    if ((typeof(input.dom.alt)!="undefined") && (input.dom.alt.length))
+        shortcut=input.dom.alt;
 
     var label='<span class="q-radio-shortcut">'+shortcut+'</span>';
     input.insertSibling(label,'before');

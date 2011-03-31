@@ -139,7 +139,7 @@ var q1a=     {
                                                     }]
                                         },
                                         {
-                                            boxLabel:'intrauterine device <span class="qexplanation">(IUD) (Mirena or ParaGard if known)</span>',
+                                            boxLabel:'intrauterine device (IUD) <span class="qexplanation">(Mirena or ParaGard if known)</span>',
                                             inputValue:2,
                                             enableQ:[q('q1a:2')],
                                             next:q('q1a:2'),

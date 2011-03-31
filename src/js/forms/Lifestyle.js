@@ -37,7 +37,7 @@ var instructions={
                         'answer that best describes '+
                         'how often that statement applies to you. Many of these '+
                         'questions ask about your interactions with other people. '+
-                        'Please think about theway you are with most people, rather '+
+                        'Please think about the way you are with most people, rather '+
                         'than special relationships you may have with spouses or '+
                         'significant others, children, siblings, and parents. '+
                         'Everyone changes over time, which can make it hard to fill '+
@@ -74,36 +74,36 @@ getQ("I am comfortable with unexpected changes in plans"),
 getQ("It's hard for me to avoid getting sidetracked in conversation"),
 getQ("I would rather talk to people to get information than to socialize"),
 getQ("People have to talk me into trying something new"),
-getQ("I am &quot;in-tune&quot; with the other person during conversation***"),
+getQ("I am &quot;in-tune&quot; with the other person during conversation.***"),
 getQ("I have to warm myself up to the idea of visiting an unfamiliar place"),
 getQ("I enjoy being in social situations"),
 getQ("My voice has a flat or monotonous sound to it"),
-getQ("I feel diconnected or &quot;out of sync&quot; in conversations with others***"),
-getQ("People find it easy to approach me***"),
+getQ("I feel diconnected or &quot;out of sync&quot; in conversations with others.***"),
+getQ("People find it easy to approach me.***"),
 getQ("I feel a strong need for sameness from day to day"),
 getQ("People ask me to repeat things I've said because they don't understand"),
 getQ("I am flexible about how things should be done"),
 getQ("I look forward to situations when I can meet new people"),
 getQ("I have been told that I talk too much about certain topics"),
-getQ("When I make conversation it is just to be polite***"),
+getQ("When I make conversation it is just to be polite.***"),
 getQ("I look forward to trying new things"),
 getQ("I speak too loudly or softly"),
-getQ("I can tell when someone is not interested in what I am saying***"),
+getQ("I can tell when someone is not interested in what I am saying.***"),
 getQ("I have a hard time dealing with changes in my routine"),
-getQ("I am good at making small talk***"),
+getQ("I am good at making small talk.***"),
 getQ("I act very set in my ways"),
 getQ("I feel like I am really connecting with other people"),
 getQ("People get frustrated by my unwillingness to bend"),
-getQ("Conversation bores me***"),
-getQ("I am warm and friendly in my interactions with others***"),
+getQ("Conversation bores me.***"),
+getQ("I am warm and friendly in my interactions with others.***"),
 getQ("I leave long pauses in conversation"),
 getQ("I alter my daily routine by trying something different"),
 getQ("I prefer to be alone rather than with others"),
 getQ("I lose track of my original point when talking to people"),
 getQ("I like to closely follow a routine while working"),
-getQ("I can tell when it is time to change topics in conversation***"),
+getQ("I can tell when it is time to change topics in conversation.***"),
 getQ("I keep doing things the way I know, even if another way might be better"),
-getQ("I enjoy chatting with people***")
+getQ("I enjoy chatting with people.***")
 ];
 
 

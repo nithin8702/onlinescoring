@@ -121,35 +121,44 @@ var q2=     {
                                             boxLabel:'0',
                                             inputValue:0,
                                             next:q('q3'),
-                                            disableQ:[q('q2a')]
+                                            shortcutKey:0,
+                                            disableQ:[q('q2a')],
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -208,35 +217,43 @@ var q2a=     {
                                                                 self.getEl().dom.defaultValue=0;
                                                                 self.getEl().dom.value=0;
                                                             }
-                                                        }
+                                                        },
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -508,35 +525,43 @@ var q5=     {
                                             boxLabel:'0',
                                             inputValue:0,
                                             next:q('q6'),
-                                            disableQ:[q('q5a')]
+                                            disableQ:[q('q5a')],
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -594,35 +619,43 @@ var q5a=     {
                                                                 self.getEl().dom.defaultValue=0;
                                                                 self.getEl().dom.value=0;
                                                             }
-                                                        }
+                                                        },
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -670,35 +703,43 @@ var q6=     {
                                             boxLabel:'0',
                                             inputValue:0,
                                             next:q('q7'),
-                                            disableQ:[q('q6a')]
+                                            disableQ:[q('q6a')],
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -754,35 +795,43 @@ var q6a=     {
                                                                 self.getEl().dom.defaultValue=0;
                                                                 self.getEl().dom.value=0;
                                                             }
-                                                        }
+                                                        },
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -890,35 +939,43 @@ var q7a=     {
                                                                 self.getEl().dom.defaultValue=0;
                                                                 self.getEl().dom.value=0;
                                                             }
-                                                        }
+                                                        },
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -1027,35 +1084,43 @@ var q8a=     {
                                                                 self.getEl().dom.defaultValue=0;
                                                                 self.getEl().dom.value=0;
                                                             }
-                                                        }
+                                                        },
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -1164,35 +1229,43 @@ var q9a=     {
                                                                 self.getEl().dom.defaultValue=0;
                                                                 self.getEl().dom.value=0;
                                                             }
-                                                        }
+                                                        },
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -1250,35 +1323,43 @@ var q9b=     {
                                                                 self.getEl().dom.defaultValue=0;
                                                                 self.getEl().dom.value=0;
                                                             }
-                                                        }
+                                                        },
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -1320,35 +1401,43 @@ var q10=     {
                             items:  [
                                         {
                                             boxLabel:'0',
-                                            inputValue:0
+                                            inputValue:0,
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -1455,35 +1544,43 @@ var q11a=     {
                                                                 self.getEl().dom.defaultValue=0;
                                                                 self.getEl().dom.value=0;
                                                             }
-                                                        }
+                                                        },
+                                            autoCreate: getRadioShortcut(0)
                                         },
                                         {
                                             boxLabel:'1',
-                                            inputValue:1
+                                            inputValue:1,
+                                            autoCreate: getRadioShortcut(1)
                                         },
                                         {
                                             boxLabel:'2',
-                                            inputValue:2
+                                            inputValue:2,
+                                            autoCreate: getRadioShortcut(2)
                                         },
                                         {
                                             boxLabel:'3',
-                                            inputValue:3
+                                            inputValue:3,
+                                            autoCreate: getRadioShortcut(3)
                                         },
                                         {
                                             boxLabel:'4',
-                                            inputValue:4
+                                            inputValue:4,
+                                            autoCreate: getRadioShortcut(4)
                                         },
                                         {
                                             boxLabel:'5',
-                                            inputValue:5
+                                            inputValue:5,
+                                            autoCreate: getRadioShortcut(5)
                                         },
                                         {
                                             boxLabel:'6',
-                                            inputValue:6
+                                            inputValue:6,
+                                            autoCreate: getRadioShortcut(6)
                                         },
                                         {
                                             boxLabel:'7+',
-                                            inputValue:7
+                                            inputValue:7,
+                                            autoCreate: getRadioShortcut(7)
                                         }
                                     ]
                         }
@@ -1772,4 +1869,15 @@ function btnFinishClicked(button)
         resetForms();
     else
         promptSaveForm(currentForm);
+}
+
+
+function getRadioShortcut(key)
+{
+    return  {
+                tag:"input",
+                type:"radio",
+                autocomplete:"off",
+                alt:key
+            }
 }
