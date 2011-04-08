@@ -1039,6 +1039,286 @@ var q6=     {
                                                             focus:onFieldFocus
                                                         }
                                         },
+                                        //Asthma
+                                        {
+                                            html:'Asthma',
+                                            cls:'q-table-label',
+                                            border:false
+                                        },
+                                        {
+                                            id:q('q6:a20:1'),
+                                            name:'ASTHMA',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a20:2'),
+                                            name:'ASTHMA',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a20:3'),
+                                            name:'ASTHMA',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+
+                                        //Chronic liver disease
+                                        {
+                                            html:'Chronic liver disease or hepatitis',
+                                            cls:'q-table-label',
+                                            border:false
+                                        },
+                                        {
+                                            id:q('q6:a21:1'),
+                                            name:'LIVER',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a21:2'),
+                                            name:'LIVER',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a21:3'),
+                                            name:'LIVER',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+
+                                        //Heart attack or bypass surgery
+                                        {
+                                            html:'Heart attack or bypass surgery',
+                                            cls:'q-table-label',
+                                            border:false
+                                        },
+                                        {
+                                            id:q('q6:a22:1'),
+                                            name:'HEART_ATTACK',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a22:2'),
+                                            name:'HEART_ATTACK',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a22:3'),
+                                            name:'HEART_ATTACK',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+
+                                        //Heart problems
+                                        {
+                                            html:'Heart problems',
+                                            cls:'q-table-label',
+                                            border:false
+                                        },
+                                        {
+                                            id:q('q6:a23:1'),
+                                            name:'HEART_PROBLEMS',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a23:2'),
+                                            name:'HEART_PROBLEMS',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a23:3'),
+                                            name:'HEART_PROBLEMS',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+
+                                        //Kidney disease
+                                        {
+                                            html:'Kidney disease',
+                                            cls:'q-table-label',
+                                            border:false
+                                        },
+                                        {
+                                            id:q('q6:a24:1'),
+                                            name:'KIDNEY',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a24:2'),
+                                            name:'KIDNEY',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a24:3'),
+                                            name:'KIDNEY',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+
+                                        //Leukemia
+                                        {
+                                            html:'Leukemia',
+                                            cls:'q-table-label',
+                                            border:false
+                                        },
+                                        {
+                                            id:q('q6:a25:1'),
+                                            name:'LEUKEMIA',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a25:2'),
+                                            name:'LEUKEMIA',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a25:3'),
+                                            name:'LEUKEMIA',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+
+                                        //Pneumonia
+                                        {
+                                            html:'Pneumonia',
+                                            cls:'q-table-label',
+                                            border:false
+                                        },
+                                        {
+                                            id:q('q6:a26:1'),
+                                            name:'PNEUMONIA',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a26:2'),
+                                            name:'PNEUMONIA',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a26:3'),
+                                            name:'PNEUMONIA',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+
+                                        //Rheumatoid arthritis or other autoimmune disorders
+                                        {
+                                            html:'Rheumatoid arthritis or other autoimmune disorders',
+                                            cls:'q-table-label',
+                                            border:false
+                                        },
+                                        {
+                                            id:q('q6:a27:1'),
+                                            name:'AUTOIMMUNE',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a27:2'),
+                                            name:'AUTOIMMUNE',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a27:3'),
+                                            name:'AUTOIMMUNE',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+
+                                        //Stomach ulcers
+                                        {
+                                            html:'Stomach ulcers',
+                                            cls:'q-table-label',
+                                            border:false
+                                        },
+                                        {
+                                            id:q('q6:a28:1'),
+                                            name:'ULCERS',
+                                            xtype:'radio',
+                                            inputValue:2,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a28:2'),
+                                            name:'ULCERS',
+                                            xtype:'radio',
+                                            inputValue:1,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+                                        {
+                                            id:q('q6:a28:3'),
+                                            name:'ULCERS',
+                                            xtype:'radio',
+                                            inputValue:3,
+                                            next:q('q7'),
+                                            listeners:{check:updateIllnessCount}
+                                        },
+
+
                                         {
                                             id:'HQ_LIFETIME',
                                             name:'LIFETIME',
@@ -2063,7 +2343,7 @@ var form=   {
                 autoScroll:false,
                 buttonAlign:'left',
                 title:'Health',
-                schema:'HQ/1.1',
+                schema:'HQ/1.2',
                 keys:   {
                             //Digits [1-5]
                             key:[
@@ -2121,6 +2401,15 @@ var form=   {
                                     "SA",
                                     "OTHER",
                                     "OTHER_LIST",
+                                    "ASTHMA",
+                                    "LIVER",
+                                    "HEART_ATTACK",
+                                    "HEART_PROBLEMS",
+                                    "KIDNEY",
+                                    "LEUKEMIA",
+                                    "PNEUMONIA",
+                                    "AUTOIMMUNE",
+                                    "ULCERS",
                                     "LIFETIME",
                                     "NOW",
                                     "NOW_PSYMED",

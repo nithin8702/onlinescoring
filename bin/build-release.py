@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/d/Libraries/Python/2.7/pythonw.exe
 
 __author__="Victor Petrov <victor_petrov@harvard.edu>"
 __date__ ="$Jan 17, 2011 11:25:38 AM$"

@@ -82,6 +82,7 @@
             <script type="text/javascript" src="js/forms/Lifestyle.js"></script>
             <script type="text/javascript" src="js/forms/Interactions.js"></script>
             <script type="text/javascript" src="js/forms/HormoneMenstrualCycle.js"></script>
+            <script type="text/javascript" src="js/forms/HollingsheadIndex.js"></script>
         <?php endif; ?>
 
         <?php if ($_SESSION['clearance']>=50):?>

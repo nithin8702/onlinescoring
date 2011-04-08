@@ -830,7 +830,7 @@ function onDiffStoreLoaded(store, records, options)
     {
         var record=records[i];
         var fieldCount=record.fields.getCount();
-        var initialValue=null;
+        var initialValue="";
         var match=true;
         //Determines whether to pre-populate the final column by comparing all other <cell> columns
         //If a value already exists in the 'final' column, then do not pre-populate.
@@ -844,20 +844,19 @@ function onDiffStoreLoaded(store, records, options)
         for (var j=0;j<fieldCount;++j)
         {
             var field=record.fields.item(j).name;
-            var value=record.data[field];
             //Decode
-            record.data[field]=decodeURIComponent(value);
+            record.data[field]=decodeURIComponent(record.data[field]);
 
             if (!compare)
                 continue;
             
             var cellColumn=field.indexOf('cell');
             //Don't perform comparisons for non-<cell> columns
-            if (cellColumn<0)
+            if ((cellColumn<0) || (!record.data[field].toString().length))
                 continue;
 
-            //Store the value of the first encountered <cell> column into initialValue
-            if ((cellColumn==0) && (initialValue===null))
+            //Store the value of the first encountered non-empty <cell> column into initialValue
+            if (!initialValue.toString().length)
                 initialValue=record.data[field];
             else
             {
@@ -868,7 +867,7 @@ function onDiffStoreLoaded(store, records, options)
         }
 
         //If all <cell> columns have the same value, store it in the final column
-        if (compare && match)
+        if (compare && match && initialValue.toString().length)
             record.set('final',initialValue);
     }
 }
@@ -1104,6 +1103,7 @@ function diffRecord(record)
     var foundFirst=false;
     var match=0;
     var val=record.get('final');
+    var all_empty=true;
 
     //Skip records that have a final value
     if ((val!=null) && (val.toString().length))
@@ -1113,25 +1113,42 @@ function diffRecord(record)
     {
         var field=record.fields.item(i).name;
         var cellColumn=field.indexOf('cell');
+
+        console.log("Field=",field,"cellColumn=",cellColumn);
+
         //Don't perform comparisons for non-<cell> columns
         if (cellColumn<0)
             continue;
 
+        var value=record.get(field);
+
+        if (typeof(value)=="undefined")
+            continue;
+        console.log("Looking at value: ",value);
+        //to lower case
+        value=value.toString().toLowerCase();
+
+        //Skip empty values (only happens when the form is empty)
+        if (!value.length)
+            continue;
+
+        all_empty=false;
+
         //Store the value of the first encountered <cell> column into initialValue
-        if ((cellColumn==0) && !foundFirst)
+        if (!foundFirst)
         {
-            initialValue=record.get(field);
+            initialValue=value;
             foundFirst=true;
         }
         else
         {
             //Compare values (case insensitive)
-            if (record.get(field).toString().toLowerCase()!=initialValue.toString().toLowerCase())
+            if (value!=initialValue)
                 match=1;
         }
     }
 
-    if (!initialValue.length)
+    if (all_empty)
         match=2;
 
    return match;

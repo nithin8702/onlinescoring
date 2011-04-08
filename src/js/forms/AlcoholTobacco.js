@@ -422,20 +422,22 @@ var q7=     {
                       ]
             }
 
-var btnFinish={
+
+var btnNext={
                 xtype:'fieldset',
                 border:false,
                 style:'margin-bottom:20px',
                 items:[
                             {
-                                id:'btnFinish',
+                                id:q('btnNext'),
                                 xtype:'button',
-                                text:'Finish',
-                                icon:'images/icons/finish.png',
-                                handler:btnFinishClicked
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnNextFormClicked
                             }
                       ]
               };
+
 
 var form=   {
                 id:qID,
@@ -443,7 +445,7 @@ var form=   {
                 border:false,
                 autoScroll:false,
                 buttonAlign:'left',
-                lastForm:true,
+                lastForm:false,
                 title:'Alcohol/Tobacco/Caffeine',
                 schema:'ATC/1.0',
                 submitOrder: [
@@ -471,7 +473,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[q1,q2,q3,q4,q5,q6,q7,btnFinish]
+                items:[q1,q2,q3,q4,q5,q6,q7,btnNext]
              };
 
 NRG.Forms.AlcoholTobacco=form;
@@ -481,13 +483,4 @@ NRG.Forms.AlcoholTobacco=form;
 function q(id)
 {
     return qID+':'+id;
-}
-
-function btnFinishClicked(button)
-{
-    var currentForm=Ext.getCmp('tabForms').getActiveTab();
-    if (currentForm.saved)
-        resetForms();
-    else
-        promptSaveForm(currentForm);
 }
