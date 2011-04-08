@@ -1813,7 +1813,7 @@ var form=   {
                 border:false,
                 autoScroll:false,
                 buttonAlign:'left',
-                lastForm:true,
+                lastForm:false,
                 title:'Interactions',
                 schema:'INT/1.0',
                 submitOrder: [
@@ -1861,16 +1861,6 @@ function q(id)
 {
     return qID+':'+id;
 }
-
-function btnFinishClicked(button)
-{
-    var currentForm=Ext.getCmp('tabForms').getActiveTab();
-    if (currentForm.saved)
-        resetForms();
-    else
-        promptSaveForm(currentForm);
-}
-
 
 function getRadioShortcut(key)
 {

@@ -40,7 +40,8 @@ try
 {
     $config=new \NRG\Configuration("config.ini.php");
     $dbconfig=$config->Database;
-    $db=new Database($dbconfig['host'],$dbconfig['user'],$dbconfig['pass'],$dbconfig['name']);
+    $db=new Database($dbconfig['host'],$dbconfig['user'],$dbconfig['pass'],
+                     $dbconfig['name']);
 
     if (!$db)
         throw new Exception("Couldn't connect to the database.");
@@ -49,6 +50,14 @@ try
 
     foreach ($subjects as $subject)
     {
+        //If the subject has been locked, make sure it is never highlighted as
+        //having errors
+        if ((int)$subject['locked']==1)
+        {
+            $db->storeFinalDiffState($subject['subjectLabel'],1);
+            continue;
+        }
+
         $xml=getSubjectDataAsXml($subject['subjectLabel'],$db);
     //    header('Content-type: application/xml');
     //    print $xml->saveXML();die;

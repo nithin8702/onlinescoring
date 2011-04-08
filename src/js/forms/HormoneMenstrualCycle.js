@@ -860,20 +860,21 @@ var q12={
                   ]
         }
 
-var btnFinish={
+var btnNext={
                 xtype:'fieldset',
                 border:false,
                 style:'margin-bottom:20px',
                 items:[
                             {
-                                id:'btnFinish',
+                                id:q('btnNext'),
                                 xtype:'button',
-                                text:'Finish',
-                                icon:'images/icons/finish.png',
-                                handler:btnFinishClicked
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnNextFormClicked
                             }
                       ]
               };
+
 
 
 var form=   {
@@ -908,7 +909,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[q1,q1a,q2,q2abc,q3,q3a,q4,q5,q6,q7,q8,q9,q10,q11,q12,btnFinish],
+                items:[q1,q1a,q2,q2abc,q3,q3a,q4,q5,q6,q7,q8,q9,q10,q11,q12,btnNext],
                 submitOrder: [
                                 'BC', 'BC_TYPE', 'BC_NAME', 'BC_PREV',
                                 'BC_PREV_TYPE', 'BC_PREV_TIME', 'BC_PREV_STOP',

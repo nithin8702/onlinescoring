@@ -58,7 +58,8 @@ var tabForms=       {
                                     NRG.Forms.AlcoholTobacco,
                                     NRG.Forms.Lifestyle,
                                     NRG.Forms.Interactions,
-                                    NRG.Forms.HormoneMenstrualCycle
+                                    NRG.Forms.HormoneMenstrualCycle,
+                                    NRG.Forms.Hollingshead
                                 ]
 
                     };

@@ -16,12 +16,14 @@ Ext.ux.DatePickerPlusPlus = Ext.extend(Ext.ux.DatePickerPlus, {
 
     reset:function()
     {
-        console.log("Resetting the calendar");
         this.datesCertain=[];
         this.datesUnsure=[];
         this.timestampsCertain=[];
         this.timestampsUnsure=[];
-        this.getEl().select("a").removeClass(['x-date-selected','x-date-pp-click1','x-date-pp-click2']);
+        var el=this.getEl();
+
+        if (typeof(el)!="undefined")
+            el.select("a").removeClass(['x-date-selected','x-date-pp-click1','x-date-pp-click2']);
     },
 
     handleDateClick:function(e,t)
@@ -39,8 +41,6 @@ Ext.ux.DatePickerPlusPlus = Ext.extend(Ext.ux.DatePickerPlus, {
             tp.clicked=1;
         else
             tp.clicked++;
-
-        console.log("Clicked on ",el);
 
         tp.removeClass(['x-date-selected']);
 

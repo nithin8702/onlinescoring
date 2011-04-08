@@ -270,22 +270,26 @@ function diffColumns(DOMNodeList $cells)
     if (!$cells->length)
         return 0;
 
-    $lastValue=null;
+    $firstValue="";
     
     foreach ($cells as $cell)
     {
         $value=strtolower($cell->nodeValue);
 
+        //Skip empty cells
+        if (empty($value))
+            continue;
+
         //Obtain the first value
-        if ($lastValue===null)
+        if (empty($firstValue))
         {
-            $lastValue=$value;
+            $firstValue=$value;
             continue;
         }
 
         //Compare subsequent values with the first value.
         //If at least 1 is different, then return 1
-        if ($value!==$lastValue)
+        if ($value!==$firstValue)
             return 1;
     }
 
@@ -293,7 +297,7 @@ function diffColumns(DOMNodeList $cells)
     //value then we can say that all the column values
     //are equal.
     //But if, they're empty, return 2
-    if (!strlen($lastValue))
+    if (!strlen($firstValue))
         return 2;
 
     return 0;

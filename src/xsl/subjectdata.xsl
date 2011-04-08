@@ -87,7 +87,7 @@
            </xsl:call-template>
             <!-- Health -->
            <xsl:call-template name="form">
-               <xsl:with-param name="name">HQ/1.1</xsl:with-param>
+               <xsl:with-param name="name">HQ/1.2</xsl:with-param>
            </xsl:call-template>
             <!-- Alcohol/Tobacco/Caffeine -->
            <xsl:call-template name="form">
@@ -104,6 +104,10 @@
             <!-- Hormone/Menstrual Cycle -->
            <xsl:call-template name="form">
                <xsl:with-param name="name">HMC/1.0</xsl:with-param>
+           </xsl:call-template>
+            <!-- Hollingshead Index -->
+           <xsl:call-template name="form">
+               <xsl:with-param name="name">HI/1.0</xsl:with-param>
            </xsl:call-template>
            
         </rows>
