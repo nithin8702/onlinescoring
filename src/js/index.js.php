@@ -105,6 +105,16 @@ var toolbarForms=   {
                                         icon:'images/icons/go.png',
                                         handler:btnGoClicked
                                     },
+                                    '-',
+                                    {
+                                        id:'btnSkip',
+                                        xtype:'button',
+                                        text:'Skip',
+                                        icon:'images/icons/next.png',
+                                        handler:btnSkipClicked,
+                                        disabled:true
+                                    },
+                                    '->',
                                     {
                                         id:'btnReset',
                                         xtype:'button',
@@ -112,7 +122,7 @@ var toolbarForms=   {
                                         handler:resetForms,
                                         icon:'images/icons/reset.png'
                                     },
-                                    '->',
+                                    '-',
                                     {
                                         id:'form_version',
                                         xtype:'tbtext',
@@ -467,6 +477,17 @@ function btnGoClicked(button)
     });
 }
 
+
+function btnSkipClicked(button)
+{
+    var tabpanel=Ext.getCmp('tabForms');
+
+    if (tabpanel.getActiveTab().lastForm==true)
+        congratulations();
+    else
+        nextForm();
+}
+
 function btnHistoryToggled(button,state)
 {
     var grid=Ext.getCmp('gridHistory');
@@ -597,6 +618,7 @@ function resetForms()
     //Reset all buttons
     Ext.getCmp('btnGo').show();
     Ext.getCmp('btnSave').disable();
+    Ext.getCmp('btnSkip').disable();
 
     //Reset all forms
     var forms=Ext.getCmp('tabForms');
@@ -643,6 +665,7 @@ function sessionRequestSucceeded(data,request)
         NRG.Forms.SessionLabel=response.session;
         Ext.getCmp('btnGo').hide();
         Ext.getCmp('btnSave').enable();
+        Ext.getCmp('btnSkip').enable();
         Ext.fly('panelFormsWelcome').hide();
         Ext.getCmp('tabForms').show();
         Ext.fly('clock').update('00:00');
