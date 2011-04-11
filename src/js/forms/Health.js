@@ -2343,7 +2343,7 @@ var form=   {
                 autoScroll:false,
                 buttonAlign:'left',
                 title:'Health',
-                schema:'HQ/1.2',
+                schema:'HQ/1.3',
                 keys:   {
                             //Digits [1-5]
                             key:[
