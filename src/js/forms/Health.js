@@ -1109,7 +1109,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a22:1'),
-                                            name:'HEART_ATTACK',
+                                            name:'HEART_ATT',
                                             xtype:'radio',
                                             inputValue:2,
                                             next:q('q7'),
@@ -1117,7 +1117,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a22:2'),
-                                            name:'HEART_ATTACK',
+                                            name:'HEART_ATT',
                                             xtype:'radio',
                                             inputValue:1,
                                             next:q('q7'),
@@ -1125,7 +1125,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a22:3'),
-                                            name:'HEART_ATTACK',
+                                            name:'HEART_ATT',
                                             xtype:'radio',
                                             inputValue:3,
                                             next:q('q7'),
@@ -1140,7 +1140,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a23:1'),
-                                            name:'HEART_PROBLEMS',
+                                            name:'HEART_PROB',
                                             xtype:'radio',
                                             inputValue:2,
                                             next:q('q7'),
@@ -1148,7 +1148,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a23:2'),
-                                            name:'HEART_PROBLEMS',
+                                            name:'HEART_PROB',
                                             xtype:'radio',
                                             inputValue:1,
                                             next:q('q7'),
@@ -1156,7 +1156,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a23:3'),
-                                            name:'HEART_PROBLEMS',
+                                            name:'HEART_PROB',
                                             xtype:'radio',
                                             inputValue:3,
                                             next:q('q7'),
@@ -1202,7 +1202,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a25:1'),
-                                            name:'LEUKEMIA',
+                                            name:'LEUK',
                                             xtype:'radio',
                                             inputValue:2,
                                             next:q('q7'),
@@ -1210,7 +1210,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a25:2'),
-                                            name:'LEUKEMIA',
+                                            name:'LEUK',
                                             xtype:'radio',
                                             inputValue:1,
                                             next:q('q7'),
@@ -1218,7 +1218,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a25:3'),
-                                            name:'LEUKEMIA',
+                                            name:'LEUK',
                                             xtype:'radio',
                                             inputValue:3,
                                             next:q('q7'),
@@ -1233,7 +1233,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a26:1'),
-                                            name:'PNEUMONIA',
+                                            name:'PNEU',
                                             xtype:'radio',
                                             inputValue:2,
                                             next:q('q7'),
@@ -1241,7 +1241,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a26:2'),
-                                            name:'PNEUMONIA',
+                                            name:'PNEU',
                                             xtype:'radio',
                                             inputValue:1,
                                             next:q('q7'),
@@ -1249,7 +1249,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a26:3'),
-                                            name:'PNEUMONIA',
+                                            name:'PNEU',
                                             xtype:'radio',
                                             inputValue:3,
                                             next:q('q7'),
@@ -1264,7 +1264,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a27:1'),
-                                            name:'AUTOIMMUNE',
+                                            name:'ARTH',
                                             xtype:'radio',
                                             inputValue:2,
                                             next:q('q7'),
@@ -1272,7 +1272,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a27:2'),
-                                            name:'AUTOIMMUNE',
+                                            name:'ARTH',
                                             xtype:'radio',
                                             inputValue:1,
                                             next:q('q7'),
@@ -1280,7 +1280,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a27:3'),
-                                            name:'AUTOIMMUNE',
+                                            name:'ARTH',
                                             xtype:'radio',
                                             inputValue:3,
                                             next:q('q7'),
@@ -1295,7 +1295,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a28:1'),
-                                            name:'ULCERS',
+                                            name:'ULCER',
                                             xtype:'radio',
                                             inputValue:2,
                                             next:q('q7'),
@@ -1303,7 +1303,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a28:2'),
-                                            name:'ULCERS',
+                                            name:'ULCER',
                                             xtype:'radio',
                                             inputValue:1,
                                             next:q('q7'),
@@ -1311,7 +1311,7 @@ var q6=     {
                                         },
                                         {
                                             id:q('q6:a28:3'),
-                                            name:'ULCERS',
+                                            name:'ULCER',
                                             xtype:'radio',
                                             inputValue:3,
                                             next:q('q7'),
@@ -2403,13 +2403,13 @@ var form=   {
                                     "OTHER_LIST",
                                     "ASTHMA",
                                     "LIVER",
-                                    "HEART_ATTACK",
-                                    "HEART_PROBLEMS",
+                                    "HEART_ATT",
+                                    "HEART_PROB",
                                     "KIDNEY",
-                                    "LEUKEMIA",
-                                    "PNEUMONIA",
-                                    "AUTOIMMUNE",
-                                    "ULCERS",
+                                    "LEUK",
+                                    "PNEU",
+                                    "ARTH",
+                                    "ULCER",
                                     "LIFETIME",
                                     "NOW",
                                     "NOW_PSYMED",

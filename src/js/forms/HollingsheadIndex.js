@@ -103,13 +103,13 @@ retired, mark the category that best describes your previous occupation.'
                                         },
                                         {
                                             id:q('q1:a1:2'),
-                                            name:'OCCU_MOTHER',
+                                            name:'OCCU_M',
                                             inputValue:7,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q1:a1:3'),
-                                            name:'OCCU_FATHER',
+                                            name:'OCCU_F',
                                             inputValue:7,
                                             xtype:'radio'
                                         },
@@ -128,13 +128,13 @@ retired, mark the category that best describes your previous occupation.'
                                         },
                                         {
                                             id:q('q1:a2:2'),
-                                            name:'OCCU_MOTHER',
+                                            name:'OCCU_M',
                                             inputValue:6,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q1:a2:3'),
-                                            name:'OCCU_FATHER',
+                                            name:'OCCU_F',
                                             inputValue:6,
                                             xtype:'radio'
                                         },
@@ -153,13 +153,13 @@ retired, mark the category that best describes your previous occupation.'
                                         },
                                         {
                                             id:q('q1:a3:2'),
-                                            name:'OCCU_MOTHER',
+                                            name:'OCCU_M',
                                             inputValue:5,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q1:a3:3'),
-                                            name:'OCCU_FATHER',
+                                            name:'OCCU_F',
                                             inputValue:5,
                                             xtype:'radio'
                                         },
@@ -178,13 +178,13 @@ retired, mark the category that best describes your previous occupation.'
                                         },
                                         {
                                             id:q('q1:a4:2'),
-                                            name:'OCCU_MOTHER',
+                                            name:'OCCU_M',
                                             inputValue:4,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q1:a4:3'),
-                                            name:'OCCU_FATHER',
+                                            name:'OCCU_F',
                                             inputValue:4,
                                             xtype:'radio'
                                         },
@@ -203,13 +203,13 @@ retired, mark the category that best describes your previous occupation.'
                                         },
                                         {
                                             id:q('q1:a5:2'),
-                                            name:'OCCU_MOTHER',
+                                            name:'OCCU_M',
                                             inputValue:3,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q1:a5:3'),
-                                            name:'OCCU_FATHER',
+                                            name:'OCCU_F',
                                             inputValue:3,
                                             xtype:'radio'
                                         },
@@ -228,13 +228,13 @@ retired, mark the category that best describes your previous occupation.'
                                         },
                                         {
                                             id:q('q1:a6:2'),
-                                            name:'OCCU_MOTHER',
+                                            name:'OCCU_M',
                                             inputValue:2,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q1:a6:3'),
-                                            name:'OCCU_FATHER',
+                                            name:'OCCU_F',
                                             inputValue:2,
                                             xtype:'radio'
                                         },
@@ -253,13 +253,13 @@ retired, mark the category that best describes your previous occupation.'
                                         },
                                         {
                                             id:q('q1:a7:2'),
-                                            name:'OCCU_MOTHER',
+                                            name:'OCCU_M',
                                             inputValue:1,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q1:a7:3'),
-                                            name:'OCCU_FATHER',
+                                            name:'OCCU_F',
                                             inputValue:1,
                                             xtype:'radio'
                                         }
@@ -302,7 +302,7 @@ var q3=     {
                 items:[
                         {
                             id:q('q3'),
-                            name:'OCCU_MOTHER_LIST',
+                            name:'OCCU_M_LIST',
                             xtype:'textfield',
                             fieldLabel:'Please list your mother\'s occupation',
                             labelStyle:'padding-top:5px;width:400px',
@@ -327,7 +327,7 @@ var q4=     {
                 items:[
                         {
                             id:q('q4'),
-                            name:'OCCU_FATHER_LIST',
+                            name:'OCCU_F_LIST',
                             xtype:'textfield',
                             fieldLabel:'Please list your father\'s occupation',
                             labelStyle:'padding-top:5px;width:400px',
@@ -410,13 +410,13 @@ achieving if you are a student.'
                                         },
                                         {
                                             id:q('q5:a1:2'),
-                                            name:'EDU_MOTHER',
+                                            name:'EDU_M',
                                             inputValue:7,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q5:a1:3'),
-                                            name:'EDU_FATHER',
+                                            name:'EDU_F',
                                             inputValue:7,
                                             xtype:'radio'
                                         },
@@ -435,13 +435,13 @@ achieving if you are a student.'
                                         },
                                         {
                                             id:q('q5:a2:2'),
-                                            name:'EDU_MOTHER',
+                                            name:'EDU_M',
                                             inputValue:6,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q5:a2:3'),
-                                            name:'EDU_FATHER',
+                                            name:'EDU_F',
                                             inputValue:6,
                                             xtype:'radio'
                                         },
@@ -460,13 +460,13 @@ achieving if you are a student.'
                                         },
                                         {
                                             id:q('q5:a3:2'),
-                                            name:'EDU_MOTHER',
+                                            name:'EDU_M',
                                             inputValue:5,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q5:a3:3'),
-                                            name:'EDU_FATHER',
+                                            name:'EDU_F',
                                             inputValue:5,
                                             xtype:'radio'
                                         },
@@ -485,13 +485,13 @@ achieving if you are a student.'
                                         },
                                         {
                                             id:q('q5:a4:2'),
-                                            name:'EDU_MOTHER',
+                                            name:'EDU_M',
                                             inputValue:4,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q5:a4:3'),
-                                            name:'EDU_FATHER',
+                                            name:'EDU_F',
                                             inputValue:4,
                                             xtype:'radio'
                                         },
@@ -510,13 +510,13 @@ achieving if you are a student.'
                                         },
                                         {
                                             id:q('q5:a5:2'),
-                                            name:'EDU_MOTHER',
+                                            name:'EDU_M',
                                             inputValue:3,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q5:a5:3'),
-                                            name:'EDU_FATHER',
+                                            name:'EDU_F',
                                             inputValue:3,
                                             xtype:'radio'
                                         },
@@ -535,13 +535,13 @@ achieving if you are a student.'
                                         },
                                         {
                                             id:q('q5:a6:2'),
-                                            name:'EDU_MOTHER',
+                                            name:'EDU_M',
                                             inputValue:2,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q5:a6:3'),
-                                            name:'EDU_FATHER',
+                                            name:'EDU_F',
                                             inputValue:2,
                                             xtype:'radio'
                                         },
@@ -560,13 +560,13 @@ achieving if you are a student.'
                                         },
                                         {
                                             id:q('q5:a7:2'),
-                                            name:'EDU_MOTHER',
+                                            name:'EDU_M',
                                             inputValue:1,
                                             xtype:'radio'
                                         },
                                         {
                                             id:q('q5:a7:3'),
-                                            name:'EDU_FATHER',
+                                            name:'EDU_F',
                                             inputValue:1,
                                             xtype:'radio'
                                         }
@@ -623,14 +623,14 @@ var form=   {
                 items:[h1,q1,q2,q3,q4,h2,q5,btnFinish],
                 submitOrder:    [
                                     "OCCU_SELF",
-                                    "OCCU_MOTHER",
-                                    "OCCU_FATHER",
+                                    "OCCU_M",
+                                    "OCCU_F",
                                     "OCCU_SELF_LIST",
-                                    "OCCU_MOTHER_LIST",
-                                    "OCCU_FATHER_LIST",
+                                    "OCCU_M_LIST",
+                                    "OCCU_F_LIST",
                                     "EDU_SELF",
-                                    "EDU_MOTHER",
-                                    "EDU_FATHER"
+                                    "EDU_M",
+                                    "EDU_F"
                                 ]
             };
 

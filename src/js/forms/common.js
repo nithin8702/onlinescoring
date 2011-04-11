@@ -992,19 +992,9 @@ function saveRequestSucceeded(data,request)
     if (response.success==1)
     {
         var form=Ext.getCmp('tabForms').getActiveTab();
-        var time=Ext.fly('clock').dom.innerHTML;
 
         if (form.lastForm)
-        {
-            Ext.Msg.show({
-                title:'Reset?',
-                width:350,
-                msg:'Congratulations! Your time was '+time+'.<br><br>Would you like to reset all forms now?',
-                buttons:Ext.Msg.YESNOCANCEL,
-                icon:Ext.Msg.QUESTION,
-                fn:function(button){if (button=='yes') resetForms();}
-            });
-        }
+            congratulations();
         else
             nextForm();
         return;
@@ -1274,3 +1264,16 @@ function rtrim(stringToTrim)
 	return stringToTrim.toString().replace(/\s+$/,"");
 }
 
+function congratulations()
+{
+    var time=Ext.fly('clock').dom.innerHTML;
+    Ext.Msg.show({
+        title:'Reset?',
+        width:350,
+        msg:'Congratulations! Your time was '+time+'.<br><br>Would you like to reset all forms now?',
+        buttons:Ext.Msg.YESNOCANCEL,
+        icon:Ext.Msg.QUESTION,
+        fn:function(button){if (button=='yes') resetForms();}
+    });
+
+}
