@@ -7,11 +7,11 @@
                 <ref name="T_7_Choices"/>
             </element>
             <!-- OCCU_MOTHER -->
-            <element name="occu_mother">
+            <element name="occu_m">
                 <ref name="T_7_Choices"/>
             </element>
             <!-- OCCU_FATHER -->
-            <element name="occu_father">
+            <element name="occu_f">
                 <ref name="T_7_Choices"/>
             </element>
             <!-- OCCU_SELF_LIST -->
@@ -19,11 +19,11 @@
                 <ref name="T_StringWithQuotes"/>
             </element>
             <!-- OCCU_MOTHER_LIST -->
-            <element name="occu_mother_list">
+            <element name="occu_m_list">
                 <ref name="T_StringWithQuotes"/>
             </element>
             <!-- OCCU_FATHER_LIST -->
-            <element name="occu_father_list">
+            <element name="occu_f_list">
                 <ref name="T_StringWithQuotes"/>
             </element>
             <!-- EDU_SELF -->
@@ -31,11 +31,11 @@
                 <ref name="T_7_Choices"/>
             </element>
             <!-- EDU_MOTHER -->
-            <element name="edu_mother">
+            <element name="edu_m">
                 <ref name="T_7_Choices"/>
             </element>
             <!-- EDU_FATHER -->
-            <element name="edu_father">
+            <element name="edu_f">
                 <ref name="T_7_Choices"/>
             </element>
         </element>

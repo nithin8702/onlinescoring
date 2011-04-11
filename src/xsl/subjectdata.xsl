@@ -87,7 +87,7 @@
            </xsl:call-template>
             <!-- Health -->
            <xsl:call-template name="form">
-               <xsl:with-param name="name">HQ/1.2</xsl:with-param>
+               <xsl:with-param name="name">HQ/1.3</xsl:with-param>
            </xsl:call-template>
             <!-- Alcohol/Tobacco/Caffeine -->
            <xsl:call-template name="form">
