@@ -2885,8 +2885,16 @@ function onQ6NA(checkbox,checked)
 
     q6.getEl().select('input[id$=":3"]').each(function(checkbox)
     {
-        var cb=Ext.getCmp(checkbox.id);
-        cb.setValue(checked);
+        var components=checkbox.id.split(":",4);
+        var a=components[2];
+        var id=a.substr(1);
+
+        //Answer ID of "other", followed by asthma, leukemia, etc
+        if (id>19)
+        {
+            var cb=Ext.getCmp(checkbox.id);
+            cb.setValue(checked);
+        }
     })
 
     if (checked)
