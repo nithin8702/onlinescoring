@@ -241,7 +241,7 @@ var q2=     {
                                             change:radiogroupChanged,
                                             specialkey:onEnter
                                         },
-                            enableQ:[q('q2a')],
+                            enableQ:[q('q2a'),q('q2b'),q('q2c')],
                             next:q('q2a'),
                             items:  [
                                         {
@@ -278,7 +278,7 @@ var q2abc=     {
                             allowBlank:true,
                             fieldLabel:'What kind',
                             next:q('q2b'),
-                            enableQ:q('q2b'),
+                            enableQ:[q('q2b')],
                             selectOnFocus:true,
                             style:'margin-top:10px;',
                             labelStyle:'width:250px;margin:2px 10px 0px 25px;',
@@ -290,6 +290,7 @@ var q2abc=     {
                                         }
                         },
                         {
+                            disabled:true,
                             id:q('q2b'),
                             xtype:'textfield',
                             name:'BC_PREV_TIME',
@@ -308,6 +309,7 @@ var q2abc=     {
                                         }
                         },
                         {
+                            disabled:true,
                             id:q('q2c'),
                             xtype:'textfield',
                             name:'BC_PREV_STOP',
