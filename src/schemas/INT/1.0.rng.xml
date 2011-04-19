@@ -1,0 +1,118 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start combine="choice">
+        <element name="form">
+            <element name="marital">
+                <ref name="T_5_Choices"/>
+            </element>
+            <element name="child">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="child_see">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="parent">
+                <ref name="T_4_Choices"/>
+            </element>
+            <element name="parent_see">
+                <ref name="T_4_Choices"/>
+            </element>
+            <element name="in_law">
+                <ref name="T_5_Choices"/>
+            </element>
+            <element name="in_law_see">
+                <ref name="T_4_Choices"/>
+            </element>
+            <element name="rel">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="rel_see">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="friend">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="friend_see">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="religion">
+                <ref name="T_2_Choices"/>
+            </element>
+            <element name="religion_see">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="school">
+                <ref name="T_2_Choices"/>
+            </element>
+            <element name="school_see">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="work">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="work_super">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="work_see">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="neighbor">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="vol">
+                <ref name="T_2_Choices"/>
+            </element>
+            <element name="vol_see">
+                <ref name="T_0to7_Choices"/>
+            </element>
+            <element name="group">
+                <ref name="T_2_Choices"/>
+            </element>
+            <element name="group_name_1">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="group_num_1">
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
+            </element>
+            <element name="group_name_2">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="group_num_2">
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
+            </element>
+            <element name="group_name_3">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="group_num_3">
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
+            </element>
+            <element name="group_name_4">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="group_num_4">
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
+            </element>
+            <element name="group_name_5">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="group_num_5">
+                <data type="nonNegativeInteger">
+                    <param name="maxInclusive">9999</param>
+                    <param name="minInclusive">1</param>
+                </data>
+            </element>
+        </element>
+    </start>
+</grammar>

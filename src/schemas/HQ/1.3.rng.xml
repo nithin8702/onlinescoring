@@ -1,0 +1,506 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start>
+        <element name="form">
+            <!-- HEALTH -->
+            <element name="health">
+                <ref name="T_5_Choices"/>
+            </element>
+            <!-- SATISFY -->
+            <element name="satisfy">
+                <ref name="T_5_Choices"/>
+            </element>
+            <!-- CONSCIOUS -->
+            <element name="conscious">
+                <ref name="T_2_Choices"/>
+            </element>
+            <!-- POST_MENO -->
+            <element name="post_meno">
+                <ref name="T_2_Choices"/>
+            </element>
+            <!-- RX -->
+            <element name="rx">
+                <choice>
+                    <data type="nonNegativeInteger">
+                        <param name="maxInclusive">100</param>
+                    </data>
+                    <ref name="NoAnswer"/>
+                </choice>
+            </element>
+            <!-- NON RX -->
+            <element name="non_rx">
+                <choice>
+                    <data type="nonNegativeInteger">
+                        <param name="maxInclusive">100</param>
+                    </data>
+                    <ref name="NoAnswer"/>
+                </choice>
+            </element>
+
+            <!-- MEDICATIONS -->
+            <element name="med_1">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_strength_1">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_freq_1">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="med_2">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_strength_2">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_freq_2">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="med_3">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_strength_3">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_freq_3">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="med_4">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_strength_4">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="med_freq_4">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <!-- CANCER -->
+            <element name="canc">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="migraine">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="diabetes">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="enceph">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="epilepsy">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="hbp">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="ms">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="park">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="stroke">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="dep">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="adhd">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="anx">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="pd">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="sch">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="bp">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="aa">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="sa">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="other">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="other_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="asthma">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="liver">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="heart_att">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="heart_prob">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="kidney">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="leuk">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="pneu">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="arth">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="ulcer">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <!-- Number of Medications -->
+            <element name="lifetime">
+				<choice>
+					<data type="nonNegativeInteger">
+						<param name="maxInclusive">100</param>
+					</data>
+					<ref name="NoAnswer"/>
+				</choice>
+            </element>
+            <element name="now">
+				<choice>
+					<data type="nonNegativeInteger">
+						<param name="maxInclusive">100</param>
+					</data>
+					<ref name="NoAnswer"/>
+				</choice>
+            </element>
+
+            <!-- NOW PSYMED -->
+            <element name="now_psymed">
+                <ref name="T_2_Choices"/>
+            </element>
+            <element name="now_psymed_list">
+                <ref name="T_String"/>
+            </element>
+
+            <!-- PAST PSYMED -->
+            <element name="past_psymed">
+                <ref name="T_2_Choices"/>
+            </element>
+            <element name="past_psymed_med">
+                <ref name="T_String"/>
+            </element>
+            <element name="past_psymed_time">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <!-- FAMILY ILLNESSES -->
+            <element name="fam_heart">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_heart_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_heart_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_heart_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_alz">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_alz_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_alz_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_alz_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_notalz">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_notalz_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_notalz_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_notalz_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_ms">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_ms_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_ms_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_ms_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_canc">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_canc_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_canc_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_canc_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_migraine">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_migraine_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_migraine_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_migraine_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_diabetes">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_diabetes_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_diabetes_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_diabetes_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_enceph">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_enceph_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_enceph_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_enceph_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_epilepsy">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_epilepsy_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_epilepsy_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_epilepsy_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_hbp">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_hbp_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_hbp_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_hbp_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_park">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_park_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_park_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_park_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_stroke">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_stroke_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_stroke_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_stroke_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_dep">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_dep_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_dep_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_dep_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_adhd">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_adhd_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_adhd_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_adhd_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_anx">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_anx_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_anx_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_anx_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_pd">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_pd_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_pd_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_pd_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_sch">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_sch_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_sch_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_sch_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_bp">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_bp_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_bp_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_bp_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_aa">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_aa_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_aa_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_aa_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_sa">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_sa_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_sa_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_sa_s">
+                <ref name="T_01"/>
+            </element>
+
+            <element name="fam_other">
+                <ref name="T_0to3"/>
+            </element>
+            <element name="fam_other_m">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_other_f">
+                <ref name="T_01"/>
+            </element>
+            <element name="fam_other_s">
+                <ref name="T_01"/>
+            </element>
+
+            <!-- SIBLINGS -->
+            <element name="num_sib">
+                <choice>
+                    <data type="nonNegativeInteger">
+                        <param name="maxInclusive">100</param>
+                    </data>
+                    <ref name="NoAnswer"/>
+                </choice>
+            </element>
+
+            <element name="dad_health">
+                <ref name="T_2_Choices"/>
+            </element>
+
+            <element name="mom_health">
+                <ref name="T_2_Choices"/>
+            </element>
+
+            <!-- COMMENTS -->
+            <element name="add_list">
+                <choice>
+                    <data type="string"></data>
+                    <ref name="NoAnswer"/>
+                </choice>
+            </element>
+
+        </element>
+    </start>
+</grammar>
