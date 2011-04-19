@@ -202,7 +202,7 @@
             <data type="string">
                 <param name="pattern">[\w\-\+@\?% ,\.();/:!]+</param>
                 <param name="whiteSpace">collapse</param>
-                <param name="maxLength">500</param>
+                <param name="maxLength">4096</param>
             </data>
             <ref name="NoAnswer"/>
         </choice>
@@ -213,7 +213,7 @@
             <data type="string">
                 <param name="pattern">[\w\-\+@\?% ,\.();/':!]+</param>
                 <param name="whiteSpace">collapse</param>
-                <param name="maxLength">500</param>
+                <param name="maxLength">4096</param>
             </data>
             <ref name="NoAnswer"/>
         </choice>
