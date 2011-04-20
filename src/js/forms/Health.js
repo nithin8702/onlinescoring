@@ -2889,8 +2889,8 @@ function onQ6NA(checkbox,checked)
         var a=components[2];
         var id=a.substr(1);
 
-        //Answer ID of "other", followed by asthma, leukemia, etc
-        if (id>19)
+        //Answer ID of everything up to and including "other"
+        if (id<20)
         {
             var cb=Ext.getCmp(checkbox.id);
             cb.setValue(checked);

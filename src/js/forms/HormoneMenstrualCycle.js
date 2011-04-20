@@ -523,7 +523,7 @@ var q6=     {
                             xtype:'numberfield',
                             name:'PER_LENGTH',
                             allowBlank:true,
-                            allowDecimals:false,
+                            allowDecimals:true,
                             allowNegative:false,
                             maxValue:31,
                             minValue:0,
@@ -656,7 +656,7 @@ var q8=     {
                                                         proxyFor:q('q8a'),
                                                         xtype:'numberfield',
                                                         allowBlank:true,
-                                                        allowDecimals:false,
+                                                        allowDecimals:true,
                                                         allowNegative:false,
                                                         maxValue:365,
                                                         minValue:0,
@@ -886,7 +886,7 @@ var form=   {
                 autoScroll:false,
                 buttonAlign:'left',
                 title:'Hormone/Menstrual Cycle',
-                schema:'HMC/1.0',
+                schema:'HMC/1.1',
                 keys:   {
                             //Digits [1-5]
                             key:[
