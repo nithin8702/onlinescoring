@@ -67,12 +67,15 @@ try
         $xml->loadXML($result);
 
         $rows=$xml->getElementsByTagName('rows')->item(0);
-        $hasDiff=diffRows($rows);
+        $diffResult=diffRows($rows);
 
-        if ($hasDiff==0)
-            $db->storeFinalDiffState($subject['subjectLabel'],1);
-        else
+        if ($diffResult['diff']>0)
             $db->storeFinalDiffState($subject['subjectLabel'],-1);
+        else
+            if ($diffResult['empty']>0)
+                $db->storeFinalDiffState($subject['subjectLabel'],-2);
+            else
+                $db->storeFinalDiffState($subject['subjectLabel'],1);
     }
 }
 catch (Exception $e)

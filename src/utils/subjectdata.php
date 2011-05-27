@@ -235,7 +235,7 @@ function applyXSLtoXML(DomDocument $xmldoc, $xsltemplate)
  */
 function diffRows(DomNode &$rowcollection)
 {
-    $result=0;
+    $result=Array("diff"=>0,"empty"=>0);
     $row=$rowcollection->firstChild;
 
     //Loop through all the rows
@@ -250,8 +250,12 @@ function diffRows(DomNode &$rowcollection)
             $r=diffColumns($row->getElementsByTagName('cell'));
 
         $row->appendChild(new DOMAttr('diff', $r));
-        if ($r>0)
-            $result++;
+
+        switch ($r)
+        {
+            case 1:$result['diff']++;break;
+            case 2:$result['empty']++;break;
+        }
 
         $row=$row->nextSibling;
     }
