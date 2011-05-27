@@ -112,7 +112,7 @@ function radiogroupChanged(radiogroup, checked)
     if (NRG.Forms.GlobalReset==true)
         return;
 
-    //console.log('+ radiogroupChanged('+radiogroup.id+')',radiogroup,checked);
+    console.log('+ radiogroupChanged('+radiogroup.id+')',radiogroup,checked);
 
     if ((typeof(checked)=="undefined") || (checked==null))
         return;
@@ -139,10 +139,16 @@ function radiogroupChanged(radiogroup, checked)
     }
 
     if (disableQ)
+    {
+        console.log('calling toggleQ for disableQ');
         toggleQ(disableQ,false);
+    }
 
     if (enableQ)
+    {
+        console.log('calling toggleQ for enableQ');
         toggleQ(enableQ,true);
+    }
 
     //-- Decide which question is next
     var next=null;
@@ -168,6 +174,7 @@ function radiogroupChanged(radiogroup, checked)
 
     //Jump to the next question (or trigger form done)
     //nextQ(next,form);
+    console.log('Calling nextField()');
     nextField(radiogroup,next);
 }
 
@@ -492,8 +499,9 @@ function toggleQ(ids,state)
             if ((component.xtype=="checkboxgroup") ||
                 (component.xtype=="radiogroup"))
                 {
-                    console.log("Setting value of radiogroup ",component.getId()," to ''");
-                    component.setValue("");
+                    //console.log("Setting value of radiogroup ",component.getId()," to ''");
+                    //component.setValue("");
+
                     //Make sure textboxe values are not set to "false"
                     component.getEl().select('input[type="text"]').each(function(el,c,index)
                     {
@@ -504,8 +512,9 @@ function toggleQ(ids,state)
         }
         else
         {
-            console.log("Setting value of radiogroup ",component.getId()," to ''");
-            component.setValue("");
+            //console.log("Setting value of radiogroup ",component.getId()," to ''");
+//          component.setValue(false);
+
             component.getEl().up('.q-container').removeClass('q-invalid');
             component.getEl().up('.q-container').addClass('q-valid');
             //Make sure textboxe values are not set to "false"

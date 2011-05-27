@@ -518,7 +518,7 @@ function renderSubjectLabel(value,metadata,record,rowIndex,colIndex,store)
                     else
                         cssClass+='row-diff-even';
                     break;
-            case 2:if (rowIndex%2==1)
+            case -2:if (rowIndex%2==1)
                         cssClass+='row-diff-empty-odd';
                     else
                         cssClass+='row-diff-empty-even'
@@ -1114,7 +1114,7 @@ function diffRecord(record)
         var field=record.fields.item(i).name;
         var cellColumn=field.indexOf('cell');
 
-        console.log("Field=",field,"cellColumn=",cellColumn);
+        //console.log("Field=",field,"cellColumn=",cellColumn);
 
         //Don't perform comparisons for non-<cell> columns
         if (cellColumn<0)
@@ -1124,7 +1124,7 @@ function diffRecord(record)
 
         if (typeof(value)=="undefined")
             continue;
-        console.log("Looking at value: ",value);
+        //console.log("Looking at value: ",value);
         //to lower case
         value=value.toString().toLowerCase();
 
@@ -1156,7 +1156,7 @@ function diffRecord(record)
 
 function markSubjectAsLocked(label)
 {
-    console.log('Locking subject '+label);
+    //console.log('Locking subject '+label);
     var grid=NRG.OnlineScoring.GridSubjects;
     var store=grid.getStore();
 
@@ -1168,5 +1168,5 @@ function markSubjectAsLocked(label)
     var record=store.getAt(result);
     record.set('locked',1);
 
-    console.log('Locked subject '+label);
+    //console.log('Locked subject '+label);
 }
