@@ -676,7 +676,7 @@ var q12=     {
                             disabled:true,
                             allowBlank:true,
                             minValue:1900,
-                            maxValue:2010,
+                            maxValue:2011,
                             maxLength:4,
                             width:65,
                             listeners:  {
@@ -816,7 +816,7 @@ var btnNext={
               };
 var form=   {
                 id:qID,
-                schema:'DEM/1.4',
+                schema:'DEM/1.5',
                 xtype:'form',
                 border:false,
                 autoScroll:false,
