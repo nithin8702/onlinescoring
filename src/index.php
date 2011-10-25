@@ -111,7 +111,7 @@
             }
         ?>
     </head>
-    <body>
+    <body oncontextmenu="return false;">
         <div id="divRegister" style="display:none"></div>
     </body>
 </html>
