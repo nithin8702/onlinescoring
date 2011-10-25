@@ -337,16 +337,17 @@ ul.help
 
 .row-diff-empty-odd
 {
-    background-color: #FFFF55;
+    /* background-color: #FFFF55; */
+    /*border-right:1px solid orange; */
     color:black;
-    border-right:1px solid orange;
+    
 }
 
 .row-diff-empty-even
 {
-    background-color: #FFFFAA;
+    /* background-color: #FFFFAA; */
+    /* border-right:1px solid orange; */
     color:black;
-    border-right:1px solid orange;
 }
 
 .diff-col-header-label

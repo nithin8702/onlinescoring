@@ -866,9 +866,17 @@ function onDiffStoreLoaded(store, records, options)
             }
         }
 
-        //If all <cell> columns have the same value, store it in the final column
-        if (compare && match && initialValue.toString().length)
-            record.set('final',initialValue);
+        //if we should prepopulate the final column
+        if (compare)
+        {
+            //if all cells are empty, set the final column to 9999
+            if (!initialValue.toString().length)
+                record.set('final',9999)
+            else
+                //if a match was found (all <cell> columns have the same value)
+                if (match)
+                    record.set('final',initialValue);
+        }
     }
 }
 
@@ -877,7 +885,13 @@ function onDiffValuesUpdated(store, record, operation)
     //Update diff column so that the cells in the Data_Label column are properly
     //highlighted, but only in case the initial value was not 0
     var diff=diffRecord(record);
-    record.set('diff',diff);
+    if (diff==2)
+    {
+        record.set('final',9999);
+        record.set('diff',0);
+    }
+    else
+        record.set('diff',diff);
 
     //If the grid was edited, enable save/cancel buttons and update the title
     if (operation==Ext.data.Record.EDIT)
