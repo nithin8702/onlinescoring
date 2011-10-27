@@ -513,7 +513,7 @@ class Database
 
             if ($qr->num_rows)
                 $result=$qr->fetch_assoc();
-            
+
             $qr->close();
         }
         catch (Exception $e)
