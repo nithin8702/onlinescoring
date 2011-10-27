@@ -1,29 +1,58 @@
 // vim: ts=4:sw=4:nu:fdc=4:nospell
+/*global Ext */
 /**
+ * @class Ext.ux.grid.Search
+ * @extends Ext.util.Observable
+ *
  * Search plugin for Ext.grid.GridPanel, Ext.grid.EditorGrid ver. 2.x or subclasses of them
  *
- * @author    Ing. Jozef Sakalos
- * @copyright (c) 2008, by Ing. Jozef Sakalos
- * @date      17. January 2008
- * @version   $Id: Ext.ux.grid.Search.js 220 2008-04-29 21:46:51Z jozo $
+ * @author    Ing. Jozef Sakáloš
+ * @copyright (c) 2008, by Ing. Jozef Sakáloš
+ * @date      <ul>
+ * <li>17. January 2008<li>
+ * <li>6. February 2009</li>
+ * </ul>
+ * @version   1.1.1
+ * @revision  $Id: Ext.ux.grid.Search.js 798 2010-01-17 00:46:57Z jozo $
  *
  * @license Ext.ux.grid.Search is licensed under the terms of
  * the Open Source LGPL 3.0 license.  Commercial use is permitted to the extent
  * that the code/component(s) do NOT become part of another Open Source or Commercially
  * licensed development library or toolkit without explicit permission.
  * 
- * License details: http://www.gnu.org/licenses/lgpl.html
+ * <p>License details: <a href="http://www.gnu.org/licenses/lgpl.html"
+ * target="_blank">http://www.gnu.org/licenses/lgpl.html</a></p>
+ *
+ * @forum     23615
+ * @demo      http://gridsearch.extjs.eu
+ * @download  
+ * <ul>
+ * <li><a href="http://gridsearch.extjs.eu/gridsearch.tar.bz2">gridsearch.tar.bz2</a></li>
+ * <li><a href="http://gridsearch.extjs.eu/gridsearch.tar.gz">gridsearch.tar.gz</a></li>
+ * <li><a href="http://gridsearch.extjs.eu/gridsearch.zip">gridsearch.zip</a></li>
+ * </ul>
+ *
+ * @donate
+ * <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+ * <input type="hidden" name="cmd" value="_s-xclick">
+ * <input type="hidden" name="hosted_button_id" value="3430419">
+ * <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-butcc-donate.gif" 
+ * border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+ * <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+ * </form>
  */
-
-/*global Ext */
 
 Ext.ns('Ext.ux.grid');
 
+// Check RegExp.escape dependency
+if('function' !== typeof RegExp.escape) {
+	throw('RegExp.escape function is missing. Include Ext.ux.util.js file.');
+}
+
 /**
- * @class Ext.ux.grid.Search
- * @extends Ext.util.Observable
- * @param {Object} config configuration object
+ * Creates new Search plugin
  * @constructor
+ * @param {Object} A config object
  */
 Ext.ux.grid.Search = function(config) {
 	Ext.apply(this, config);
@@ -32,7 +61,7 @@ Ext.ux.grid.Search = function(config) {
 
 Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	/**
-	 * cfg {Boolean} autoFocus true to try to focus the input field on each store load (defaults to undefined)
+	 * @cfg {Boolean} autoFocus Try to focus the input field on each store load if set to true (defaults to undefined)
 	 */
 
 	/**
@@ -51,33 +80,39 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	,selectAllText:'Select All'
 
 	/**
-	 * @cfg {String} position Where to display the search controls. Valid values are top and bottom (defaults to bottom)
+	 * @cfg {String} position Where to display the search controls. Valid values are top and bottom
 	 * Corresponding toolbar has to exist at least with mimimum configuration tbar:[] for position:top or bbar:[]
-	 * for position bottom. Plugin does NOT create any toolbar.
+	 * for position bottom. Plugin does NOT create any toolbar.(defaults to "bottom")
 	 */
 	,position:'bottom'
 
 	/**
-	 * @cfg {String} iconCls Icon class for menu button (defaults to icon-magnifier)
+	 * @cfg {String} iconCls Icon class for menu button (defaults to "icon-magnifier")
 	 */
 	,iconCls:'icon-magnifier'
 
 	/**
 	 * @cfg {String/Array} checkIndexes Which indexes to check by default. Can be either 'all' for all indexes
-	 * or array of dataIndex names, e.g. ['persFirstName', 'persLastName']
+	 * or array of dataIndex names, e.g. ['persFirstName', 'persLastName'] (defaults to "all")
 	 */
 	,checkIndexes:'all'
 
 	/**
 	 * @cfg {Array} disableIndexes Array of index names to disable (not show in the menu), e.g. ['persTitle', 'persTitle2']
+	 * (defaults to [] - empty array)
 	 */
 	,disableIndexes:[]
 
 	/**
-	 * @cfg {String} dateFormat how to format date values. If undefined (the default) 
+	 * Field containing search text (read-only)
+	 * @property field
+	 * @type {Ext.form.TwinTriggerField}
+	 */
+
+	/**
+	 * @cfg {String} dateFormat How to format date values. If undefined (the default) 
 	 * date is formatted as configured in colummn model
 	 */
-	,dateFormat:undefined
 
 	/**
 	 * @cfg {Boolean} showSelectAll Select All item is shown in menu if true (defaults to true)
@@ -85,30 +120,39 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	,showSelectAll:true
 
 	/**
+	 * Menu containing the column module fields menu with checkboxes (read-only)
+	 * @property menu
+	 * @type {Ext.menu.Menu}
+	 */
+
+	/**
 	 * @cfg {String} menuStyle Valid values are 'checkbox' and 'radio'. If menuStyle is radio
-	 * then only one field can be searched at a time and selectAll is automatically switched off.
+	 * then only one field can be searched at a time and selectAll is automatically switched off. 
+	 * (defaults to "checkbox")
 	 */
 	,menuStyle:'checkbox'
 
 	/**
-	 * @cfg {Number} minChars minimum characters to type before the request is made. If undefined (the default)
+	 * @cfg {Number} minChars Minimum characters to type before the request is made. If undefined (the default)
 	 * the trigger field shows magnifier icon and you need to click it or press enter for search to start. If it
 	 * is defined and greater than 0 then maginfier is not shown and search starts after minChars are typed.
+	 * (defaults to undefined)
 	 */
 
 	/**
-	 * @cfg {String} minCharsTipText Tooltip to display if minChars is > 0
+	 * @cfg {String} minCharsTipText Tooltip to display if minChars is > 1
 	 */
 	,minCharsTipText:'Type at least {0} characters'
 
 	/**
 	 * @cfg {String} mode Use 'remote' for remote stores or 'local' for local stores. If mode is local
-	 * no data requests are sent to server the grid's store is filtered instead (defaults to 'remote')
+	 * no data requests are sent to server the grid's store is filtered instead (defaults to "remote")
 	 */
 	,mode:'remote'
 
 	/**
 	 * @cfg {Array} readonlyIndexes Array of index names to disable (show in menu disabled), e.g. ['persTitle', 'persTitle2']
+	 * (defaults to undefined)
 	 */
 
 	/**
@@ -122,7 +166,7 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	,xtype:'gridsearch'
 
 	/**
-	 * @cfg {Object} paramNames Params name map (defaults to {fields:'fields', query:'query'}
+	 * @cfg {Object} paramNames Params name map (defaults to {fields:"fields", query:"query"}
 	 */
 	,paramNames: {
 		 fields:'fields'
@@ -135,16 +179,17 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	,shortcutKey:'r'
 
 	/**
-	 * @cfg {String} shortcutModifier Modifier for shortcutKey. Valid values: alt, ctrl, shift (defaults to alt)
+	 * @cfg {String} shortcutModifier Modifier for shortcutKey. Valid values: alt, ctrl, shift (defaults to "alt")
 	 */
 	,shortcutModifier:'alt'
 
 	/**
-	 * @cfg {String} align 'left' or 'right' (defaults to 'left')
+	 * @cfg {String} align "left" or "right" (defaults to "left")
 	 */
 
 	/**
-	 * @cfg {Number} minLength force user to type this many character before he can make a search
+	 * @cfg {Number} minLength Force user to type this many character before he can make a search 
+	 * (defaults to undefined)
 	 */
 
 	/**
@@ -154,7 +199,7 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	
 	// {{{
 	/**
-	 * private
+	 * @private
 	 * @param {Ext.grid.GridPanel/Ext.grid.EditorGrid} grid reference to grid this plugin is used for
 	 */
 	,init:function(grid) {
@@ -172,12 +217,12 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	// }}}
 	// {{{
 	/**
-	 * private add plugin controls to <b>existing</b> toolbar and calls reconfigure
+	 * adds plugin controls to <b>existing</b> toolbar and calls reconfigure
+	 * @private
 	 */
 	,onRender:function() {
 		var panel = this.toolbarContainer || this.grid;
 		var tb = 'bottom' === this.position ? panel.bottomToolbar : panel.topToolbar;
-
 		// add menu
 		this.menu = new Ext.menu.Menu();
 
@@ -203,15 +248,21 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 			 width:this.width
 			,selectOnFocus:undefined === this.selectOnFocus ? true : this.selectOnFocus
 			,trigger1Class:'x-form-clear-trigger'
-			,trigger2Class:this.minChars ? 'x-hidden' : 'x-form-search-trigger'
-			,onTrigger1Click:this.minChars ? Ext.emptyFn : this.onTriggerClear.createDelegate(this)
-			,onTrigger2Click:this.onTriggerSearch.createDelegate(this)
+			,trigger2Class:this.minChars ? 'x-hide-display' : 'x-form-search-trigger'
+			,onTrigger1Click:this.onTriggerClear.createDelegate(this)
+			,onTrigger2Click:this.minChars ? Ext.emptyFn : this.onTriggerSearch.createDelegate(this)
 			,minLength:this.minLength
 		});
 
 		// install event handlers on input field
 		this.field.on('render', function() {
-			this.field.el.dom.qtip = this.minChars ? String.format(this.minCharsTipText, this.minChars) : this.searchTipText;
+			// register quick tip on the way to search
+			if((undefined === this.minChars || 1 < this.minChars) && this.minCharsTipText) {
+				Ext.QuickTips.register({
+					 target:this.field.el
+					,text:this.minChars ? String.format(this.minCharsTipText, this.minChars) : this.searchTipText
+				});
+			}
 
 			if(this.minChars) {
 				this.field.el.on({scope:this, buffer:300, keyup:this.onKeyUp});
@@ -231,6 +282,11 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 		}, this, {single:true});
 
 		tb.add(this.field);
+
+		// re-layout the panel if the toolbar is outside
+		if(panel !== this.grid) {
+			this.toolbarContainer.doLayout();
+		}
 
 		// reconfigure
 		this.reconfigure();
@@ -253,6 +309,7 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 		if(true === this.autoFocus) {
 			this.grid.store.on({scope:this, load:function(){this.field.focus();}});
 		}
+
 	} // eo function onRender
 	// }}}
 	// {{{
@@ -260,7 +317,13 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	 * field el keypup event handler. Triggers the search
 	 * @private
 	 */
-	,onKeyUp:function() {
+	,onKeyUp:function(e, t, o) {
+
+		// ignore special keys 
+		if(e.isNavKeyPress()) {
+			return;
+		}
+
 		var length = this.field.getValue().toString().length;
 		if(0 === length || this.minChars <= length) {
 			this.onTriggerSearch();
@@ -269,7 +332,8 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	// }}}
 	// {{{
 	/**
-	 * private Clear Trigger click handler
+	 * Clear Trigger click handler
+	 * @private 
 	 */
 	,onTriggerClear:function() {
 		if(this.field.getValue()) {
@@ -281,7 +345,8 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	// }}}
 	// {{{
 	/**
-	 * private Search Trigger click handler (executes the search, local or remote)
+	 * Search Trigger click handler (executes the search, local or remote)
+	 * @private 
 	 */
 	,onTriggerSearch:function() {
 		if(!this.field.isValid()) {
@@ -302,7 +367,7 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 						}
 						var rv = r.get(item.dataIndex);
 						rv = rv instanceof Date ? rv.format(this.dateFormat || r.fields.get(item.dataIndex).dateFormat) : rv;
-						var re = new RegExp(val, 'gi');
+						var re = new RegExp(RegExp.escape(val), 'gi');
 						retval = re.test(rv);
 					}, this);
 					if(retval) {
@@ -365,7 +430,7 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	// }}}
 	// {{{
 	/**
-	 * Enable search (TwinTriggerField)
+	 * Disable search (TwinTriggerField)
 	 */
 	,disable:function() {
 		this.setDisabled(true);
@@ -373,7 +438,8 @@ Ext.extend(Ext.ux.grid.Search, Ext.util.Observable, {
 	// }}}
 	// {{{
 	/**
-	 * private (re)configures the plugin, creates menu items from column model
+	 * (re)configures the plugin, creates menu items from column model
+	 * @private 
 	 */
 	,reconfigure:function() {
 

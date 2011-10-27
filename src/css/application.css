@@ -72,6 +72,10 @@
      background-image:url('../images/icons/history.png');
 }
 
+.x-icon-search
+{
+    background-image:url('../images/icons/search.png');
+}
 .question-text
 {
     font-family: tahoma, arial, helvetica, sans-serif;
