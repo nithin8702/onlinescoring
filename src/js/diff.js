@@ -885,7 +885,9 @@ function onDiffStoreLoaded(store, records, options)
         if (compare)
         {
             //if all cells are empty, set the final column to 9999
-            if (!initialValue.toString().length)
+            //also always set DEM_CITY to 9999 (per Randy's request)
+            if (!initialValue.toString().length ||
+                record.data['field']=='DEM_CITY')
                 record.set('final',9999)
             else
                 //if a match was found (all <cell> columns have the same value)
