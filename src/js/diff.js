@@ -219,6 +219,12 @@ var tbarDiffGrid=   {
                                                                 }
                                                             ]
                                                 }
+                                    },
+                                    {
+                                        id:'btnDownload',
+                                        text:'Download',
+                                        icon:'images/icons/csv.png',
+                                        handler:onDownloadAsCSV
                                     }
                                 ]
                     };
@@ -610,10 +616,12 @@ function onGridDiffReconfigured(grid, store, colmodel)
     {
         Ext.getCmp('btnChanges').disable();
         Ext.getCmp('btnSaveAndLock').disable();
+        Ext.getCmp('btnDownload').enable();
     }
     else
     {
         Ext.getCmp('btnSaveAndLock').enable();
+        Ext.getCmp('btnDownload').disable();
     }
 
     gridDiffUpdateTitle(grid);
@@ -768,6 +776,13 @@ function onSaveDiffFailed(response, options)
         icon:Ext.Msg.ERROR,
         buttons:Ext.Msg.OK
     });
+}
+
+function onDownloadAsCSV(button,event)
+{
+    var grid=NRG.OnlineScoring.GridDiff;
+
+    window.open('ajax/subjectdata.php?final=true&format=csv&label='+grid.subject);
 }
 
 function onBeforeSubjectSelected(selmodel,rowIndex,keepExisting,record)

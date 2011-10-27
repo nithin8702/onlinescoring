@@ -45,7 +45,18 @@ define('XSL_SUBJECT_DATA','../xsl/subjectdata.xsl');
 if (!isset($_GET['label']) || empty($_GET['label']))
     ajax_error('Please specify a subject label.');
 
+$final=false;
+$format='xml';
+
+if (isset($_GET['final']) && in_array(strtolower($_GET['final']),
+                                      Array('1','true','yes','y')))
+    $final=true;
+
+if ($final && isset($_GET['format']) && !empty($_GET['format']))
+    $format=strtolower(trim($_GET['format']));
+
 $subjectLabel=trim(strtoupper($_GET['label']));
+$xml="";
 
 try
 {
@@ -55,29 +66,51 @@ try
 
     if (!$db)
         throw new Exception("Couldn't connect to the database.");
-    
-    $xml=getSubjectDataAsXml($subjectLabel, $db);
-//    header('Content-type: application/xml');
-//    print $xml->saveXML();die;
-    
-    /** WARNING: This function caches the XSL file. */
-    $result=applyXSLtoXML($xml, XSL_SUBJECT_DATA);
 
-    $xml=new DomDocument();
-    $xml->loadXML($result);
+    $xml=NULL;
 
-//    header('Content-type: application/xml');
-//    print $xml->saveXML();die;
+    if ($final)
+        $xml=getSubjectFinalDataAsXML($subjectLabel,$db);
+    else
+    {
+        $xml=getSubjectDataAsXml($subjectLabel, $db);
+        /** WARNING: This function caches the XSL file. */
+        $result=applyXSLtoXML($xml, XSL_SUBJECT_DATA);
+    //    header('Content-type: application/xml');
+    //    print $xml->saveXML();die;
 
-    $rows=$xml->getElementsByTagName('rows')->item(0);
-    $hasDiff=diffRows($rows);
+
+        $xml=new DomDocument();
+        $xml->loadXML($result);
+
+    //    header('Content-type: application/xml');
+    //    print $xml->saveXML();die;
+
+        $rows=$xml->getElementsByTagName('rows')->item(0);
+        $hasDiff=diffRows($rows);
+    }
 }
 catch (Exception $e)
 {
     ajax_error($e->getMessage());
 }
 
-header('Content-type: application/xml');
+$content_type='application/xml';
+$content_disposition=null;
+$result="";
 
-//Decode and print
-print $xml->saveXML();
+switch ($format)
+{
+    case 'csv':$content_type='text/csv';
+               $content_disposition="attachment; filename=".$subjectLabel.".csv";
+               $result=convertFinalDataToCSV($xml,
+                                             Array('DATA_LABEL','RESP'));
+               break;
+    default: $result=$xml->saveXML();
+}
+
+//output
+header('Content-type: '.$content_type);
+if ($content_disposition)
+    header('Content-disposition: '.$content_disposition);
+print $result;

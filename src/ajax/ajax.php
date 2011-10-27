@@ -91,11 +91,11 @@ function ajax_result(Array $result)
 function error_handler($errno,$errstr,$errfile,$errline)
 {
     //Only enable debug output for localhost
-    if ($_SERVER['REMOTE_ADDR']!="127.0.0.1")
+    /*if ($_SERVER['REMOTE_ADDR']!="127.0.0.1")
     {
         error_log('[OnlineScoring] ERROR: '.$errstr.' at '.$errfile.':'.$errline,0);
         ajax_error("The server is experiencing technical difficulties. Please try again later.");
-    }
+    }*/
 
     ajax_error($errstr.' at '.$errfile.':'.$errline);
 }

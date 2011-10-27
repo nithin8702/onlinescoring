@@ -63,7 +63,8 @@ function getSubjectDataAsXml($subjectLabel, Database $db)
     $xmlFinal->appendXML($finalxmldata);
 
     $nodeFinal=$xmldoc->createElement('final');
-    $nodeFinal->appendChild($xmlFinal);
+    if ($xmlFinal->hasChildNodes())
+        $nodeFinal->appendChild($xmlFinal);
     $locked=0;
     if ($finaldata['locked']>0)
         $locked=$finaldata['locked'];
@@ -143,6 +144,35 @@ function getSubjectDataAsXml($subjectLabel, Database $db)
     set_error_handler($originalHandler);
 
     //print $xmldoc->saveXML();
+    return $xmldoc;
+}
+
+/** Returns the subject's final data as XML.
+ * @param String $subjectLabel
+ * @param Database $db
+ * @return DomDocument The Subject data as XML
+ */
+function getSubjectFinalDataAsXML($subjectLabel, Database $db)
+{
+    if (empty($subjectLabel))
+        throw new Exception("Empty subject label.");
+
+    //Retrieve the form data
+    $result=$db->getSubjectFinalData($subjectLabel);
+
+    //Register a new error handler to handle libxml specific errors
+    $originalHandler=set_error_handler("libxml_error_handler");
+
+    //Create an XML document to store all the data (properly)
+    $xmldoc=new DomDocument();
+    if (empty($result['data']))
+        $result['data']='<result/>';
+    $xmldoc->loadXML($result['data']);
+    $xmldoc->documentElement->setAttribute('locked',$result['locked']);
+    $xmldoc->documentElement->setAttribute('subject',$subjectLabel);
+
+    set_error_handler($originalHandler);
+
     return $xmldoc;
 }
 
@@ -228,6 +258,13 @@ function applyXSLtoXML(DomDocument $xmldoc, $xsltemplate)
     return $result;
 }
 
+
+function getFinalDataAsXML($subjectLabel, Database $db)
+{
+
+}
+
+
 /** Compares the columns of repeating <row> elements.
  * Appends @diff=1 if the columns have different values, otherwise @diff=0
  * @param DomNode $rowcollection
@@ -307,11 +344,40 @@ function diffColumns(DOMNodeList $cells)
     return 0;
 }
 
+function convertFinalDataToCSV(DOMDocument $xml,Array $headers)
+{
+    $result=Array();
+    $i=0;
+
+    foreach ($headers as &$h)
+        $h="\"$h\"";
+
+    $result[]=implode(",",$headers);
+    $root=$xml->documentElement;
+    if ($root->hasChildNodes())
+    {
+        $row=Array();
+
+        $node=$root->firstChild;
+        while ($node)
+        {
+            $row='"'.$node->localName.'"';
+            $row.=',"'.$node->nodeValue.'"';
+
+            $node=$node->nextSibling;
+
+            $result[]=$row;
+        }
+    }
+
+    return implode("\n",$result);
+}
+
 function libxml_error_handler($errno,$errstr,$errfile,$errline)
 {
     //Ignore malformed xml for now.
-    //print "$errstr at $errfile:$errline\n";
-//    die;
+    print "$errstr at $errfile:$errline\n";
+    die;
 }
 
 function libxml_xslt_error_handler($errno,$errstr,$errfile,$errline)
