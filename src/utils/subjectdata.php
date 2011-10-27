@@ -362,7 +362,7 @@ function convertFinalDataToCSV(DOMDocument $xml,Array $headers)
         while ($node)
         {
             $row='"'.$node->localName.'"';
-            $row.=',"'.$node->nodeValue.'"';
+            $row.=',"'.urldecode($node->nodeValue).'"';
 
             $node=$node->nextSibling;
 

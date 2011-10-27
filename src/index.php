@@ -62,7 +62,7 @@
             <script type="text/javascript" src="js/lib/ext/ux/PagingStore.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/PagingRowNumberer.js"></script>
 
-            <-- Grid Search -->
+            <!-- Grid Search -->
             <script type="text/javascript" src="js/lib/ext/ux/Util.js"></script>
             <script type="text/javascript" src="js/lib/ext/ux/GridSearch.js"></script>
             <link rel="stylesheet" type="text/css" href="js/lib/ext/ux/css/GridSearch.css" />
