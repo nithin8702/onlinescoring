@@ -147,6 +147,12 @@ NRG.OnlineScoring.GridSubjects=new Ext.grid.GridPanel({
                                         width:115
                                     }
                                 ],
+                        plugins:[new Ext.ux.grid.Search({
+                                            minChars:2,
+                                            autoFocus:true,
+                                            mode:'local',
+                                            iconCls:'x-icon-search'
+                                    }) ],
                         tbar: new Ext.PagingToolbar({
                                     pageSize: 20,
                                     store: storeSubjects,
@@ -163,7 +169,7 @@ NRG.OnlineScoring.GridSubjects=new Ext.grid.GridPanel({
                                                     xtype:'progress',
                                                     value:0.5,
                                                     text:'Loading ...',
-                                                    width:280
+                                                    width:100
                                                 }
                                             ]
 
@@ -310,7 +316,7 @@ function onSubjectsPageChanged(toolbar, data)
     if (data.total==0)
         pb.updateProgress(0,'No subjects to display');
     else
-        pb.updateProgress(end/data.total,'Displaying subjects '+start+' - '+end+' of '+data.total,true);
+        pb.updateProgress(end/data.total,start+' - '+end+' of '+data.total,true);
 }
 
 
