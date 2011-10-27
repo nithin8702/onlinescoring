@@ -22,8 +22,14 @@ Ext.ux.DatePickerPlusPlus = Ext.extend(Ext.ux.DatePickerPlus, {
         this.timestampsUnsure=[];
         var el=this.getEl();
 
+console.log("objects:");
         if (typeof(el)!="undefined")
-            el.select("a").removeClass(['x-date-selected','x-date-pp-click1','x-date-pp-click2']);
+            el.select("a").each(function(obj){
+                if (typeof(obj.dom['parentNode'])!="undefined")
+                    obj.dom.parentNode['clicked']=undefined;
+                
+                obj.removeClass(['x-date-selected','x-date-pp-click1','x-date-pp-click2']);
+            });
     },
 
     handleDateClick:function(e,t)
@@ -32,19 +38,20 @@ Ext.ux.DatePickerPlusPlus = Ext.extend(Ext.ux.DatePickerPlus, {
         var tp = Ext.get(t.parentNode);
         var el = Ext.get(t);
 
+console.log(tp);
         //Skip disabled cells
         if (tp.hasClass('x-date-disabled') || tp.hasClass('x-date-prevday') ||
             tp.hasClass('x-date-nextday'))
             return;
 
-        if (typeof(tp.clicked)=="undefined")
-            tp.clicked=1;
+        if (typeof(tp.dom.clicked)=="undefined")
+            tp.dom.clicked=1;
         else
-            tp.clicked++;
+            tp.dom.clicked++;
 
         tp.removeClass(['x-date-selected']);
 
-        switch (tp.clicked%3)
+        switch (tp.dom.clicked%3)
         {
             case 0: console.log("Unmarking date: ",t.dateValue);
                     this.unmarkDate(el,t.dateValue);
