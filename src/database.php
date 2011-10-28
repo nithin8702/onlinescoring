@@ -247,6 +247,24 @@ class Database
         return $result;
     }
 
+    /** Retrieves information about a particular username by ACL ID */
+    public function searchUserByID($aclID)
+    {
+        $result=Array();
+        if (empty($aclID))
+            return $result;
+        $param1=$this->_server->real_escape_string($aclID);
+        $query_string="SELECT *, Acl.id as aclID, Roles.id as roleID FROM Acl LEFT JOIN Roles ON (Acl.fkRoleID=Roles.id) WHERE Acl.id='$aclID'";
+        //Run the query
+        $query=$this->_server->query($query_string);
+        if ($query===false)
+            throw new Exception("SQL [$query_string]\nERROR: ".$this->_server->error);
+
+        if ($query->num_rows)
+            $result=$query->fetch_assoc();
+        $query->close();
+        return $result;
+    }
 
 
     public function createUser($email)
@@ -503,7 +521,7 @@ class Database
 
         $subjectLabel=$this->_server->real_escape_string($subjectLabel);
 
-        $query="SELECT id, fkAclID as aclID, data, locked FROM final_forms WHERE subjectLabel='$subjectLabel'";
+        $query="SELECT id, fkAclID as aclID, data, locked, datetimeModified FROM final_forms WHERE subjectLabel='$subjectLabel'";
 
         try
         {
