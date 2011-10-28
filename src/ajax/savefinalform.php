@@ -80,9 +80,23 @@ try
     $db=new Database($dbconf['host'],$dbconf['user'],$dbconf['pass'],$dbconf['name'],$dbconf['port']);
 
     //Store the data in the database
-    $db->storeFinalForm($label,$_SESSION['aclID'],$xmldata->saveXML(),$lock);
+    $finaldata=$db->getSubjectFinalData($label);
+    if ($finaldata['locked']=='1')
+    {
+        $user=$db->searchUserByID($finaldata['aclID']);
+        if (empty($user))
+            $username="<unknown>";
+        else
+            $username=$user['username'];
+        $date=$finaldata['datetimeModified'];
+        ajax_error("Oops! Subject $label has been already locked by $username at $date.");
+    }
+    else
+    {
+        $db->storeFinalForm($label,$_SESSION['aclID'],$xmldata->saveXML(),$lock);
 
-    $result=Array("success"=>1, "subject"=>$label);
+        $result=Array("success"=>1, "subject"=>$label);
+    }
 
     ajax_result($result);
 }
