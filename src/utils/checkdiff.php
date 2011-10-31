@@ -36,6 +36,12 @@ require_once "subjectdata.php";
 set_time_limit(3600);
 define('XSL_SUBJECT_DATA','../xsl/subjectdata.xsl');
 
+$label=null;
+
+if (!empty($argv) && !empty($argv[0]) && ctype_alnum(trim($argv[0])))
+    $label=trim($argv[0]);
+
+
 try
 {
     $config=new \NRG\Configuration("config.ini.php");
@@ -50,6 +56,10 @@ try
 
     foreach ($subjects as $subject)
     {
+        //Skip subjects that don't match $label, if necessary
+        if (!empty($label) && $subject['subjectLabel']!==$label)
+            continue;
+        
         //If the subject has been locked, make sure it is never highlighted as
         //having errors
         if ((int)$subject['locked']==1)
