@@ -318,11 +318,11 @@ function diffColumns(DOMNodeList $cells)
         $value=strtolower($cell->nodeValue);
 
         //Skip empty cells
-        if (empty($value))
+        if (!strlen($value))
             continue;
 
         //Obtain the first value
-        if (empty($firstValue))
+        if (!strlen($firstValue))
         {
             $firstValue=$value;
             continue;
