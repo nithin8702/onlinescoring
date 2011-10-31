@@ -141,7 +141,8 @@ function getSubjectDataAsXml($subjectLabel, Database $db)
     $xmldoc->documentElement->setAttribute('total',$count);
 
     //Restore the original error handler
-    set_error_handler($originalHandler);
+    if (!empty($originalHandler))
+        set_error_handler($originalHandler);
 
     //print $xmldoc->saveXML();
     return $xmldoc;
