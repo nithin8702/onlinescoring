@@ -38,8 +38,8 @@ define('XSL_SUBJECT_DATA','../xsl/subjectdata.xsl');
 
 $label=null;
 
-if (!empty($argv) && !empty($argv[0]) && ctype_alnum(trim($argv[0])))
-    $label=trim($argv[0]);
+if (!empty($argv) && !empty($argv[1]) && ctype_alnum(trim($argv[1])))
+    $label=trim($argv[1]);
 
 
 try
