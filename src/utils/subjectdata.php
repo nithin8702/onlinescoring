@@ -172,7 +172,8 @@ function getSubjectFinalDataAsXML($subjectLabel, Database $db)
     $xmldoc->documentElement->setAttribute('locked',$result['locked']);
     $xmldoc->documentElement->setAttribute('subject',$subjectLabel);
 
-    set_error_handler($originalHandler);
+    if (!empty($originalHandler))
+        set_error_handler($originalHandler);
 
     return $xmldoc;
 }
@@ -254,7 +255,8 @@ function applyXSLtoXML(DomDocument $xmldoc, $xsltemplate)
     $result=$xslt->transformToXml($xmldoc);
 
     //Restore the original error handler
-    set_error_handler($originalHandler);
+    if (!empty($originalHandler))
+        set_error_handler($originalHandler);
 
     return $result;
 }
