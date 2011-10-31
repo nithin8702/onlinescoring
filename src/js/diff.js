@@ -398,9 +398,13 @@ function loadSubjectData(xmldata)
     var store=generateSubjectDataStore(cells);
     var columns=generateSubjectDataColumns(cells, headers);
 
+    //Unlock the grid before loading the data, as the StoreLoaded event will be
+    //triggered after the load, and that will attempt to mark diffs
+    //which fails when the grid is locked.
+    NRG.OnlineScoring.GridDiff.locked=xmldata.documentElement.getAttribute('locked');
     //Decode all strings inside the Store and then reconfigure the grid
     store.loadData(xmldata);
-    NRG.OnlineScoring.GridDiff.locked=xmldata.documentElement.getAttribute('locked');
+
     NRG.OnlineScoring.GridDiff.reconfigure(store, columns);
 }
 
@@ -847,6 +851,7 @@ function focusNextSubject()
 //URLDecode all final records
 function onDiffStoreLoaded(store, records, options)
 {
+    console.log('onDiffStoreLoaded called');
     for (var i=0;i<records.length;++i)
     {
         var record=records[i];
