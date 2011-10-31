@@ -85,7 +85,8 @@ try
             $node=$node->nextSibling;
         }
 
-        $db->storeFinalForm($subject['subjectLabel'],$subject['aclID'],
+        $db->storeFinalForm($subject['subjectLabel'],
+                            $xml->documentElement->getAttribute('aclID'),
                             $xml->saveXML(),$subject['locked']);
     }
 

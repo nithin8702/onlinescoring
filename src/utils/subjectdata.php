@@ -171,6 +171,7 @@ function getSubjectFinalDataAsXML($subjectLabel, Database $db)
     $xmldoc->loadXML($result['data']);
     $xmldoc->documentElement->setAttribute('locked',$result['locked']);
     $xmldoc->documentElement->setAttribute('subject',$subjectLabel);
+    $xmldoc->documentElement->setAttribute('aclID',$result['aclID']);
 
     if (!empty($originalHandler))
         set_error_handler($originalHandler);
