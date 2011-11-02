@@ -927,8 +927,6 @@ function onDiffStoreLoaded(store, records, options)
                     record.set('final',initialValue);
         }
 
-        console.log(record.data['field'],ncells,':',ncomparisons);
-
         record['cell_columns']=ncells;
         record['comparisons']=ncomparisons;
 
