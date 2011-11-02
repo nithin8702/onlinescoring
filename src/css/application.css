@@ -354,6 +354,18 @@ ul.help
     color:black;
 }
 
+.row-diff-one-odd
+{
+    background-color: #87CEFA;
+    color:black;
+}
+
+.row-diff-one-even
+{
+    background-color: #98DFFF;
+    color:black;
+}
+
 .diff-col-header-label
 {
     color:gray;

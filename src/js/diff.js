@@ -584,6 +584,17 @@ function renderFieldName(value, metadata, record, rowIndex, colIndex, store)
                 break;
     }
 
+    if ((typeof(record['comparisons'])!="undefined") &&
+        (typeof(record['cell_columns'])!="undefined") &&
+        (record.cell_columns > 1) &&
+        (record.comparisons==1))
+    {
+        if (rowIndex%2==1)
+            cssClass+='row-diff-one-odd';
+        else
+            cssClass+='row-diff-one-even';
+    }
+
     metadata.css=cssClass;
 
     return value;
@@ -861,6 +872,8 @@ function onDiffStoreLoaded(store, records, options)
         //Determines whether to pre-populate the final column by comparing all other <cell> columns
         //If a value already exists in the 'final' column, then do not pre-populate.
         var compare=!record.data['final'].length;
+        var ncomparisons=0;
+        var ncells=0;
 
         //Set compare to false if the DiffGrid is locked
         if (NRG.OnlineScoring.GridDiff.locked==true)
@@ -878,9 +891,17 @@ function onDiffStoreLoaded(store, records, options)
             
             var cellColumn=field.indexOf('cell');
             //Don't perform comparisons for non-<cell> columns
-            if ((cellColumn<0) || (!record.data[field].toString().length))
+            if (cellColumn<0)
                 continue;
 
+            ++ncells; //number of <cell> columns
+
+            //Don't perform comparisons for empty <cell> columns
+            if (!record.data[field].toString().length)
+                continue;
+
+            ++ncomparisons; //number of comparisons performed
+            
             //Store the value of the first encountered non-empty <cell> column into initialValue
             if (!initialValue.toString().length)
                 initialValue=record.data[field];
@@ -905,6 +926,12 @@ function onDiffStoreLoaded(store, records, options)
                 if (match)
                     record.set('final',initialValue);
         }
+
+        console.log(record.data['field'],ncells,':',ncomparisons);
+
+        record['cell_columns']=ncells;
+        record['comparisons']=ncomparisons;
+
     }
 }
 
