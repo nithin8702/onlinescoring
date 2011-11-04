@@ -22,7 +22,6 @@ Ext.ux.DatePickerPlusPlus = Ext.extend(Ext.ux.DatePickerPlus, {
         this.timestampsUnsure=[];
         var el=this.getEl();
 
-console.log("objects:");
         if (typeof(el)!="undefined")
             el.select("a").each(function(obj){
                 if (typeof(obj.dom['parentNode'])!="undefined")
@@ -38,7 +37,6 @@ console.log("objects:");
         var tp = Ext.get(t.parentNode);
         var el = Ext.get(t);
 
-console.log(tp);
         //Skip disabled cells
         if (tp.hasClass('x-date-disabled') || tp.hasClass('x-date-prevday') ||
             tp.hasClass('x-date-nextday'))
