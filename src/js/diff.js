@@ -157,6 +157,14 @@ NRG.OnlineScoring.GridSubjects=new Ext.grid.GridPanel({
                                     pageSize: 20,
                                     store: storeSubjects,
                                     displayInfo: false,
+                                    items:[
+                                             '-',
+                                             {
+                                                    text:'',
+                                                    icon:'images/icons/csv.png',
+                                                    handler:onDownloadSubjects
+                                             }
+                                          ],
                                     listeners:  {
                                                     change:onSubjectsPageChanged
                                                 }
@@ -285,8 +293,8 @@ var ui= {
                             cmargins: '2 2 2 2',
                             collapsible:true,
                             split:true,
-                            minSize:285,
-                            width:285,
+                            minSize:280,
+                            width:280,
                             items:  [
                                         NRG.OnlineScoring.GridSubjects
                                     ]
@@ -1236,4 +1244,15 @@ function markSubjectAsLocked(label)
     record.set('locked',1);
 
     //console.log('Locked subject '+label);
+}
+
+function onDownloadSubjects()
+{
+    var grid=NRG.OnlineScoring.GridSubjects;
+
+    var sort=grid.getStore().getSortState();
+
+    window.open('ajax/subjects.php?field='+encodeURIComponent(sort.field)+
+                '&direction='+encodeURIComponent(sort.direction)+
+                '&format=csv');
 }

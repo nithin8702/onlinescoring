@@ -155,12 +155,18 @@ class Database
     /** Lists all available subjects
      * @return Array An associative array containg the query result
      */
-    public function listSubjects($sort='DESC')
+    public function listSubjects($field=null,$sort='DESC')
     {
         $result=Array();
         //ASC or DESC sorting
         if ($sort!="ASC")
             $sort="DESC";
+
+        if (empty($field) || !is_string($field))
+            $field='dateUpdated';
+
+        $sort=$this->_server->real_escape_string($sort);
+        $field=$this->_server->real_escape_string($field);
 
         $query='SELECT  Sessions.subjectLabel,
                         COUNT(DISTINCT fkSessionID) as countEntries, 
@@ -171,8 +177,8 @@ class Database
                         INNER JOIN Sessions ON (Forms.fkSessionID=Sessions.id)
                         LEFT JOIN final_forms ON (final_forms.subjectLabel=Sessions.subjectLabel))
                         GROUP BY subjectLabel 
-                        ORDER BY dateUpdated '.$sort;
-
+                        ORDER BY '.$field.' '.$sort;
+        
         $query=$this->_server->query($query);
 
         if ($query===false)
@@ -205,11 +211,15 @@ class Database
         if (!is_numeric($userid))
             throw new Exception("User ID must be a numeric value.");
 
+        //paranoia
+        $sort=$this->_server->real_escape_string($sort);
+        $userid=$this->_server->real_escape_string($userid);
+
         $query='SELECT subjectLabel as label, timestampModified as dateUpdated
                 FROM `Sessions`  WHERE fkAclID='.$userid.'
                 GROUP BY subjectLabel
                 ORDER BY timestampModified '.$sort;
-
+        
         $query=$this->_server->query($query);
 
         if ($query===false)

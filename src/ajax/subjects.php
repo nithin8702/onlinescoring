@@ -33,6 +33,39 @@ require_once '../database.php';
 //Require data manager privileges
 setClearanceLevel(50);
 
+$field=null;
+$direction="DESC";
+$format=null;
+$content_type=null;
+$content_disposition=null;
+
+if (isset($_GET['field']))
+{
+    $temp=trim($_GET['field']);
+    if (strlen($temp) && ctype_alnum($temp))
+        $field=$temp;
+}
+
+if (isset($_GET['direction']))
+{
+    $temp=strtoupper(trim($_GET['direction']));
+    if (($temp=="ASC") || ($temp=="DESC"))
+        $direction=$temp;
+}
+
+if (isset($_GET['format']))
+{
+    $temp=strtoupper(trim($_GET['format']));
+    switch ($temp)
+    {
+        case 'CSV': $format=$temp;
+                    $content_type='text/csv';
+                    $content_disposition="attachment; filename=subjects.csv";
+                    break;
+    }
+}
+
+
 try
 {
     $config=new \NRG\Configuration("../config.ini.php");
@@ -42,14 +75,60 @@ try
     if (!$db)
         throw new Exception("Couldn't connect to the database.");
 
-    $result=$db->listSubjects();
+    $result=$db->listSubjects($field,$direction);
+    
+    if (empty($format))
+    {
+        ajax_result(Array(
+                            "total"     => count($result),
+                            "subjects"  => $result
+                         ));
+    }
+    else
+    {
+        header('Content-type: '.$content_type);
+        header('Content-disposition: '.$content_disposition);
+        
+        switch ($format)
+        {
+            case 'CSV': print toCSV($result, Array('Label','Entries','Last Changed','Locked'),Array('diff'));
+        }
 
-    ajax_result(Array(
-                        "total"     => count($result),
-                        "subjects"  => $result
-                     ));
+    }
 }
 catch (\Exception $e)
 {
     error_log('[OnlineQuestionnaire] ERROR: '.$e->getMessage().' at '.$e->getFile().':'.$e->getLine(),0);
+}
+
+
+function toCSV(Array $data,Array $headers=null,Array $ignore=null)
+{
+    $rows=Array();
+
+    foreach ($headers as &$h)
+        $h='"'.$h.'"';
+
+    $rows[]=implode(',',$headers);
+
+    foreach ($data as $row)
+    {
+        $newrow=Array();
+
+        foreach ($row as $label=>$cell)
+        {
+            if (in_array($label,$ignore))
+                continue;
+            
+            if (!is_numeric($cell))
+                $newrow[]='"'.$cell.'"';
+            else
+                $newrow[]=$cell;
+        }
+
+        if (!empty($newrow))
+            $rows[]=implode(',',$newrow);
+    }
+
+    return implode("\n",$rows);
 }
