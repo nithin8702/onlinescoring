@@ -1,0 +1,22 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start>
+        <element name="form">
+            <element name="now">
+                <ref name="T_7_Choices"/>
+            </element>
+
+            <element name="fut">
+                <ref name="T_7_Choices"/>
+            </element>
+
+            <element name="dad">
+                <ref name="T_7_ChoicesAnd999"/>
+            </element>
+
+            <element name="mom">
+                <ref name="T_7_ChoicesAnd999"/>
+            </element>
+        </element>
+    </start>
+</grammar>

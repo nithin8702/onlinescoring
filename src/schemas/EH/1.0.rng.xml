@@ -1,0 +1,67 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start>
+        <element name="form">
+                <!-- SEX -->
+                <element name="sex">
+                    <ref name="T_2_Choices"/>
+                </element>
+
+                <!-- AGE -->
+                <element name="age">
+                    <choice>
+                        <data type="positiveInteger">
+                            <param name="maxInclusive">100</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                    </choice>
+                </element>
+
+                <!-- EDUCATION -->
+                <element name="educ">
+                    <choice>
+                        <data type="positiveInteger">
+                            <param name="maxInclusive">20</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                    </choice>
+                </element>
+
+                <!-- ETHNICITY -->
+                <element name="ethnic">
+                    <ref name="T_2_Choices"/>
+                </element>
+
+                <!-- RACE -->
+                <element name="race_1">
+                    <ref name="T_5_Choices"/>
+                </element>
+
+                <element name="race_2">
+                    <ref name="T_5_Choices"/>
+                </element>
+
+                <element name="race_3">
+                    <ref name="T_5_Choices"/>
+                </element>
+
+                <element name="race_4">
+                    <ref name="T_5_Choices"/>
+                </element>
+
+                <!-- HANDEDNESS -->
+                <element name="hand">
+                    <ref name="T_5_Choices_Sym0"/>
+                </element>
+
+                <element name="write">
+                    <ref name="T_5_Choices_Sym0"/>
+                </element>
+
+                <element name="throw">
+                    <ref name="T_5_Choices_Sym0"/>
+                </element>
+        </element>
+    </start>
+
+</grammar>
