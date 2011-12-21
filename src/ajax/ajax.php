@@ -68,6 +68,19 @@ function ajax_error($message='An internal error has occurred')
     ajax_result($result);
 }
 
+/** Returns an error message to an http auth request.
+ * @param String $message Error message
+ * @return JSON
+ */
+function ajax_http_auth_error($message)
+{
+    header('WWW-Authenticate: Basic realm="OnlineScoring"');
+    header('HTTP/1.0 401 Unauthorized');
+
+    print json_encode(Array("error"=>$message));
+    exit;
+}
+
 /** Returns the result of an AJAX request in a JSON object.
  * @param array $result Result/List of fields to encode
  * @result JSON
