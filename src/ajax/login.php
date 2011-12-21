@@ -102,7 +102,6 @@ try
             $logged_in=true;
         }
     }
-         
 
     if ($logged_in===false)
     {
@@ -121,7 +120,7 @@ try
 		ajax_error('Sorry, your account hasn\'t been assigned any privileges yet. Please try again later.');
 
 
-	    if (($username=="guest@neuroinfo.org") && ($txtPassword=="guest"))
+	    if (in_array(strtolower($username),Array("guest@neuroinfo.org","guest")) && ($setupconf['guest_login']==1))
 		$logged_in=true;
 	    else
 	    {
