@@ -67,8 +67,8 @@ class Configuration
         $config=null;
 
         //Check cache
-        if (function_exists('apc_fetch'))
-            $config=apc_fetch($config_file);
+        //if (function_exists('apc_fetch'))
+        //    $config=apc_fetch($config_file);
 
         //On cache miss, load config from disk
         if (empty($config))
@@ -77,8 +77,8 @@ class Configuration
             if (empty($config))
                 throw new Exception("Invalid configuration file. Please edit ".$config_file);
             //Try to store the configuration file in cache
-            if (function_exists('apc_store'))
-                apc_store($config_file, $config);
+           // if (function_exists('apc_store'))
+           //     apc_store($config_file, $config);
         }
 
         return $config;

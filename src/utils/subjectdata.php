@@ -161,6 +161,9 @@ function getSubjectFinalDataAsXML($subjectLabel, Database $db)
     //Retrieve the form data
     $result=$db->getSubjectFinalData($subjectLabel);
 
+    if (empty($result) || !strlen($result['data']))
+        return NULL;
+
     //Register a new error handler to handle libxml specific errors
     $originalHandler=set_error_handler("libxml_error_handler");
 
@@ -346,6 +349,31 @@ function diffColumns(DOMNodeList $cells)
         return 2;
 
     return 0;
+}
+
+function convertFinalDataToArray(DOMDocument $xml,Array $headers)
+{
+    $result=Array();
+    $i=0;
+
+    $result[]=$headers;
+
+    $root=$xml->documentElement;
+    if ($root->hasChildNodes())
+    {
+        $node=$root->firstChild;
+        while ($node)
+        {
+            $row=Array();
+            $row[]=$node->localName;
+            $row[]=urldecode($node->nodeValue);
+
+            $node=$node->nextSibling;
+            $result[]=$row;
+        } 
+    }
+
+    return $result;
 }
 
 function convertFinalDataToCSV(DOMDocument $xml,Array $headers)
