@@ -147,4 +147,20 @@ $content_type='application/json';
 
 //output
 header('Content-type: '.$content_type);
-print json_encode($result);
+
+/* this used to be just json_encode($result),
+ * but the VM was running out of memory for large queries */
+print '{'.
+      ' "success": '.$result['success'].','.
+      ' "count": '.$result['count'].','.
+      ' "data": { ';
+
+//foreach subject, print the subject label and it's data as json
+foreach ($result['data'] as $subjectLabel => $subjectData)
+{
+    print '"'.$subjectLabel.'":';
+    print json_encode($subjectData);
+}
+
+//Close 'data' and top-level object
+print '} }';
