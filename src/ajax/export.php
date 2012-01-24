@@ -134,6 +134,10 @@ try
   
     foreach ($labels as $subjectLabel)
     {
+        //Skip subjects that were not locked
+        if (!isSubjectLocked($subjectLabel))
+            continue;
+
         $xml=NULL;
 
         $xml=getSubjectFinalDataAsXML($subjectLabel,$db);
