@@ -37,9 +37,10 @@ require_once "NRG/Login/Google/ClientLogin.php";
 require_once '../database.php';
 require_once "../utils/subjectdata.php";
 
-ini_set('memory_limit','512MB');
+ini_set('memory_limit',256*1024*1024); //256MB
 
 define('XSL_SUBJECT_DATA','../xsl/subjectdata.xsl');
+define('MAX_LABELS',100);
 
 if (!isset($_SERVER['PHP_AUTH_USER']))
     ajax_http_auth_error("This service requires an authenticated user");
@@ -114,6 +115,10 @@ if (!isset($_REQUEST['label']) || empty($_REQUEST['label']))
     ajax_error('Please specify a subject label.');
 
 $labels=explode(",",trim(strtoupper($_REQUEST['label'])));
+
+if (count($labels>MAX_LABELS))
+    ajax_error("Your request has exceeded the maximum number of subject labels allowed (".MAX_LABELS.")");
+
 $xml="";
 $result=Array("success"=>1,
               "count"=>0,
@@ -151,20 +156,3 @@ $content_type='application/json';
 header('Content-type: '.$content_type);
 
 print json_encode($result);
-
-/* this used to be just json_encode($result),
- * but the VM was running out of memory for large queries 
-print '{'.
-      ' "success": '.$result['success'].','.
-      ' "count": '.$result['count'].','.
-      ' "data": { ';
-
-//foreach subject, print the subject label and it's data as json
-foreach ($result['data'] as $subjectLabel => $subjectData)
-{
-    print '"'.$subjectLabel.'":';
-    print json_encode($subjectData);
-}
-
-//Close 'data' and top-level object
-print '} }'; */
