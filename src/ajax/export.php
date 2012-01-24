@@ -37,6 +37,8 @@ require_once "NRG/Login/Google/ClientLogin.php";
 require_once '../database.php';
 require_once "../utils/subjectdata.php";
 
+ini_set('memory_limit','512MB');
+
 define('XSL_SUBJECT_DATA','../xsl/subjectdata.xsl');
 
 if (!isset($_SERVER['PHP_AUTH_USER']))
@@ -148,8 +150,10 @@ $content_type='application/json';
 //output
 header('Content-type: '.$content_type);
 
+print json_encode($result);
+
 /* this used to be just json_encode($result),
- * but the VM was running out of memory for large queries */
+ * but the VM was running out of memory for large queries 
 print '{'.
       ' "success": '.$result['success'].','.
       ' "count": '.$result['count'].','.
@@ -163,4 +167,4 @@ foreach ($result['data'] as $subjectLabel => $subjectData)
 }
 
 //Close 'data' and top-level object
-print '} }';
+print '} }'; */
