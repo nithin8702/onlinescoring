@@ -116,7 +116,7 @@ if (!isset($_REQUEST['label']) || empty($_REQUEST['label']))
 
 $labels=explode(",",trim(strtoupper($_REQUEST['label'])));
 
-if (count($labels>MAX_LABELS))
+if (count($labels)>MAX_LABELS)
     ajax_error("Your request has exceeded the maximum number of subject labels allowed (".MAX_LABELS.")");
 
 $xml="";
