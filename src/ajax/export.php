@@ -108,10 +108,10 @@ catch(Exception $e)
     ajax_http_auth_error($e->getMessage());
 }
 
-if (!isset($_GET['label']) || empty($_GET['label']))
+if (!isset($_REQUEST['label']) || empty($_REQUEST['label']))
     ajax_error('Please specify a subject label.');
 
-$labels=explode(",",trim(strtoupper($_GET['label'])));
+$labels=explode(",",trim(strtoupper($_REQUEST['label'])));
 $xml="";
 $result=Array("success"=>1,
               "count"=>0,
