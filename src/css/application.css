@@ -107,12 +107,55 @@
     margin-left:5px;
 }
 
-.life_headers span
+.life_headers span:nth-child(2n+1)
 {
-    margin-left:5px;
+    color:darkgray;
 }
 
-.life_headers span:nth-child(2n+1)
+.beh_headers
+{
+    width:840px;
+    text-align:right;
+}
+
+.beh_headers span
+{
+    margin-left:75px;
+}
+
+.beh_headers span:nth-child(2n+1)
+{
+    color:darkgray;
+}
+
+.scl_headers
+{
+    width:905px;
+    text-align:right;
+}
+
+.scl_headers span
+{
+    margin-left:20px;
+}
+
+.scl_headers span:nth-child(2n+1)
+{
+    color:darkgray;
+}
+
+.asr_headers
+{
+    width:865px;
+    text-align:right;
+}
+
+.asr_headers span
+{
+    margin-left:20px;
+}
+
+.asr_headers span:nth-child(2n+1)
 {
     color:darkgray;
 }
