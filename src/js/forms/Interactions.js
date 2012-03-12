@@ -1861,13 +1861,3 @@ function q(id)
 {
     return qID+':'+id;
 }
-
-function getRadioShortcut(key)
-{
-    return  {
-                tag:"input",
-                type:"radio",
-                autocomplete:"off",
-                alt:key
-            }
-}

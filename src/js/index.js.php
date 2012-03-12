@@ -42,6 +42,7 @@ var tabForms=       {
                         border:false,
                         bodyBorder:false,
                         autoScroll:true,
+                        enableTabScroll:true,
                         hidden:true,
                         activeTab:0,
                         listeners:  {
@@ -59,7 +60,10 @@ var tabForms=       {
                                     NRG.Forms.Lifestyle,
                                     NRG.Forms.Interactions,
                                     NRG.Forms.HormoneMenstrualCycle,
-                                    NRG.Forms.Hollingshead
+                                    NRG.Forms.Hollingshead,
+                                    NRG.Forms.Behavior,
+                                    NRG.Forms.SCL,
+                                    NRG.Forms.SelfReport
                                 ]
 
                     };
@@ -538,6 +542,8 @@ function onTabShow(obj)
 {
     //hack
     onFormActivated(obj.getActiveTab());
+
+    obj.doLayout();
 }
 
 function nextForm()
