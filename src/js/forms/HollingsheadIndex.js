@@ -575,18 +575,17 @@ achieving if you are a student.'
                       ]
             };
 
-
-var btnFinish={
+var btnNext={
                 xtype:'fieldset',
                 border:false,
                 style:'margin-bottom:20px',
                 items:[
                             {
-                                id:'btnFinish',
+                                id:q('btnNext'),
                                 xtype:'button',
-                                text:'Finish',
-                                icon:'images/icons/finish.png',
-                                handler:btnFinishClicked
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnNextFormClicked
                             }
                       ]
               };
@@ -599,7 +598,7 @@ var form=   {
                 buttonAlign:'left',
                 title:'Hollingshead',
                 schema:'HI/1.0',
-                lastForm:true,
+                lastForm:false,
                 keys:   {
                             //Digits [1-5]
                             key:[
@@ -620,7 +619,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[h1,q1,q2,q3,q4,h2,q5,btnFinish],
+                items:[h1,q1,q2,q3,q4,h2,q5,btnNext],
                 submitOrder:    [
                                     "OCCU_SELF",
                                     "OCCU_M",
@@ -641,13 +640,4 @@ NRG.Forms.Hollingshead=form;
 function q(id)
 {
     return qID+':'+id;
-}
-
-function btnFinishClicked(button)
-{
-    var currentForm=Ext.getCmp('tabForms').getActiveTab();
-    if (currentForm.saved)
-        resetForms();
-    else
-        promptSaveForm(currentForm);
 }

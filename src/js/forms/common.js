@@ -140,13 +140,11 @@ function radiogroupChanged(radiogroup, checked)
 
     if (disableQ)
     {
-        console.log('calling toggleQ for disableQ');
         toggleQ(disableQ,false);
     }
 
     if (enableQ)
     {
-        console.log('calling toggleQ for enableQ');
         toggleQ(enableQ,true);
     }
 
@@ -174,7 +172,6 @@ function radiogroupChanged(radiogroup, checked)
 
     //Jump to the next question (or trigger form done)
     //nextQ(next,form);
-    console.log('Calling nextField()');
     nextField(radiogroup,next);
 }
 
@@ -608,32 +605,30 @@ function radioKeypress(field,keycode,event)
     {
         var index=0;
         var radios=group.getEl().select('input[type="radio"]',true);
-        var radio=radios.item(index);
-        if (!radio)
-            return;
+        var radio=null;
 
-        if ((typeof(radio.dom.alt)!="undefined") && (radio.dom.alt.length))
-            index=charcode;
-        else
-            index=charcode-1;
-
-        var radio=radios.item(index);
-
-        if (!radio)
-            return;
-
-        console.log(radio);
-
-        if (radio)
-        {
-            console.log("Setting value of ",radio.id," to true.");
-            group.setValue(radio.id,true);
-            group.getEl().select('input[type="text"]').each(function(el,c,index)
+        radios.each(function(el,obj,index){
+            if ((typeof(el.dom.alt)!="undefined") && (el.dom.alt.length))
             {
-                el.dom.value="";
-                //console.log("Cleared value from textbox "+el.dom.id);
-            });
+                if (el.dom.alt==charcode)
+                    radio=el;
+            }
+            else
+                if (index==(charcode-1))
+                    radio=el;
+        });
+
+        if (radio==null)
+        {
+            console.log("Radio "+charcode+" not found.");
+            return;
         }
+
+        group.setValue(radio.id,true);
+        group.getEl().select('input[type="text"]').each(function(el,c,index)
+        {
+            el.dom.value="";
+        });
     }
 }
 
@@ -1285,4 +1280,23 @@ function congratulations()
         fn:function(button){if (button=='yes') resetForms();}
     });
 
+}
+
+function btnFinishClicked(button)
+{
+    var currentForm=Ext.getCmp('tabForms').getActiveTab();
+    if (currentForm.saved)
+        resetForms();
+    else
+        promptSaveForm(currentForm);
+}
+
+function getRadioShortcut(key)
+{
+    return  {
+                tag:"input",
+                type:"radio",
+                autocomplete:"off",
+                alt:key
+            }
 }

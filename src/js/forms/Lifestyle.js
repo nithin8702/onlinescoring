@@ -1,6 +1,6 @@
 /* Lifestyle.js tabsize=4
  *
- * The L:ifestyle Form.
+ * The Lifestyle Form.
  *
  * @author  Victor Petrov <victor_petrov@harvard.edu>
  * @date    July 20, 2010
@@ -164,11 +164,37 @@ function q(id)
     return qID+':'+id;
 }
 
-function getQ(label)
+function getRadios(amount,start)
+{
+    var result=[];
+
+    if (typeof(start)=="undefined")
+        start=1;
+
+    for (var i=start;i<=amount;++i)
+        result.push({
+                        boxLabel:""+i,
+                        inputValue:i,
+                        autoCreate: getRadioShortcut(i)
+                    });
+
+    return result;
+}
+
+function getQ(label,name,nradios,start)
 {
     var id=++question_id;
-  
-    return {
+
+    if (typeof(name)=="undefined")
+        name=prefix+id;
+
+    if (typeof(nradios)=="undefined")
+        nradios=6;
+
+    if (typeof(start)=="undefined")
+        start=1;
+
+    var result= {
                 xtype:'fieldset',
                 border:false,
                 cls:'q-fieldset q-container',
@@ -185,7 +211,7 @@ function getQ(label)
                             allowBlank:true,
                             next:q('q'+(id+1)),
                             defaults:   {
-                                            name:prefix+id,
+                                            name:name,
                                             listeners:  {
                                                             focus:onFieldFocus,
                                                             blur:onFocusLost
@@ -195,35 +221,12 @@ function getQ(label)
                                             change:radiogroupChanged,
                                             specialkey:onEnter
                                         },
-                            items:  [
-                                        {
-                                            boxLabel:'1',
-                                            inputValue:1
-                                        },
-                                        {
-                                            boxLabel:'2',
-                                            inputValue:2
-                                        },
-                                        {
-                                            boxLabel:'3',
-                                            inputValue:3,
-                                        },
-                                        {
-                                            boxLabel:'4',
-                                            inputValue:4,
-                                        },
-                                        {
-                                            boxLabel:'5',
-                                            inputValue:5
-                                        },
-                                        {
-                                            boxLabel:'6',
-                                            inputValue:6
-                                        }
-                                    ]
+                            items: getRadios(nradios,start)
                         }
                       ]
             };
+
+    return result;
 }
 
 function getSequentialSubmitOrder(start,end)
