@@ -1,0 +1,151 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start combine="choice">
+        <element name="form">
+            <element name="q1">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q2">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q3">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q4">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q5">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q6">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q7">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q8">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q9">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q10">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q11">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q12">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q13">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q14">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q15">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q16">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q17">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q18">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q19">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q20">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q21">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q22">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q23">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q24">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q25">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q26">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q27">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q28">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q29">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q30">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q31">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q32">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q33">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q34">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q35">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="q36">
+                <ref name="T_3_Choices"/>
+            </element>
+
+        </element>
+    </start>
+</grammar>
