@@ -109,7 +109,18 @@
            <xsl:call-template name="form">
                <xsl:with-param name="name">HI/1.0</xsl:with-param>
            </xsl:call-template>
-           
+            <!-- Behavior -->
+           <xsl:call-template name="form">
+               <xsl:with-param name="name">BRIEF/1.0</xsl:with-param>
+           </xsl:call-template>
+            <!-- SCL -->
+           <xsl:call-template name="form">
+               <xsl:with-param name="name">SCL/1.0</xsl:with-param>
+           </xsl:call-template>
+            <!-- Self-Report -->
+           <xsl:call-template name="form">
+               <xsl:with-param name="name">SR/1.0</xsl:with-param>
+           </xsl:call-template>
         </rows>
     </xsl:template>
 

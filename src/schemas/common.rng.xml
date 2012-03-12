@@ -33,7 +33,7 @@
         </data>
     </define>
 
-    <!-- 0 through 4 -->
+    <!-- 0 through 3 -->
     <define name="T_0to3">
         <data type="nonNegativeInteger">
             <param name="maxInclusive">3</param>
@@ -56,6 +56,17 @@
             <ref name="NoAnswer"/>
         </choice>
     </define>
+
+    <!-- 0 through 4 -->
+    <define name="T_0to4_Choices">
+        <choice>
+            <data type="nonNegativeInteger">
+                <param name="maxInclusive">4</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
 
     <!-- 0 through 7 -->
     <define name="T_0to7_Choices">
