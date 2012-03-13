@@ -43,7 +43,7 @@ var instructions={
 
 var headers={
                 xtype:'label',
-                html:'<div class="headers">'+
+                html:'<div class="scl_headers">'+
                            '<span>Not at all</span>'+
                            '<span>A little bit</span>'+
                            '<span>Moderately</span>'+

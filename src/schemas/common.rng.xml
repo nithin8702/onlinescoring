@@ -47,6 +47,16 @@
         </data>
     </define>
 
+    <!-- 0 through 2 -->
+    <define name="T_0to2_Choices">
+        <choice>
+            <data type="nonNegativeInteger">
+                <param name="maxInclusive">2</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
     <!-- 0 through 3 -->
     <define name="T_0to3_Choices">
         <choice>
