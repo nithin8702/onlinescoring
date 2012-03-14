@@ -112,7 +112,7 @@ function radiogroupChanged(radiogroup, checked)
     if (NRG.Forms.GlobalReset==true)
         return;
 
-    console.log('+ radiogroupChanged('+radiogroup.id+')',radiogroup,checked);
+    //console.log('+ radiogroupChanged('+radiogroup.id+')',radiogroup,checked);
 
     if ((typeof(checked)=="undefined") || (checked==null))
         return;

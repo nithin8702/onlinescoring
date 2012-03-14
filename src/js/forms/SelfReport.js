@@ -35,7 +35,7 @@ var instructions={
                     cls:'instructions',
                     html:'<p class="instructions">Below is a list of items '+
                          'that describe people. For each item, choose 0, 1, or'+
-                         '2 to describe yourself over the past 6 months. '+
+                         ' 2 to describe yourself over the past 6 months. '+
                          'Please answer all items as well as you can, even if '+
                          'some do not seem to apply to you.</p>'
                  };
@@ -533,7 +533,8 @@ function getQN13Q(label,name)
                             labelStyle:'width:500px',
                             invalidClass:'',
                             allowBlank:true,
-                            next:q('q'+question_id+':a2'),
+                            next:q('q'+(question_id+1)),
+                            disableQ:[q('q'+question_id+':a2')],
                             defaults:   {
                                             name:name,
                                             listeners:  {
@@ -545,7 +546,27 @@ function getQN13Q(label,name)
                                             change:radiogroupChanged,
                                             specialkey:onEnter
                                         },
-                            items: getRadios(2,0)
+                            items: [
+                                        {
+                                            boxLabel:"0",
+                                            inputValue:0,
+                                            autoCreate:getRadioShortcut(0)
+                                        },
+                                        {
+                                            boxLabel:"1",
+                                            inputValue:1,
+                                            autoCreate:getRadioShortcut(1),
+                                            enableQ:[q('q'+question_id+':a2')],
+                                            next:q('q'+question_id+':a2')
+                                        },
+                                        {
+                                            boxLabel:"2",
+                                            inputValue:2,
+                                            autoCreate:getRadioShortcut(2),
+                                            enableQ:[q('q'+question_id+':a2')],
+                                            next:q('q'+question_id+':a2')
+                                        }
+                                  ]
                         }
                       ]
                 },
@@ -559,6 +580,7 @@ function getQN13Q(label,name)
                                 name:name+'_LIST',
                                 xtype:'textfield',
                                 width:400,
+                                disabled:true,
                                 allowBlank:true,
                                 fieldLabel:'Describe',
                                 style:'margin-top:5px',
