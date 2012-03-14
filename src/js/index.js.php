@@ -62,8 +62,8 @@ var tabForms=       {
                                     NRG.Forms.HormoneMenstrualCycle,
                                     NRG.Forms.Hollingshead,
                                     NRG.Forms.Behavior,
-                                    NRG.Forms.SCL,
-                                    NRG.Forms.SelfReport
+                                    NRG.Forms.SelfReport,
+                                    NRG.Forms.SCL
                                 ]
 
                     };
