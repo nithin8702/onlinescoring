@@ -127,7 +127,59 @@ getQ("My moods swing between elation and depression","MOODSWNG",2,0),
             getQN13SubQ1(q('q'+question_id),"a. Aches or pains (<b>not</b> stomach or headaches)","ACHES",q('q'+question_id+':a2')),
             getQN13SubQ1(2,"b. Headaches","HEADACHE",q('q'+question_id+':a3')),
             getQN13SubQ1(3,"c. Nausea, feel sick","NAUSEA",q('q'+question_id+':a4')),
-            getQN13SubQ1(4,"d. Problems with eyes (<b>not</b> if corrected by glasses)","PROBEYES",q('q'+question_id+':a4:1')),
+            {
+                    xtype:'fieldset',
+                    border:false,
+                    cls:'q-fieldset q-container',
+                    items:[
+                            {
+                                id:q('q'+question_id+':a4'),
+                                xtype:'radiogroup',
+                                hideLabel:false,
+                                fieldLabel:"d. Problems with eyes (<b>not</b> if corrected by glasses)",
+                                style:'padding-left:'+radioPaddingLeft+'px',
+                                width:400,
+                                labelStyle:'width:480px;font-weight:normal',
+                                invalidClass:'',
+                                allowBlank:true,
+                                next:q('q'+question_id+':a5'),
+                                disableQ:[q('q'+question_id+':a4:1')],
+                                defaults:   {
+                                                name:"PROBEYES",
+                                                listeners:  {
+                                                                focus:onFieldFocus,
+                                                                blur:onFocusLost
+                                                            }
+                                            },
+                                listeners:  {
+                                                change:radiogroupChanged,
+                                                specialkey:onEnter
+                                            },
+                                items:[
+                                        {
+                                            boxLabel:"0",
+                                            inputValue:0,
+                                            autoCreate:getRadioShortcut(0)
+                                        },
+                                        {
+                                            boxLabel:"1",
+                                            inputValue:1,
+                                            autoCreate:getRadioShortcut(1),
+                                            enableQ:[q('q'+question_id+':a4:1')],
+                                            next:q('q'+question_id+':a4:1')
+                                        },
+                                        {
+                                            boxLabel:"2",
+                                            inputValue:2,
+                                            autoCreate:getRadioShortcut(2),
+                                            enableQ:[q('q'+question_id+':a4:1')],
+                                            next:q('q'+question_id+':a4:1')
+                                        }
+                                      ]
+
+                            }
+                          ]
+            },
             {
                 xtype:'fieldset',
                 border:false,
@@ -309,17 +361,17 @@ getQ("I am a happy person","AMHAPPY",2,0),
 
 ];
 
-var btnFinish={
+var btnNext={
                 xtype:'fieldset',
                 border:false,
                 style:'margin-bottom:20px',
                 items:[
                             {
-                                id:'btnFinish',
+                                id:q('btnNext'),
                                 xtype:'button',
-                                text:'Finish',
-                                icon:'images/icons/finish.png',
-                                handler:btnFinishClicked
+                                text:'Next Form',
+                                icon:'images/icons/next.png',
+                                handler:btnNextFormClicked
                             }
                       ]
               };
@@ -332,7 +384,7 @@ var form=   {
                 buttonAlign:'left',
                 title:'Self-Report',
                 schema:'ASR/1.0',
-                lastForm:true,
+                lastForm:false,
                 keys:   {
                             //Digits [0-2]
                             key:[
@@ -353,7 +405,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[instructions,headers,q1to122,footnote,btnFinish],
+                items:[instructions,headers,q1to122,footnote,btnNext],
                 submitOrder: [
                                 "FORGET",
                                 "USEOPPOR",

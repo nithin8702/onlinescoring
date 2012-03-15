@@ -151,17 +151,17 @@ var allQ=[
     getQ("The idea that something is wrong with your mind","WRNGMIND",4,0),
 ];
 
-var btnNext={
+var btnFinish={
                 xtype:'fieldset',
                 border:false,
                 style:'margin-bottom:20px',
                 items:[
                             {
-                                id:q('btnNext'),
+                                id:'btnFinish',
                                 xtype:'button',
-                                text:'Next Form',
-                                icon:'images/icons/next.png',
-                                handler:btnNextFormClicked
+                                text:'Finish',
+                                icon:'images/icons/finish.png',
+                                handler:btnFinishClicked
                             }
                       ]
               };
@@ -174,7 +174,7 @@ var form=   {
                 buttonAlign:'left',
                 title:'SCL',
                 schema:'SCL/1.0',
-                lastForm:false,
+                lastForm:true,
                 keys:   {
                             //Digits [0-4]
                             key:[
@@ -195,7 +195,7 @@ var form=   {
                                 show:onFormShow,
                                 activate:onFormActivated
                             },
-                items:[instructions,headers,allQ,footnote,btnNext],
+                items:[instructions,headers,allQ,footnote,btnFinish],
                 submitOrder: [
                     "HEADACHE",
                     "NERVOUS",
