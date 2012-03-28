@@ -1,0 +1,367 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start combine="choice">
+        <element name="form">
+            <element name="headache">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="nervous">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="badthght">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="dizzy">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="nosex">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="critical">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="othcntrl">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="othblame">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="remember">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="sloppy">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="annoyed">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="chestpain">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="fearopen">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="lowenergy">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="endlife">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="hearsnds">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="tremble">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="notrust">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="appetite">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="cryeasy">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="shysex">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="trapped">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="fastfear">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="outburst">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="homealone">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="blame">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="backpain">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="blocked">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="lonely">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="feelblue">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="worry">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="nointerest">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="fearful">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="feelhurt">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="othknow">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="dontknow">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="nolikeme">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="doslowly">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="heartrace">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="nausea">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="feelinf">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="soreness">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="watched">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="asleep">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="dblcheck">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="nodecide">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="feartrans">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="breath">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="hotcold">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="avoidfear">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="mindblank">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="numbness">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="lump">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="hopeless">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="noconcen">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="feelweak">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="tense">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="heavyarm">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="death">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="overeat">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="othwatch">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="notmyown">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="urgeharm">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="earlymorn">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="repeatact">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="sleep">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="urgebreak">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="snglidea">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="selfconsc">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="crowds">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="alleffort">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="terror">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="publiceat">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="freqargue">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="leftalone">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="nocredit">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="alonewith">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="sitstill">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="worthless">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="futbad">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="shout">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="faint">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="advantage">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="bothersex">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="punishsin">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="imgfear">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="wrngbody">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="notclose">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="guilt">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+            <element name="wrngmind">
+                <ref name="T_0to4_Choices"/>
+            </element>
+
+        </element>
+    </start>
+</grammar>

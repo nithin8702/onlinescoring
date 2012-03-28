@@ -1,0 +1,565 @@
+<!-- common.rng.xml
+ This RelaxNG schema contains the common data types used by other RelaxNG schemas
+ in subdirectories.
+
+ @author  Victor Petrov <victor_petrov@harvard.edu>
+ @date    July 20, 2010
+ @copyright (c) 2010 The Presidents and Fellows of Harvard College
+ @copyright (c) 2010 The Neuroinformatics Research Group at Harvard University
+ @license   GPLv3 <http://www.gnu.org/licenses/gpl-3.0.txt>
+ 
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ You should have received a copy of the GNU General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+ @warning Unless otherwise specified, all XML files in this directory are
+          governed by the above copyright and license.
+ -->
+
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <!-- TYPES -->
+
+    <!-- 0 or 1 -->
+    <define name="T_01">
+        <data type="nonNegativeInteger">
+            <param name="maxInclusive">1</param>
+        </data>
+    </define>
+
+    <!-- 0 through 3 -->
+    <define name="T_0to3">
+        <data type="nonNegativeInteger">
+            <param name="maxInclusive">3</param>
+        </data>
+    </define>
+
+    <!-- 0 through 7 -->
+    <define name="T_0to7">
+        <data type="nonNegativeInteger">
+            <param name="maxInclusive">7</param>
+        </data>
+    </define>
+
+    <!-- 0 through 2 -->
+    <define name="T_0to2_Choices">
+        <choice>
+            <data type="nonNegativeInteger">
+                <param name="maxInclusive">2</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- 0 through 3 -->
+    <define name="T_0to3_Choices">
+        <choice>
+            <data type="nonNegativeInteger">
+                <param name="maxInclusive">3</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- 0 through 4 -->
+    <define name="T_0to4_Choices">
+        <choice>
+            <data type="nonNegativeInteger">
+                <param name="maxInclusive">4</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+
+    <!-- 0 through 7 -->
+    <define name="T_0to7_Choices">
+        <choice>
+            <data type="nonNegativeInteger">
+                <param name="maxInclusive">7</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- 9999 -->
+    <define name="NoAnswer">
+        <value type="positiveInteger">9999</value>
+    </define>
+
+    <!-- RadioGroup: Yes/No/Cancel -->
+    <define name="T_2_Choices">
+        <choice>
+            <value type="positiveInteger">1</value>
+            <value type="positiveInteger">2</value>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 3 Choices / Cancel -->
+    <define name="T_3_Choices">
+        <choice>
+            <data type="positiveInteger">
+                <param name="maxInclusive">3</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 4 Choices / Cancel -->
+    <define name="T_4_Choices">
+        <choice>
+            <data type="positiveInteger">
+                <param name="maxInclusive">4</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 5 Choices / Cancel -->
+    <define name="T_5_Choices">
+        <choice>
+            <data type="positiveInteger">
+                <param name="maxInclusive">5</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 5 Choices ( -2 -> 2 ) / Cancel -->
+    <define name="T_5_Choices_Sym0">
+        <choice>
+            <data type="integer">
+                <param name="minInclusive">-2</param>
+                <param name="maxInclusive">2</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 6 Choices / Cancel -->
+    <define name="T_6_Choices">
+        <choice>
+            <data type="positiveInteger">
+                <param name="maxInclusive">6</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 7 Choices / Cancel -->
+    <define name="T_7_Choices">
+        <choice>
+            <data type="positiveInteger">
+                <param name="maxInclusive">7</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 7 Choices / 999 / Cancel -->
+    <define name="T_7_ChoicesAnd999">
+        <choice>
+            <data type="positiveInteger">
+                <param name="maxInclusive">7</param>
+            </data>
+            <value type="positiveInteger">999</value>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 7 Choices / 998 / 997 / Cancel -->
+    <define name="T_7_ChoicesAnd998_997">
+        <choice>
+            <value type="positiveInteger">997</value>
+            <value type="positiveInteger">998</value>
+            <data type="positiveInteger">
+                <param name="maxInclusive">7</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 7 Choices / 999 / 998 / Cancel -->
+    <define name="T_7_ChoicesAnd999_998">
+        <choice>
+            <value type="positiveInteger">998</value>
+            <value type="positiveInteger">999</value>
+            <data type="positiveInteger">
+                <param name="maxInclusive">7</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 8 Choices / Cancel -->
+    <define name="T_8_Choices">
+        <choice>
+            <data type="positiveInteger">
+                <param name="maxInclusive">8</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- RadioGroup: 9 Choices / Cancel -->
+    <define name="T_9_Choices">
+        <choice>
+            <data type="positiveInteger">
+                <param name="maxInclusive">9</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+<!--*-->
+    <define name="T_String">
+        <choice>
+            <data type="string">
+                <param name="pattern">[\w\-\+@\?% ,\.();/:!]+</param>
+                <param name="whiteSpace">collapse</param>
+                <param name="maxLength">4096</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <define name="T_StringWithQuotes">
+        <choice>
+            <data type="string">
+                <param name="pattern">[\w\-\+@\?% ,\.();/':!]+</param>
+                <param name="whiteSpace">collapse</param>
+                <param name="maxLength">4096</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- Zip Code -->
+    <define name="T_ZipCode">
+        <choice>
+            <data type="string">
+                <param name="pattern">\d{5}(\-\d{4})?</param>
+            </data>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- Country list -->
+    <define name="T_Country">
+        <choice>
+            <value type="string">AD</value>
+            <value type="string">AE</value>
+            <value type="string">AF</value>
+            <value type="string">AG</value>
+            <value type="string">AI</value>
+            <value type="string">AL</value>
+            <value type="string">AM</value>
+            <value type="string">AN</value>
+            <value type="string">AO</value>
+            <value type="string">AQ</value>
+            <value type="string">AR</value>
+            <value type="string">AS</value>
+            <value type="string">AT</value>
+            <value type="string">AU</value>
+            <value type="string">AW</value>
+            <value type="string">AX</value>
+            <value type="string">AZ</value>
+            <value type="string">BA</value>
+            <value type="string">BB</value>
+            <value type="string">BD</value>
+            <value type="string">BE</value>
+            <value type="string">BF</value>
+            <value type="string">BG</value>
+            <value type="string">BH</value>
+            <value type="string">BI</value>
+            <value type="string">BJ</value>
+            <value type="string">BM</value>
+            <value type="string">BN</value>
+            <value type="string">BO</value>
+            <value type="string">BR</value>
+            <value type="string">BS</value>
+            <value type="string">BT</value>
+            <value type="string">BV</value>
+            <value type="string">BW</value>
+            <value type="string">BY</value>
+            <value type="string">BZ</value>
+            <value type="string">CA</value>
+            <value type="string">CC</value>
+            <value type="string">CD</value>
+            <value type="string">CF</value>
+            <value type="string">CG</value>
+            <value type="string">CH</value>
+            <value type="string">CI</value>
+            <value type="string">CK</value>
+            <value type="string">CL</value>
+            <value type="string">CM</value>
+            <value type="string">CN</value>
+            <value type="string">CO</value>
+            <value type="string">CR</value>
+            <value type="string">CS</value>
+            <value type="string">CU</value>
+            <value type="string">CV</value>
+            <value type="string">CX</value>
+            <value type="string">CY</value>
+            <value type="string">CZ</value>
+            <value type="string">DE</value>
+            <value type="string">DJ</value>
+            <value type="string">DK</value>
+            <value type="string">DM</value>
+            <value type="string">DO</value>
+            <value type="string">DZ</value>
+            <value type="string">EC</value>
+            <value type="string">EE</value>
+            <value type="string">EG</value>
+            <value type="string">EH</value>
+            <value type="string">ER</value>
+            <value type="string">ES</value>
+            <value type="string">ET</value>
+            <value type="string">FI</value>
+            <value type="string">FJ</value>
+            <value type="string">FK</value>
+            <value type="string">FM</value>
+            <value type="string">FO</value>
+            <value type="string">FR</value>
+            <value type="string">FX</value>
+            <value type="string">GA</value>
+            <value type="string">GB</value>
+            <value type="string">GD</value>
+            <value type="string">GE</value>
+            <value type="string">GF</value>
+            <value type="string">GH</value>
+            <value type="string">GI</value>
+            <value type="string">GL</value>
+            <value type="string">GM</value>
+            <value type="string">GN</value>
+            <value type="string">GP</value>
+            <value type="string">GQ</value>
+            <value type="string">GR</value>
+            <value type="string">GS</value>
+            <value type="string">GT</value>
+            <value type="string">GU</value>
+            <value type="string">GW</value>
+            <value type="string">GY</value>
+            <value type="string">HK</value>
+            <value type="string">HM</value>
+            <value type="string">HN</value>
+            <value type="string">HR</value>
+            <value type="string">HT</value>
+            <value type="string">HU</value>
+            <value type="string">ID</value>
+            <value type="string">IE</value>
+            <value type="string">IL</value>
+            <value type="string">IN</value>
+            <value type="string">IO</value>
+            <value type="string">IQ</value>
+            <value type="string">IR</value>
+            <value type="string">IS</value>
+            <value type="string">IT</value>
+            <value type="string">JM</value>
+            <value type="string">JO</value>
+            <value type="string">JP</value>
+            <value type="string">KE</value>
+            <value type="string">KG</value>
+            <value type="string">KH</value>
+            <value type="string">KI</value>
+            <value type="string">KM</value>
+            <value type="string">KN</value>
+            <value type="string">KP</value>
+            <value type="string">KR</value>
+            <value type="string">KW</value>
+            <value type="string">KY</value>
+            <value type="string">KZ</value>
+            <value type="string">LA</value>
+            <value type="string">LB</value>
+            <value type="string">LC</value>
+            <value type="string">LI</value>
+            <value type="string">LK</value>
+            <value type="string">LR</value>
+            <value type="string">LS</value>
+            <value type="string">LT</value>
+            <value type="string">LU</value>
+            <value type="string">LV</value>
+            <value type="string">LY</value>
+            <value type="string">MA</value>
+            <value type="string">MC</value>
+            <value type="string">MD</value>
+            <value type="string">MG</value>
+            <value type="string">MH</value>
+            <value type="string">MK</value>
+            <value type="string">ML</value>
+            <value type="string">MM</value>
+            <value type="string">MN</value>
+            <value type="string">MO</value>
+            <value type="string">MP</value>
+            <value type="string">MQ</value>
+            <value type="string">MR</value>
+            <value type="string">MS</value>
+            <value type="string">MT</value>
+            <value type="string">MU</value>
+            <value type="string">MV</value>
+            <value type="string">MW</value>
+            <value type="string">MX</value>
+            <value type="string">MY</value>
+            <value type="string">MZ</value>
+            <value type="string">NA</value>
+            <value type="string">NC</value>
+            <value type="string">NE</value>
+            <value type="string">NF</value>
+            <value type="string">NG</value>
+            <value type="string">NI</value>
+            <value type="string">NL</value>
+            <value type="string">NO</value>
+            <value type="string">NP</value>
+            <value type="string">NR</value>
+            <value type="string">NU</value>
+            <value type="string">NZ</value>
+            <value type="string">OM</value>
+            <value type="string">PA</value>
+            <value type="string">PE</value>
+            <value type="string">PF</value>
+            <value type="string">PG</value>
+            <value type="string">PH</value>
+            <value type="string">PK</value>
+            <value type="string">PL</value>
+            <value type="string">PM</value>
+            <value type="string">PN</value>
+            <value type="string">PR</value>
+            <value type="string">PS</value>
+            <value type="string">PT</value>
+            <value type="string">PW</value>
+            <value type="string">PY</value>
+            <value type="string">QA</value>
+            <value type="string">RE</value>
+            <value type="string">RO</value>
+            <value type="string">RU</value>
+            <value type="string">RW</value>
+            <value type="string">SA</value>
+            <value type="string">SB</value>
+            <value type="string">SC</value>
+            <value type="string">SD</value>
+            <value type="string">SE</value>
+            <value type="string">SG</value>
+            <value type="string">SH</value>
+            <value type="string">SI</value>
+            <value type="string">SJ</value>
+            <value type="string">SK</value>
+            <value type="string">SL</value>
+            <value type="string">SM</value>
+            <value type="string">SN</value>
+            <value type="string">SO</value>
+            <value type="string">SR</value>
+            <value type="string">ST</value>
+            <value type="string">SU</value>
+            <value type="string">SV</value>
+            <value type="string">SY</value>
+            <value type="string">SZ</value>
+            <value type="string">TC</value>
+            <value type="string">TD</value>
+            <value type="string">TF</value>
+            <value type="string">TG</value>
+            <value type="string">TH</value>
+            <value type="string">TJ</value>
+            <value type="string">TK</value>
+            <value type="string">TL</value>
+            <value type="string">TM</value>
+            <value type="string">TN</value>
+            <value type="string">TO</value>
+            <value type="string">TP</value>
+            <value type="string">TR</value>
+            <value type="string">TT</value>
+            <value type="string">TV</value>
+            <value type="string">TW</value>
+            <value type="string">TZ</value>
+            <value type="string">UA</value>
+            <value type="string">UG</value>
+            <value type="string">UK</value>
+            <value type="string">UM</value>
+            <value type="string">US</value>
+            <value type="string">UY</value>
+            <value type="string">UZ</value>
+            <value type="string">VA</value>
+            <value type="string">VC</value>
+            <value type="string">VE</value>
+            <value type="string">VG</value>
+            <value type="string">VI</value>
+            <value type="string">VN</value>
+            <value type="string">VU</value>
+            <value type="string">WF</value>
+            <value type="string">WS</value>
+            <value type="string">YE</value>
+            <value type="string">YT</value>
+            <value type="string">YU</value>
+            <value type="string">ZA</value>
+            <value type="string">ZM</value>
+            <value type="string">ZR</value>
+            <value type="string">ZW</value>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+    <!-- US STATES -->
+    <define name="T_State">
+        <choice>
+            <value type="string">AL</value>
+            <value type="string">AK</value>
+            <value type="string">AZ</value>
+            <value type="string">AR</value>
+            <value type="string">CA</value>
+            <value type="string">CO</value>
+            <value type="string">CT</value>
+            <value type="string">DE</value>
+            <value type="string">DC</value>
+            <value type="string">FL</value>
+            <value type="string">GA</value>
+            <value type="string">HI</value>
+            <value type="string">ID</value>
+            <value type="string">IL</value>
+            <value type="string">IN</value>
+            <value type="string">IA</value>
+            <value type="string">KS</value>
+            <value type="string">KY</value>
+            <value type="string">LA</value>
+            <value type="string">ME</value>
+            <value type="string">MD</value>
+            <value type="string">MA</value>
+            <value type="string">MI</value>
+            <value type="string">MN</value>
+            <value type="string">MS</value>
+            <value type="string">MO</value>
+            <value type="string">MT</value>
+            <value type="string">NE</value>
+            <value type="string">NV</value>
+            <value type="string">NH</value>
+            <value type="string">NJ</value>
+            <value type="string">NM</value>
+            <value type="string">NY</value>
+            <value type="string">NC</value>
+            <value type="string">ND</value>
+            <value type="string">OH</value>
+            <value type="string">OK</value>
+            <value type="string">OR</value>
+            <value type="string">PA</value>
+            <value type="string">PR</value>
+            <value type="string">RI</value>
+            <value type="string">SC</value>
+            <value type="string">SD</value>
+            <value type="string">TN</value>
+            <value type="string">TX</value>
+            <value type="string">UT</value>
+            <value type="string">VT</value>
+            <value type="string">VA</value>
+            <value type="string">WA</value>
+            <value type="string">WV</value>
+            <value type="string">WI</value>
+            <value type="string">WY</value>
+            <ref name="NoAnswer"/>
+        </choice>
+    </define>
+
+</grammar>

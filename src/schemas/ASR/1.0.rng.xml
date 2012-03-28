@@ -1,0 +1,619 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start combine="choice">
+        <element name="form">
+
+            <element name="forget">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="useoppor">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="argue">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="workabil">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="blameoth">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="drugs">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="drugs_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="brag">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="attnlong">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="mindoff">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="mindoff_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="sitstill">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="dependoth">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="lonely">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="inafog">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="cryalot">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="honest">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="meanoth">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="daydream">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="tryhurt">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="lotattn">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="damagemy">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="damageoth">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="worryfut">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="breakrule">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="donteat">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="getalong">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="notguilty">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="jealous">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="badlyfam">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="fearthng">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="fearthng_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="opposex">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="dobad">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="perfect">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="noloveme">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="outtoget">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="feelinf">
+                <ref name="T_0to2_Choices"/>
+            </element>
+            <element name="accprone">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="fights">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="neighbor">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="hangarnd">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="hearsnds">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="hearsnds_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="impulsive">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="likealone">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="cheat">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="overwhelm">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="nervous">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="twitch">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="twitch_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="confidence">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="notliked">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="betteroth">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="fearful">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="dizzy">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="guilty">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="cantplan">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="tired">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="moodswng">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="aches">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="headache">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="nausea">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="probeyes">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="probeyes_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="rash">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="stmchache">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="vomit">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="heartrace">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="numbness">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="attackoth">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="pickskin">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="pickskin_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="nofinish">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="noenjoy">
+                <ref name="T_0to2_Choices"/>
+            </element>
+            <element name="workpoor">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="clumsy">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="older">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="priority">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="wonttalk">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="repeatact">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="repeatact_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="friends">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="scream">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="secretive">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="seethngs">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="seethngs_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="embarrass">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="worryfam">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="respfam">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="showoff">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="timid">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="irresp">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="sleep">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="sleep_">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="decide">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="speech">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="speech_">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="standup">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="chngbeh">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="steal">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="bored">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="dostrange">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="dostrange_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="thinkodd">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="thinkodd_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="stubborn">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="moodfast">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="likeoths">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="rushinto">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="getdrunk">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="thnkkill">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="troublaw">
+                <ref name="T_0to2_Choices"/>
+            </element>
+            <element name="troublaw_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="talktoo">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="teaseoth">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="temper">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="thinksex">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="threaten">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="helpoth">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="oneplace">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="nosleep">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="nosleep_">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="awayjob">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="noenergy">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="unhappy">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="louder">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="disorg">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="tryfair">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="nosuccess">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="losethng">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="trynew">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="othersex">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="notinvolve">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="worry">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="worrysex">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="paydebt">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="restless">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="ezupset">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="money">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="impatient">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="details">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="drive">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="lateappt">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="keepjob">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="amhappy">
+                <ref name="T_0to2_Choices"/>
+            </element>
+
+            <element name="tobacco">
+                <choice>
+                        <data type="nonNegativeInteger">
+                                <!-- seconds in 6 months -->
+                                <param name="maxInclusive">16070400</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                </choice>
+            </element>
+
+            <element name="drunk">
+                <choice>
+                        <data type="nonNegativeInteger">
+                                <!-- days in 6 months -->
+                                <param name="maxInclusive">186</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                </choice>
+            </element>
+
+            <element name="nonmeds">
+                <choice>
+                        <data type="nonNegativeInteger">
+                                <!-- days in 6 months -->
+                                <param name="maxInclusive">186</param>
+                        </data>
+                        <ref name="NoAnswer"/>
+                </choice>
+            </element>
+
+        </element>
+    </start>
+</grammar>

@@ -1,0 +1,97 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start combine="choice">
+        <element name="form">
+            <element name="bc">
+                <ref name="T_2_Choices"/>
+            </element>
+            <element name="bc_type">
+                <ref name="T_4_Choices"/>
+            </element>
+            <element name="bc_name">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="bc_prev">
+                <ref name="T_2_Choices"/>
+            </element>
+            <element name="bc_prev_type">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="bc_prev_time">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="bc_prev_stop">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+
+            <element name="preg">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="preg_num">
+                <choice>
+                    <data type="nonNegativeInteger">
+                        <param name="maxInclusive">100</param>
+                        <param name="minInclusive">1</param>
+                    </data>
+                    <ref name="NoAnswer"/>
+                </choice>
+            </element>
+            <element name="preg_plan">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="per">
+                <ref name="T_3_Choices"/>
+            </element>
+            <element name="per_length">
+                <choice>
+                    <data type="float">
+                        <param name="maxInclusive">31</param>
+                        <param name="minInclusive">0</param>
+                    </data>
+                    <ref name="NoAnswer"/>
+                </choice>
+            </element>
+            <element name="per_reg">
+                <ref name="T_4_Choices"/>
+            </element>
+            <element name="per_reg_other">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <element name="per_freq">
+                <choice>
+                    <data type="float">
+                        <param name="maxInclusive">365</param>
+                        <param name="minInclusive">0</param>
+                    </data>
+                    <ref name="NoAnswer"/>
+                </choice>
+            </element>
+            <element name="per_first">
+                <choice>
+                    <data type="float">
+                        <param name="maxInclusive">100</param>
+                    </data>
+                    <ref name="NoAnswer"/>
+                </choice>
+            </element>
+
+            <element name="amen">
+                <ref name="T_2_Choices"/>
+            </element>
+
+            <element name="per_track">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="cal_certain">
+                <ref name="T_String"/>
+            </element>
+
+            <element name="cal_notsure">
+                <ref name="T_String"/>
+            </element>
+
+        </element>
+    </start>
+</grammar>

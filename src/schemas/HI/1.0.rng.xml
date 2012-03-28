@@ -1,0 +1,43 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start>
+        <element name="form">
+            <!-- OCCU_SELF -->
+            <element name="occu_self">
+                <ref name="T_7_Choices"/>
+            </element>
+            <!-- OCCU_MOTHER -->
+            <element name="occu_m">
+                <ref name="T_7_Choices"/>
+            </element>
+            <!-- OCCU_FATHER -->
+            <element name="occu_f">
+                <ref name="T_7_Choices"/>
+            </element>
+            <!-- OCCU_SELF_LIST -->
+            <element name="occu_self_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <!-- OCCU_MOTHER_LIST -->
+            <element name="occu_m_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <!-- OCCU_FATHER_LIST -->
+            <element name="occu_f_list">
+                <ref name="T_StringWithQuotes"/>
+            </element>
+            <!-- EDU_SELF -->
+            <element name="edu_self">
+                <ref name="T_7_Choices"/>
+            </element>
+            <!-- EDU_MOTHER -->
+            <element name="edu_m">
+                <ref name="T_7_Choices"/>
+            </element>
+            <!-- EDU_FATHER -->
+            <element name="edu_f">
+                <ref name="T_7_Choices"/>
+            </element>
+        </element>
+    </start>
+</grammar>

@@ -1,0 +1,307 @@
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <include href="../common.rng.xml"/>
+    <start combine="choice">
+        <element name="form">
+            <element name="angburst">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="errors">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="disorg">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="noconcen">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="tapfing">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="remind">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="closet">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="chngact">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="bigtasks">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="frgtname">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="multistep">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="overreact">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="nonotice">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="getready">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="priority">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="sitstill">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="midtask">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="dblcheck">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="emoburst">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="liehouse">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="noprep">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="diffway">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="talktime">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="misjudge">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="nostart">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="sametalk">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="tired">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="moreemo">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="waitturn">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="othdisorg">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="losething">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="diffprob">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="smallprob">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="futplan">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="attnspan">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="sexcmmt">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="othupset">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="three">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="goals">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="bathmess">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="careless">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="easyupset">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="baddcns">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="dealchng">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="noexcite">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="frgtinstrct">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="onpaper">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="mistake">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="hardstart">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="saythink">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="fastanger">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="nofinish">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="lastmin">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="ownfinish">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="distract">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="noremem">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="tooemo">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="rushthru">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="annoyed">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="homemess">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="unexchng">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="freetime">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="dontplan">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="thinkact">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="cantfind">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="organize">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="getover">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="onething">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="moodchng">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="conseq">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="orgwork">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="upsetsml">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="impulsive">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="pickup">
+                <ref name="T_3_Choices"/>
+            </element>
+
+            <element name="complete">
+                <ref name="T_3_Choices"/>
+            </element>
+
+        </element>
+    </start>
+</grammar>
