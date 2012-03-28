@@ -59,6 +59,6 @@ We don't just give out @neuroinfo.org accounts so, if your domain is not hosted 
 
 FYI: We do not keep, peek at, nor steal your password. We don't even like the fact that it goes through our application, but we must log you in somehow, so, at least wemake sure we're not storing it anywhere. Thus, even if your web server is compromised, your account password is still safe and sound.
 
-By default, when you log in, @neuroinfo.org is appended to your username (if the e-mail does not contain an @ sign). For your convenience, make sure to edit the DEFAULT_DOMAIN variable in src/js/login.js.
+By default, when you log in, @neuroinfo.org is appended to your username (if the e-mail does not contain an @ sign). To change the default domain name, edit value of DEFAULT_DOMAIN in src/js/login.js.
 
-This is all temporary. In the future, we'll add LDAP and NIS support.
+This is, of course, temporary. In the future, we'll add LDAP and NIS support.
