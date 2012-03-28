@@ -210,7 +210,7 @@ getQ("My moods swing between elation and depression","MOODSWNG",2,0),
             getQN13SubQ1(9,"i. Numbness or tingling in body parts","NUMBNESS")
    ]
 },
-
+getQ("I physically attack people","ATTACKOTH",2,0),
 getQN13Q("I pick my skin or other parts of my body","PICKSKIN"),
 getQ("I fail to finish things I should do","NOFINISH",2,0),
 getQ("There is very little that I enjoy","NOENJOY",2,0),
