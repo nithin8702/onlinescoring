@@ -148,8 +148,8 @@ var birthCountry=   {
                         id:q('q5:a1'),
                         xtype:'combo',
                         width:160,
-                        value:'USA',
-                        inputValue:'USA',
+                        value:'US',
+                        inputValue:'US',
                         submitValue:false,
                         allowBlank:true,
                         forceSelection:false,
@@ -676,7 +676,7 @@ var q12=     {
                             disabled:true,
                             allowBlank:true,
                             minValue:1900,
-                            maxValue:2011,
+                            maxValue:(new Date()).getFullYear(),
                             maxLength:4,
                             width:65,
                             listeners:  {
@@ -816,7 +816,7 @@ var btnNext={
               };
 var form=   {
                 id:qID,
-                schema:'DEM/1.5',
+                schema:'DEM/1.7',
                 xtype:'form',
                 border:false,
                 autoScroll:false,

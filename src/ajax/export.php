@@ -31,7 +31,7 @@
  * @see ../utils/subjectdata.php
  */
 
-require_once "ajax.php";
+require_once "auth.php";
 require_once "NRG/Configuration.php";
 require_once "NRG/Login/Google/ClientLogin.php";
 require_once '../database.php';
@@ -61,54 +61,6 @@ try
 catch (Exception $e)
 {
     ajax_error($e->getMessage());
-}
-
-//------
-// AUTH
-//------
-try
-{
-    $user=$_SERVER['PHP_AUTH_USER'];
-    $pass=$_SERVER['PHP_AUTH_PW'];
-
-    //try to use the export user
-    if (isset($setupconfig['export_user']) && isset($setupconfig['export_key']))
-    {
-        $export_user=strtolower($setupconfig['export_user']);
-        $export_key=$setupconfig['export_key'];
-
-        if ((strtolower($user)==$export_user) && ($pass==$export_key))
-            $logged_in=true;
-    }
-
-    //if not, try to authenticate against Google Apps
-    if (!$logged_in)
-    {
-        try
-        {
-
-            $auth=new \NRG\Login\Google\ClientLogin($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']);
-
-            //Attempt to authenticate the user
-            $auth->login();
-
-            if ($auth->isSuccessful())
-                $logged_in=true;
-        }
-        catch (\NRG\Login\Google\ClientLoginException $e)
-        {
-            $logged_in=false;
-            ajax_http_auth_error("Invalid username or password");
-        }
-    }
-
-    //if none of the options above worked, return an error
-    if (!$logged_in)
-        ajax_http_auth_error("Invalid username or password");
-}
-catch(Exception $e)
-{
-    ajax_http_auth_error($e->getMessage());
 }
 
 if (!isset($_REQUEST['label']) || empty($_REQUEST['label']))
@@ -144,7 +96,10 @@ try
 
         if ($xml)
         {
-            $result['data'][$subjectLabel]=convertFinalDataToArray($xml,Array('DATA_LABEL','RESP'));
+            $converted_data=convertFinalDataToArray($xml,Array('DATA_LABEL','RESP'));
+            applyHQHack($converted_data);
+	    applyDEMHack($converted_data);
+            $result['data'][$subjectLabel]=$converted_data;
             ++$result['count'];
         }
     }
@@ -160,3 +115,38 @@ $content_type='application/json';
 header('Content-type: '.$content_type);
 
 print json_encode($result);
+
+function applyHQHack(Array &$data)
+{
+	$totalHQ=0;
+	$totalEmpty=0;
+
+	foreach ($data as $row)
+	{
+		$label=$row[0];
+		$value=trim($row[1]);
+		if (strpos(strtoupper($label),'HQ_')!==0)
+			continue;
+
+		$totalHQ++;
+
+		if (empty($value) || ($value==='9999') || ($value==='0'))
+			$totalEmpty++;
+	}
+
+	if ($totalHQ===$totalEmpty)
+		foreach ($data as &$row)
+			if (strpos(strtoupper($row[0]),'HQ_')===0)
+				$row[1]='9999';
+}
+
+function applyDEMHack(array &$data)
+{
+	foreach ($data as &$row)
+	{
+		$label=$row[0];
+		$value=trim($row[1]);
+		if ((strtoupper($label) == 'DEM_COUNTRY') && (strtoupper($value) == 'USA'))
+			$row[1]='US';
+	}
+}
