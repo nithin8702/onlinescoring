@@ -25,7 +25,18 @@
  * -----------------------------------------------------------------------------
  */
 
-/* Validate the session */
+require_once('ajax.php');
+require_once "NRG/Configuration.php";
+require_once "NRG/Login/Google/ClientLogin.php";
+
+/* basic auth ? */
+if (isset($_SERVER['PHP_AUTH_USER']) && isset($_SERVER['PHP_AUTH_PW']))
+{
+    $config=new \NRG\Configuration("../config.ini.php");
+    basic_auth($config->Setup);
+}
+else
+/* regular auth */
 if (!isset($_SESSION['auth']) || (!$_SESSION['auth']))
 {
     $result=Array(
@@ -38,6 +49,57 @@ if (!isset($_SESSION['auth']) || (!$_SESSION['auth']))
 
 function setClearanceLevel($level)
 {
+    //cannot currently detect clearance level for basic-auth users
+    if (isset($_SERVER['PHP_AUTH_USER']))
+        return;
+
     if ((int)$_SESSION['clearance']<$level)
         ajax_error('You do not have sufficient permissions to perform this operation.');
+}
+
+function basic_auth(Array $setupconfig)
+{
+    try
+    {
+        $user=$_SERVER['PHP_AUTH_USER'];
+        $pass=$_SERVER['PHP_AUTH_PW'];
+
+        //try to use the export user
+        if (isset($setupconfig['export_user']) && isset($setupconfig['export_key']))
+        {
+            $export_user=strtolower($setupconfig['export_user']);
+            $export_key=$setupconfig['export_key'];
+
+            if ((strtolower($user)==$export_user) && ($pass==$export_key))
+                $logged_in=true;
+        }
+
+        //if not, try to authenticate against Google Apps
+        if (!$logged_in)
+        {
+            try
+            {
+                $auth=new \NRG\Login\Google\ClientLogin($_SERVER['PHP_AUTH_USER'],$_SERVER['PHP_AUTH_PW']);
+
+                //Attempt to authenticate the user
+                $auth->login();
+
+                if ($auth->isSuccessful())
+                    $logged_in=true;
+            }
+            catch (\NRG\Login\Google\ClientLoginException $e)
+            {
+                $logged_in=false;
+                ajax_http_auth_error("Invalid username or password");
+            }
+        }
+
+        //if none of the options above worked, return an error
+        if (!$logged_in)
+            ajax_http_auth_error("Invalid username or password");
+    }
+    catch(Exception $e)
+    {
+        ajax_http_auth_error($e->getMessage());
+    }
 }

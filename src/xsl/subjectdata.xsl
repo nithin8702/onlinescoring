@@ -75,7 +75,7 @@
             </xsl:call-template>
             <!-- Demographics -->
            <xsl:call-template name="form">
-               <xsl:with-param name="name">DEM/1.5</xsl:with-param>
+               <xsl:with-param name="name">DEM/1.7</xsl:with-param>
            </xsl:call-template>
             <!-- Education -->
            <xsl:call-template name="form">
